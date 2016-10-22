@@ -3,17 +3,10 @@
 	<head>
 		<meta name="layout" content="template"/>
 		<title>Bienvenido al Laboratorio</title>
-		 <!-- Bootstrap Core CSS -->
-		  <link href="${request.contextPath}/template/css/bootstrap.min.css?v=1" rel="stylesheet">
-	 
-	    <!-- Custom CSS -->
-	     <link href="${request.contextPath}/template/css/sb-admin.css?v=1" rel="stylesheet">
 	  
 	    <!-- Morris Charts CSS -->
 	     <link href="${request.contextPath}/template/css/plugins/morris.css?v=1" rel="stylesheet">
 	    
-	    <!-- Custom Fonts -->
-	     <link href="${request.contextPath}/template/css/font-awesome.min.css?v=1" rel="stylesheet">
 	   
 		</head>
 	<body>
@@ -125,9 +118,10 @@
              <!-- /.row -->
 
  
+     
      <!-- jQuery -->
-     <script src=" ${request.contextPath}/template/js/jquery.js"></script>
-    
+    <script src=" ${request.contextPath}/template/js/jquery.js"></script>
+   
     <!-- Bootstrap Core JavaScript -->
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
 

@@ -19,3 +19,12 @@ if (typeof jQuery !== 'undefined') {
 		});
 	})(jQuery);
 }
+
+<!-- Menu lateral quede activado -->
+
+	  $(document).ready(function() {
+	  $('li.active').removeClass('active');
+	  $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+	});
+
+
