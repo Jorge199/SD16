@@ -17,22 +17,21 @@
 
 	</head>
 	<body>
-		<center>
-		<img src="<g:resource dir='images' file='fondo.png'/>" data-toggle="modal" data-target="#login-modal">
-		</center>
-		<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="loginmodal-container">
-					<h1>Ingresa a tu cuenta</h1><br>
-				  <form>
-					<input type="text" name="user" placeholder="Correo o nombre de usuario">
-					<input type="password" name="pass" placeholder="Contrasena">
-					<input type="submit" name="login" class="login loginmodal-submit" value="Ingresar">
-				  </form>
-					
-				</div>
-			</div>
+
+		
+		 <div class="loginmodal-container">
+			<h1>Ingresa a tu cuenta</h1><br>
+			<form>
+				<input type="text" name="user" placeholder="Correo o nombre de usuario">
+				<input type="password" name="pass" placeholder="Contrasena">
+				<input type="submit" name="login" class="login loginmodal-submit" value="Ingresar">
+			</form>
+			 <div class="panel-footer" align="center">
+    			<strong>Copyright © 2016 - F.I.U.N.I</strong>
+ 			 </div>
 		  </div>
+		
+		
 	<!-- jQuery -->
    
     <script src=" ${request.contextPath}/template/js/jquery.js"></script>

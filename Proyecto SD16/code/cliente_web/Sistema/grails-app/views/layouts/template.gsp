@@ -217,24 +217,13 @@
         <div id="page-wrapper">
 			<g:layoutBody/>
 		</div>
+		<div class="panel-footer" align="center">
+    		<strong>Copyright © 2016 - F.I.U.N.I</strong>
+ 		</div>
 	</div>
 	
-
-    <!-- jQuery -->
-   
-    <script src=" ${request.contextPath}/template/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${request.contextPath}/template/js/bootstrap.min.js"></script>
     
-     <!-- Menu lateral quede activado -->
-    <script>
-    	  $(document).ready(function() {
-    	  $('li.active').removeClass('active');
-    	  $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
-    	});
-
-    </script>
+    
 
 </body>
 
