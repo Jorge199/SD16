@@ -33,7 +33,7 @@ public class CountryResource {
 	}
 
 	@GET
-	@Path("/{textToFind}")
+	@Path("search/{textToFind}")
 	@Produces("application/xml")
 	public CountryResult search(@PathParam("textToFind") String textToFind) {
 		return countryService.find(textToFind);
