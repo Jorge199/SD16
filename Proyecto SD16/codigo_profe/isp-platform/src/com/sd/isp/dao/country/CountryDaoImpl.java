@@ -39,18 +39,27 @@ public class CountryDaoImpl extends BaseDaoImpl<CountryDomain> implements ICount
 	}
 
 	
-	public List<CountryDomain> find2(String textToFind) {
+	public List<CountryDomain> find(String textToFind) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CountryDomain.class);
-		criteria.add(Restrictions.ilike("_name", textToFind));
-
+		Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
+		Criterion idCriterion = null;
+		if (StringUtils.isNumeric(textToFind)) {
+			idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
+		}
+		
+		if(idCriterion!=null){
+			criteria.add(Restrictions.or(nameCriterion, idCriterion));
+		}else{
+			criteria.add(nameCriterion);
+		}
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<CountryDomain> countries = criteria.list();
 		return countries;
 	}
 
-	public List<CountryDomain> find(String textToFind) {
+	public List<CountryDomain> find2(String textToFind) {
 		Integer id = null;
 		if (StringUtils.isNumeric(textToFind)) {
 			id = Integer.valueOf(textToFind);
