@@ -27,7 +27,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 
 	@Override
 	public ReportDomain save(ReportDomain domain) {
-		sessionFactory.getCurrentSession().save(domain);
+		sessionFactory.getCurrentSession().saveOrUpdate(domain);
 		return domain;
 	}
 
