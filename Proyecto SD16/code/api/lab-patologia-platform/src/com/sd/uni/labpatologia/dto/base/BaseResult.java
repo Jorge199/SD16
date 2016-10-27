@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.dto.base;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 public abstract class BaseResult<DTO extends BaseDTO> implements Serializable {

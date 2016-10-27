@@ -14,24 +14,42 @@ import com.sd.uni.labpatologia.domain.base.BaseDomain;
 @Entity
 @Table(name = "request")
 public class RequestDomain extends BaseDomain {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 
+	/**
+		REMPLAZAR CUANDO EXISTA EL DOMAIN
+	@ManyToOne
+    @JoinColumn(name="patientId")
+    private Patient _patientId;
+	 */
 	@Column(name = "patientId")
 	private Integer _patientId;
 
+	/**
+		REMPLAZAR CUANDO EXISTA EL DOMAIN
+	@ManyToOne
+	@JoinColumn(name="studyId")
+	private Study _studyId;
+	 */
 	@Column(name = "studyId")
 	private Integer _studyId;
 
+	/**
+		REMPLAZAR CUANDO EXISTA EL DOMAIN
+	@ManyToOne
+	@JoinColumn(name="doctorId")
+	private Doctor _doctorId;
+	 */
 	@Column(name = "doctorId")
 	private Integer _doctorId;
 
 	@Column(name = "date")
 	private Date _date;
-	
+
 	@Column(name = "note")
 	private String _note;
 
@@ -74,7 +92,7 @@ public class RequestDomain extends BaseDomain {
 	public void setDate(Date date) {
 		_date = date;
 	}
-	
+
 	public String getNote() {
 		return _note;
 	}
