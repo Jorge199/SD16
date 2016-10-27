@@ -39,7 +39,7 @@ public class RequestDomain extends BaseDomain {
 	private Integer _studyId;
 
 	/**
-	REMPLAZAR CUANDO EXISTA EL DOMAIN
+		REMPLAZAR CUANDO EXISTA EL DOMAIN
 	@ManyToOne
 	@JoinColumn(name="doctorId")
 	private Doctor _doctorId;
