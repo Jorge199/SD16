@@ -62,5 +62,16 @@ public class ReportManager extends AbstractBaseManager {
 			System.out.println("\tobservaciones "+r.getObservaciones());
 		}
 	}
+	
+	public void getByDiagnostic(String diagnostic) {
+		ReportResult reportResult = getJerseyClient().resource(getBaseUrl() + "/report/search/diagnostic="+diagnostic).get(ReportResult.class);
+		for (ReportDTO r : reportResult.getReports()) {
+			System.out.print("id: "+ r.getId());
+			System.out.print("\tid_ficha "+ r.getIdFicha());
+			System.out.print("\tdiagnostico "+r.getFecha());
+			System.out.print("\tfecha "+r.getDiagnostico());
+			System.out.println("\tobservaciones "+r.getObservaciones());
+		}
+	}
 
 }
