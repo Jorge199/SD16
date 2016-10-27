@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
+import com.sd.uni.labpatologia.exception.PatologyException;
 
 @Repository
 public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportDao {
@@ -43,18 +44,22 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	}
 
 	@Override
-	public List<ReportDomain> find(String textToFind) {
+	public List<ReportDomain> find(String textToFind) throws PatologyException {
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ReportDomain.class);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		Map<String, String> map = obtenerQuery(textToFind);
-		
-		if (map.containsKey("diagnostic")) {		//si quiere filtrar por diagnostico
+
+		if (map.containsKey("diagnostic")) { // si quiere filtrar por
+												// diagnostico
 			criteria.add(Restrictions.eq("_diagnostico", map.get("diagnostic")));
 		}
-		
-		if (map.containsKey("start") && map.containsKey("end")) { //si quiere buscar entre fechas
+
+		if (map.containsKey("start") && map.containsKey("end")) { // si quiere
+																	// buscar
+																	// entre
+																	// fechas
 			try {
 				minDate = formatter.parse(map.get("start"));
 				Calendar c = Calendar.getInstance();
@@ -66,7 +71,8 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		} else if (map.containsKey("date")) {	//si quiere filtrar por una fecha especifica
+		} else if (map.containsKey("date")) { // si quiere filtrar por una fecha
+												// especifica
 			try {
 				criteria.add(Restrictions.eq("_fecha", formatter.parse(map.get("date"))));
 			} catch (ParseException e) {
@@ -80,11 +86,13 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 		return reports;
 
 	}
+
 	/**
-	 * Creo un diccionario con clave valor
-	 * En donde clave=columna de la bd y valor=valor a buscar
-	*/
-	private Map<String, String> obtenerQuery(String textToFind) {
+	 * Creo un diccionario con clave valor En donde clave=columna de la bd y
+	 * valor=valor a buscar
+	 * @throws PatologyException 
+	 */
+	private Map<String, String> obtenerQuery(String textToFind) throws PatologyException {
 		String[] params = textToFind.split("&");
 		Map<String, String> map = new HashMap<String, String>();
 		try {
@@ -94,7 +102,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 				map.put(name, value);
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Formato de ruta invalido");
+			throw new PatologyException("Formato de ruta invalido", e);
 		}
 		return map;
 	}

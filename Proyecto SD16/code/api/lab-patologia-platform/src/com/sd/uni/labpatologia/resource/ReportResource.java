@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.report.IReportService;
 
 @Path("/report")
@@ -35,7 +36,7 @@ public class ReportResource {
 	@GET
 	@Path("/search/{textToFind}")
 	@Produces("application/xml")
-	public ReportResult search(@PathParam("textToFind") String textToFind) {
+	public ReportResult search(@PathParam("textToFind") String textToFind) throws PatologyException {
 		return reportService.find(textToFind);
 	}
 	
