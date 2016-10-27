@@ -1,4 +1,4 @@
-package com.sd.uni.labpatologia.domain.laboratorio;
+package com.sd.uni.labpatologia.domain.laboratory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import com.sd.uni.labpatologia.domain.base.BaseDomain;
 
 @Entity
 @Table(name = "laboratory")
-public class LaboratorioDomain extends BaseDomain{
+public class LaboratoryDomain extends BaseDomain{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)

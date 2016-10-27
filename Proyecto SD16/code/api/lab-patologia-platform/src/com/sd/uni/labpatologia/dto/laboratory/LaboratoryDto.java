@@ -1,4 +1,4 @@
-package com.sd.uni.labpatologia.dto.laboratorio;
+package com.sd.uni.labpatologia.dto.laboratory;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import com.sd.uni.labpatologia.dto.base.BaseDTO;
 
 @XmlRootElement(name = "laboratory")
-public class LaboratorioDto extends BaseDTO{
+public class LaboratoryDto extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _address;
