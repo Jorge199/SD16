@@ -1,6 +1,5 @@
 package report;
 import java.util.Date;
-
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
 

@@ -9,6 +9,8 @@ public interface IBaseDao<DOMAIN extends BaseDomain> {
 	public DOMAIN save(DOMAIN domain);
 
 	public DOMAIN getById(Integer domainId);
+	
+	
 
 	public List<DOMAIN> findAll();
 }
