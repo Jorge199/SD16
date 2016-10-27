@@ -18,10 +18,9 @@
 	<classpathentry kind="lib" path="lib/jersey-servlet-1.14.jar"/>
 	<classpathentry kind="lib" path="lib/jettison-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jsr311-api-1.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/lab-patologia-platform/dist/lab-patologia-platform.jar"/>
-	<classpathentry kind="lib" path="lib/lab-patologia-platform.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="src" path="/lab-patologia-platform"/>
+	<classpathentry kind="lib" path="lib/lab-patologia-platform.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
-import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
 
@@ -46,24 +45,24 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 
 	@Override
 	public List<RequestDomain> find(String textToFind) {
-
-		/*Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RequestDomain.class);
-		
-		Criterion nameCriterion = Restrictions.ilike("_name", textToFind);
+		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_note", textToFind))
+				.add(Restrictions.ilike("_date", textToFind));
+				
 		Criterion idCriterion = null;
 		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion= Restrictions.eq("_id", Integer.valueOf(textToFind));
+			idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
 		}
 
-		if(idCriterion!=null){
-			criteria.add(Restrictions.or(nameCriterion, idCriterion));
-		}else{
-			criteria.add(nameCriterion);
+		if (idCriterion != null) {
+			criteria.add(Restrictions.or(propertyCriterion, idCriterion));
+		} else {
+			criteria.add(propertyCriterion);
 		}
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		List<RequestDomain> countries = criteria.list();*/
-		return null;
+		List<RequestDomain> requests = criteria.list();
+		return requests;
 	}
 
 	
