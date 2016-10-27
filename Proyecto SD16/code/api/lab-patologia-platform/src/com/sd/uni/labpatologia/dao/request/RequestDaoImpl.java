@@ -47,8 +47,7 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 	public List<RequestDomain> find(String textToFind) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RequestDomain.class);
-		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_note", textToFind))
-				.add(Restrictions.ilike("_date", textToFind));
+		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_note", textToFind));
 				
 		Criterion idCriterion = null;
 		if (StringUtils.isNumeric(textToFind)) {
@@ -64,7 +63,5 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 		List<RequestDomain> requests = criteria.list();
 		return requests;
 	}
-
-	
 
 }

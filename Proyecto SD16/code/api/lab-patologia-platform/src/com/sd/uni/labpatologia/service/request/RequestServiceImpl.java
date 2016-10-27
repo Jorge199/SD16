@@ -54,8 +54,8 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	protected RequestDTO convertDomainToDto(RequestDomain domain) {
 		final RequestDTO dto = new RequestDTO();
 		dto.setId(domain.getId());
-		dto.setId(domain.getPatientId());
-		dto.setPatientId(domain.getStudyId());
+		dto.setPatientId(domain.getPatientId());
+		dto.setStudyId(domain.getStudyId());
 		dto.setDoctorId(domain.getDoctorId());
 		dto.setNote(domain.getNote());
 		dto.setDate(domain.getDate());
@@ -66,8 +66,8 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	protected RequestDomain convertDtoToDomain(RequestDTO dto) {
 		final RequestDomain domain = new RequestDomain();
 		domain.setId(dto.getId());
-		domain.setId(dto.getPatientId());
-		domain.setPatientId(dto.getStudyId());
+		domain.setPatientId(dto.getPatientId());
+		domain.setStudyId(dto.getStudyId());
 		domain.setDoctorId(dto.getDoctorId());
 		domain.setNote(dto.getNote());
 		domain.setDate(dto.getDate());
