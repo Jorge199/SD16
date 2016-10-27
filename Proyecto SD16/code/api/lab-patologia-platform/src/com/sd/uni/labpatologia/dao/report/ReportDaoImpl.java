@@ -44,16 +44,17 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 
 	@Override
 	public List<ReportDomain> find(String textToFind) {
-		System.out.println("este texto ingrese sin parse" + textToFind);
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ReportDomain.class);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		Map<String, String> map = obtenerQuery(textToFind);
-		if (map.containsKey("diagnostic")) {
+		
+		if (map.containsKey("diagnostic")) {		//si quiere filtrar por diagnostico
 			criteria.add(Restrictions.eq("_diagnostico", map.get("diagnostic")));
 		}
-		if (map.containsKey("start") && map.containsKey("end")) {
+		
+		if (map.containsKey("start") && map.containsKey("end")) { //si quiere buscar entre fechas
 			try {
 				minDate = formatter.parse(map.get("start"));
 				Calendar c = Calendar.getInstance();
@@ -65,7 +66,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		} else if (map.containsKey("date")) {
+		} else if (map.containsKey("date")) {	//si quiere filtrar por una fecha especifica
 			try {
 				criteria.add(Restrictions.eq("_fecha", formatter.parse(map.get("date"))));
 			} catch (ParseException e) {
@@ -79,7 +80,8 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 		return reports;
 
 	}
-	/**Creo un diccionario con clave valor
+	/**
+	 * Creo un diccionario con clave valor
 	 * En donde clave=columna de la bd y valor=valor a buscar
 	*/
 	private Map<String, String> obtenerQuery(String textToFind) {
