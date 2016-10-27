@@ -6,7 +6,7 @@ public class WsRequest {
 		RequestManager manager = new RequestManager();
 		System.out.println("Creamos un registro");
 		manager.addRequest(1, 2, 3, "estudio");
-		manager.addRequest(2, 1, 3, "mama");
+		manager.addRequest(2, 1, 3, "estudio mama");
 		
 		System.out.println("Obtenemos el registro por id");
 		manager.getById(1);
@@ -16,6 +16,9 @@ public class WsRequest {
 		
 		System.out.println("\nObtenemos el registro por propiedad");
 		manager.getByProperty("estudio");
+		
+		System.out.println("\nObtenemos el registro por fecha");
+		manager.getByProperty("2017-10-27");
 
 	}
 }
