@@ -23,7 +23,7 @@ public class ReportResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public ReportDTO getById(@PathParam("id") Integer reportId) {
+	public ReportDTO getById(@PathParam("id") Integer reportId) throws PatologyException {
 		return reportService.getById(reportId);
 	}
 

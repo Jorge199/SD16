@@ -6,6 +6,10 @@ public class PatologyException extends Exception {
 		super(string, e);
 	}
 
+	public PatologyException(String string) {
+		super(string);
+	}
+
 	private static final long serialVersionUID = 1L;
 
 }

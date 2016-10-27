@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.laboratorio.LaboratorioDomain;
-
+import com.sd.uni.labpatologia.exception.PatologyException;
 
 @Repository
-public class LaboratorioDaoImpl extends BaseDaoImpl<LaboratorioDomain> implements ILaboratorioDao{
+public class LaboratorioDaoImpl extends BaseDaoImpl<LaboratorioDomain> implements ILaboratorioDao {
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
 	public LaboratorioDomain save(LaboratorioDomain domain) {
 		// TODO Auto-generated method stub
@@ -28,12 +28,14 @@ public class LaboratorioDaoImpl extends BaseDaoImpl<LaboratorioDomain> implement
 	}
 
 	@Override
-	public LaboratorioDomain getById(Integer domainId) {
-		// TODO Auto-generated method stub
-		return (LaboratorioDomain) sessionFactory.getCurrentSession().get(LaboratorioDomain.class, domainId);
+	public LaboratorioDomain getById(Integer domainId) throws PatologyException {
+		if (null != domainId) {
+			return (LaboratorioDomain) sessionFactory.getCurrentSession().get(LaboratorioDomain.class, domainId);
+		} else {
+			throw new PatologyException("El ID no puede ser null");
+		}
 	}
 
-	
 	@Override
 	public List<LaboratorioDomain> findAll() {
 		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(LaboratorioDomain.class);
@@ -45,30 +47,30 @@ public class LaboratorioDaoImpl extends BaseDaoImpl<LaboratorioDomain> implement
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(LaboratorioDomain.class);
 		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
-				.add(Restrictions.ilike("_address", textToFind))
-				.add(Restrictions.ilike("_email", textToFind))
+				.add(Restrictions.ilike("_address", textToFind)).add(Restrictions.ilike("_email", textToFind))
 				.add(Restrictions.ilike("_phone", textToFind));
 		Criterion idCriterion = null;
 		if (StringUtils.isNumeric(textToFind)) {
 			idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
 		}
-		
-		if(idCriterion != null){
+
+		if (idCriterion != null) {
 			criteria.add(Restrictions.or(propertyCriterion, idCriterion));
-		}else{
+		} else {
 			criteria.add(propertyCriterion);
 		}
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<LaboratorioDomain> labs = criteria.list();
 		return labs;
 	}
-	
+
 	public List<LaboratorioDomain> find2(String textToFind) {
 		Integer id = null;
 		if (StringUtils.isNumeric(textToFind)) {
 			id = Integer.valueOf(textToFind);
 		}
-		Query q = sessionFactory.getCurrentSession().createQuery("from LaboratorioDomain where _name like :parameter or _address like :parameter or _email like :parameter or _phone like :parameter or _id=:id");
+		Query q = sessionFactory.getCurrentSession().createQuery(
+				"from LaboratorioDomain where _name like :parameter or _address like :parameter or _email like :parameter or _phone like :parameter or _id=:id");
 		q.setParameter("parameter", "%" + textToFind + "%");
 		q.setParameter("id", id);
 		return q.list();

@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -33,8 +32,12 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	}
 
 	@Override
-	public ReportDomain getById(Integer domainId) {
+	public ReportDomain getById(Integer domainId) throws PatologyException {
+		if (null != domainId) {
 		return (ReportDomain) sessionFactory.getCurrentSession().get(ReportDomain.class, domainId);
+		} else {
+			throw new PatologyException("El ID no puede ser null");
+		}
 	}
 
 	@Override

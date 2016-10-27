@@ -13,6 +13,7 @@ import com.sd.uni.labpatologia.dao.laboratorio.LaboratorioDaoImpl;
 import com.sd.uni.labpatologia.domain.laboratorio.LaboratorioDomain;
 import com.sd.uni.labpatologia.dto.laboratorio.LaboratorioDto;
 import com.sd.uni.labpatologia.dto.laboratorio.LaboratorioResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 
@@ -31,7 +32,7 @@ public class LaboratorioServiceImpl extends BaseServiceImpl<LaboratorioDto, Labo
 
 	@Override
 	@Transactional
-	public LaboratorioDto getById(Integer id) {
+	public LaboratorioDto getById(Integer id) throws PatologyException {
 		final LaboratorioDomain labDomain = _labDao.getById(id);
 		final LaboratorioDto labDTO = convertDomainToDto(labDomain);
 		return labDTO;
@@ -77,7 +78,7 @@ public class LaboratorioServiceImpl extends BaseServiceImpl<LaboratorioDto, Labo
 
 	@Override
 	@Transactional
-	public LaboratorioResult find(String textToFind) {
+	public LaboratorioResult find(String textToFind) throws PatologyException {
 		final List<LaboratorioDto> labs = new ArrayList<>();
 		for (LaboratorioDomain domain : _labDao.find(textToFind)) {
 			final LaboratorioDto dto = convertDomainToDto(domain);

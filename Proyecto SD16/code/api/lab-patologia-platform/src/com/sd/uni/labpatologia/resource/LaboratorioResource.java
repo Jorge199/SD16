@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.laboratorio.LaboratorioDto;
 import com.sd.uni.labpatologia.dto.laboratorio.LaboratorioResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.laboratorio.ILaboratorioService;
 
 
@@ -27,7 +28,7 @@ public class LaboratorioResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public LaboratorioDto getById(@PathParam("id") Integer laboratoryId) {
+	public LaboratorioDto getById(@PathParam("id") Integer laboratoryId) throws PatologyException {
 		return _labService.getById(laboratoryId);
 	}
 
@@ -40,7 +41,7 @@ public class LaboratorioResource {
 	@GET
 	@Path("/search/{textToFind}")
 	@Produces("application/xml")
-	public LaboratorioResult search(@PathParam("textToFind") String textToFind) {
+	public LaboratorioResult search(@PathParam("textToFind") String textToFind) throws PatologyException {
 		return _labService.find(textToFind);
 	}
 

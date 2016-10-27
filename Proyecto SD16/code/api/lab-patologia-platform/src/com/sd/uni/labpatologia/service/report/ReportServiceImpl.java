@@ -31,7 +31,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional
-	public ReportDTO getById(Integer id) {
+	public ReportDTO getById(Integer id) throws PatologyException {
 		final ReportDomain domain = reportDao.getById(id);
 		final ReportDTO dto = convertDomainToDto(domain);
 		return dto;

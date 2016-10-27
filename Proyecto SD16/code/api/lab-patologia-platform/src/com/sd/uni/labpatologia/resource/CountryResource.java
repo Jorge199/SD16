@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.country.CountryDTO;
 import com.sd.uni.labpatologia.dto.country.CountryResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.country.ICountryService;
 
 @Path("/country")
@@ -22,7 +23,7 @@ public class CountryResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public CountryDTO getById(@PathParam("id") Integer countryId) {
+	public CountryDTO getById(@PathParam("id") Integer countryId) throws PatologyException {
 		return countryService.getById(countryId);
 	}
 
