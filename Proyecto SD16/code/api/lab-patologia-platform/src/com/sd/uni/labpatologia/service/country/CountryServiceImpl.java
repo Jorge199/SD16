@@ -12,6 +12,7 @@ import com.sd.uni.labpatologia.dao.country.ICountryDao;
 import com.sd.uni.labpatologia.domain.country.CountryDomain;
 import com.sd.uni.labpatologia.dto.country.CountryDTO;
 import com.sd.uni.labpatologia.dto.country.CountryResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 @Service
@@ -29,7 +30,7 @@ public class CountryServiceImpl extends BaseServiceImpl<CountryDTO, CountryDomai
 
 	@Override
 	@Transactional
-	public CountryDTO getById(Integer id) {
+	public CountryDTO getById(Integer id) throws PatologyException {
 		final CountryDomain domain = countryDao.getById(id);
 		final CountryDTO dto = convertDomainToDto(domain);
 		return dto;
@@ -62,6 +63,12 @@ public class CountryServiceImpl extends BaseServiceImpl<CountryDTO, CountryDomai
 		domain.setId(dto.getId());
 		domain.setName(dto.getName());
 		return domain;
+	}
+
+	@Override
+	public CountryResult find(String textToFind) throws PatologyException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.request.IRequestService;
 
 @Path("/request")
@@ -22,7 +23,7 @@ public class RequestResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public RequestDTO getById(@PathParam("id") Integer requestId) {
+	public RequestDTO getById(@PathParam("id") Integer requestId) throws PatologyException{
 		return requestService.getById(requestId);
 	}
 
@@ -40,7 +41,7 @@ public class RequestResource {
 	@GET
 	@Path("/search/{textToFind}")
 	@Produces("application/xml")
-	public RequestResult search(@PathParam("textToFind") String textToFind) {
+	public RequestResult search(@PathParam("textToFind") String textToFind) throws PatologyException{
 		return requestService.find(textToFind);
 	}
 }

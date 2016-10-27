@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.country.CountryDomain;
+import com.sd.uni.labpatologia.exception.PatologyException;
 
 @Repository
 public class CountryDaoImpl extends BaseDaoImpl<CountryDomain> implements ICountryDao {
@@ -31,5 +32,13 @@ public class CountryDaoImpl extends BaseDaoImpl<CountryDomain> implements ICount
 		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(CountryDomain.class);
 		return criteria.list();
 	}
+
+	@Override
+	public List<CountryDomain> find(String textToFind) throws PatologyException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }
