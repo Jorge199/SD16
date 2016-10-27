@@ -19,15 +19,18 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 
-	@Column(name = "id_doctor", nullable = false)
-	private Integer _id_doctor;
-
-	@Column(name = "id_paciente", nullable = false)
-	private Integer _id_paciente;
 	
-	@Column(name = "id_estudio", nullable = false)
-	private Integer _id_estudio;
+	/**
+	 * Cuando se tenga la relacion se reemplazara con:
+	 * @ManyToOne
+	 * @JoinColumn(name = "id_ficha") 
+	 * @org.hibernate.annotations.ForeignKey(name="FK_ID_FICHA")
+	 * private Ficha _id_ficha;
+	 */
+	@Column(name = "id_ficha", nullable = false)
+	private Integer _id_ficha;
 
+	
 	@Column(name = "fecha", nullable = false)
 	private Date _fecha;
 
@@ -45,29 +48,14 @@ public class ReportDomain extends BaseDomain {
 		_id = id;
 	}
 
-	public Integer getIdDoctor() {
-		return _id_doctor;
+	public Integer getIdFicha() {
+		return _id_ficha;
 	}
 
-	public void setIdDoctor(Integer id_doctor) {
-		_id_doctor = id_doctor;
+	public void setIdFicha(Integer id_ficha) {
+		_id_ficha = id_ficha;
 	}
 
-	public Integer getIdPaciente() {
-		return _id_paciente;
-	}
-
-	public void setIdPaciente(Integer id_paciente) {
-		_id_paciente = id_paciente;
-	}
-	
-	public Integer getIdEstudio() {
-		return _id_estudio;
-	}
-
-	public void setIdEstudio(Integer id_estudio) {
-		_id_estudio = id_estudio;
-	}
 
 	public Date getFecha() {
 		return _fecha;

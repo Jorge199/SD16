@@ -12,38 +12,19 @@ public class ReportDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer _id_paciente;
-	private Integer _id_doctor;
-	private Integer _id_estudio;
+	private Integer _id_ficha;
 	private String _diagnostico;
 	private Date _fecha;
 	private String _observaciones;
 
-	@XmlElement
-	public Integer getIdDoctor() {
-		return _id_doctor;
-	}
-
-	public void setIdDoctor(Integer id_doctor) {
-		_id_doctor = id_doctor;
-	}
 	
 	@XmlElement
-	public Integer getIdPaciente() {
-		return _id_paciente;
+	public Integer getIdFicha() {
+		return _id_ficha;
 	}
 
-	public void setIdPaciente(Integer id_paciente) {
-		_id_paciente = id_paciente;
-	}
-	
-	@XmlElement
-	public Integer getIdEstudio() {
-		return _id_estudio;
-	}
-
-	public void setIdEstudio(Integer id_estudio) {
-		_id_estudio= id_estudio;
+	public void setIdFicha(Integer id_ficha) {
+		_id_ficha= id_ficha;
 	}
 
 	@XmlElement

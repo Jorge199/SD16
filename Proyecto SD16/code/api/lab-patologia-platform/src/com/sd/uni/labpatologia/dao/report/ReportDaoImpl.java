@@ -79,7 +79,9 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 		return reports;
 
 	}
-
+	/**Creo un diccionario con clave valor
+	 * En donde clave=columna de la bd y valor=valor a buscar
+	*/
 	private Map<String, String> obtenerQuery(String textToFind) {
 		String[] params = textToFind.split("&");
 		Map<String, String> map = new HashMap<String, String>();
