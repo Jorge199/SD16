@@ -61,6 +61,8 @@ public class WsReport {
 			reportManager.addReport(6, formatter.parse("22-05-2016"), "alguna observacion", "no cancer");
 			reportManager.addReport(3, formatter.parse("6-02-2016"), "alguna observacion", "no cancer");
 			reportManager.addReport(2, formatter.parse("25-08-2016"), "alguna observacion", "cancer");
+			reportManager.addReport(2, formatter.parse("27-02-2016"), "alguna observacion", "cancer");
+			reportManager.addReport(2, formatter.parse("28-01-2016"), "alguna observacion", "cancer");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
