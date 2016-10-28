@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.report.IReportDao;
 import com.sd.uni.labpatologia.dao.report.ReportDaoImpl;
+import com.sd.uni.labpatologia.dao.request.IRequestDao;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
@@ -20,6 +21,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		implements IReportService {
 	@Autowired
 	private IReportDao reportDao;
+	
+	@Autowired
+	private IRequestDao requestDao;
 
 	@Override
 	@Transactional
@@ -54,10 +58,10 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	protected ReportDTO convertDomainToDto(ReportDomain domain) {
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
-		dto.setIdFicha(domain.getIdFicha());
-		dto.setDiagnostico(domain.getDiagnostico());
-		dto.setFecha(domain.getFecha());
-		dto.setObservaciones(domain.getObservaciones());
+		dto.setRequestId(domain.getRequest().getId());
+		dto.setDiagnostic(domain.getDiagnostic());
+		dto.setDate(domain.getDate());
+		dto.setObservations(domain.getObservations());
 		return dto;
 	}
 
@@ -65,10 +69,14 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	protected ReportDomain convertDtoToDomain(ReportDTO dto) {
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
-		domain.setIdFicha(dto.getIdFicha());
-		domain.setDiagnostico(dto.getDiagnostico());
-		domain.setFecha(dto.getFecha());
-		domain.setObservaciones(dto.getObservaciones());
+		try {
+			domain.setRequest(requestDao.getById(dto.getRequestId()));
+		} catch (PatologyException e) {
+			e.printStackTrace();
+		}
+		domain.setDiagnostic(dto.getDiagnostic());
+		domain.setDate(dto.getDate());
+		domain.setObservations(dto.getObservations());
 		return domain;
 	}
 

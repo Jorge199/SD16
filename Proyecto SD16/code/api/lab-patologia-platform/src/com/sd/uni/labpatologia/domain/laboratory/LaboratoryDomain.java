@@ -29,9 +29,6 @@ public class LaboratoryDomain extends BaseDomain{
 	@Column(name = "email")
 	private String _email;
 	
-	@Column(name = "logo")
-	private String _logo;
-	
 	public Integer getId() {
 		return _id;
 	}
@@ -67,10 +64,5 @@ public class LaboratoryDomain extends BaseDomain{
 		_email = email;
 	}
 	
-	public String getLogo() {
-		return _logo;
-	}
-	public void setLogo(String logo) {
-		_logo = logo;
-	}
+	
 }

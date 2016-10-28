@@ -12,7 +12,7 @@ public class LaboratoryDto extends BaseDTO{
 	private String _address;
 	private String _phone;
 	private String _email;
-	private String _logo;
+
 
 	@XmlElement
 	public String getName() {
@@ -50,12 +50,4 @@ public class LaboratoryDto extends BaseDTO{
 		_email = email;
 	}
 	
-	@XmlElement
-	public String getLogo() {
-		return _logo;
-	}
-	
-	public void setLogo(String logo) {
-		_logo = logo;
-	}
 }
