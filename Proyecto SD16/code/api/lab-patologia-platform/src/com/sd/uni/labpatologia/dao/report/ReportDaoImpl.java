@@ -34,7 +34,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	@Override
 	public ReportDomain getById(Integer domainId) throws PatologyException {
 		if (null != domainId) {
-		return (ReportDomain) sessionFactory.getCurrentSession().get(ReportDomain.class, domainId);
+			return (ReportDomain) sessionFactory.getCurrentSession().get(ReportDomain.class, domainId);
 		} else {
 			throw new PatologyException("El ID no puede ser null");
 		}
@@ -59,10 +59,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 			criteria.add(Restrictions.eq("_diagnostico", map.get("diagnostic")));
 		}
 
-		if (map.containsKey("start") && map.containsKey("end")) { // si quiere
-																	// buscar
-																	// entre
-																	// fechas
+		if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
 			try {
 				minDate = formatter.parse(map.get("start"));
 				Calendar c = Calendar.getInstance();
@@ -72,15 +69,14 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 				// System.out.println("desde" + minDate + "hasta " + maxDate);
 				criteria.add(Restrictions.between("_fecha", minDate, maxDate));
 			} catch (ParseException e) {
-				e.printStackTrace();
+				throw new PatologyException("Formato de ruta invalido", e);
 			}
 		} else if (map.containsKey("date")) { // si quiere filtrar por una fecha
 												// especifica
 			try {
 				criteria.add(Restrictions.eq("_fecha", formatter.parse(map.get("date"))));
 			} catch (ParseException e) {
-				// e.printStackTrace();
-				System.out.println("date= ? invalido");
+				throw new PatologyException("Formato de ruta invalido", e);
 			}
 		}
 
@@ -93,7 +89,8 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	/**
 	 * Creo un diccionario con clave valor En donde clave=columna de la bd y
 	 * valor=valor a buscar
-	 * @throws PatologyException 
+	 * 
+	 * @throws PatologyException
 	 */
 	private Map<String, String> obtenerQuery(String textToFind) throws PatologyException {
 		String[] params = textToFind.split("&");
