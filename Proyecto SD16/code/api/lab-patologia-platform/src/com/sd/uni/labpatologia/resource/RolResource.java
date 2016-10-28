@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.rol.RolDTO;
 import com.sd.uni.labpatologia.dto.rol.RolResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.rol.IRolService;
 
 @Path("/rol")
@@ -23,7 +24,7 @@ public class RolResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public RolDTO getById(@PathParam("id") Integer countryId) {
+	public RolDTO getById(@PathParam("id") Integer countryId) throws PatologyException {
 		return rolService.getById(countryId);
 	}
 

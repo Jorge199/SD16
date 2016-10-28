@@ -35,7 +35,7 @@ public class StudyTypeManager extends AbstractBaseManager{
 	public void getByPropertyStudyType(String textToFind){
 		// ejemplo buscar por propiedad direccion
 		StudyTypeResult studyTypeResult = getJerseyClient().resource(getBaseUrl() + "/study_type/search/"+textToFind).get(StudyTypeResult.class);
-		for (StudyTypeDto c : StudyTypeResult.getLaboratories()) {
+		for (StudyTypeDTO c : studyTypeResult.getStudies()) {
 			System.out.println(c.getName());
 			System.out.println(c.getDescription());
 		}

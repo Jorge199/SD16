@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.user.UserDTO;
 import com.sd.uni.labpatologia.dto.user.UserResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.user.IUserService;
 
 @Path("/user")
@@ -24,7 +25,7 @@ public class UserResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public UserDTO getById(@PathParam("id") Integer usuarioId) {
+	public UserDTO getById(@PathParam("id") Integer usuarioId) throws PatologyException {
 		return userService.getById(usuarioId);
 	}
 

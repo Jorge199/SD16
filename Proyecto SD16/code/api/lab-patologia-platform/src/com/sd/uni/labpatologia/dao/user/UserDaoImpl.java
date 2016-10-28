@@ -3,6 +3,7 @@ package com.sd.uni.labpatologia.dao.user;
 
 import java.util.List;
 
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;

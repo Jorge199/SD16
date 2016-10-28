@@ -12,6 +12,7 @@ import com.sd.uni.labpatologia.dao.rol.IRolDao;
 import com.sd.uni.labpatologia.domain.rol.RolDomain;
 import com.sd.uni.labpatologia.dto.rol.RolDTO;
 import com.sd.uni.labpatologia.dto.rol.RolResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 @Service
@@ -30,7 +31,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 
 	@Override
 	@Transactional
-	public RolDTO getById(Integer id) {
+	public RolDTO getById(Integer id) throws PatologyException {
 		final RolDomain domain = rolDao.getById(id);
 		final RolDTO dto = convertDomainToDto(domain);
 		return dto;

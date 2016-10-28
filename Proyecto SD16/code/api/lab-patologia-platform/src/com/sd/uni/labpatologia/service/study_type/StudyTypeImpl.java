@@ -45,7 +45,7 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 			estudios.add(dto);
 		}
 		final StudyTypeResult estudioResult = new StudyTypeResult();
-		estudioResult.setEstudios(estudios);
+		estudioResult.setStudies(estudios);
 		return estudioResult;
 	}
 

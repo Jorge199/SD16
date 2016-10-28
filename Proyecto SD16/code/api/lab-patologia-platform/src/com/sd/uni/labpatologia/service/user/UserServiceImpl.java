@@ -13,6 +13,7 @@ import com.sd.uni.labpatologia.dao.user.UserDaoImpl;
 import com.sd.uni.labpatologia.domain.user.UserDomain;
 import com.sd.uni.labpatologia.dto.user.UserDTO;
 import com.sd.uni.labpatologia.dto.user.UserResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 @Service
@@ -31,7 +32,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional
-	public UserDTO getById(Integer id) {
+	public UserDTO getById(Integer id) throws PatologyException {
 		final UserDomain domain = userDao.getById(id);
 		final UserDTO dto = convertDomainToDto(domain);
 		return dto;
