@@ -9,32 +9,32 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sd.uni.labpatologia.dto.estudio.EstudioDTO;
-import com.sd.uni.labpatologia.dto.estudio.EstudioResult;
+import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
+import com.sd.uni.labpatologia.dto.study_type.StudyTypeResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
-import com.sd.uni.labpatologia.service.estudio.IEstudioService;
+import com.sd.uni.labpatologia.service.study_type.IStudyTypeService;
 
 @Path("/estudio")
 @Component
-public class EstudioResource {
+public class StudyTypeResource {
 	@Autowired
-	private IEstudioService estudioService;
+	private IStudyTypeService estudioService;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public EstudioDTO getById(@PathParam("id") Integer estudioId) throws PatologyException {
+	public StudyTypeDTO getById(@PathParam("id") Integer estudioId) throws PatologyException {
 		return estudioService.getById(estudioId);
 	}
 
 	@GET
 	@Produces("application/xml")
-	public EstudioResult getAll() {
+	public StudyTypeResult getAll() {
 		return estudioService.getAll();
 	}
 
 	@POST
-	public EstudioDTO save(EstudioDTO estudio) {
+	public StudyTypeDTO save(StudyTypeDTO estudio) {
 		return estudioService.save(estudio);
 	}
 }

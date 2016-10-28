@@ -1,9 +1,7 @@
 package study_type;
 
-import com.sd.uni.labpatologia.dto.estudio.EstudioDTO;
-import com.sd.uni.labpatologia.dto.estudio.EstudioResult;
-import com.sd.uni.labpatologia.dto.report.ReportDTO;
-import com.sd.uni.labpatologia.dto.report.ReportResult;
+import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
+import com.sd.uni.labpatologia.dto.study_type.StudyTypeResult;
 
 import base.AbstractBaseManager;
 
@@ -14,14 +12,14 @@ public class StudyTypeManager extends AbstractBaseManager{
 	}
 
 	public void addStudy(String name, String description) {
-		EstudioDTO estudioDTO = new EstudioDTO();
+		StudyTypeDTO estudioDTO = new StudyTypeDTO();
 		estudioDTO.setName(name);
 		estudioDTO.setDescription(description);
 	}
 	
 	public void getAllStudies() {
-		EstudioResult estudioResult = getJerseyClient().resource(getBaseUrl() + "/estudio").get(EstudioResult.class);
-		for (EstudioDTO r : estudioResult.getEstudios()) {
+		StudyTypeResult estudioResult = getJerseyClient().resource(getBaseUrl() + "/study_type").get(StudyTypeResult.class);
+		for (StudyTypeDTO r : estudioResult.getStudies()) {
 			System.out.print("id: "+r.getId());
 			System.out.print("\tnombre "+ r.getName());
 			System.out.print("\tdescripcion "+r.getDescription());
@@ -29,10 +27,18 @@ public class StudyTypeManager extends AbstractBaseManager{
 	}
 	
 	public void getById(int id) {
-		EstudioDTO study = getJerseyClient().resource(getBaseUrl() + "/estudio/"+id).get(EstudioDTO.class);
+		StudyTypeDTO study = getJerseyClient().resource(getBaseUrl() + "/study_type/"+id).get(StudyTypeDTO.class);
 		System.out.print("id: "+study.getId());
 		System.out.print("\tnombre "+ study.getName());
 		System.out.print("\tdescripcion "+study.getDescription());
+	}
+	public void getByPropertyStudyType(String textToFind){
+		// ejemplo buscar por propiedad direccion
+		StudyTypeResult studyTypeResult = getJerseyClient().resource(getBaseUrl() + "/study_type/search/"+textToFind).get(StudyTypeResult.class);
+		for (StudyTypeDto c : StudyTypeResult.getLaboratories()) {
+			System.out.println(c.getName());
+			System.out.println(c.getDescription());
+		}
 	}
 	
 }

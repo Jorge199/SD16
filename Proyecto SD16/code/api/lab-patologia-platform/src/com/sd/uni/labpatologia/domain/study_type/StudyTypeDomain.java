@@ -1,4 +1,4 @@
-package com.sd.uni.labpatologia.domain.estudio;
+package com.sd.uni.labpatologia.domain.study_type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 
 @Entity
-@Table(name = "estudio")
-public class EstudioDomain extends BaseDomain {
+@Table(name = "study_type")
+public class StudyTypeDomain extends BaseDomain {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
