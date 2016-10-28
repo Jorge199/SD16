@@ -60,7 +60,6 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 		laboratory.setAddress(domain.getAddress());
 		laboratory.setEmail(domain.getEmail());
 		laboratory.setPhone(domain.getPhone());
-		laboratory.setLogo(domain.getLogo());
 		return laboratory;
 	}
 
@@ -72,7 +71,6 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 		laboratory.setAddress(dto.getAddress());
 		laboratory.setEmail(dto.getEmail());
 		laboratory.setPhone(dto.getPhone());
-		laboratory.setLogo(dto.getLogo());
 		return laboratory;
 	}
 
