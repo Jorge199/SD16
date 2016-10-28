@@ -84,8 +84,8 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 			criteria.add(nameCriterion);
 		}
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		List<UserDomain> usuarios = criteria.list();
-		return usuarios;
+		List<UserDomain> users = criteria.list();
+		return users;
 	}
 
 	public List<UserDomain> find(String textToFind) {

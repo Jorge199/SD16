@@ -40,26 +40,26 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 	@Override
 	@Transactional
 	public RolResult getAll() {
-		final List<RolDTO> roles = new ArrayList<>();
+		final List<RolDTO> rols = new ArrayList<>();
 		for (RolDomain domain : rolDao.findAll()) {
 			final RolDTO dto = convertDomainToDto(domain);
-			roles.add(dto);
+			rols.add(dto);
 		}
 		final RolResult rolResult = new RolResult();
-		rolResult.setRoles(roles);
+		rolResult.setRols(rols);
 		return rolResult;
 	}
 
 	@Override
 	@Transactional
 	public RolResult find(String textToFind) {
-		final List<RolDTO> roles = new ArrayList<>();
+		final List<RolDTO> rols = new ArrayList<>();
 		for (RolDomain domain : rolDao.find(textToFind)) {
 			final RolDTO dto = convertDomainToDto(domain);
-			roles.add(dto);
+			rols.add(dto);
 		}
 		final RolResult rolResult = new RolResult();
-		rolResult.setRoles(roles);
+		rolResult.setRols(rols);
 		return rolResult;
 	}
 

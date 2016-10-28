@@ -24,8 +24,8 @@ public class RolResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public RolDTO getById(@PathParam("id") Integer countryId) throws PatologyException {
-		return rolService.getById(countryId);
+	public RolDTO getById(@PathParam("id") Integer rolId) throws PatologyException {
+		return rolService.getById(rolId);
 	}
 
 	@GET

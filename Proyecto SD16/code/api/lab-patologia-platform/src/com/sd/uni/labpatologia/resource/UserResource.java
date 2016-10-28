@@ -25,8 +25,10 @@ public class UserResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public UserDTO getById(@PathParam("id") Integer usuarioId) throws PatologyException {
-		return userService.getById(usuarioId);
+
+	public UserDTO getById(@PathParam("id") Integer userId) throws PatologyException {
+		return userService.getById(userId);
+
 	}
 
 	@GET

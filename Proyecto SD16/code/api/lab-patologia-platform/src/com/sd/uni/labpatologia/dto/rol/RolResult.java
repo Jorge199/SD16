@@ -14,11 +14,11 @@ public class RolResult extends BaseResult<RolDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement
-	public List<RolDTO> getRoles() {
+	public List<RolDTO> getRols() {
 		return getList();
 	}
 
-	public void setRoles(List<RolDTO> dtos) {
+	public void setRols(List<RolDTO> dtos) {
 		super.setList(dtos);
 	}
 }

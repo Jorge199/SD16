@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
+import com.sd.uni.labpatologia.domain.rol.RolDomain;
 
 @Entity
 @Table(name = "user")
@@ -25,6 +28,9 @@ public class UserDomain extends BaseDomain {
 	@Column(name = "password", nullable = false, unique = false)
 	private String _password;
 
+	@ManyToOne
+	private RolDomain _rol;
+	
 	public Integer getId() {
 		return _id;
 	}
@@ -48,6 +54,14 @@ public class UserDomain extends BaseDomain {
 
 	public void setPassword(String password) {
 		_password = password;
+	}
+	
+	public RolDomain getRol() {
+		return _rol;
+	}
+
+	public void setRol(RolDomain rol) {
+		_rol = rol;
 	}
 
 }

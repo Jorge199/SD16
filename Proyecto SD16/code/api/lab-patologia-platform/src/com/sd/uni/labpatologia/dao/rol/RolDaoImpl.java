@@ -56,8 +56,8 @@ public class RolDaoImpl extends BaseDaoImpl<RolDomain> implements IRolDao {
 			criteria.add(nameCriterion);
 		}
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		List<RolDomain> roles = criteria.list();
-		return roles;
+		List<RolDomain> rols = criteria.list();
+		return rols;
 	}
 
 	public List<RolDomain> find2(String textToFind) {

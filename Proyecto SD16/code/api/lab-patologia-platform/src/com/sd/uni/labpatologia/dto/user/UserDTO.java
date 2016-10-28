@@ -11,6 +11,7 @@ public class UserDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _password;
+	private Integer _rolId;
 
 	@XmlElement
 	public String getName() {
@@ -21,6 +22,12 @@ public class UserDTO extends BaseDTO {
 	public String getPassword() {
 		return _password;
 	}
+	
+	@XmlElement
+	public Integer getRolId() {
+		return _rolId;
+	}
+	
 
 	public void setName(String name) {
 		_name = name;
@@ -30,4 +37,8 @@ public class UserDTO extends BaseDTO {
 		_password = password;
 	}
 
+	public void setRolId(Integer rolId) {
+		_rolId = rolId;
+	}
+	
 }

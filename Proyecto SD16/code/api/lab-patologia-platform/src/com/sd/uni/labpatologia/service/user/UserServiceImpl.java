@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import com.sd.uni.labpatologia.dao.rol.IRolDao;
 import com.sd.uni.labpatologia.dao.user.IUserDao;
 import com.sd.uni.labpatologia.dao.user.UserDaoImpl;
 import com.sd.uni.labpatologia.domain.user.UserDomain;
@@ -21,6 +23,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		implements IUserService {
 	@Autowired
 	private IUserDao userDao;
+	
+	@Autowired
+	private IRolDao rolDao;
 
 	@Override
 	@Transactional
@@ -70,6 +75,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		dto.setId(domain.getId());
 		dto.setName(domain.getName());
 		dto.setPassword(domain.getPassword());
+		dto.setRolId(domain.getRol().getId());
 		return dto;
 	}
 
@@ -79,6 +85,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		domain.setId(dto.getId());
 		domain.setName(dto.getName());
 		domain.setPassword(dto.getPassword());
+		try {
+			domain.setRol(rolDao.getById(dto.getRolId()));
+		} catch (PatologyException e) {
+			e.printStackTrace();
+		}
 		
 		return domain;
 	}
