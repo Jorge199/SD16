@@ -14,6 +14,8 @@ public class WsPathologyLaboratory {
 							// cargadas no puedo generar reportes
 		loadReportData(); // carga reportes de prueba
 		testReport(); // prueba las busquedas de los reportes
+		
+		testRequest();
 	}
 
 	/*
@@ -109,6 +111,22 @@ public class WsPathologyLaboratory {
 		 */
 		System.out.println("\n\t Obtener por Diagnostico (no cancer)");
 		reportManager.getByDiagnostic("no%20cancer");
+	}
+	
+	public static void testRequest(){
+		RequestManager manager = new RequestManager();
+		System.out.println("Creamos un registro");
+		manager.addRequest(1, 2, 3, "estudio");
+		manager.addRequest(2, 1, 3, "estudio mama");
+		
+		System.out.println("Obtenemos el registro por id");
+		manager.getById(1);
+		
+		System.out.println("\nObtenemos todos");
+		manager.getAll();
+		
+		System.out.println("\nObtenemos el registro por propiedad");
+		manager.getByProperty("estudio");
 	}
 
 }
