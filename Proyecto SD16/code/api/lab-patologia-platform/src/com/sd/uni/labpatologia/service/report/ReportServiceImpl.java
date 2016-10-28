@@ -54,10 +54,10 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	protected ReportDTO convertDomainToDto(ReportDomain domain) {
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
-		dto.setIdFicha(domain.getIdFicha());
-		dto.setDiagnostico(domain.getDiagnostico());
-		dto.setFecha(domain.getFecha());
-		dto.setObservaciones(domain.getObservaciones());
+		dto.setRequestId(domain.getRequestId());
+		dto.setDiagnostic(domain.getDiagnostic());
+		dto.setDate(domain.getDate());
+		dto.setObservations(domain.getObservations());
 		return dto;
 	}
 
@@ -65,10 +65,10 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	protected ReportDomain convertDtoToDomain(ReportDTO dto) {
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
-		domain.setIdFicha(dto.getIdFicha());
-		domain.setDiagnostico(dto.getDiagnostico());
-		domain.setFecha(dto.getFecha());
-		domain.setObservaciones(dto.getObservaciones());
+		domain.setRequestId(dto.getRequestId());
+		domain.setDiagnostic(dto.getDiagnostic());
+		domain.setDate(dto.getDate());
+		domain.setObservations(dto.getObservations());
 		return domain;
 	}
 

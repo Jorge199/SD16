@@ -56,7 +56,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 
 		if (map.containsKey("diagnostic")) { // si quiere filtrar por
 												// diagnostico
-			criteria.add(Restrictions.eq("_diagnostico", map.get("diagnostic")));
+			criteria.add(Restrictions.eq("_diagnostic", map.get("diagnostic")));
 		}
 
 		if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
@@ -67,14 +67,14 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 				c.add(Calendar.DATE, 1);
 				maxDate = c.getTime();
 				// System.out.println("desde" + minDate + "hasta " + maxDate);
-				criteria.add(Restrictions.between("_fecha", minDate, maxDate));
+				criteria.add(Restrictions.between("_date", minDate, maxDate));
 			} catch (ParseException e) {
 				throw new PatologyException("Formato de ruta invalido", e);
 			}
 		} else if (map.containsKey("date")) { // si quiere filtrar por una fecha
 												// especifica
 			try {
-				criteria.add(Restrictions.eq("_fecha", formatter.parse(map.get("date"))));
+				criteria.add(Restrictions.eq("_date", formatter.parse(map.get("date"))));
 			} catch (ParseException e) {
 				throw new PatologyException("Formato de ruta invalido", e);
 			}

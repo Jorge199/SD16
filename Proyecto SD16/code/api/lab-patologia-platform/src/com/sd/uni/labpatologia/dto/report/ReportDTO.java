@@ -12,46 +12,46 @@ public class ReportDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer _id_ficha;
-	private String _diagnostico;
-	private Date _fecha;
-	private String _observaciones;
+	private Integer _requestId;
+	private String _diagnostic;
+	private Date _date;
+	private String _observations;
 
 	
 	@XmlElement
-	public Integer getIdFicha() {
-		return _id_ficha;
+	public Integer getRequestId() {
+		return _requestId;
 	}
 
-	public void setIdFicha(Integer id_ficha) {
-		_id_ficha= id_ficha;
+	public void setRequestId(Integer requestId) {
+		_requestId= requestId;
 	}
 
 	@XmlElement
-	public String getDiagnostico() {
-		return _diagnostico;
+	public String getDiagnostic() {
+		return _diagnostic;
 	}
 
-	public void setDiagnostico(String diagnostico) {
-		_diagnostico = diagnostico;
+	public void setDiagnostic(String diagnostic) {
+		_diagnostic = diagnostic;
 	}
 	
 	@XmlElement
-	public Date getFecha() {
-		return _fecha;
+	public Date getDate() {
+		return _date;
 	}
 
-	public void setFecha(Date fecha) {
-		_fecha = fecha;
+	public void setDate(Date date) {
+		_date = date;
 	}
 
 	@XmlElement
-	public String getObservaciones() {
-		return _observaciones;
+	public String getObservations() {
+		return _observations;
 	}
 
-	public void setObservaciones(String observaciones) {
-		_observaciones = observaciones;
+	public void setObservations(String observations) {
+		_observations = observations;
 	}
 
 }
