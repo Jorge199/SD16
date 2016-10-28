@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
+import com.sd.uni.labpatologia.domain.request.RequestDomain;
 
 @Entity
 @Table(name = "report")
@@ -19,16 +21,8 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 
-	/**
-	 * Cuando se tenga la relacion se reemplazara con:
-	 * 
-	 * @ManyToOne
-	 * @JoinColumn(name = "id_ficha")
-	 * @org.hibernate.annotations.ForeignKey(name="FK_ID_FICHA") private Ficha
-	 *                                                           _id_ficha;
-	 */
-	@Column(name = "requestId", nullable = false)
-	private Integer _requestId;
+	@ManyToOne
+	private RequestDomain _request;
 
 	@Column(name = "date", nullable = false)
 	private Date _date;
@@ -47,12 +41,12 @@ public class ReportDomain extends BaseDomain {
 		_id = id;
 	}
 
-	public Integer getRequestId() {
-		return _requestId;
+	public RequestDomain getRequest() {
+		return _request;
 	}
 
-	public void setRequestId(Integer requestId) {
-		_requestId = requestId;
+	public void setRequest(RequestDomain request) {
+		_request = request;
 	}
 
 	public Date getDate() {

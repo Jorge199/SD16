@@ -1,15 +1,19 @@
 package com.sd.uni.labpatologia.domain.request;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
+import com.sd.uni.labpatologia.domain.report.ReportDomain;
 
 @Entity
 @Table(name = "request")
@@ -20,6 +24,9 @@ public class RequestDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 
+	@OneToMany(mappedBy="_request")
+	private Set<ReportDomain>_reports= new HashSet<ReportDomain>();
+	
 	/**
 		REMPLAZAR CUANDO EXISTA EL DOMAIN
 	@ManyToOne

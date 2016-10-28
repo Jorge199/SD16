@@ -3,8 +3,11 @@ import java.util.Date;
 
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
+import com.sd.uni.labpatologia.dto.request.RequestDTO;
+import com.sd.uni.labpatologia.dto.request.RequestResult;
 
 import base.AbstractBaseManager;
+import request.RequestManager;
 
 public class ReportManager extends AbstractBaseManager {
 
@@ -37,6 +40,11 @@ public class ReportManager extends AbstractBaseManager {
 		ReportDTO report = getJerseyClient().resource(getBaseUrl() + "/report/"+id).get(ReportDTO.class);
 			System.out.print("id: "+ report.getId());
 			System.out.print("\tid_ficha: "+ report.getRequestId());
+			//obtengo el request desde el RequestId del report
+			RequestDTO request = getJerseyClient().resource(getBaseUrl() + "/request/"+report.getRequestId()).get(RequestDTO.class);
+			System.out.print("\tdoctor_id: "+ request.getDoctorId());
+			System.out.print("\tpaciente_id: "+ request.getPatientId());
+			
 			System.out.print("\tdiagnostico: "+report.getDiagnostic());
 			System.out.print("\tfecha: "+report.getDate());
 			System.out.println("\tobservaciones: "+report.getObservations());
@@ -47,6 +55,11 @@ public class ReportManager extends AbstractBaseManager {
 		for (ReportDTO r : reportResult.getReports()) {
 			System.out.print("id: "+ r.getId());
 			System.out.print("\tid_ficha: "+ r.getRequestId());
+			//obtengo el request desde el RequestId del report
+			RequestDTO request = getJerseyClient().resource(getBaseUrl() + "/request/"+r.getRequestId()).get(RequestDTO.class);
+			System.out.print("\tdoctor_id: "+ request.getDoctorId());
+			System.out.print("\tpaciente_id: "+ request.getPatientId());
+			
 			System.out.print("\tdiagnostico: "+r.getDiagnostic());
 			System.out.print("\tfecha: "+r.getDate());
 			System.out.println("\tobservaciones: "+r.getObservations());
@@ -57,6 +70,11 @@ public class ReportManager extends AbstractBaseManager {
 		for (ReportDTO r : reportResult.getReports()) {
 			System.out.print("id: "+ r.getId());
 			System.out.print("\tid_ficha: "+ r.getRequestId());
+			//obtengo el request desde el RequestId del report
+			RequestDTO request = getJerseyClient().resource(getBaseUrl() + "/request/"+r.getRequestId()).get(RequestDTO.class);
+			System.out.print("\tdoctor_id: "+ request.getDoctorId());
+			System.out.print("\tpaciente_id: "+ request.getPatientId());
+			
 			System.out.print("\tdiagnostico: "+r.getDiagnostic());
 			System.out.print("\tfecha: "+r.getDate());
 			System.out.println("\tobservaciones: "+r.getObservations());
@@ -68,6 +86,11 @@ public class ReportManager extends AbstractBaseManager {
 		for (ReportDTO r : reportResult.getReports()) {
 			System.out.print("id: "+ r.getId());
 			System.out.print("\tid_ficha: "+ r.getRequestId());
+			//obtengo el request desde el RequestId del report
+			RequestDTO request = getJerseyClient().resource(getBaseUrl() + "/request/"+r.getRequestId()).get(RequestDTO.class);
+			System.out.print("\tdoctor_id: "+ request.getDoctorId());
+			System.out.print("\tpaciente_id: "+ request.getPatientId());
+			
 			System.out.print("\tdiagnostico: "+r.getDiagnostic());
 			System.out.print("\tfecha: "+r.getDate());
 			System.out.println("\tobservaciones: "+r.getObservations());

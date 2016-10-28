@@ -4,13 +4,26 @@ import java.text.SimpleDateFormat;
 
 import laboratory.LaboratoryManager;
 import report.ReportManager;
+import request.RequestManager;
 
 public class WsPathologyLaboratory {
 
 	public static void main(String[] args) {
 		laboratoryManager();
-		loadReportData();	//carga datos - reportes de prueba
-		testReport();		//prueba las busquedas de los reportes
+		loadRequestData(); // carga fichas, si no tengo request (fichas)
+							// cargadas no puedo generar reportes
+		loadReportData(); // carga reportes de prueba
+		testReport(); // prueba las busquedas de los reportes
+	}
+
+	/*
+	 * Cargo datos de prueba de request(ficha)
+	 */
+	private static void loadRequestData() {
+		RequestManager requestManager = new RequestManager();
+		requestManager.addRequest(1, 2, 3, "asd");
+		requestManager.addRequest(3, 4, 6, "asd");
+		requestManager.addRequest(2, 1, 6, "asd");
 	}
 
 	private static void laboratoryManager() {
@@ -31,21 +44,29 @@ public class WsPathologyLaboratory {
 		laboratoryManager.getByPropertyLaboratory("centro");
 	}
 
+	/*
+	 * Metodo que carga datos de prueba para generar reportes Notese que no se
+	 * puede crear un reporte de un id_ficha (request) que no existe (o no esta
+	 * cargada)
+	 */
 	public static void loadReportData() {
 		ReportManager reportManager = new ReportManager();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		try {
 			reportManager.addReport(1, formatter.parse("11-06-2016"), "obs", "cancer");
-			reportManager.addReport(6, formatter.parse("22-05-2016"), "alguna observacion", "no cancer");
+			reportManager.addReport(1, formatter.parse("22-05-2016"), "alguna observacion", "no cancer");
 			reportManager.addReport(3, formatter.parse("6-02-2016"), "alguna observacion", "no cancer");
 			reportManager.addReport(2, formatter.parse("25-08-2016"), "alguna observacion", "cancer");
-			reportManager.addReport(2, formatter.parse("27-02-2016"), "alguna observacion", "cancer");
+			reportManager.addReport(3, formatter.parse("27-02-2016"), "alguna observacion", "cancer");
 			reportManager.addReport(2, formatter.parse("28-01-2016"), "alguna observacion", "cancer");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/*
+	 * Este metodo obtiene datos de reportes
+	 */
 	public static void testReport() {
 		ReportManager reportManager = new ReportManager();
 
