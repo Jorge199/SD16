@@ -1,5 +1,6 @@
 package com.sd.uni.labpatologia.dao.patient;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -43,10 +44,10 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 	public List<PatientDomain> find(String textToFind) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(PatientDomain.class);
+		//SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
 		.add(Restrictions.ilike("_lastName", textToFind)).add(Restrictions.ilike("_document", textToFind))
-		.add(Restrictions.ilike("_sex", textToFind)).add(Restrictions.ilike("_birthDate", textToFind))
-		.add(Restrictions.ilike("_address", textToFind)).add(Restrictions.ilike("_phone", textToFind));
+		.add(Restrictions.ilike("_sex", textToFind)).add(Restrictions.ilike("_address", textToFind)).add(Restrictions.ilike("_phone", textToFind));
 		Criterion idCriterion = null;
 		if (StringUtils.isNumeric(textToFind)) {
 			idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
