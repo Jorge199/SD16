@@ -1,6 +1,8 @@
 package com.sd.uni.labpatologia.domain.patient;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
+import com.sd.uni.labpatologia.domain.request.RequestDomain;
 
 
 
@@ -21,6 +25,9 @@ public class PatientDomain extends BaseDomain {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
+	
+	@OneToMany(mappedBy="_patient")
+	private Set<RequestDomain>_requests= new HashSet<RequestDomain>();
 
 	@Column(name = "name")
 	private String _name;
@@ -52,12 +59,11 @@ public class PatientDomain extends BaseDomain {
 		_id = id;
 	}
 
-	public String getName() {
-		return _name;
-	}
-
 	public void setName(String name) {
 		_name = name;
+	}
+	public String getName() {
+		return _name;
 	}
 
 	public String getLastName() {
@@ -105,5 +111,13 @@ public class PatientDomain extends BaseDomain {
 
 	public void setPhone(String phone) {
 		_phone = phone;
+	}
+	
+	public Set<RequestDomain> getRequests() {
+		return _requests;
+	}
+
+	public void setRequests(Set<RequestDomain> requests) {
+		_requests = requests;
 	}
 }

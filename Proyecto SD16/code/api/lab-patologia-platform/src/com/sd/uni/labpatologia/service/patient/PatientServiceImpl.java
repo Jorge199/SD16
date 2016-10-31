@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.patient.IPatientDao;
 import com.sd.uni.labpatologia.dao.patient.PatientDaoImpl;
+import com.sd.uni.labpatologia.dao.request.IRequestDao;
 import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
@@ -20,7 +21,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 
 	@Autowired
 	private IPatientDao patientDao;
-
+	
 	@Override
 	@Transactional
 	public PatientDTO save(PatientDTO dto) {
