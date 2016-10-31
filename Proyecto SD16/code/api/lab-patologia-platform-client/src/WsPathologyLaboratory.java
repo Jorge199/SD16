@@ -3,6 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import laboratory.LaboratoryManager;
+import patient.PatientManager;
 import report.ReportManager;
 import request.RequestManager;
 import study_type.StudyTypeManager;
@@ -11,6 +12,7 @@ public class WsPathologyLaboratory {
 
 	public static void main(String[] args) {
 		laboratoryManager();
+		patientManager();
 		loadRequestData(); // carga fichas, si no tengo request (fichas)
 							// cargadas no puedo generar reportes
 		loadReportData(); // carga reportes de prueba
@@ -29,6 +31,29 @@ public class WsPathologyLaboratory {
 		requestManager.addRequest(1, 2, 3, "asd");
 		requestManager.addRequest(3, 4, 6, "asd");
 		requestManager.addRequest(2, 1, 6, "asd");
+	}
+	
+	/*Metodo para cargar datos de paciente*/
+	
+	private static void patientManager(){
+		
+		System.out.println("###### PACIENTES #####");
+		
+		PatientManager patientManager = new PatientManager();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		System.out.println("Agregar datos");
+		try{
+		patientManager.addPatient("Karina","Sanabria","4763428","Femenino",formatter.parse("11-06-1994"), "Cap Miranda","0985241789");
+		patientManager.addPatient("Eli","Sanabria","47893458","Femenino",formatter.parse("11-06-1994"),"Cap Miranda","0985241789");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Buscar por id");
+		patientManager.getByIdPatient(1);
+		System.out.println("Mostrar todos los pacientes");
+		patientManager.getAllPatients();
+		System.out.println("Buscar por propiedades");
+		patientManager.getByPropertyPatient("Karina");
 	}
 
 	private static void laboratoryManager() {
