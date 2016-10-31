@@ -18,20 +18,20 @@ import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 @Service
 public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain, StudyTypeDaoImpl, StudyTypeResult> implements IStudyTypeService {
 	@Autowired
-	private IStudyTypeDao estudioDao;
+	private IStudyTypeDao _studyTypeDao;
 
 	@Override
 	@Transactional
 	public StudyTypeDTO save(StudyTypeDTO dto) {
 		final StudyTypeDomain domain = convertDtoToDomain(dto);
-		final StudyTypeDomain estudioDomain = estudioDao.save(domain);
+		final StudyTypeDomain estudioDomain = _studyTypeDao.save(domain);
 		return convertDomainToDto(estudioDomain);
 	}
 
 	@Override
 	@Transactional
 	public StudyTypeDTO getById(Integer id) throws PatologyException {
-		final StudyTypeDomain domain = estudioDao.getById(id);
+		final StudyTypeDomain domain = _studyTypeDao.getById(id);
 		final StudyTypeDTO dto = convertDomainToDto(domain);
 		return dto;
 	}
@@ -40,7 +40,7 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 	@Transactional
 	public StudyTypeResult getAll() {
 		final List<StudyTypeDTO> estudios = new ArrayList<>();
-		for (StudyTypeDomain domain : estudioDao.findAll()) {
+		for (StudyTypeDomain domain : _studyTypeDao.findAll()) {
 			final StudyTypeDTO dto = convertDomainToDto(domain);
 			estudios.add(dto);
 		}
@@ -54,6 +54,7 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 		final StudyTypeDTO dto = new StudyTypeDTO();
 		dto.setId(domain.getId());
 		dto.setName(domain.getName());
+		dto.setDescription(domain.getDescription());
 		return dto;
 	}
 
@@ -62,13 +63,20 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 		final StudyTypeDomain domain = new StudyTypeDomain();
 		domain.setId(dto.getId());
 		domain.setName(dto.getName());
+		domain.setDescription(dto.getDescription());
 		return domain;
 	}
 
 	@Override
 	public StudyTypeResult find(String textToFind) throws PatologyException {
-		// TODO Auto-generated method stub
-		return null;
+		final List<StudyTypeDTO> studies = new ArrayList<>();
+		for (StudyTypeDomain domain : _studyTypeDao.find(textToFind)) {
+			final StudyTypeDTO dto = convertDomainToDto(domain);
+			studies.add(dto);
+		}
+		final StudyTypeResult studyResult = new StudyTypeResult();
+		studyResult.setStudies(studies);
+		return studyResult;
 	}
 
 }

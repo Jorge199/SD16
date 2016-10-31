@@ -9,32 +9,40 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sd.uni.labpatologia.dto.rol.RolResult;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.study_type.IStudyTypeService;
 
-@Path("/estudio")
+@Path("/study_type")
 @Component
 public class StudyTypeResource {
 	@Autowired
-	private IStudyTypeService estudioService;
+	private IStudyTypeService studyTypeService;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
 	public StudyTypeDTO getById(@PathParam("id") Integer estudioId) throws PatologyException {
-		return estudioService.getById(estudioId);
+		return studyTypeService.getById(estudioId);
 	}
 
 	@GET
 	@Produces("application/xml")
 	public StudyTypeResult getAll() {
-		return estudioService.getAll();
+		return studyTypeService.getAll();
+	}
+	
+	@GET
+	@Path("search/{textToFind}")
+	@Produces("application/xml")
+	public StudyTypeResult search(@PathParam("textToFind") String textToFind) throws PatologyException {
+		return studyTypeService.find(textToFind);
 	}
 
 	@POST
 	public StudyTypeDTO save(StudyTypeDTO estudio) {
-		return estudioService.save(estudio);
+		return studyTypeService.save(estudio);
 	}
 }

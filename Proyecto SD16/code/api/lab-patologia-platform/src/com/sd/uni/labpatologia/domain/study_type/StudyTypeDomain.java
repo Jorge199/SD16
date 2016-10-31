@@ -40,7 +40,7 @@ public class StudyTypeDomain extends BaseDomain {
 	}
 	
 	public String getDescription() {
-		return _name;
+		return _description;
 	}
 
 	public void setDescription(String description) {

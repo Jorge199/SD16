@@ -20,28 +20,33 @@ import com.sd.uni.labpatologia.exception.PatologyException;
 @Repository
 public class StudyTypeDaoImpl extends BaseDaoImpl<StudyTypeDomain> implements IStudyTypeDao {
 	@Autowired
-	private SessionFactory _sessionFactory;
+	private SessionFactory sessionFactory;
 
 	@Override
 	public StudyTypeDomain save(StudyTypeDomain domain) {
-		_sessionFactory.getCurrentSession().saveOrUpdate(domain);
+		sessionFactory.getCurrentSession().saveOrUpdate(domain);
 		return domain;
 	}
 
 	@Override
-	public StudyTypeDomain getById(Integer domainId) {
-		return (StudyTypeDomain) _sessionFactory.getCurrentSession().get(StudyTypeDomain.class, domainId);
+	public StudyTypeDomain getById(Integer domainId) throws PatologyException {
+		if (null != domainId) {
+			return (StudyTypeDomain) sessionFactory.getCurrentSession().get(StudyTypeDomain.class, domainId);
+		}
+		else{
+			throw new PatologyException("El ID no puede ser null");
+		}
 	}
 
 	@Override
 	public List<StudyTypeDomain> findAll() {
-		final Criteria criteria = _sessionFactory.getCurrentSession().createCriteria(StudyTypeDomain.class);
+		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(StudyTypeDomain.class);
 		return criteria.list();
 	}
 
 	@Override
 	public List<StudyTypeDomain> find(String textToFind) throws PatologyException {
-		Session session = _sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(StudyTypeDomain.class);
 		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
 				.add(Restrictions.ilike("_description", textToFind));
