@@ -6,6 +6,7 @@ import laboratory.LaboratoryManager;
 import patient.PatientManager;
 import report.ReportManager;
 import request.RequestManager;
+import study_type.StudyTypeManager;
 
 public class WsPathologyLaboratory {
 
@@ -18,6 +19,8 @@ public class WsPathologyLaboratory {
 		testReport(); // prueba las busquedas de los reportes
 		
 		testRequest();
+		
+		testStudyType();
 	}
 
 	/*
@@ -152,6 +155,25 @@ public class WsPathologyLaboratory {
 		
 		System.out.println("\nObtenemos el registro por propiedad");
 		manager.getByProperty("estudio");
+	}
+	
+	public static void testStudyType(){
+		StudyTypeManager s = new StudyTypeManager();
+		System.out.println("Creamos estudios:");
+		s.addStudy("Cancer", "Busqueda de cancer");
+		s.addStudy("Gripe", "Busqueda de gripe");
+		s.addStudy("Cancer de mama", "Busqueda de cancer de mama");
+		
+		System.out.println("Obtenemos el estudio por id = 1");
+		s.getById(1);
+		
+		System.out.println("\nObtenemos todos");
+		s.getAllStudies();
+		
+		System.out.println("\nObtenemos el estudio por propiedad = cancer");
+		//s.getByPropertyStudyType("cancer");
+		System.out.println("No me funciona");
+		
 	}
 
 }

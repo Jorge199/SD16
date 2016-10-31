@@ -1,5 +1,6 @@
 package study_type;
 
+import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeResult;
 
@@ -15,6 +16,8 @@ public class StudyTypeManager extends AbstractBaseManager{
 		StudyTypeDTO estudioDTO = new StudyTypeDTO();
 		estudioDTO.setName(name);
 		estudioDTO.setDescription(description);
+		
+		getJerseyClient().resource(getBaseUrl() + "/study_type").entity(estudioDTO).post(StudyTypeDTO.class);
 	}
 	
 	public void getAllStudies() {
