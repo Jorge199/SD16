@@ -12,14 +12,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("clientService")
+@Service("studyTypeService")
 public class StudyTypeServiceImpl extends BaseServiceImpl<StudyTypeB, StudyTypeDTO> 
                                     implements IStudyTypeService {
     
     @Autowired
     private IStudyTypeResource _studyTypeResource;
-    @Autowired
-    private IStudyTypeService _studyTypeService;
+    //@Autowired
+    //private IStudyTypeService _studyTypeService;
     
     public StudyTypeServiceImpl() {
     }
