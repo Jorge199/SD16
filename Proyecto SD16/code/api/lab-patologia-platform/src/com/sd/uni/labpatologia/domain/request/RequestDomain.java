@@ -9,11 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
+import com.sd.uni.labpatologia.domain.doctor.DoctorDomain;
+import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
+import com.sd.uni.labpatologia.domain.study_type.StudyTypeDomain;
 
 @Entity
 @Table(name = "request")
@@ -27,32 +31,14 @@ public class RequestDomain extends BaseDomain {
 	@OneToMany(mappedBy="_request")
 	private Set<ReportDomain>_reports= new HashSet<ReportDomain>();
 	
-	/**
-		REMPLAZAR CUANDO EXISTA EL DOMAIN
 	@ManyToOne
-    @JoinColumn(name="patientId")
-    private Patient _patientId;
-	 */
-	@Column(name = "patientId")
-	private Integer _patientId;
-
-	/**
-		REMPLAZAR CUANDO EXISTA EL DOMAIN
+	private PatientDomain _patient;
+	
 	@ManyToOne
-	@JoinColumn(name="studyId")
-	private Study _studyId;
-	 */
-	@Column(name = "studyId")
-	private Integer _studyId;
-
-	/**
-		REMPLAZAR CUANDO EXISTA EL DOMAIN
+	private StudyTypeDomain _studyType;
+	
 	@ManyToOne
-	@JoinColumn(name="doctorId")
-	private Doctor _doctorId;
-	 */
-	@Column(name = "doctorId")
-	private Integer _doctorId;
+	private DoctorDomain _doctor;
 
 	@Column(name = "date")
 	private Date _date;
@@ -66,30 +52,6 @@ public class RequestDomain extends BaseDomain {
 
 	public void setId(Integer id) {
 		_id = id;
-	}
-
-	public Integer getPatientId() {
-		return _patientId;
-	}
-
-	public void setPatientId(Integer patientId) {
-		_patientId = patientId;
-	}
-
-	public Integer getStudyId() {
-		return _studyId;
-	}
-
-	public void setStudyId(Integer studyId) {
-		_studyId = studyId;
-	}
-
-	public Integer getDoctorId() {
-		return _doctorId;
-	}
-
-	public void setDoctorId(Integer doctorId) {
-		_doctorId = doctorId;
 	}
 
 	public Date getDate() {
@@ -108,5 +70,37 @@ public class RequestDomain extends BaseDomain {
 		_note = note;
 	}
 
+	public Set<ReportDomain> getReports() {
+		return _reports;
+	}
+
+	public void setReports(Set<ReportDomain> reports) {
+		_reports = reports;
+	}
+
+	public PatientDomain getPatient() {
+		return _patient;
+	}
+
+	public void setPatient(PatientDomain patient) {
+		_patient = patient;
+	}
+
+	public StudyTypeDomain getStudyType() {
+		return _studyType;
+	}
+
+	public void setStudyType(StudyTypeDomain studyType) {
+		_studyType = studyType;
+	}
+
+	public DoctorDomain getDoctor() {
+		return _doctor;
+	}
+
+	public void setDoctor(DoctorDomain doctor) {
+		_doctor = doctor;
+	}
+	
 }
 

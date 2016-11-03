@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.uni.labpatologia.dao.doctor.IDoctorDao;
+import com.sd.uni.labpatologia.dao.patient.IPatientDao;
 import com.sd.uni.labpatologia.dao.request.IRequestDao;
 import com.sd.uni.labpatologia.dao.request.RequestDaoImpl;
+import com.sd.uni.labpatologia.dao.study_type.IStudyTypeDao;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
@@ -20,6 +23,16 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		implements IRequestService {
 	@Autowired
 	private IRequestDao requestDao;
+	
+	@Autowired
+	private IPatientDao patientDao;
+
+	@Autowired
+	private IDoctorDao doctorDao;
+
+	@Autowired
+	private IStudyTypeDao studyTypeDao;
+
 
 	@Override
 	@Transactional
@@ -54,9 +67,9 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	protected RequestDTO convertDomainToDto(RequestDomain domain) {
 		final RequestDTO dto = new RequestDTO();
 		dto.setId(domain.getId());
-		dto.setPatientId(domain.getPatientId());
-		dto.setStudyId(domain.getStudyId());
-		dto.setDoctorId(domain.getDoctorId());
+		dto.setPatientId(domain.getPatient().getId());
+		dto.setStudyId(domain.getStudyType().getId());
+		dto.setDoctorId(domain.getDoctor().getId());
 		dto.setNote(domain.getNote());
 		dto.setDate(domain.getDate());
 		return dto;
@@ -66,9 +79,13 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	protected RequestDomain convertDtoToDomain(RequestDTO dto) {
 		final RequestDomain domain = new RequestDomain();
 		domain.setId(dto.getId());
-		domain.setPatientId(dto.getPatientId());
-		domain.setStudyId(dto.getStudyId());
-		domain.setDoctorId(dto.getDoctorId());
+		try {
+			domain.setPatient(patientDao.getById(dto.getPatientId()));
+			domain.setStudyType(studyTypeDao.getById(dto.getStudyId()));
+			domain.setDoctor(doctorDao.getById(dto.getDoctorId()));
+		} catch (PatologyException e) {
+			e.printStackTrace();
+		}
 		domain.setNote(dto.getNote());
 		domain.setDate(dto.getDate());
 		return domain;

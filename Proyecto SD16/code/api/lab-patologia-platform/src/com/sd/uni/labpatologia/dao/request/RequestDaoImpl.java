@@ -1,6 +1,8 @@
 package com.sd.uni.labpatologia.dao.request;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -63,5 +65,5 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 		List<RequestDomain> requests = criteria.list();
 		return requests;
 	}
-
+	
 }
