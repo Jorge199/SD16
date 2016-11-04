@@ -6,13 +6,14 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.sd.uni.labpatologia.beans.base.BaseBean;
+import com.sd.uni.labpatologia.beans.request.RequestB;
 
 public class ReportB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private Date _date;
 	private String _diagnostic;
 	private String _observations;
-	//private RequestB _request;
+	private RequestB _request;
 
 	public ReportB(Map<String, String> params) {
 		super(params);
@@ -50,11 +51,11 @@ public class ReportB extends BaseBean {
 	public void setObservations(String observations) {
 		_observations = observations;
 	}
-	//public RequestB getRequest() {
-	//	return _request;
-	//}
+	public RequestB getRequest() {
+		return _request;
+	}
 
-	//public void setRequest(RequestB request) {
-	//	_request = request;
-	//}
+	public void setRequest(RequestB request) {
+		_request = request;
+	}
 }

@@ -66,17 +66,17 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 	protected RequestB convertDtoToBean(RequestDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
-		params.put("note", dto.getNote());
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		params.put("date", formato.format(dto.getDate()));
-		params.put("code", dto.getCode());
-		params.put("status", dto.getStatus());
+		//params.put("note", dto.getNote());
+		//SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		//params.put("date", formato.format(dto.getDate()));
+		//params.put("code", dto.getCode());
+		//params.put("status", dto.getStatus());
 		
 		final RequestB requestB = new RequestB(params);
 		
 		//requestB.setPatient(_patientService.getById(dto.getPatientId()));
-		requestB.setDoctor(_doctorService.getById(dto.getDoctorId()));
-		requestB.setStudyType(_studyTypeService.getById(dto.getStudyId()));
+		//requestB.setDoctor(_doctorService.getById(dto.getDoctorId()));
+		//requestB.setStudyType(_studyTypeService.getById(dto.getStudyId()));
 
 		return requestB;
 	}
