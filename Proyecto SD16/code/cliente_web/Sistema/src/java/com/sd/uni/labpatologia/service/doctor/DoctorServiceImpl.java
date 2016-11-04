@@ -24,7 +24,7 @@ import com.sd.uni.labpatologia.rest.doctor.IDoctorResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 import com.sd.uni.labpatologia.service.doctor.IDoctorService;
 
-@Service("reportService")
+@Service("doctortService")
 public class DoctorServiceImpl extends BaseServiceImpl<DoctorB, DoctorDto>
 		implements IDoctorService {
 

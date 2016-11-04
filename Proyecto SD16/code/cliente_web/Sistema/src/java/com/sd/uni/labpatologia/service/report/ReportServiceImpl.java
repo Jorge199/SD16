@@ -13,7 +13,7 @@ import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.rest.report.IReportResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
-//import com.sd.uni.labpatologia.service.request.IRequestService;
+import com.sd.uni.labpatologia.service.request.IRequestService;
 
 @Service("reportService")
 public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
@@ -21,8 +21,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 
 	@Autowired
 	private IReportResource _reportResource;
-	//@Autowired
-	//private IRequestService _requestService;
+	@Autowired
+	private IRequestService _requestService;
 
 	public ReportServiceImpl() {
 	}
@@ -64,7 +64,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		params.put("observations", dto.getObservations());
 		final ReportB reportB = new ReportB(params);
 		reportB.setDate(dto.getDate());
-		//reportB.setRequest(_requestService.getById(dto.getRequestId()));
+		reportB.setRequest(_requestService.getById(dto.getRequestId()));
 
 		return reportB;
 	}
@@ -76,7 +76,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		dto.setDate(bean.getDate());
 		dto.setDiagnostic(bean.getDiagnostic());
 		dto.setObservations(bean.getObservations());
-		//dto.setRequestId(bean.getRequest().getId());
+		dto.setRequestId(bean.getRequest().getId());
 		return dto;
 	}
 }

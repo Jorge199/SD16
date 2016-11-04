@@ -1,6 +1,5 @@
 package study_type;
 
-import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeResult;
 

@@ -1,7 +1,6 @@
 package laboratory;
 
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryDto;
-
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryResult;
 
 import base.AbstractBaseManager;
