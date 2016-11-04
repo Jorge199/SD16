@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.uni.labpatologia.dto.base.BaseDTO;
+import com.sd.uni.labpatologia.util.StatusEnum;
 
 @XmlRootElement(name = "request")
 public class RequestDTO extends BaseDTO {
@@ -20,7 +21,7 @@ public class RequestDTO extends BaseDTO {
 	private Integer _userId;
 	private Integer _reportId;
 	private String _code;
-	private String _status;
+	private StatusEnum _status;
 	
 	@XmlElement
 	public Integer getPatientId() {
@@ -95,11 +96,11 @@ public class RequestDTO extends BaseDTO {
 	}
 
 	@XmlElement
-	public String getStatus() {
+	public StatusEnum getStatus() {
 		return _status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusEnum status) {
 		_status = status;
 	}
 

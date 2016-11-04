@@ -117,13 +117,14 @@ public class RequestB extends BaseBean {
 		setNote(params.get("note"));
 		setCode(params.get("code"));
 		setStatus(params.get("status"));
-		
+		/*
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			setDate(formato.parse(params.get("date")));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		*/
 
 	}
 

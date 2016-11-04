@@ -76,14 +76,14 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	protected RequestDTO convertDomainToDto(RequestDomain domain) {
 		final RequestDTO dto = new RequestDTO();
 		dto.setId(domain.getId());
-		dto.setPatientId(domain.getPatient().getId());
-		dto.setStudyId(domain.getStudyType().getId());
-		dto.setDoctorId(domain.getDoctor().getId());
-		dto.setNote(domain.getNote());
-		dto.setDate(domain.getDate());
-		dto.setUserId(domain.getUser().getId());
-		dto.setCode(domain.getCode());
-		dto.setStatus(domain.getStatus().toString());
+		if (null != domain.getNote()) dto.setNote(domain.getNote());
+		if (null != domain.getCode()) dto.setCode(domain.getCode());
+		if (null != domain.getPatient()) dto.setPatientId(domain.getPatient().getId());
+		if (null != domain.getStudyType())dto.setStudyId(domain.getStudyType().getId());
+		if (null != domain.getDoctor()) dto.setDoctorId(domain.getDoctor().getId());
+		if (null != domain.getDate()) dto.setDate(domain.getDate());
+		if (null != domain.getUser()) dto.setUserId(domain.getUser().getId());
+		if (null != domain.getStatus()) dto.setStatus(domain.getStatus());
 		return dto;
 	}
 
@@ -92,17 +92,17 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		final RequestDomain domain = new RequestDomain();
 		domain.setId(dto.getId());
 		try {
-			domain.setPatient(patientDao.getById(dto.getPatientId()));
-			domain.setStudyType(studyTypeDao.getById(dto.getStudyId()));
-			domain.setDoctor(doctorDao.getById(dto.getDoctorId()));
-			domain.setUser(userDao.getById(dto.getUserId()));
+			if (null != dto.getPatientId()) domain.setPatient(patientDao.getById(dto.getPatientId()));
+			if (null != dto.getStudyId()) domain.setStudyType(studyTypeDao.getById(dto.getStudyId()));
+			if (null != dto.getDoctorId()) domain.setDoctor(doctorDao.getById(dto.getDoctorId()));
+			if (null != dto.getUserId()) domain.setUser(userDao.getById(dto.getUserId()));
 		} catch (PatologyException e) {
 			e.printStackTrace();
 		}
-		domain.setNote(dto.getNote());
-		domain.setDate(dto.getDate());
-		domain.setCode(dto.getCode());
-		domain.setStatus(StatusEnum.valueOf(dto.getStatus()));
+		if (null != dto.getNote()) domain.setNote(dto.getNote());
+		if (null != dto.getDate()) domain.setDate(dto.getDate());
+		if (null != dto.getCode()) domain.setCode(dto.getCode());
+		if (null != dto.getStatus()) domain.setStatus(dto.getStatus());
 		return domain;
 	}
 
