@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +47,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 
 	@Override
 	@Transactional
+	@CachePut(value = "lab-patologia-platform-cache")
 	public RequestDTO save(RequestDTO dto) {
 		final RequestDomain domain = convertDtoToDomain(dto);
 		final RequestDomain requestDomain = requestDao.save(domain);
@@ -53,6 +56,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'request_' + #id")
 	public RequestDTO getById(Integer id) throws PatologyException {
 		final RequestDomain domain = requestDao.getById(id);
 		final RequestDTO dto = convertDomainToDto(domain);
@@ -61,6 +65,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache")
 	public RequestResult getAll() {
 		final List<RequestDTO> requests = new ArrayList<>();
 		for (RequestDomain domain : requestDao.findAll()) {

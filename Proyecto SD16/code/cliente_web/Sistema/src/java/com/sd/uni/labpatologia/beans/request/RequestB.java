@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import com.sd.uni.labpatologia.beans.base.BaseBean;
 import com.sd.uni.labpatologia.beans.doctor.DoctorB;
 import com.sd.uni.labpatologia.beans.study_type.StudyTypeB;
+import com.sd.uni.labpatologia.util.StatusEnum;
 
 public class RequestB extends BaseBean {
 
@@ -21,7 +22,7 @@ public class RequestB extends BaseBean {
 	//private UserB _user;
 	private StudyTypeB _studyType;
 	private String _code;
-	private String _status;
+	private StatusEnum _status;
 	
 
 	public RequestB(Map<String, String> params) {
@@ -89,12 +90,12 @@ public class RequestB extends BaseBean {
 	}
 
 
-	public String getStatus() {
+	public StatusEnum getStatus() {
 		return _status;
 	}
 
 
-	public void setStatus(String status) {
+	public void setStatus(StatusEnum status) {
 		_status = status;
 	}
 
@@ -116,7 +117,7 @@ public class RequestB extends BaseBean {
 		}
 		setNote(params.get("note"));
 		setCode(params.get("code"));
-		setStatus(params.get("status"));
+		setStatus(StatusEnum.valueOf(params.get("status")));
 		/*
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		try {
