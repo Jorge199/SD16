@@ -1,9 +1,9 @@
-package src.laboratory;
+package laboratory;
 
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryDto;
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryResult;
 
-import src.base.AbstractBaseManager;
+import base.AbstractBaseManager;
 
 public class LaboratoryManager extends AbstractBaseManager {
 	public LaboratoryManager() {

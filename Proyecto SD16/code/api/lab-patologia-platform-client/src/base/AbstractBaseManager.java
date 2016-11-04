@@ -1,4 +1,4 @@
-package src.base;
+package base;
 import com.sun.jersey.api.client.Client;
 
 public abstract class AbstractBaseManager {

@@ -1,6 +1,5 @@
-package src;
 
-import src.study_type.StudyTypeManager;
+import study_type.StudyTypeManager;
 
 
 public class WsStudyType {

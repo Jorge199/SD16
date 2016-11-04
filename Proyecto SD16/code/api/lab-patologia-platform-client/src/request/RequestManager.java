@@ -1,11 +1,11 @@
-package src.request;
+package request;
 
 import java.util.Date;
 
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 
-import src.base.AbstractBaseManager;
+import base.AbstractBaseManager;
 
 public class RequestManager extends AbstractBaseManager {
 	public RequestManager() {

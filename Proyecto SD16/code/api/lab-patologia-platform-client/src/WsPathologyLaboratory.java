@@ -1,14 +1,14 @@
-package src;
+
 
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import src.laboratory.LaboratoryManager;
-import src.patient.PatientManager;
-import src.report.ReportManager;
-import src.request.RequestManager;
-import src.study_type.StudyTypeManager;
+import laboratory.LaboratoryManager;
+import patient.PatientManager;
+import report.ReportManager;
+import request.RequestManager;
+import study_type.StudyTypeManager;
 
 public class WsPathologyLaboratory {
 
