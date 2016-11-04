@@ -34,7 +34,11 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	@Override
 	public ReportDomain getById(Integer domainId) throws PatologyException {
 		if (null != domainId) {
+			try{
 			return (ReportDomain) sessionFactory.getCurrentSession().get(ReportDomain.class, domainId);
+			}catch(Exception e){
+				throw new PatologyException( "No existe el reporte con id "+domainId,e);
+			}
 		} else {
 			throw new PatologyException("El ID no puede ser null");
 		}

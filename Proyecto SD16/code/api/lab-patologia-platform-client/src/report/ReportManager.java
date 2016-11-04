@@ -1,13 +1,11 @@
-package report;
+package src.report;
 import java.util.Date;
 
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
-import com.sd.uni.labpatologia.dto.request.RequestResult;
 
-import base.AbstractBaseManager;
-import request.RequestManager;
+import src.base.AbstractBaseManager;
 
 public class ReportManager extends AbstractBaseManager {
 
