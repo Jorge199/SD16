@@ -1,9 +1,11 @@
-package patient;
+package src.patient;
 
 import java.util.Date;
+
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
-import base.AbstractBaseManager;
+
+import src.base.AbstractBaseManager;
 
 public class PatientManager extends AbstractBaseManager {
 	public PatientManager() {

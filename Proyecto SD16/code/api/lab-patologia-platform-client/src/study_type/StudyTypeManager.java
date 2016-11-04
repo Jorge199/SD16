@@ -1,10 +1,9 @@
-package study_type;
+package src.study_type;
 
-import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeResult;
 
-import base.AbstractBaseManager;
+import src.base.AbstractBaseManager;
 
 public class StudyTypeManager extends AbstractBaseManager{
 	
