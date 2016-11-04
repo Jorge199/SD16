@@ -72,21 +72,21 @@ public class RequestB extends BaseBean {
 		_studyType = studyType;
 	}*/
 
-
+ 
 	@Override
 	protected void create(Map<String, String> params) {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
 		setNote(params.get("note"));
-		
+		/*
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			setDate(formato.parse(params.get("date")));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
+	*/
 	}
 
 }
