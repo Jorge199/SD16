@@ -85,13 +85,6 @@ class LaboratoryController {
 			}
 		}
 
-		laboratoryInstance.properties = params
-
-		if (!laboratoryInstance.save(flush: true)) {
-			render(view: "edit", model: [laboratoryInstance: laboratoryInstance])
-			return
-		}
-
 		flash.message = message(code: 'default.updated.message', args: [
 			message(code: 'laboratory.label', default: 'Laboratory'),
 			laboratoryInstance.id

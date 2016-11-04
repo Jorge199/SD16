@@ -55,8 +55,8 @@
 							<g:hiddenField name="id" value="${laboratoryInstance?.id}" />
 							</br>
 							<fieldset class="buttons">
-								<g:actionSubmit class="btn btn-success" action="update" value="${message(code: 'Actualizar')}" />
-								<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'Eliminar')}" formnovalidate="" onclick="return confirm('${message(code: 'Estas seguro que quieres eliminarlo?')}');" />
+								<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'Actualizar')}" />
+		
 							</fieldset>
 						</g:form>						
 					</div>

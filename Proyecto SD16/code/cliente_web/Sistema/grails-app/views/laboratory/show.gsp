@@ -50,7 +50,6 @@
 							</br>
 							<fieldset class="buttons">
 							<g:link class="btn btn-success" action="edit" id="${laboratoryInstance?.id}"><i class="fa fa-pencil"></i> Editar</g:link>
-							<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'Eliminar')}" onclick="return confirm('${message(code: 'Estas seguro que quieres eliminarlo?')}');"  />
 							</fieldset>
 						</g:form>
 					</div>

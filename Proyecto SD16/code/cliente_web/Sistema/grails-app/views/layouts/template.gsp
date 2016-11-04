@@ -198,6 +198,17 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-info-circle"></i> Laboratorio<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo4" class="collapse">
+                            <li>
+                                <a href="/Sistema/laboratory/create">Registrar</a>
+                            </li>
+                            <li>
+                                <a href="/Sistema/Laboratory/list">Listar</a>
+                            </li>
+                        </ul>
+                    </li>
                     
                     <li>
                         <a href="/Sistema/informe/index"><i class="fa fa-fw fa-file-text-o"></i>Informe</a>
