@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,7 +57,7 @@ public class RequestDomain extends BaseDomain {
 	@Column(name = "code")
 	private String _code;
 	
-	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	private StatusEnum _status;
 
 	public Integer getId() {
