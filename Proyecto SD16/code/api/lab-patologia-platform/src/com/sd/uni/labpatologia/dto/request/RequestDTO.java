@@ -17,6 +17,10 @@ public class RequestDTO extends BaseDTO {
 	private Integer _doctorId;
 	private Date _date;
 	private String _note;
+	private Integer _userId;
+	private Integer _reportId;
+	private String _code;
+	private String _status;
 	
 	@XmlElement
 	public Integer getPatientId() {
@@ -63,4 +67,41 @@ public class RequestDTO extends BaseDTO {
 		_note = note;
 	}
 
+	@XmlElement
+	public Integer getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(Integer userId) {
+		_userId = userId;
+	}
+
+	@XmlElement
+	public Integer getReportId() {
+		return _reportId;
+	}
+
+	public void setReportId(Integer reportId) {
+		_reportId = reportId;
+	}
+
+	@XmlElement
+	public String getCode() {
+		return _code;
+	}
+
+	public void setCode(String code) {
+		_code = code;
+	}
+
+	@XmlElement
+	public String getStatus() {
+		return _status;
+	}
+
+	public void setStatus(String status) {
+		_status = status;
+	}
+
+	
 }

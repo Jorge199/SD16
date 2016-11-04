@@ -12,7 +12,7 @@ public class PatologyException extends Exception {
 		super(string);
 	}
 
-	public PatologyException(String string, ParseException e) {
+	public PatologyException(String string, Exception e) {
 		super(string, e);
 	}
 

@@ -9,14 +9,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.doctor.IDoctorDao;
 import com.sd.uni.labpatologia.dao.patient.IPatientDao;
+import com.sd.uni.labpatologia.dao.report.IReportDao;
 import com.sd.uni.labpatologia.dao.request.IRequestDao;
 import com.sd.uni.labpatologia.dao.request.RequestDaoImpl;
 import com.sd.uni.labpatologia.dao.study_type.IStudyTypeDao;
+import com.sd.uni.labpatologia.dao.user.IUserDao;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
+import com.sd.uni.labpatologia.util.StatusEnum;
 
 @Service
 public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomain, RequestDaoImpl, RequestResult>
@@ -32,6 +35,12 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 
 	@Autowired
 	private IStudyTypeDao studyTypeDao;
+	
+	@Autowired
+	private IUserDao userDao;
+	
+	@Autowired
+	private IReportDao reportDao;
 
 
 	@Override
@@ -72,6 +81,9 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		dto.setDoctorId(domain.getDoctor().getId());
 		dto.setNote(domain.getNote());
 		dto.setDate(domain.getDate());
+		dto.setUserId(domain.getUser().getId());
+		dto.setCode(domain.getCode());
+		dto.setStatus(domain.getStatus().toString());
 		return dto;
 	}
 
@@ -83,11 +95,14 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 			domain.setPatient(patientDao.getById(dto.getPatientId()));
 			domain.setStudyType(studyTypeDao.getById(dto.getStudyId()));
 			domain.setDoctor(doctorDao.getById(dto.getDoctorId()));
+			domain.setUser(userDao.getById(dto.getUserId()));
 		} catch (PatologyException e) {
 			e.printStackTrace();
 		}
 		domain.setNote(dto.getNote());
 		domain.setDate(dto.getDate());
+		domain.setCode(dto.getCode());
+		domain.setStatus(StatusEnum.valueOf(dto.getStatus()));
 		return domain;
 	}
 
