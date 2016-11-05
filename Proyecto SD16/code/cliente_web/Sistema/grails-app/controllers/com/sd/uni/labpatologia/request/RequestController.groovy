@@ -1,7 +1,12 @@
 package com.sd.uni.labpatologia.request
 
 import com.sd.uni.labpatologia.beans.request.RequestB
+import com.sd.uni.labpatologia.service.doctor.IDoctorService
 import com.sd.uni.labpatologia.service.request.IRequestService
+import com.sd.uni.labpatologia.service.study_type.IStudyTypeService
+import com.sd.uni.labpatologia.util.StatusEnum;
+
+import java.text.SimpleDateFormat
 
 class RequestController {
 
@@ -9,29 +14,36 @@ class RequestController {
 
 	//services
 	def IRequestService requestService
-	/*def IDoctorService doctorService
-	def IPatientService patientService
-	def IStudyTypeService studyTypeService*/
+	def IDoctorService doctorService
+	//def IPatientService patientService
+	def IStudyTypeService studyTypeService
 
 	def index() {
 		redirect(action: "list", params: params)
 	}
 
 	def list(Integer max) {
+		
 		def requests = requestService.getAll()
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
 		[requestInstanceList: requests, requestInstanceTotal: requests?.size()]
+	
 	}
 
 	def create() {
-		/*[requestInstance: new RequestB(params), requests:requestService.getAll()] */
+		[requestInstance: new RequestB(params), studies:studyTypeService.getAll()
+			,doctors:doctorService.getAll()] //patients:patientService.getAll()
 	}
 
 	def save() {
 		def requestInstance = new RequestB(params)
-		/*requestInstance.setDoctor(doctorService.getById(Integer.valueOf(params.doctorId)))
-		requestInstance.setPatient(patientService.getById(Integer.valueOf(params.patientId)))
-		requestInstance.setStudyType(studyTypeService.getById(Integer.valueOf(params.studyTypeId)))*/
+		requestInstance.setDoctor(doctorService.getById(Integer.valueOf(params.doctorId)))
+		//requestInstance.setPatient(patientService.getById(Integer.valueOf(params.patientId)))
+		requestInstance.setStudyType(studyTypeService.getById(Integer.valueOf(params.studyTypeId)))
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		requestInstance.setDate(formatter.parse(formatter.format(new Date())));
+		
 		def newRequest= requestService.save(requestInstance)
 		if (!newRequest?.getId()) {
 			render(view: "create", model: [requestInstance: requestInstance])

@@ -3,12 +3,23 @@ package com.sd.uni.labpatologia.util;
 import java.util.EnumSet;
 
 public enum StatusEnum {
-	RECIBIDO,
-	PROCESO,
-	PROCESADO,
-	TERMINADO,
-	RETIRADO;
+	RECIBIDO("Recibido"),
+	PROCESO("Proceso"),
+	PROCESADO("Procesado"),
+	TERMINADO("Terminado"),
+	RETIRADO("Retirado");
 	
-	public static final EnumSet<StatusEnum> allStatus = EnumSet.of(RECIBIDO, PROCESO, PROCESADO, TERMINADO, RETIRADO);
+	final String _value;
+	private StatusEnum(String value){
+		_value = value;
+	}
+	
+	public String toString(){
+		return _value;
+	}
+	public String getKey(){
+		return name();
+	}
+	//public static final EnumSet<StatusEnum> allStatus = EnumSet.of(RECIBIDO, PROCESO, PROCESADO, TERMINADO, RETIRADO);
 	
 }

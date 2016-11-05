@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.sd.uni.labpatologia.beans.base.BaseBean;
 import com.sd.uni.labpatologia.beans.doctor.DoctorB;
+import com.sd.uni.labpatologia.beans.patient.PatientB;
 import com.sd.uni.labpatologia.beans.study_type.StudyTypeB;
 import com.sd.uni.labpatologia.util.StatusEnum;
 
@@ -18,7 +19,7 @@ public class RequestB extends BaseBean {
 	private String _note;
 	private Date _date;
 	private DoctorB _doctor;
-	//private PatientB _patient;
+	private PatientB _patient;
 	//private UserB _user;
 	private StudyTypeB _studyType;
 	private String _code;
@@ -117,16 +118,24 @@ public class RequestB extends BaseBean {
 		}
 		setNote(params.get("note"));
 		setCode(params.get("code"));
-		setStatus(StatusEnum.valueOf(params.get("status")));
-		/*
+		//para que no lance error 
+		if (!StringUtils.isBlank(params.get("status"))) {
+			setStatus(StatusEnum.valueOf(params.get("status")));
+		
+		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			setDate(formato.parse(params.get("date")));
+			//setDate(formato.parse(params.get("date")));
+			//para que no lance error
+			if(null != params.get("date")){
+				setDate(formato.parse(params.get("date")));
+			}
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
+		
+
 		}
-		*/
-
 	}
-
+	}
 }
