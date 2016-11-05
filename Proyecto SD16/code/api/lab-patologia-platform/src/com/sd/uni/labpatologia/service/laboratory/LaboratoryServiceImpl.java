@@ -2,9 +2,12 @@ package com.sd.uni.labpatologia.service.laboratory;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,14 +27,16 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 	
 	@Override
 	@Transactional
+	@CachePut(value = "lab-patologia-platform-cache")
 	public LaboratoryDto save(LaboratoryDto dto) {
 		final LaboratoryDomain laboratoryDomain = convertDtoToDomain(dto);
 		final LaboratoryDomain laboratory = _laboratoryDao.save(laboratoryDomain);
 		return convertDomainToDto(laboratory);
 	}
-
+	
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'laboratory_' + #id")
 	public LaboratoryDto getById(Integer id) throws PatologyException {
 		final LaboratoryDomain laboratoryDomain = _laboratoryDao.getById(id);
 		final LaboratoryDto laboratoryDTO = convertDomainToDto(laboratoryDomain);
@@ -40,6 +45,7 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache")
 	public LaboratoryResult getAll() {
 		final List<LaboratoryDto> laboratories = new ArrayList<>();
 		for (LaboratoryDomain domain : _laboratoryDao.findAll()) {
