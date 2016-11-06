@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.doctor.DoctorDomain;
+import com.sd.uni.labpatologia.domain.study_type.StudyTypeDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
 
 @Repository
@@ -46,14 +47,14 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorDomain> implements IDoctorD
 		Session session = _sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(DoctorDomain.class);
 		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
-				.add(Restrictions.ilike("_last_name", textToFind)).add(Restrictions.ilike("_ci", textToFind))
-				.add(Restrictions.ilike("_address", textToFind)).add(Restrictions.ilike("_email", textToFind))
-				.add(Restrictions.ilike("_phone", textToFind));
+				.add(Restrictions.ilike("_last_name", textToFind))
+				.add(Restrictions.ilike("_address", textToFind))
+				.add(Restrictions.ilike("_phone", textToFind))
+				.add(Restrictions.ilike("_email", textToFind));				
 		Criterion idCriterion = null;
 		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
+			idCriterion = Restrictions.eq("_ci", Integer.valueOf(textToFind));
 		}
-
 		if (idCriterion != null) {
 			criteria.add(Restrictions.or(propertyCriterion, idCriterion));
 		} else {
