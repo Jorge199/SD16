@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.sd.uni.labpatologia.beans.laboratory.LaboratoryB;
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryDto;
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryResult;
@@ -74,6 +73,11 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryB, Laborato
 		dto.setName(bean.getName());
 		dto.setPhone(bean.getPhone());
 		return dto;
+	}
+	@Override
+	public List<LaboratoryB> find(String textToFind) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

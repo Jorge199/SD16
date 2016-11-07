@@ -17,7 +17,7 @@ import com.sd.uni.labpatologia.rest.patient.IPatientResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 import com.sd.uni.labpatologia.service.patient.IPatientService;
 
-@Service("reportService")
+@Service("patientService")
 public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>implements IPatientService {
 
 	@Autowired
@@ -86,5 +86,11 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>imp
 		dto.setAddress(bean.getAddress());
         dto.setPhone(bean.getPhone());
 		return dto;
+	}
+
+	@Override
+	public List<PatientB> find(String textToFind) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

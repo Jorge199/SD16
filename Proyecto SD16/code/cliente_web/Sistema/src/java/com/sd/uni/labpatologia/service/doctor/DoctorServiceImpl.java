@@ -90,4 +90,10 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorB, DoctorDto>
                 dto.setEmail(bean.getEmail());
 		return dto;
 	}
+
+	@Override
+	public List<DoctorB> find(String textToFind) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
