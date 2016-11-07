@@ -5,116 +5,86 @@ import java.text.SimpleDateFormat;
 import com.sd.uni.labpatologia.beans.report.ReportB
 import com.sd.uni.labpatologia.service.report.IReportService;
 import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
+import com.sd.uni.labpatologia.service.request.IRequestService;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 class ReportController {
 	static allowedMethods = [save: "POST", update: "POST"]
 	
 	//service
 	def IReportService reportService;
-	//def IRequestService requestService;
+	def IRequestService requestService;
 	def index() {
 		redirect(action: "list", params: params)
 	}
 	
-	def list(Integer max) {
-		
+	def list() {
 		def reports = reportService.getAll()
+		String textToFind="";
+		if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
+			textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
+		}
+		if((!"".equals(params.get("startSearch")) && !"".equals(params.get("endSearch"))) &&
+			(null!=(params.get("startSearch")) && null!=params.get("endSearch"))){
+			textToFind+="start="+params.get("startSearch")+'&'
+			textToFind+="end="+params.get("endSearch")
+		}else{
+			if(null!=(params.get("startSearch")) && !"".equals(params.get("startSearch"))){
+				textToFind+="date="+params.get("startSearch")
+			}
+		}
+		
+		
+		if(!textToFind.equals("")){
+			reports = reportService.find(textToFind);
+		}
+		textToFind ="";
 		System.out.println("Cantidad Reportes----------------------------->"+reports.size())
 		[reportInstanceList: reports, reportInstanceTotal: reports?.size()]
 	}
 	
-	def create() {
-		[reportInstance: new ReportB(params)]//, requests:requestService.getAll()]
+	def create(Integer id) {
+		def reportInstance = new ReportB(params)
+		reportInstance.setRequest(requestService.getById(id))
+		[reportInstance: reportInstance] //, requests:requestService.getAll()]
 	}
-	def save() {
+	def save(Integer id) {
+		
 		def reportInstance = new ReportB(params)
 		//request
-		//clientInstance.setCity(cityService.getById(Integer.valueOf(params.cityId)))
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
+		reportInstance.setRequest(requestService.getById(Integer.parseInt(params.get("requestId"))))
 		def newReport= reportService.save(reportInstance)
 		if (!newReport?.getId()) {
-			render(view: "create", model: [reportInstance: reportInstance])
-			return
+			//redirect(action: "list", id: newReport.getId())
+			//return
 		}
-
-		flash.message = message(code: 'default.created.message', args: [
-			message(code: 'report.label', default: 'Report'),
-			newReport.getId()
-		])
-		redirect(action: "edit", id: newReport.getId())
+		redirect(action: "list", id: newReport.getId())
 	}
 	
 	def edit(Integer id) {
-		def reportInstance = reportService.getById(id)
-		if (!reportInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'report.label', default: 'Report'),
-				id
-			])
-			redirect(action: "list")
-			return
-		}
-
+		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
+				//si no existe esa id
+				if (!reportInstance) {
+					flash.message = message(code: 'default.not.found.message', args: [
+						message(code: 'report.label', default: 'Report'),
+						id
+					])
+					redirect(action: "list")
+					return
+				}
 		[reportInstance: reportInstance]
 	}
 	
-	def update(Long id, Long version) {
-		def reportInstance = reportService.getById(id)
-		if (!reportInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'report.label', default: 'Report'),
-				id
-			])
-			redirect(action: "list")
-			return
-		}
-
-		if (version != null) {
-			if (reportInstance.version > version) {
-				reportInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-						[
-							message(code: 'report.label', default: 'Report')] as Object[],
-						"Another user has updated this Report while you were editing")
-				render(view: "edit", model: [reportInstance: reportInstance])
-				return
-			}
-		}
-
-		reportInstance.properties = params
-
-		if (!reportInstance.save(flush: true)) {
-			render(view: "edit", model: [reportInstance: reportInstance])
-			return
-		}
-
-		flash.message = message(code: 'default.updated.message', args: [
-			message(code: 'report.label', default: 'Report'),
-			reportInstance.id
-		])
-		redirect(action: "show", id: reportInstance.id)
-	}
-
-	def delete(Integer id) {
-		System.out.println("entro en delete");
-		def reportInstance = reportService.getById(id)
-		if (!reportInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'client.label', default: 'Report'),
-				id
-			])
-			redirect(action: "list")
-			return
-		}
-		System.out.println("entro en delete");
-			reportInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [
-				message(code: 'report.label', default: 'Report'),
-				id
-			])
-			redirect(action: "list")
-	
-			System.out.println("entro en delete");
-		
+	def update(Integer id) {
+		def reportInstance = new ReportB(params)
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
+		reportInstance.setRequest(requestService.getById(Integer.parseInt(params.get("requestId"))))
+		reportInstance.setId(Integer.parseInt(params.get("edit")))
+		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+		reportService.save(reportInstance)
+		redirect(action: "list")
 	}
 }

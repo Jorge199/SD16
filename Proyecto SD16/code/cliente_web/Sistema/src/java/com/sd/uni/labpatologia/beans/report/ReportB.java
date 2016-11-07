@@ -7,11 +7,12 @@ import org.apache.commons.lang.StringUtils;
 
 import com.sd.uni.labpatologia.beans.base.BaseBean;
 import com.sd.uni.labpatologia.beans.request.RequestB;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 public class ReportB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private Date _date;
-	private String _diagnostic;
+	private DiagnosticEnum _diagnostic;
 	private String _observations;
 	private RequestB _request;
 
@@ -24,7 +25,6 @@ public class ReportB extends BaseBean {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
-		setDiagnostic(params.get("diagnostic"));
 		setObservations(params.get("observations"));	
 	}
 
@@ -36,11 +36,11 @@ public class ReportB extends BaseBean {
 		_date = date;
 	}
 
-	public String getDiagnostic() {
+	public DiagnosticEnum getDiagnostic() {
 		return _diagnostic;
 	}
 
-	public void setDiagnostic(String diagnostic) {
+	public void setDiagnostic(DiagnosticEnum diagnostic) {
 		_diagnostic = diagnostic;
 	}
 

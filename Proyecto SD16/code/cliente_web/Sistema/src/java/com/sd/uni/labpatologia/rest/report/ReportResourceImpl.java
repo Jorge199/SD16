@@ -17,5 +17,10 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO> implements I
 		final ReportResult result = getWebResource().get(ReportResult.class);
 		return result;
 	}
+	@Override
+	public ReportResult find(String textToFind) {
+		final ReportResult result = findWR(textToFind).get(ReportResult.class);
+		return result;
+	}
 
 }

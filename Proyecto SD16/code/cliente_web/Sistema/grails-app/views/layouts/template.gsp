@@ -211,7 +211,7 @@
                     </li>
                     
                     <li>
-                        <a href="/Sistema/informe/index"><i class="fa fa-fw fa-file-text-o"></i>Informe</a>
+                        <a href="/Sistema/report/list/"><i class="fa fa-fw fa-file-text-o"></i>Informes</a>
                         
                     </li>
                     

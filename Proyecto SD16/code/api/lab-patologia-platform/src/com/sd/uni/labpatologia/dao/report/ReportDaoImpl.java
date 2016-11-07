@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 @Repository
 public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportDao {
@@ -60,7 +61,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 
 		if (map.containsKey("diagnostic")) { // si quiere filtrar por
 												// diagnostico
-			criteria.add(Restrictions.eq("_diagnostic", map.get("diagnostic")));
+			criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf( map.get("diagnostic"))));
 		}
 
 		if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas

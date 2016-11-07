@@ -14,6 +14,7 @@ import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.rest.report.IReportResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 import com.sd.uni.labpatologia.service.request.IRequestService;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 @Service("reportService")
 public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
@@ -60,9 +61,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	protected ReportB convertDtoToBean(ReportDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
-		params.put("diagnostic", dto.getDiagnostic());
 		params.put("observations", dto.getObservations());
 		final ReportB reportB = new ReportB(params);
+		reportB.setDiagnostic(dto.getDiagnostic());
 		reportB.setDate(dto.getDate());
 		reportB.setRequest(_requestService.getById(dto.getRequestId()));
 
@@ -78,5 +79,18 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		dto.setObservations(bean.getObservations());
 		dto.setRequestId(bean.getRequest().getId());
 		return dto;
+	}
+	@Override
+	public List<ReportB> find (String textToFind) {
+		final ReportResult result = _reportResource.find(textToFind);
+		final List<ReportDTO> rList = null == result.getReports() ? new ArrayList<ReportDTO>()
+				: result.getReports();
+
+		final List<ReportB> reports = new ArrayList<ReportB>();
+		for (ReportDTO dto : rList) {
+			final ReportB bean = convertDtoToBean(dto);
+			reports.add(bean);
+		}
+		return reports;
 	}
 }

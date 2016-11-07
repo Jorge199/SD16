@@ -7,5 +7,5 @@ import com.sd.uni.labpatologia.rest.base.IBaseResource;
 public interface IReportResource extends IBaseResource<ReportDTO> {
 
 	public ReportResult getAll();
-
+	public ReportResult find(String textToFind);
 }

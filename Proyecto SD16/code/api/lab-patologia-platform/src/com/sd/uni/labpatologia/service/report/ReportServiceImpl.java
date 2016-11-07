@@ -29,7 +29,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional
-	@CachePut(value = "lab-patologia-platform-cache")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'report_dto' + #id")
 	public ReportDTO save(ReportDTO dto) {
 		final ReportDomain domain = convertDtoToDomain(dto);
 		final ReportDomain reportDomain = reportDao.save(domain);
@@ -47,7 +47,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional
-	@Cacheable(value = "lab-patologia-platform-cache")
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'reports_'")
 	public ReportResult getAll() {
 		final List<ReportDTO> reports = new ArrayList<>();
 		for (ReportDomain domain : reportDao.findAll()) {
