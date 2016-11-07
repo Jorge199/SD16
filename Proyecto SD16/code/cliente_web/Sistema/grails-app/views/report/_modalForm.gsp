@@ -4,10 +4,10 @@
 		<div class="panel-heading">
 			<h4>
 				<strong>Informes</strong>
-				<button type="button" class="btn btn-primary" data-toggle="modal"
+				<label type="button" class="btn btn-primary" data-toggle="modal"
 					data-target="#createReport">
 					<i class="fa fa-plus"></i>
-				</button>
+				</label>
 			</h4>
 		</div>
 		<div class="panel-body"></div>
