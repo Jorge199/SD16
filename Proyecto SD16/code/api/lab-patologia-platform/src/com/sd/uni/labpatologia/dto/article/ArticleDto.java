@@ -9,8 +9,9 @@ import com.sd.uni.labpatologia.dto.base.BaseDTO;
 public class ArticleDto extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	private String _name;
+	private String _description;
 	private String _units;
-	private Integer _count;
+	private Integer _count_stock;
 	
 	@XmlElement
 	public String getUnits() {
@@ -29,13 +30,21 @@ public class ArticleDto extends BaseDTO{
 	public void setName(String name) {
 		_name = name;
 	}
+	@XmlElement
+	public String getDescription() {
+		return _description;
+	}
+	
+	public void setDescription(String des) {
+		_description = des;
+	}
 	
 	@XmlElement
 	public Integer getCount() {
-		return _count;
+		return _count_stock;
 	}
 
 	public void setCount(Integer c) {
-		_count = c;
+		_count_stock = c;
 	}	
 }

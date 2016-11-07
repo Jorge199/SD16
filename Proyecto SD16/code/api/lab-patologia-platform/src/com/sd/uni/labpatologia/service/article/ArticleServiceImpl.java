@@ -12,7 +12,7 @@ import com.sd.uni.labpatologia.dao.article.ArticleDaoImpl;
 import com.sd.uni.labpatologia.domain.article.ArticleDomain;
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
-import com.sd.uni.labpatologia.exception.PatologyException;
+import com.sd.uni.labpatologia.exception.*;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 
@@ -30,6 +30,29 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		return convertDomainToDto(Article);
 	}
 
+		
+	@Override
+	@Transactional
+	public ArticleDto add_to_stock(Integer id, Integer c) throws PatologyException {
+		final ArticleDomain ArticleDomain = _articleDao.getById(id);
+		ArticleDomain.setCount((c + ArticleDomain.getCount()));
+		final ArticleDomain Article = _articleDao.save(ArticleDomain);
+		return convertDomainToDto(Article);
+	}
+	
+	@Override
+	@Transactional
+	public ArticleDto remove_from_stock(Integer id, Integer c) throws PatologyException , StockException{
+		final ArticleDomain ArticleDomain = _articleDao.getById(id);
+		if(c < ArticleDomain.getCount() ){
+			ArticleDomain.setCount((ArticleDomain.getCount() - c));			
+			final ArticleDomain Article = _articleDao.save(ArticleDomain);
+			return convertDomainToDto(Article);		
+		} else {
+			throw new StockException("Stock insuficiente");
+		}
+	}	
+	
 	@Override
 	@Transactional
 	public ArticleDto getById(Integer id) throws PatologyException {
@@ -57,6 +80,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		final ArticleDto Article = new ArticleDto();
 		Article.setId(domain.getId());
 		Article.setName(domain.getName());
+		Article.setDescription(domain.getDescription());
 		Article.setUnits(domain.getUnits());
 		Article.setCount(domain.getCount());
 		return Article;
@@ -67,6 +91,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		final ArticleDomain Article = new ArticleDomain();
 		Article.setId(dto.getId());
 		Article.setName(dto.getName());
+		Article.setDescription(dto.getDescription());
 		Article.setUnits(dto.getUnits());
 		Article.setCount(dto.getCount());
 		return Article;

@@ -19,17 +19,22 @@ public class ArticleDomain extends BaseDomain{
 	
 	@Column(name = "name")
 	private String _name;
+
+	@Column(name = "description")
+	private String _description;
+
 	
 	@Column(name = "units")
 	private String _units;
 	
-	@Column(name = "count")
-	private Integer _count;
+	@Column(name = "count_stock")
+	private Integer _count_stock;
 	
 	
 	public Integer getId() {
 		return _id;
 	}
+	
 	public void setId(Integer id) {
 		_id = id;
 	}
@@ -48,12 +53,18 @@ public class ArticleDomain extends BaseDomain{
 	public void setName(String name) {
 		_name = name;
 	}
-
+	
+	public String getDescription() {
+		return _description;
+	}
+	public void setDescription(String des) {
+		_description = des;
+	}
 	public Integer getCount() {
-		return _count;
+		return _count_stock;
 	}
 
 	public void setCount(Integer c) {
-		_count = c;
+		_count_stock = c;
 	}	
 }
