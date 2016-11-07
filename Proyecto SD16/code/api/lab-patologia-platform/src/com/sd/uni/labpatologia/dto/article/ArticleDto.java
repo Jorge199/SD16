@@ -10,15 +10,15 @@ public class ArticleDto extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _description;
-	private String _units;
+	private Integer _units;
 	private Integer _count_stock;
 	
 	@XmlElement
-	public String getUnits() {
+	public Integer getUnits() {
 		return _units;
 	}
 
-	public void setUnits(String uni) {
+	public void setUnits(Integer uni) {
 		_units = uni;
 	}
 	

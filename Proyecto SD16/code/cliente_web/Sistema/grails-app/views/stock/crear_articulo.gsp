@@ -23,7 +23,7 @@
 									<span class="required-indicator">*</span>
 								</label>
 								
-								<g:textField class="form-control" name="address"/>
+								<g:textField class="form-control" name="name"/>
 								
 							</div>
 							 <div class="col-md-6">
@@ -31,7 +31,7 @@
 										Cantidad
 										<span class="required-indicator">*</span>
 									</label>
-								
+									<g:textField class="form-control" name="units"/>								
 <%--									<g:textField class="form-control" name="last_name" required="" value="${patientInstance?.last_name}"/>--%>
 							</div>
 						</div>
@@ -41,11 +41,19 @@
 										Descripcion
 										<span class="required-indicator">*</span>
 									</label>
-									
+									<g:textField class="form-control" name="description"/>									
 <%--									<g:textField class="form-control" name="name" required="" value="${patientInstance?.name}"/>--%>
 								
 								</div>
-						
+						      <div class="col-md-6">
+									<label>
+										Cantidad en Stock
+										<span class="required-indicator">*</span>
+									</label>
+									<g:textField class="form-control" name="count_stock"/>
+<%--									<g:textField class="form-control" name="name" required="" value="${patientInstance?.name}"/>--%>
+								
+								</div>						
 						</div>
 						<br>
 						<button class="btn btn-primary"><i class="fa fa-floppy-o"></i> Crear</button>

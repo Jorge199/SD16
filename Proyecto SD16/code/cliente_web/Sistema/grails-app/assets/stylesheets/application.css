@@ -12,3 +12,7 @@
 *= require mobile
 *= require_self
 */
+li>ul>li a {
+    color: white;
+    text-decoration: blink;
+}

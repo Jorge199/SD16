@@ -25,7 +25,7 @@ public class ArticleDomain extends BaseDomain{
 
 	
 	@Column(name = "units")
-	private String _units;
+	private Integer _units;
 	
 	@Column(name = "count_stock")
 	private Integer _count_stock;
@@ -39,11 +39,11 @@ public class ArticleDomain extends BaseDomain{
 		_id = id;
 	}
 	
-	public String getUnits() {
+	public Integer getUnits() {
 		return _units;
 	}
 
-	public void setUnits(String _uits) {
+	public void setUnits(Integer _uits) {
 		_units = _uits;
 	}
 	

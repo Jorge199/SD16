@@ -209,6 +209,32 @@
                             </li>
                         </ul>
                     </li>
+					<%-- STOCK --%>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#stock_ops"><i class="fa fa-fw fa-shopping-cart"></i> Stock<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="stock_ops" class="collapse">
+                            <li>
+                                <a href="/Sistema/stock/listar">Consultar Stock</a>
+                                <a href="/Sistema/stock/crear_articulo">Agregar Articulo</a>
+                            </li>
+
+                            <li>
+		                        <a href="javascript:;" data-toggle="collapse" data-target="#stock_ops_art">Movimiento de Stock<i class="fa fa-fw fa-caret-down"></i></a>
+		                        <ul id="stock_ops_art" class="collapse">
+		                            <li>
+		                                <a href="/Sistema/stock/add">Ingreso de Articulos</a>
+		                            </li>
+		                            
+		                            <li>
+		                                <a href="/Sistema/stock/remove">Egreso de Articulos</a>
+		                            </li>
+		                        </ul>
+
+                            </li>
+                            
+                        </ul>
+                    </li>
+
                     
                     <li>
                         <a href="/Sistema/report/list/"><i class="fa fa-fw fa-file-text-o"></i>Informes</a>
