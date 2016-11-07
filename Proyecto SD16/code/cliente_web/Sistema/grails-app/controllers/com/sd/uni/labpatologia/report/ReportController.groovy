@@ -20,7 +20,6 @@ class ReportController {
 	
 	def list() {
 		def reports = reportService.getAll()
-		System.out.println("asd" + params)
 		String textToFind="";
 		if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
 			textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
@@ -65,7 +64,6 @@ class ReportController {
 	}
 	
 	def edit(Integer id) {
-		System.out.println("entro en edit")
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
 				//si no existe esa id
 				if (!reportInstance) {
@@ -80,8 +78,6 @@ class ReportController {
 	}
 	
 	def update(Integer id) {
-		System.out.println("entro en update"+id)
-		System.out.println("asd" + params + params.get("observations"))
 		def reportInstance = new ReportB(params)
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
