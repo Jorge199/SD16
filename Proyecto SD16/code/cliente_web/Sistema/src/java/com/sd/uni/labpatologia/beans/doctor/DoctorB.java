@@ -9,7 +9,6 @@ package com.sd.uni.labpatologia.beans.doctor;
  *
  * @author User
  */
-import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -24,26 +23,12 @@ public class DoctorB extends BaseBean {
 	private String _address;
 	private String _phone;
 	private String _email;
-	//private RequestB _request;
+	private DoctorB _doctor;
 
 	public DoctorB(Map<String, String> params) {
 		super(params);
 	}
-
-	@Override
-	protected void create(Map<String, String> params) {
-		if (!StringUtils.isBlank(params.get("id"))) {
-			setId(Integer.valueOf(params.get("id")));
-		}
-		setName(params.get("name"));
-		setLastName(params.get("last_name"));	
-                setCi(Integer.parseInt(params.get("ci")));
-                setLastName(params.get("last_name"));
-                setAddress(params.get("address"));
-                setPhone(params.get("phone"));
-                setEmail(params.get("email"));
-	}
-
+        
 	public String getName() {
 		return _name;
 	}
@@ -56,8 +41,8 @@ public class DoctorB extends BaseBean {
 		return _last_name;
 	}
 	
-	public void setLastName(String name) {
-		_last_name = name;
+	public void setLastName(String last_name) {
+		_last_name = last_name;
 	}
 	
 	public Integer getCi() {
@@ -90,4 +75,27 @@ public class DoctorB extends BaseBean {
 	public void setEmail(String email) {
 		_email = email;
 	}
+        
+        public DoctorB getDoctor() {
+		return _doctor;
+	}
+	public void setDoctor(DoctorB doctor) {
+		_doctor = doctor;
+	}
+        
+	@Override
+	protected void create(Map<String, String> params) {
+		if (!StringUtils.isBlank(params.get("id"))) {
+			setId(Integer.valueOf(params.get("id")));
+		}
+                if (!StringUtils.isBlank(params.get("ci"))) {
+			setId(Integer.valueOf(params.get("ci")));
+		}
+		setName(params.get("name"));
+		setLastName(params.get("last_name"));	
+                setAddress(params.get("address"));
+                setPhone(params.get("phone"));
+                setEmail(params.get("email"));
+	}
+
 }
