@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 @Entity
 @Table(name = "report")
@@ -27,12 +30,12 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "date", nullable = false)
 	private Date _date;
 
-	@Column(name = "diagnostic")
-	private String _diagnostic;
-
 	@Column(name = "observations")
 	private String _observations;
 
+	@Enumerated(EnumType.STRING)
+	private DiagnosticEnum _diagnostic;
+	
 	public Integer getId() {
 		return _id;
 	}
@@ -57,13 +60,6 @@ public class ReportDomain extends BaseDomain {
 		_date = date;
 	}
 
-	public String getDiagnostic() {
-		return _diagnostic;
-	}
-
-	public void setDiagnostic(String diagnostic) {
-		_diagnostic = diagnostic;
-	}
 
 	public String getObservations() {
 		return _observations;
@@ -71,6 +67,14 @@ public class ReportDomain extends BaseDomain {
 
 	public void setObservations(String observations) {
 		_observations = observations;
+	}
+	
+	public DiagnosticEnum getDiagnostic() {
+		return _diagnostic;
+	}
+
+	public void setDiagnostic(DiagnosticEnum diagnostic) {
+		_diagnostic = diagnostic;
 	}
 
 }

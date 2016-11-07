@@ -4,6 +4,8 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
+
 import laboratory.LaboratoryManager;
 import patient.PatientManager;
 import report.ReportManager;
@@ -14,15 +16,15 @@ public class WsPathologyLaboratory {
 
 	public static void main(String[] args) {
 		laboratoryManager();
-		patientManager();
+		//patientManager();
 		loadRequestData(); // carga fichas, si no tengo request (fichas)
 							// cargadas no puedo generar reportes
 		loadReportData(); // carga reportes de prueba
 		testReport(); // prueba las busquedas de los reportes
 		
-		testRequest();
+		//testRequest();
 		
-		testStudyType();
+		//testStudyType();
 	}
 
 	/*
@@ -85,12 +87,12 @@ public class WsPathologyLaboratory {
 		ReportManager reportManager = new ReportManager();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		try {
-			reportManager.addReport(1, formatter.parse("11-06-2016"), "obs", "cancer");
-			reportManager.addReport(1, formatter.parse("22-05-2016"), "alguna observacion", "no cancer");
-			reportManager.addReport(3, formatter.parse("6-02-2016"), "alguna observacion", "no cancer");
-			reportManager.addReport(2, formatter.parse("25-08-2016"), "alguna observacion", "cancer");
-			reportManager.addReport(3, formatter.parse("27-02-2016"), "alguna observacion", "cancer");
-			reportManager.addReport(2, formatter.parse("28-01-2016"), "alguna observacion", "cancer");
+			reportManager.addReport(1, formatter.parse("11-06-2016"), "obs", DiagnosticEnum.CARCINOMA);
+			reportManager.addReport(1, formatter.parse("22-05-2016"), "alguna observacion", DiagnosticEnum.LEUCEMIA);
+			reportManager.addReport(3, formatter.parse("6-02-2016"), "alguna observacion", DiagnosticEnum.SIN_INDICIOS);
+			reportManager.addReport(2, formatter.parse("25-08-2016"), "alguna observacion", DiagnosticEnum.SARCOMA);
+			reportManager.addReport(3, formatter.parse("27-02-2016"), "alguna observacion", DiagnosticEnum.SIN_INDICIOS);
+			reportManager.addReport(2, formatter.parse("28-01-2016"), "alguna observacion",DiagnosticEnum.LEUCEMIA);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -139,8 +141,8 @@ public class WsPathologyLaboratory {
 		 * http://localhost:8080/lab-patologia-platform/rest/report/search/
 		 * diagnostic=cancer
 		 */
-		System.out.println("\n\t Obtener por Diagnostico (no cancer)");
-		reportManager.getByDiagnostic("no%20cancer");
+		System.out.println("\n\t Obtener por Diagnostico (Carcinoma)");
+		reportManager.getByDiagnostic("CARCINOMA");
 	}
 	
 	public static void testRequest(){

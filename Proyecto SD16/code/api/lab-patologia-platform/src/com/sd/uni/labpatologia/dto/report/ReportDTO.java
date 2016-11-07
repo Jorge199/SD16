@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.uni.labpatologia.dto.base.BaseDTO;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 @XmlRootElement(name = "report")
 public class ReportDTO extends BaseDTO {
@@ -13,7 +14,7 @@ public class ReportDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 
 	private Integer _requestId;
-	private String _diagnostic;
+	private DiagnosticEnum _diagnostic;
 	private Date _date;
 	private String _observations;
 
@@ -28,11 +29,11 @@ public class ReportDTO extends BaseDTO {
 	}
 
 	@XmlElement
-	public String getDiagnostic() {
+	public DiagnosticEnum getDiagnostic() {
 		return _diagnostic;
 	}
 
-	public void setDiagnostic(String diagnostic) {
+	public void setDiagnostic(DiagnosticEnum diagnostic) {
 		_diagnostic = diagnostic;
 	}
 	
