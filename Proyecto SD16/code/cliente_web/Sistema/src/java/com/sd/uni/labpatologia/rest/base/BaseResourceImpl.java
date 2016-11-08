@@ -9,7 +9,7 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 	private final Class<DTO> _dtoClass;
 	private final WebResource _webResource;
 
-	private static final String BASE_URL = "http://localhost:8181/lab-patologia-platform/rest";
+	private static final String BASE_URL = "http://localhost:8080/lab-patologia-platform/rest";
 	
 	public BaseResourceImpl(Class<DTO> dtoClass, String resourcePath) {
 		_dtoClass = dtoClass;
