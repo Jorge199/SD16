@@ -11,6 +11,7 @@ import com.sd.uni.labpatologia.beans.base.BaseBean;
 import com.sd.uni.labpatologia.beans.doctor.DoctorB;
 import com.sd.uni.labpatologia.beans.patient.PatientB;
 import com.sd.uni.labpatologia.beans.study_type.StudyTypeB;
+import com.sd.uni.labpatologia.beans.user.UserB;
 import com.sd.uni.labpatologia.util.StatusEnum;
 
 public class RequestB extends BaseBean {
@@ -20,7 +21,7 @@ public class RequestB extends BaseBean {
 	private Date _date;
 	private DoctorB _doctor;
 	private PatientB _patient;
-	//private UserB _user;
+	private UserB _user;
 	private StudyTypeB _studyType;
 	private String _code;
 	private StatusEnum _status;
@@ -62,7 +63,7 @@ public class RequestB extends BaseBean {
 	
 	
 
-	/*public PatientB getPatient() {
+	public PatientB getPatient() {
 		return _patient;
 	}
 
@@ -79,7 +80,7 @@ public class RequestB extends BaseBean {
 
 	public void setUser(UserB user) {
 		_user = user;
-	}*/
+	}
 	
 	public String getCode() {
 		return _code;
