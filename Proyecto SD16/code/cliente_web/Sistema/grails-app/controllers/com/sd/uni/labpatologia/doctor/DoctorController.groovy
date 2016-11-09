@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 class DoctorController {
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	//services
-	def IDoctorService doctorService=new DoctorServiceImpl()
+	def IDoctorService doctorService
 	
 	
 	
