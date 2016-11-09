@@ -19,16 +19,34 @@ class LaboratoryController {
 		redirect(action: "list", params: params)
 	}
 	
-	def list() {
-		def laboratories = laboratoryService.getAll()
-	
+	def list() {	
+		def text = params.text
+		def laboratories = null
+		if(null != text && !"".equals(text)){
+			laboratories = laboratoryService.find(text)
+			System.out.println("ingresado"+text)
+			System.out.println("busqueda"+laboratories)
+		}else{
+			laboratories = laboratoryService.getAll()
+		}
+			
 		System.out.println("Cantidad Laboratorios----------------------------->"+laboratories.size())
 		[laboratoryInstanceList: laboratories, reportInstanceTotal: laboratories?.size()]
 	}
+	/*
+	def search(){
+		def text = params.text
+		def results = laboratoryService.find(text)
+		System.out.println("ingresado"+text)
+		System.out.println("busqueda"+results)
+		render(view: "list",model: [results:results])
+	}
+	*/
 	
 	def create(Integer id) {
 		def laboratoryInstance = new LaboratoryB(params)
-		[laboratoryInstance: laboratoryInstance] //, requests:requestService.getAll()]
+		[laboratoryInstance: laboratoryInstance] 
+		
 	}
 	def save(Integer id) {
 		
@@ -36,8 +54,7 @@ class LaboratoryController {
 	
 		def newLaboratory = laboratoryService.save(laboratoryInstance)
 		if (!newLaboratory?.getId()) {
-			//redirect(action: "list", id: newReport.getId())
-			//return
+		
 		}
 		redirect(action: "list", id: newLaboratory.getId())
 	}
