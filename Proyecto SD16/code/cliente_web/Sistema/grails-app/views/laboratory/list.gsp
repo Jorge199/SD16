@@ -26,20 +26,10 @@
 						</div>
 					</g:if>
 					
-					<g:form method="post" >
-					<g:hiddenField name="textToFind" value="${laboratoryInstance?.textToFind}" />
-					<div class="col-md-8">
-						<label for="search"> <g:message code="Buscar" /></label>
-						<input  name="startSearch"
-												required="" />
-				
-			
-						<button type="submit" class="btn btn-primary" name="list">
-							<i class="fa fa-search"></i> Buscar
-						</button>
-				
-					</div>
-					</g:form>
+					<g:form action="list">
+   					<g:textField name="text" />
+   					<g:submitButton name="list" value="Buscar" class="btn btn-primary" />
+						</g:form>
 					
 					
 					<div class="dataTable_wrapper">
