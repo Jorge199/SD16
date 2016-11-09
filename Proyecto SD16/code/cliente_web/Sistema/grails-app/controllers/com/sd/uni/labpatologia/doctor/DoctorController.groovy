@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.doctor
 
 import com.sd.uni.labpatologia.beans.doctor.DoctorB
+import com.sd.uni.labpatologia.service.doctor.DoctorServiceImpl
 import com.sd.uni.labpatologia.service.doctor.IDoctorService
 
 import org.springframework.dao.DataIntegrityViolationException
@@ -10,18 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 class DoctorController {
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	//services
-	def IDoctorService doctorService
+	def IDoctorService doctorService=new DoctorServiceImpl()
 	
 	
-	def index() {
-		redirect(action: "list", params: params)
-	}
+	
 	def create(){
 		[doctorInstance: new DoctorB(params)]
 	}
 	
 	def list(Integer max) {
-		def doctors = doctorService.getAll()
+		def text = params.text
+		def doctors = null
+		if(null != text && !"".equals(text)){
+			doctors = doctorService.find(text)
+		}else{
+			doctors = doctorService.getAll()
+		}
+			
 		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size()]
 	}
 	
@@ -50,54 +56,31 @@ class DoctorController {
 		[doctorInstance: doctorInstance]
 	}
 
-	def edit(Long id) {
-		def doctorInstance = doctorService.getById(id.intValue())
-		if (!doctorInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'doctor.label', default: 'Doctor'),
-				id
-			])
-			redirect(action: "list")
-			return
-		}
-
+	def edit(Integer id) {
+		def doctorInstance = doctorService.getById(Integer.parseInt(params.get("id")))
+				//si no existe esa id
+				if (!doctorInstance) {
+					flash.message = message(code: 'default.not.found.message', args: [
+						message(code: 'doctor.label', default: 'Doctor'),
+						id
+					])
+					redirect(action: "show")
+					return
+				}
 		[doctorInstance: doctorInstance]
 	}
-
-	def update(Long id, Long version) {
-		def doctorInstance = doctorService.getById(id.intValue())
-		if (!doctorInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'doctor.label', default: 'Doctor'),
-				id
-			])
-			redirect(action: "list")
-			return
-		}
-
-		if (version != null) {
-			if (doctorInstance.version > version) {
-				doctorInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-						[
-							message(code: 'doctor.label', default: 'Doctor')] as Object[],
-						"Another user has updated this Client while you were editing")
-				render(view: "edit", model: [doctorInstance: doctorInstance])
-				return
-			}
-		}
-
-		doctorInstance.properties = params
-
-		if (!doctorInstance.save(flush: true)) {
-			render(view: "edit", model: [doctorInstance: doctorInstance])
-			return
-		}
-
-		flash.message = message(code: 'default.updated.message', args: [
-			message(code: 'doctor.label', default: 'Doctor'),
-			doctorInstance.id
-		])
-		redirect(action: "show", id: doctorInstance.id)
+	
+	def update(Integer id) {
+		def doctorInstance = new DoctorB(params)
+		doctorInstance.setId(Integer.parseInt(params.get("edit")))
+		doctorInstance.setAddress(params.get("address"))
+		doctorInstance.setEmail(params.get("email"))
+		doctorInstance.setName(params.get("name"))
+                doctorInstance.setLastName(params.get("last_name"))
+                doctorInstance.setCi(Integer.parseInt(params.get("ci")))
+		doctorInstance.setPhone(params.get("phone"))
+		doctorService.save(doctorInstance)
+		redirect(action: "list")
 	}
 
 	

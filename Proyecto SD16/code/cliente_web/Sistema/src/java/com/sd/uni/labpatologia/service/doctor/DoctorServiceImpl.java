@@ -20,11 +20,11 @@ import org.springframework.stereotype.Service;
 import com.sd.uni.labpatologia.beans.doctor.DoctorB;
 import com.sd.uni.labpatologia.dto.doctor.DoctorDto;
 import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
+import com.sd.uni.labpatologia.rest.doctor.DoctorResourceImpl;
 import com.sd.uni.labpatologia.rest.doctor.IDoctorResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
-import com.sd.uni.labpatologia.service.doctor.IDoctorService;
 
-@Service("doctortService")
+@Service("doctorService")
 public class DoctorServiceImpl extends BaseServiceImpl<DoctorB, DoctorDto>
 		implements IDoctorService {
 
@@ -69,12 +69,12 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorB, DoctorDto>
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("name", dto.getName());
 		params.put("last_name", dto.getLastName());
-                
+                params.put("ci", String.valueOf(dto.getCi()));
                 params.put("address", dto.getAddress());
                 params.put("phone", dto.getPhone());
                 params.put("email", dto.getEmail());
+       
 		final DoctorB doctorB = new DoctorB(params);
-                doctorB.setCi(dto.getCi());
 		return doctorB;
 	}
 
@@ -93,7 +93,15 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorB, DoctorDto>
 
 	@Override
 	public List<DoctorB> find(String textToFind) {
-		// TODO Auto-generated method stub
-		return null;
+		final DoctorResult result = _doctorResource.find(textToFind);
+		final List<DoctorDto> rList = null == result.getDoctors() ? new ArrayList<DoctorDto>()
+				: result.getDoctors();
+
+		final List<DoctorB> doctors = new ArrayList<DoctorB>();
+		for (DoctorDto dto : rList) {
+			final DoctorB bean = convertDtoToBean(dto);
+			doctors.add(bean);
+		}
+		return doctors;
 	}
 }

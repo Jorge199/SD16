@@ -27,9 +27,9 @@
 								</g:if>
 							</div>
                                                         <div class="col-md-6">
-								<g:if test="${doctorInstance?.last_name}">
+								<g:if test="${doctorInstance?.lastName}">
 								<label>Apellido<span class="required-indicator">*</span></label>
-								<g:fieldValue class="form-control" bean="${doctorInstance}"  field="last_name"/>
+								<g:fieldValue class="form-control" bean="${doctorInstance}"  field="lastName"/>
 							
 								</g:if>
 							</div>
