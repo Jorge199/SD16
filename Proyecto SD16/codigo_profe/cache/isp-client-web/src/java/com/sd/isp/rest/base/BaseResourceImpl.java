@@ -18,6 +18,7 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements
 
 	protected static final String CACHE_REGION = "isp-client-web-cache";
 	private static final String BASE_URL = "http://localhost:8080/isp-platform/rest";
+	private static final String TOKEN="dasdasdasdasdsadsd";
 
 	@Autowired
 	@Qualifier("grailsCacheManager")
@@ -33,7 +34,8 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements
 	}
 
 	protected WebResource getWebResource() {
-		return _webResource;
+		 _webResource.header("token", TOKEN);
+		 return _webResource;
 	}
 
 	protected Class<DTO> getDtoClass() {
