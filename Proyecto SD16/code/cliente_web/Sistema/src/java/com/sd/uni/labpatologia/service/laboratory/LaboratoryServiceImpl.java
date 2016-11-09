@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sd.uni.labpatologia.beans.laboratory.LaboratoryB;
+import com.sd.uni.labpatologia.beans.report.ReportB;
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryDto;
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryResult;
+import com.sd.uni.labpatologia.dto.report.ReportDTO;
+import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.rest.laboratory.ILaboratoryResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
@@ -76,8 +79,16 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryB, Laborato
 	}
 	@Override
 	public List<LaboratoryB> find(String textToFind) {
-		// TODO Auto-generated method stub
-		return null;
+		final LaboratoryResult result = _laboratoryResource.find(textToFind);
+		final List<LaboratoryDto> rList = null == result.getLaboratories() ? new ArrayList<LaboratoryDto>()
+				: result.getLaboratories();
+
+		final List<LaboratoryB> laboratories = new ArrayList<LaboratoryB>();
+		for (LaboratoryDto dto : rList) {
+			final LaboratoryB bean = convertDtoToBean(dto);
+			laboratories.add(bean);
+		}
+		return laboratories;
 	}
 
 }
