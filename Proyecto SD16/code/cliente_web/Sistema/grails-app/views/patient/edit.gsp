@@ -51,7 +51,7 @@
 								</g:if>
 							</div>
 							<div class="col-md-6">
-								<g:if test="${patientInstance?.birtDate}">
+								<g:if test="${patientInstance?.birthDate}">
 								<label>Fecha de Nac.<span class="required-indicator">*</span></label>
 								<g:textField class="form-control" bean="${patientInstance}" name="birthDate"/>
 								</g:if>

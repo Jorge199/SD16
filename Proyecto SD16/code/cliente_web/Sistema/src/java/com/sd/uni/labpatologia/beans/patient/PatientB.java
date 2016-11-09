@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-
 import com.sd.uni.labpatologia.beans.base.BaseBean;
 
 public class PatientB extends BaseBean {
@@ -91,7 +90,9 @@ public class PatientB extends BaseBean {
         setSex(params.get("sex"));
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			setBirthDate(format.parse(params.get("birthDate")));
+			if(null != params.get("birthDate")){
+				setBirthDate(format.parse(params.get("birthDate")));
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

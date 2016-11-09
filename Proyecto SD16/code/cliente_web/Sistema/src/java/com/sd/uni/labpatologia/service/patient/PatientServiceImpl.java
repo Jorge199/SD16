@@ -14,6 +14,7 @@ import com.sd.uni.labpatologia.beans.patient.PatientB;
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
 import com.sd.uni.labpatologia.rest.patient.IPatientResource;
+import com.sd.uni.labpatologia.rest.patient.PatientResourceImpl;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 import com.sd.uni.labpatologia.service.patient.IPatientService;
 
@@ -21,7 +22,7 @@ import com.sd.uni.labpatologia.service.patient.IPatientService;
 public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>implements IPatientService {
 
 	@Autowired
-	private IPatientResource _patientResource;
+	private IPatientResource _patientResource=new PatientResourceImpl();
 	
 	public PatientServiceImpl() {	
 	}
@@ -89,8 +90,16 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>imp
 	}
 
 	@Override
-	public List<PatientB> find(String textToFind) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PatientB> find (String textToFind) {
+		final PatientResult result = _patientResource.find(textToFind);
+		final List<PatientDTO> rList = null == result.getPatients() ? new ArrayList<PatientDTO>()
+				: result.getPatients();
+
+		final List<PatientB> patients = new ArrayList<PatientB>();
+		for (PatientDTO dto : rList) {
+			final PatientB bean = convertDtoToBean(dto);
+			patients.add(bean);
+		}
+		return patients;
 	}
 }

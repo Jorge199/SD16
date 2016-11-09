@@ -18,5 +18,11 @@ public class PatientResourceImpl extends BaseResourceImpl<PatientDTO> implements
 		final PatientResult result = getWebResource().get(PatientResult.class);
 		return result;
 	}
+	
+	@Override
+	public PatientResult find(String textToFind) {
+		final PatientResult result = findWR(textToFind).get(PatientResult.class);
+		return result;
+	}
 
 }

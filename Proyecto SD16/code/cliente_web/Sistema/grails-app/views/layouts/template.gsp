@@ -167,10 +167,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-user"></i> Paciente <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo1" class="collapse">
                             <li class="active">
-                                <a href="/Sistema/paciente/crear">Registrar</a>
+                                <a href="/Sistema/patient/create">Registrar</a>
                             </li>
                             <li class="active">
-                                <a href="/Sistema/paciente/listar">Listar</a>
+                                <a href="/Sistema/patient/list">Listar</a>
                             </li>
                         </ul>
                     </li>
