@@ -89,7 +89,7 @@ public class DoctorB extends BaseBean {
 			setId(Integer.valueOf(params.get("id")));
 		}
                 if (!StringUtils.isBlank(params.get("ci"))) {
-			setId(Integer.valueOf(params.get("ci")));
+			setCi(Integer.valueOf(params.get("ci")));
 		}
 		setName(params.get("name"));
 		setLastName(params.get("last_name"));	
