@@ -77,12 +77,17 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 		params.put("note", dto.getNote());
 		params.put("code", dto.getCode());
 		final RequestB requestB = new RequestB(params);
-		requestB.setDate(dto.getDate());
-		requestB.setStatus(dto.getStatus());
-		requestB.setPatient(_patientService.getById(dto.getPatientId()));
-		requestB.setDoctor(_doctorService.getById(dto.getDoctorId()));
-		requestB.setStudyType(_studyTypeService.getById(dto.getStudyId()));
-		requestB.setUser(_userService.getById(dto.getUserId()));
+		try{
+			requestB.setDate(dto.getDate());
+			requestB.setStatus(dto.getStatus());
+			requestB.setPatient(_patientService.getById(dto.getPatientId()));
+			requestB.setDoctor(_doctorService.getById(dto.getDoctorId()));
+			requestB.setStudyType(_studyTypeService.getById(dto.getStudyId()));
+			requestB.setUser(_userService.getById(dto.getUserId()));
+		}catch(Exception e){
+			System.out.println("debe lanzar una excepcion");
+			System.out.print(e);
+		}
 		return requestB;
 	}
 
@@ -90,14 +95,20 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 	protected RequestDTO convertBeanToDto(RequestB bean) {
 		final RequestDTO dto = new RequestDTO();
 		dto.setId(bean.getId());
-		dto.setNote(bean.getNote());
-		dto.setDate(bean.getDate());
-		dto.setCode(bean.getCode());
-		dto.setStatus(bean.getStatus());
-		dto.setPatientId(bean.getPatient().getId());
-		dto.setDoctorId(bean.getDoctor().getId());
-		dto.setStudyId(bean.getStudyType().getId());
-		dto.setUserId(bean.getUser().getId());
+		try{
+			dto.setNote(bean.getNote());
+			dto.setDate(bean.getDate());
+			dto.setCode(bean.getCode());
+			dto.setStatus(bean.getStatus());
+			dto.setPatientId(bean.getPatient().getId());
+			dto.setDoctorId(bean.getDoctor().getId());
+			dto.setStudyId(bean.getStudyType().getId());
+			dto.setUserId(bean.getUser().getId());
+		}catch(Exception e){
+			System.out.println("debe lanzar una excepcion ");
+			System.out.print(e);
+		}
+		
 		return dto;
 	}
 

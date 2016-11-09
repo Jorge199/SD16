@@ -66,7 +66,6 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		reportB.setDiagnostic(dto.getDiagnostic());
 		reportB.setDate(dto.getDate());
 		reportB.setRequest(_requestService.getById(dto.getRequestId()));
-
 		return reportB;
 	}
 
