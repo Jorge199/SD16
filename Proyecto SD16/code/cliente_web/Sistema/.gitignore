@@ -31,6 +31,8 @@
 
 # "temporary" build files
 /target
+/target-eclipse/
+/*.class
 
 # OS generated files #
 ######################
@@ -56,8 +58,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-
+.project
 # Eclipse Core
 .project
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
+/.classpath
