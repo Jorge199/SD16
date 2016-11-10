@@ -9,11 +9,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sd.uni.labpatologia.beans.doctor.DoctorB;
-import com.sd.uni.labpatologia.beans.report.ReportB;
+
+
 import com.sd.uni.labpatologia.beans.request.RequestB;
-import com.sd.uni.labpatologia.dto.report.ReportDTO;
-import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.rest.request.IRequestResource;
@@ -30,13 +28,13 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 	@Autowired
 	private IRequestResource _requestResource;
 	@Autowired
-	private IPatientService _patientService;
+	private IPatientService patientService;
 	@Autowired
-	private IStudyTypeService _studyTypeService;
+	private IStudyTypeService studyTypeService;
 	@Autowired
-	private IDoctorService _doctorService;
-	@Autowired
-	private IUserService _userService;
+	private IDoctorService doctorService;
+	//@Autowired
+	//private IUserService userService;
 
 	public RequestServiceImpl() {
 	}
@@ -77,17 +75,12 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 		params.put("note", dto.getNote());
 		params.put("code", dto.getCode());
 		final RequestB requestB = new RequestB(params);
-		try{
-			requestB.setDate(dto.getDate());
-			requestB.setStatus(dto.getStatus());
-			requestB.setPatient(_patientService.getById(dto.getPatientId()));
-			requestB.setDoctor(_doctorService.getById(dto.getDoctorId()));
-			requestB.setStudyType(_studyTypeService.getById(dto.getStudyId()));
-			requestB.setUser(_userService.getById(dto.getUserId()));
-		}catch(Exception e){
-			System.out.println("debe lanzar una excepcion");
-			System.out.print(e);
-		}
+		requestB.setDate(dto.getDate());
+		requestB.setStatus(dto.getStatus());
+		requestB.setPatient(patientService.getById(dto.getPatientId()));
+		requestB.setDoctor(doctorService.getById(dto.getDoctorId()));
+		requestB.setStudyType(studyTypeService.getById(dto.getStudyId()));
+		//requestB.setUser(userService.getById(dto.getUserId()));
 		return requestB;
 	}
 
@@ -95,20 +88,14 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 	protected RequestDTO convertBeanToDto(RequestB bean) {
 		final RequestDTO dto = new RequestDTO();
 		dto.setId(bean.getId());
-		try{
-			dto.setNote(bean.getNote());
-			dto.setDate(bean.getDate());
-			dto.setCode(bean.getCode());
-			dto.setStatus(bean.getStatus());
-			dto.setPatientId(bean.getPatient().getId());
-			dto.setDoctorId(bean.getDoctor().getId());
-			dto.setStudyId(bean.getStudyType().getId());
-			dto.setUserId(bean.getUser().getId());
-		}catch(Exception e){
-			System.out.println("debe lanzar una excepcion ");
-			System.out.print(e);
-		}
-		
+		dto.setNote(bean.getNote());
+		dto.setDate(bean.getDate());
+		dto.setCode(bean.getCode());
+		dto.setStatus(bean.getStatus());
+		dto.setPatientId(bean.getPatient().getId());
+		dto.setDoctorId(bean.getDoctor().getId());
+		dto.setStudyId(bean.getStudyType().getId());
+		//dto.setUserId(bean.getUser().getId());
 		return dto;
 	}
 

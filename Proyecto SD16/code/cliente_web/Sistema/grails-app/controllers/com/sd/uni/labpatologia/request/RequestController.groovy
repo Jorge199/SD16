@@ -19,9 +19,9 @@ class RequestController {
 
 	//services
 	def IRequestService requestService
-	def IDoctorService doctorService 
+	def IDoctorService doctorService
 	def IPatientService patientService
-	def IStudyTypeService studyTypeService 
+	def IStudyTypeService studyTypeService
 	def IUserService userService
 
 	def index() {
@@ -37,8 +37,7 @@ class RequestController {
 
 	def create() {
 		def requestInstance = new RequestB(params)
-		
-		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll()] 
+		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll()]
 	}
 
 	def save() {
@@ -49,7 +48,7 @@ class RequestController {
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
-		requestInstance.setUser(userService.getById(1))
+		
 		def newRequest= requestService.save(requestInstance)
 		if (!newRequest?.getId()) {
 			//redirect(action: "list", id: newReport.getId())
@@ -69,7 +68,7 @@ class RequestController {
 					redirect(action: "list")
 					return
 				}
-		[requestInstance: requestInstance]
+		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll()]
 	}
 	
 	def update(Integer id) {

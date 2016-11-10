@@ -21,7 +21,7 @@ public class RequestB extends BaseBean {
 	private Date _date;
 	private DoctorB _doctor;
 	private PatientB _patient;
-	private UserB _user;
+	//private UserB _user;
 	private StudyTypeB _studyType;
 	private String _code;
 	private StatusEnum _status;
@@ -73,14 +73,14 @@ public class RequestB extends BaseBean {
 	}
 
 
-	public UserB getUser() {
+	/*public UserB getUser() {
 		return _user;
 	}
 
 
 	public void setUser(UserB user) {
 		_user = user;
-	}
+	}*/
 	
 	public String getCode() {
 		return _code;

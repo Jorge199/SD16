@@ -6,12 +6,9 @@
 			<label for="patient">
 			<g:message code="Paciente*" class="required-indicator"/>
 			</label>
-			<select>
-				<g:each in="${patients}" var="p">
-					<option value="volvo">Volvo</option>
-				</g:each>
-			  	
-			</select>
+			<g:select  name="patientId" from="${patients}" value="${requestInstance?.patient}"
+			optionKey="id" optionValue="name" required="" class="many-to-one"
+		  	required=""/>
 		</div>
 	</div>
 	
@@ -19,7 +16,7 @@
 		<div class="form-group">
 		<label for="date">
 			<g:message code="Fecha*" class="required-indicator"/>
-			<g:textField  required="" name="date" value="${requestInstance?.date }"/>
+			<g:textField  required="" name="date" value="${requestInstance?.date}"/>
 		</label>
 		</div>	
 	</div>
@@ -29,7 +26,7 @@
 	<div class="col-md-6">
 		<label for="code">
 			<g:message code="Codigo*" class="required-indicator"/>
-			<g:textField  required="" name="code" value="${requestInstance?.code }"/>
+			<g:textField  required="" name="code" value="${requestInstance?.code}"/>
 		</label>
 	</div>
 	<div class="col-md-6">
@@ -38,9 +35,9 @@
 			<g:message code="Tipo de estudio" />
 			<span class="required-indicator">*</span>
 			</label>
-			<g:select  name="studyTypeId" from="${studies}" optionKey="id" optionValue="${requestInstance?.studyType?.name}" required="" 
-			value="${requestInstance?.studyType?.id}" class="many-to-one"
-			noSelection="${['null':'Seleccione un estudio..']}"  required=""/>
+			<g:select  name="studyTypeId" from="${studies}" value="${requestInstance?.studyType}"
+			optionKey="id" optionValue="name" required="" class="many-to-one"
+			required=""/>
 		</div>
 	</div>
 	
@@ -51,9 +48,8 @@
 			<g:message code="Doctor" />
 			<span class="required-indicator">*</span>
 			</label>
-			<g:select name="doctorId" from="${doctors}"  value="${requestInstance?.doctor?.id}"
-			optionKey="id" optionValue="name" required="" class="many-to-one"
-			noSelection="${['null':'Seleccione un doctor..']}"></g:select>
+			<g:select name="doctorId" from="${doctors}"  value="${requestInstance?.doctor}"
+			optionKey="id" optionValue="name" required="" class="many-to-one"/>
 		</div>
 	</div>
 	
@@ -73,7 +69,7 @@
 			<span class="required-indicator">*</span>
 			</label>
 			<g:select name="status" from="${StatusEnum.values()}" value="${StatusEnum}" optionKey="key"
-			noSelection="${['null':'Seleccione un estado..']}"  required=""></g:select>
+			required=""></g:select>
 		</div>
 	</div>
 
