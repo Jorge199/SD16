@@ -7,5 +7,6 @@ import com.sd.uni.labpatologia.rest.base.IBaseResource;
 public interface IPatientResource extends IBaseResource<PatientDTO> {
 
 	public PatientResult getAll();
+	public PatientResult find(String textToFind);
 
 }

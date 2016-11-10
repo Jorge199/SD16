@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.patient.IPatientDao;
 import com.sd.uni.labpatologia.dao.patient.PatientDaoImpl;
-import com.sd.uni.labpatologia.dao.request.IRequestDao;
 import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
@@ -24,6 +25,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 	
 	@Override
 	@Transactional
+	@CachePut(value = "lab-patologia-platform-cache", key = "'report_dto' + #id")
 	public PatientDTO save(PatientDTO dto) {
 		final PatientDomain patientDomain = convertDtoToDomain(dto);
 		final PatientDomain patient = patientDao.save(patientDomain);
@@ -32,6 +34,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'patient_' + #id")
 	public PatientDTO getById(Integer id)throws PatologyException {
 		final PatientDomain patientDomain = patientDao.getById(id);
 		final PatientDTO patientDTO = convertDomainToDto(patientDomain);
@@ -40,6 +43,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache")
 	public PatientResult getAll() {
 		final List<PatientDTO> patients = new ArrayList<>();
 		for (PatientDomain domain : patientDao.findAll()) {

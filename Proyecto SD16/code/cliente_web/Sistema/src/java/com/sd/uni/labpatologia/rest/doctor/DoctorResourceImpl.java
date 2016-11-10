@@ -21,12 +21,18 @@ import com.sd.uni.labpatologia.rest.doctor.IDoctorResource;
 public class DoctorResourceImpl extends BaseResourceImpl<DoctorDto> implements IDoctorResource {
 
 	public DoctorResourceImpl() {
-		super(DoctorDto.class, "/report");
+		super(DoctorDto.class, "/doctor");
 	}
 
 	@Override
 	public DoctorResult getAll() {
 		final DoctorResult result = getWebResource().get(DoctorResult.class);
+		return result;
+	}
+        
+        @Override
+	public DoctorResult find(String textToFind) {
+		final DoctorResult result = findWR(textToFind).get(DoctorResult.class);
 		return result;
 	}
 

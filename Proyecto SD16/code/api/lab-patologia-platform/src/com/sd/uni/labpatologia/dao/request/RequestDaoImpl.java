@@ -1,12 +1,14 @@
 package com.sd.uni.labpatologia.dao.request;
 
 import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.sd.uni.labpatologia.util.StatusEnum;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -23,6 +25,7 @@ import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 @Repository
 public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IRequestDao {
@@ -91,8 +94,9 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 			criteria.add(Restrictions.ilike("_code", "%"+map.get("code")+"%"));
 		}
 		
-		if (map.containsKey("status")) { // si quiere filtrar por note
-			criteria.add(Restrictions.ilike("_status", "%"+map.get("status")+"%"));
+		if (map.containsKey("status")) { // si quiere filtrar por
+			// diagnostico
+			criteria.add(Restrictions.eq("_status", StatusEnum.valueOf( map.get("status"))));
 		}
 
 		if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas

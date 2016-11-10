@@ -5,7 +5,7 @@
 	</div>
         <div class="col-md-6">
 		<label>Apellido<span class="required-indicator">*</span></label>
-		<g:textField class="form-control" required="" name="last_name" value="${doctorInstance?.last_name }"/>
+		<g:textField class="form-control" required="" name="last_name" value="${doctorInstance?.lastName }"/>
 	</div>
         <div class="col-md-6">
 		<label>C.I<span class="required-indicator">*</span></label>

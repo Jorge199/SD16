@@ -24,16 +24,17 @@
 						<h4><strong>Editar Ficha</strong></h4>
 					</div>
 					<div class="panel-body">
-						<g:form method="post" >
-						<g:hiddenField name="id" value="${requestInstance?.id}" />
-						<fieldset class="form">
-							<g:render template="form"/>
-						</fieldset>
-						<fieldset class="buttons">
-							<g:actionSubmit class="btn btn-success" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-							<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-						</fieldset>
-					</g:form>
+						<g:form action="update" >
+							<fieldset class="form">
+								<g:render template="form"/>
+							</fieldset>
+							<fieldset class="buttons">
+								<br>
+								<button type="submit" class="btn btn-success" name="edit" value="${requestInstance?.id}">
+  									<i class="fa fa-pencil"></i> Actualizar  
+								</button>
+							</fieldset>
+						</g:form>	
 				</div>
 			</div>
 		</div>

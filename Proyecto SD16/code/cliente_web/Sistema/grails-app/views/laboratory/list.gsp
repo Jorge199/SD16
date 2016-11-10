@@ -25,6 +25,13 @@
 							${flash.message}
 						</div>
 					</g:if>
+					
+					<g:form action="list">
+   					<g:textField name="text" />
+   					<g:submitButton name="list" value="Buscar" class="btn btn-primary" />
+						</g:form>
+					
+					
 					<div class="dataTable_wrapper">
 						<div class="row">
 							<div class="col-sm-12">

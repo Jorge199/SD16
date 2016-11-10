@@ -2,6 +2,7 @@ package com.sd.uni.labpatologia.rest.request;
 
 import org.springframework.stereotype.Repository;
 
+import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
@@ -16,6 +17,12 @@ public class RequestResourceImpl extends BaseResourceImpl<RequestDTO> implements
 	@Override
 	public RequestResult getAll() {
 		final RequestResult result = getWebResource().get(RequestResult.class);
+		return result;
+	}
+	
+	@Override
+	public RequestResult find(String textToFind) {
+		final RequestResult result = findWR(textToFind).get(RequestResult.class);
 		return result;
 	}
 
