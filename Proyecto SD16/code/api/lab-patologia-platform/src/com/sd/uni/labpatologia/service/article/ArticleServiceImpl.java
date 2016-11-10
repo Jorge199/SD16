@@ -1,15 +1,19 @@
 package com.sd.uni.labpatologia.service.article;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.sd.uni.labpatologia.dao.article.IArticleDao;
 import com.sd.uni.labpatologia.dao.article.ArticleDaoImpl;
+import com.sd.uni.labpatologia.dao.stock_mov.IStockDao;
 import com.sd.uni.labpatologia.domain.article.ArticleDomain;
+import com.sd.uni.labpatologia.domain.stock_mov.StockDomain;
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
 import com.sd.uni.labpatologia.exception.*;
@@ -21,6 +25,9 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	
 	@Autowired
 	private IArticleDao _articleDao;
+
+	@Autowired
+	private IStockDao _stockDao;
 	
 	@Override
 	@Transactional
@@ -29,14 +36,18 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		final ArticleDomain Article = _articleDao.save(ArticleDomain);
 		return convertDomainToDto(Article);
 	}
-
-		
+	 
 	@Override
 	@Transactional
 	public ArticleDto add_to_stock(Integer id, Integer c) throws PatologyException {
 		final ArticleDomain ArticleDomain = _articleDao.getById(id);
+		final StockDomain stockDomain = new StockDomain();
+		stockDomain.setArticle(ArticleDomain);
+		stockDomain.setCount(c);
+		stockDomain.setMovtype(StockDomain.INC_VALUE);
 		ArticleDomain.setCount((c + ArticleDomain.getCount()));
 		final ArticleDomain Article = _articleDao.save(ArticleDomain);
+		_stockDao.save(stockDomain);
 		return convertDomainToDto(Article);
 	}
 	

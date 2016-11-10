@@ -11,12 +11,14 @@
         <div class="container-fluid">
         	<div class="row">
         	
-			            	<div class="panel panel-default">		
+	            	<div class="panel panel-default">		
                 	<div class="panel-heading">
 						<h4><strong>Registrar Articulo</strong></h4>
 					</div>
-					<div class="panel-body">
+					<g:form action="save" >
+						<div class="panel-body">
 						<div class="row">
+
 						    <div class="col-md-6">
 								<label>
 									Nombre
@@ -31,8 +33,7 @@
 										Cantidad
 										<span class="required-indicator">*</span>
 									</label>
-									<g:textField class="form-control" name="units"/>								
-<%--									<g:textField class="form-control" name="last_name" required="" value="${patientInstance?.last_name}"/>--%>
+									<g:textField class="form-control" name="units"/>
 							</div>
 						</div>
 						<div class="row">
@@ -42,8 +43,6 @@
 										<span class="required-indicator">*</span>
 									</label>
 									<g:textField class="form-control" name="description"/>									
-<%--									<g:textField class="form-control" name="name" required="" value="${patientInstance?.name}"/>--%>
-								
 								</div>
 						      <div class="col-md-6">
 									<label>
@@ -51,20 +50,15 @@
 										<span class="required-indicator">*</span>
 									</label>
 									<g:textField class="form-control" name="count_stock"/>
-<%--									<g:textField class="form-control" name="name" required="" value="${patientInstance?.name}"/>--%>
 								
 								</div>						
 						</div>
 						<br>
 						<button class="btn btn-primary"><i class="fa fa-floppy-o"></i> Crear</button>
 					</div>	
-						
+					</g:form>
 				</div>
 				
-			
-			
-			
-        	
 			</div>
 		</div>
 		<!-- jQuery -->

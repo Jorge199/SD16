@@ -24,8 +24,25 @@ class StockController {
 	}
 	
 	def crear_articulo(){
-	
+
 	}
+
+	def save(){
+		def articleInstance = new ArticleB(params)		
+		System.out.println(articleInstance.getName() + " , "  + articleInstance.getCount_stock()+ " , " + articleInstance.getDescription() + ", " + articleInstance.getUnits());
+		def newArticle= articleService.save(articleInstance)
+		if (!newArticle?.getId()) {
+			render(view: "crear_articulo", model: [articleInstance: articleInstance])
+			return
+		}
+
+		flash.message = message(code: 'default.created.message', args: [
+			message(code: 'article.label', default: 'Article'),
+			newArticle.getId()
+		])
+		redirect(action: "listar", id: newArticle.getId())
+	}	
+	
 	
 	def listar(Integer max){
 		def articles = articleService.getAll()

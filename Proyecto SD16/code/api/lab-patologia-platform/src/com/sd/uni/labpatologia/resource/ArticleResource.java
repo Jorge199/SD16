@@ -15,6 +15,7 @@ import com.sd.uni.labpatologia.dto.article.ArticleResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.exception.StockException;
 import com.sd.uni.labpatologia.service.article.IArticleService;
+import com.sd.uni.labpatologia.service.stock_mov.IStockService;
 
 
 @Path("/article")
@@ -23,6 +24,10 @@ public class ArticleResource {
 
 	@Autowired
 	private IArticleService _articleService;
+
+	@Autowired
+	private IStockService _stock;	
+	
 	
 	/* http://localhost:8080/lab-patologia-platform/rest/article/1 */
 	@GET
@@ -53,6 +58,7 @@ public class ArticleResource {
 	@Path("/add/{id}/{c}")
 	@Produces("application/xml")
 	public ArticleDto add_to_stock(@PathParam("id") Integer id,@PathParam("c") Integer c) throws PatologyException {
+
 		return _articleService.add_to_stock(id,c);
 	}
 
