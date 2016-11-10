@@ -12,16 +12,6 @@
 		</div>
 	</div>
 	
-	<div class="col-md-6">
-		<div class="form-group">
-		<label for="date">
-			<g:message code="Fecha*" class="required-indicator"/>
-			<g:textField  required="" name="date" value="${requestInstance?.date}"/>
-		</label>
-		</div>	
-	</div>
-
-	<br></br>
 	
 	<div class="col-md-6">
 		<label for="code">

@@ -25,13 +25,31 @@ class RequestController {
 	def IUserService userService
 
 	def index() {
-		redirect(action: "list")
+		redirect(action: "list",params: params)
 	}
 
 	def list() {
 		def requests = requestService.getAll()
+		String textToFind=""
+		if(null!=params.get("statusSearch") && !"".equals(params.get("statusSearch")) && !"null".equals(params.get("statusSearch"))){
+			textToFind+="status="+params.get("statusSearch")+'&'
+		}
+		if((!"".equals(params.get("startSearch"))) && !"".equals(params.get("endSearch")) && (null != params.get("startSearch")) && (null != params.get("endSearch"))){
+			textToFind+="start="+params.get("startSearch")+'&'
+			textToFind+="end="+params.get("endSearch")
+		}else{
+			if((null != params.get("startSearch")) && !"".equals(params.get("startSearch"))){
+				textToFind+="date="+params.get("startSearch")
+			}
+		}
+		
+		if(!textToFind.equals("")){
+			requests = requestService.find(textToFind)
+		}
+		textToFind=""
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
-		[requestInstanceList: requests, requestInstanceTotal: requests?.size()]
+		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll()]
+
 	
 	}
 
