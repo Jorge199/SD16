@@ -58,9 +58,10 @@ class RequestController {
 		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll()]
 	}
 
-	def save() {
+	def save(Integer id) {
 		
 		def requestInstance = new RequestB(params)
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		requestInstance.setDate(formatter.parse(formatter.format(new Date())));
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
@@ -98,7 +99,9 @@ class RequestController {
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
 		requestInstance.setId(Integer.parseInt(params.get("edit")))
 		requestInstance.setStatus(StatusEnum.valueOf(params.get("status")))
-		requestInstance.save(requestInstance)
+		requestInstance.setCode(params.get("code"))
+		requestInstance.setNote(params.get("note"))
+		requestService.save(requestInstance)
 		redirect(action: "list")
 	}
 }

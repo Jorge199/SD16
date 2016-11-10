@@ -143,10 +143,8 @@
 													</g:if>
 												</td>
 									
-												<td class="center"><g:link action="edit"
-												class="btn btn-success" id="${requestInstance.getId()}">
-														${}<i class="fa fa-pencil"></i> Editar</g:link>
-												
+												<td class="center">
+												<g:link action="edit" class="btn btn-success" id="${requestInstance.getId()}">${}<i class="fa fa-pencil"></i> Editar</g:link>
 												<button class="btn btn-default" >${}<i class="fa fa-list-alt"></i> Generar Reporte</button>
 												</td>
 											</tr>
