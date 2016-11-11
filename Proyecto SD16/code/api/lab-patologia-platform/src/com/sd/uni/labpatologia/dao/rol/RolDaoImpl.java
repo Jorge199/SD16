@@ -40,21 +40,27 @@ public class RolDaoImpl extends BaseDaoImpl<RolDomain> implements IRolDao {
 	}
 
 	
-	public List<RolDomain> find(String textToFind) {
+	public List<RolDomain> find(String textToFind, int page, int maxItems) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RolDomain.class);
-		Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
-		Criterion idCriterion = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
+		
+		if (!textToFind.equals("all")){
+			Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
+			Criterion idCriterion = null;
+			if (StringUtils.isNumeric(textToFind)) {
+				idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
+			}
+			
+			if(idCriterion!=null){
+				criteria.add(Restrictions.or(nameCriterion, idCriterion));
+			}else{
+				criteria.add(nameCriterion);
+			}
 		}
 		
-		if(idCriterion!=null){
-			criteria.add(Restrictions.or(nameCriterion, idCriterion));
-		}else{
-			criteria.add(nameCriterion);
-		}
+		criteria.setFirstResult(page*maxItems);
+		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<RolDomain> rols = criteria.list();
 		return rols;

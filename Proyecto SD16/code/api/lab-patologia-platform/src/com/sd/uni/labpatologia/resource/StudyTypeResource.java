@@ -9,7 +9,6 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sd.uni.labpatologia.dto.rol.RolResult;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -35,10 +34,10 @@ public class StudyTypeResource {
 	}
 	
 	@GET
-	@Path("search/{textToFind}")
+	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	public StudyTypeResult search(@PathParam("textToFind") String textToFind) throws PatologyException {
-		return studyTypeService.find(textToFind);
+	public StudyTypeResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return studyTypeService.find(textToFind, page, maxItems);
 	}
 
 	@POST

@@ -92,8 +92,8 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorB, DoctorDto>
 	}
 
 	@Override
-	public List<DoctorB> find(String textToFind) {
-		final DoctorResult result = _doctorResource.find(textToFind);
+	public List<DoctorB> find(String textToFind, int maxItems, int page) {
+		final DoctorResult result = _doctorResource.find(textToFind, maxItems, page);
 		final List<DoctorDto> rList = null == result.getDoctors() ? new ArrayList<DoctorDto>()
 				: result.getDoctors();
 

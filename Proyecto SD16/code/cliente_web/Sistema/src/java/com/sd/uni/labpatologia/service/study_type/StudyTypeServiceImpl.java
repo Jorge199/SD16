@@ -76,7 +76,7 @@ public class StudyTypeServiceImpl extends BaseServiceImpl<StudyTypeB, StudyTypeD
     }
 
 	@Override
-	public List<StudyTypeB> find(String textToFind) {
+	public List<StudyTypeB> find(String textToFind, int maxItems, int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}

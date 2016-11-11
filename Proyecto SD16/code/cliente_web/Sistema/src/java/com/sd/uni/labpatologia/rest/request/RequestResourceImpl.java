@@ -21,8 +21,8 @@ public class RequestResourceImpl extends BaseResourceImpl<RequestDTO> implements
 	}
 	
 	@Override
-	public RequestResult find(String textToFind) {
-		final RequestResult result = findWR(textToFind).get(RequestResult.class);
+	public RequestResult find(String textToFind, int maxItems, int page) {
+		final RequestResult result = findWR(textToFind, maxItems, page).get(RequestResult.class);
 		return result;
 	}
 

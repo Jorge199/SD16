@@ -41,23 +41,28 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 		return criteria.list();
 	}
 	@Override
-	public List<PatientDomain> find(String textToFind) {
+	public List<PatientDomain> find(String textToFind, int page, int maxItems) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(PatientDomain.class);
 		//SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
-		.add(Restrictions.ilike("_lastName", textToFind)).add(Restrictions.ilike("_document", textToFind))
-		.add(Restrictions.ilike("_sex", textToFind)).add(Restrictions.ilike("_address", textToFind)).add(Restrictions.ilike("_phone", textToFind));
-		Criterion idCriterion = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
-		}
+		if (!textToFind.equals("all")){
+			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
+					.add(Restrictions.ilike("_lastName", textToFind)).add(Restrictions.ilike("_document", textToFind))
+					.add(Restrictions.ilike("_sex", textToFind)).add(Restrictions.ilike("_address", textToFind)).add(Restrictions.ilike("_phone", textToFind));
+					Criterion idCriterion = null;
+					if (StringUtils.isNumeric(textToFind)) {
+						idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
+					}
 
-		if (idCriterion != null) {
-			criteria.add(Restrictions.or(propertyCriterion, idCriterion));
-		} else {
-			criteria.add(propertyCriterion);
+					if (idCriterion != null) {
+						criteria.add(Restrictions.or(propertyCriterion, idCriterion));
+					} else {
+						criteria.add(propertyCriterion);
+					}
 		}
+		
+		criteria.setFirstResult(page*maxItems);
+		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<PatientDomain> patients = criteria.list();
 		return patients;

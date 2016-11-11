@@ -80,9 +80,9 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 
 	@Override
 	@Transactional
-	public DoctorResult find(String textToFind) throws PatologyException {
+	public DoctorResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<DoctorDto> doctors = new ArrayList<>();
-		for (DoctorDomain domain : _doctorDao.find(textToFind)) {
+		for (DoctorDomain domain : _doctorDao.find(textToFind, page, maxItems)) {
 			final DoctorDto dto = convertDomainToDto(domain);
 			doctors.add(dto);
 		}

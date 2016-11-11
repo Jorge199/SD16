@@ -4,6 +4,8 @@ package com.sd.uni.labpatologia.dao.user;
 import java.util.List;
 
 
+
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -19,8 +21,11 @@ import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.user.UserDomain;
 
 
+import com.sd.uni.labpatologia.exception.PatologyException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import org.apache.commons.codec.binary.Hex;
 
 
@@ -68,27 +73,33 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 	}
 
 	
-	public List<UserDomain> find2(String textToFind) {
+	public List<UserDomain> find(String textToFind, int page, int maxItems) throws PatologyException{
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(UserDomain.class);
-		Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
-		Criterion idCriterion = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
+		
+		if (!textToFind.equals("all")){
+			Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
+			Criterion idCriterion = null;
+			if (StringUtils.isNumeric(textToFind)) {
+				idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
+			}
+			
+			if(idCriterion!=null){
+				criteria.add(Restrictions.or(nameCriterion, idCriterion));
+			}else{
+				criteria.add(nameCriterion);
+			}
 		}
 		
-		if(idCriterion!=null){
-			criteria.add(Restrictions.or(nameCriterion, idCriterion));
-		}else{
-			criteria.add(nameCriterion);
-		}
+		criteria.setFirstResult(page*maxItems);
+		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<UserDomain> users = criteria.list();
 		return users;
 	}
 
-	public List<UserDomain> find(String textToFind) {
+	public List<UserDomain> find2(String textToFind) {
 		Integer id = null;
 		if (StringUtils.isNumeric(textToFind)) {
 			id = Integer.valueOf(textToFind);
@@ -98,5 +109,5 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 		q.setParameter("id", id);
 		return q.list();
 	}
-
+	
 }

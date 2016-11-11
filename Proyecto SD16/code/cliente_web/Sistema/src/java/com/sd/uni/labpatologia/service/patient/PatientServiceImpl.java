@@ -90,8 +90,8 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>imp
 	}
 
 	@Override
-	public List<PatientB> find (String textToFind) {
-		final PatientResult result = _patientResource.find(textToFind);
+	public List<PatientB> find (String textToFind, int maxItems, int page) {
+		final PatientResult result = _patientResource.find(textToFind, maxItems, page);
 		final List<PatientDTO> rList = null == result.getPatients() ? new ArrayList<PatientDTO>()
 				: result.getPatients();
 

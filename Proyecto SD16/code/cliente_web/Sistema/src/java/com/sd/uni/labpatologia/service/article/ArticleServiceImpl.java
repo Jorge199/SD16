@@ -75,7 +75,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleB, ArticleDto> im
 		return dto;
 	}
 	@Override
-	public List<ArticleB> find(String textToFind) {
+	public List<ArticleB> find(String textToFind, int maxItems, int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}

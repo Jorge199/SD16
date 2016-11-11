@@ -8,5 +8,4 @@ import com.sd.uni.labpatologia.service.base.IBaseService;
 
 public interface IUserService extends IBaseService<UserDTO, UserDomain, UserDaoImpl, UserResult> {
 
-	public UserResult find(String textToFind);
 }

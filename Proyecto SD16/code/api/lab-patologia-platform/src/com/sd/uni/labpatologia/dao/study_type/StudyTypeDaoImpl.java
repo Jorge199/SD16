@@ -45,20 +45,26 @@ public class StudyTypeDaoImpl extends BaseDaoImpl<StudyTypeDomain> implements IS
 	}
 
 	@Override
-	public List<StudyTypeDomain> find(String textToFind) throws PatologyException {
+	public List<StudyTypeDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(StudyTypeDomain.class);
-		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
-				.add(Restrictions.ilike("_description", textToFind));
-		Criterion idCriterion = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
+		
+		if (!textToFind.equals("all")){
+			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
+					.add(Restrictions.ilike("_description", textToFind));
+			Criterion idCriterion = null;
+			if (StringUtils.isNumeric(textToFind)) {
+				idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
+			}
+			if (idCriterion != null) {
+				criteria.add(Restrictions.or(propertyCriterion, idCriterion));
+			} else {
+				criteria.add(propertyCriterion);
+			}
 		}
-		if (idCriterion != null) {
-			criteria.add(Restrictions.or(propertyCriterion, idCriterion));
-		} else {
-			criteria.add(propertyCriterion);
-		}
+		
+		criteria.setFirstResult(page*maxItems);
+		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<StudyTypeDomain> studies = criteria.list();
 		return studies;

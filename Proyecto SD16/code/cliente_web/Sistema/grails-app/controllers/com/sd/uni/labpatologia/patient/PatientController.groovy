@@ -21,7 +21,7 @@ class PatientController {
 		}
 		
 		def list(Integer max) {
-			def patients = patientService.getAll()
+			def patients = patientService.find("all",10,0)
 			[patientInstanceList: patients, patientInstanceTotal: patients?.size()]
 		}
 	

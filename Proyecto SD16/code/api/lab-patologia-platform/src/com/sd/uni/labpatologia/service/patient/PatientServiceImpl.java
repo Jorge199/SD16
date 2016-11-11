@@ -86,9 +86,9 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 	
 	@Override
 	@Transactional
-	public PatientResult find(String textToFind) throws PatologyException {
+	public PatientResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<PatientDTO> patients = new ArrayList<>();
-		for (PatientDomain domain : patientDao.find(textToFind)) {
+		for (PatientDomain domain : patientDao.find(textToFind, page, maxItems)) {
 			final PatientDTO dto = convertDomainToDto(domain);
 			patients.add(dto);
 		}

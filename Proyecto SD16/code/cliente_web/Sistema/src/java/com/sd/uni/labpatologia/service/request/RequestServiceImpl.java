@@ -26,7 +26,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 		implements IRequestService {
 
 	@Autowired
-	private IRequestResource _requestResource;
+	private IRequestResource requestResource;
 	@Autowired
 	private IPatientService patientService;
 	@Autowired
@@ -42,14 +42,14 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 	@Override
 	public RequestB save(RequestB bean) {
 		final RequestDTO request = convertBeanToDto(bean);
-		final RequestDTO dto = _requestResource.save(request);
+		final RequestDTO dto = requestResource.save(request);
 		final RequestB requestB = convertDtoToBean(dto);
 		return requestB;
 	}
 
 	@Override
 	public List<RequestB> getAll() {
-		final RequestResult result = _requestResource.getAll();
+		final RequestResult result = requestResource.getAll();
 		final List<RequestDTO> rList = null == result.getRequests() ? new ArrayList<RequestDTO>()
 				: result.getRequests();
 
@@ -63,7 +63,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 
 	@Override
 	public RequestB getById(Integer id) {
-		final RequestDTO dto = _requestResource.getById(id);
+		final RequestDTO dto = requestResource.getById(id);
 		final RequestB bean = convertDtoToBean(dto);
 		return bean;
 	}
@@ -100,8 +100,8 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 	}
 
 	@Override
-	public List<RequestB> find(String textToFind) {
-		final RequestResult result = _requestResource.find(textToFind);
+	public List<RequestB> find(String textToFind, int maxItems, int page) {
+		final RequestResult result = requestResource.find(textToFind, maxItems, page);
 		final List<RequestDTO> rList = null == result.getRequests() ? new ArrayList<RequestDTO>()
 				: result.getRequests();
 

@@ -87,9 +87,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional
-	public ReportResult find(String textToFind) throws PatologyException {
+	public ReportResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<ReportDTO> reports = new ArrayList<>();
-		for (ReportDomain domain : reportDao.find(textToFind)) {
+		for (ReportDomain domain : reportDao.find(textToFind, page, maxItems)) {
 			final ReportDTO dto = convertDomainToDto(domain);
 			reports.add(dto);
 		}

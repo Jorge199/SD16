@@ -29,7 +29,7 @@ class RequestController {
 	}
 
 	def list() {
-		def requests = requestService.getAll()
+		def requests = null
 		String textToFind=""
 		if(null!=params.get("statusSearch") && !"".equals(params.get("statusSearch")) && !"null".equals(params.get("statusSearch"))){
 			textToFind+="status="+params.get("statusSearch")+'&'
@@ -44,7 +44,9 @@ class RequestController {
 		}
 		
 		if(!textToFind.equals("")){
-			requests = requestService.find(textToFind)
+			requests = requestService.find(textToFind,10,0)
+		}else{
+			requests = requestService.find("all",10,0)
 		}
 		textToFind=""
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())

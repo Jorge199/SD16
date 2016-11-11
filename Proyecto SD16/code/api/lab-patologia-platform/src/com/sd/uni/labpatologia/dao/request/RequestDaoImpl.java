@@ -57,68 +57,53 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 		return criteria.list();
 	}
 
-	/*@Override
-	public List<RequestDomain> find(String textToFind) {
-		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(RequestDomain.class);
-		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_note", "%"+textToFind+"%"));
-				
-		Criterion idCriterion = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
-		}
-
-		if (null != idCriterion) {
-			criteria.add(Restrictions.or(propertyCriterion, idCriterion));
-		} else {
-			criteria.add(propertyCriterion);
-		}
-		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		List<RequestDomain> requests = criteria.list();
-		return requests;
-	}*/
 	
 	@Override
-	public List<RequestDomain> find(String textToFind) throws PatologyException {
+	public List<RequestDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RequestDomain.class);
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		Map<String, String> map = obtenerQuery(textToFind);
+		
+		if (!textToFind.equals("all")){
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			Map<String, String> map = obtenerQuery(textToFind);
 
-		if (map.containsKey("note")) { // si quiere filtrar por note
-			criteria.add(Restrictions.ilike("_note", "%"+map.get("note")+"%"));
+			if (map.containsKey("note")) { // si quiere filtrar por note
+				criteria.add(Restrictions.ilike("_note", "%"+map.get("note")+"%"));
+			}
+			
+			if (map.containsKey("code")) { // si quiere filtrar por code
+				criteria.add(Restrictions.ilike("_code", "%"+map.get("code")+"%"));
+			}
+			
+			if (map.containsKey("status")) { // si quiere filtrar por
+				// diagnostico
+				criteria.add(Restrictions.eq("_status", StatusEnum.valueOf( map.get("status"))));
+			}
+
+			if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
+				try {
+					minDate = formatter.parse(map.get("start"));
+					Calendar c = Calendar.getInstance();
+					c.setTime(formatter.parse(map.get("end")));
+					c.add(Calendar.DATE, 1);
+					maxDate = c.getTime();
+					criteria.add(Restrictions.between("_date", minDate, maxDate));
+				} catch (ParseException e) {
+					throw new PatologyException("Formato de ruta invalido", e);
+				}
+			} else if (map.containsKey("date")) { // si quiere filtrar por una fecha
+													// especifica
+				try {
+					criteria.add(Restrictions.eq("_date", formatter.parse(map.get("date"))));
+				} catch (ParseException e) {
+					throw new PatologyException("Formato de ruta invalido", e);
+				}
+			}
 		}
 		
-		if (map.containsKey("code")) { // si quiere filtrar por code
-			criteria.add(Restrictions.ilike("_code", "%"+map.get("code")+"%"));
-		}
-		
-		if (map.containsKey("status")) { // si quiere filtrar por
-			// diagnostico
-			criteria.add(Restrictions.eq("_status", StatusEnum.valueOf( map.get("status"))));
-		}
-
-		if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
-			try {
-				minDate = formatter.parse(map.get("start"));
-				Calendar c = Calendar.getInstance();
-				c.setTime(formatter.parse(map.get("end")));
-				c.add(Calendar.DATE, 1);
-				maxDate = c.getTime();
-				criteria.add(Restrictions.between("_date", minDate, maxDate));
-			} catch (ParseException e) {
-				throw new PatologyException("Formato de ruta invalido", e);
-			}
-		} else if (map.containsKey("date")) { // si quiere filtrar por una fecha
-												// especifica
-			try {
-				criteria.add(Restrictions.eq("_date", formatter.parse(map.get("date"))));
-			} catch (ParseException e) {
-				throw new PatologyException("Formato de ruta invalido", e);
-			}
-		}
-
+		criteria.setFirstResult(page*maxItems);
+		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<RequestDomain> requests = criteria.list();
 		return requests;

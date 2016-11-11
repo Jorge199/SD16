@@ -34,7 +34,7 @@ public class CountryDaoImpl extends BaseDaoImpl<CountryDomain> implements ICount
 	}
 
 	@Override
-	public List<CountryDomain> find(String textToFind) throws PatologyException {
+	public List<CountryDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		// TODO Auto-generated method stub
 		return null;
 	}

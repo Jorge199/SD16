@@ -71,7 +71,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolB, RolDTO>
 	}
 
 	@Override
-	public List<RolB> find(String textToFind) {
+	public List<RolB> find(String textToFind, int maxItems, int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}

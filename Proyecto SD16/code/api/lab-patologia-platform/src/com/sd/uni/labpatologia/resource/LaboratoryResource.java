@@ -42,10 +42,10 @@ public class LaboratoryResource {
 	
 	/* http://localhost:8080/lab-patologia-platform/rest/laboratory/search/textToFind */
 	@GET
-	@Path("/search/{textToFind}")
+	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	public LaboratoryResult search(@PathParam("textToFind") String textToFind) throws PatologyException {
-		return _laboratoryService.find(textToFind);
+	public LaboratoryResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return _laboratoryService.find(textToFind, page, maxItems);
 	}
 
 	@POST

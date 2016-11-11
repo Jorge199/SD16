@@ -78,7 +78,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO> implements 
 	}
 
 	@Override
-	public List<UserB> find(String textToFind) {
+	public List<UserB> find(String textToFind, int maxItems, int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}

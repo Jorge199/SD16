@@ -20,8 +20,8 @@ public class LaboratoryResourceImpl extends BaseResourceImpl<LaboratoryDto> impl
 	}
 
 	@Override
-	public LaboratoryResult find(String textToFind) {
-		final LaboratoryResult result = findWR(textToFind).get(LaboratoryResult.class);
+	public LaboratoryResult find(String textToFind, int maxItems, int page) {
+		final LaboratoryResult result = findWR(textToFind, maxItems, page).get(LaboratoryResult.class);
 		return result;
 	}
 

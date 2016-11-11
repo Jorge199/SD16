@@ -58,9 +58,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional
-	public UserResult find(String textToFind) {
+	public UserResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<UserDTO> users = new ArrayList<>();
-		for (UserDomain domain : userDao.find(textToFind)) {
+		for (UserDomain domain : userDao.find(textToFind, page, maxItems)) {
 			final UserDTO dto = convertDomainToDto(domain);
 			users.add(dto);
 		}

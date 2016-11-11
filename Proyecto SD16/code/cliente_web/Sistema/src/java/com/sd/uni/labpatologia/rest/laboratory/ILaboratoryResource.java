@@ -7,5 +7,5 @@ import com.sd.uni.labpatologia.rest.base.IBaseResource;
 
 public interface ILaboratoryResource extends IBaseResource<LaboratoryDto> {
 	public LaboratoryResult getAll();
-	public LaboratoryResult find(String textToFind);
+	public LaboratoryResult find(String textToFind, int maxItems, int page);
 }

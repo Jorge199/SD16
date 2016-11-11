@@ -52,39 +52,43 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	}
 
 	@Override
-	public List<ReportDomain> find(String textToFind) throws PatologyException {
+	public List<ReportDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ReportDomain.class);
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		Map<String, String> map = obtenerQuery(textToFind);
+		if (!textToFind.equals("all")){
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			Map<String, String> map = obtenerQuery(textToFind);
 
-		if (map.containsKey("diagnostic")) { // si quiere filtrar por
-												// diagnostico
-			criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf( map.get("diagnostic"))));
-		}
-
-		if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
-			try {
-				minDate = formatter.parse(map.get("start"));
-				Calendar c = Calendar.getInstance();
-				c.setTime(formatter.parse(map.get("end")));
-				c.add(Calendar.DATE, 1);
-				maxDate = c.getTime();
-				// System.out.println("desde" + minDate + "hasta " + maxDate);
-				criteria.add(Restrictions.between("_date", minDate, maxDate));
-			} catch (ParseException e) {
-				throw new PatologyException("Formato de ruta invalido", e);
+			if (map.containsKey("diagnostic")) { // si quiere filtrar por
+													// diagnostico
+				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf( map.get("diagnostic"))));
 			}
-		} else if (map.containsKey("date")) { // si quiere filtrar por una fecha
-												// especifica
-			try {
-				criteria.add(Restrictions.eq("_date", formatter.parse(map.get("date"))));
-			} catch (ParseException e) {
-				throw new PatologyException("Formato de ruta invalido", e);
+
+			if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
+				try {
+					minDate = formatter.parse(map.get("start"));
+					Calendar c = Calendar.getInstance();
+					c.setTime(formatter.parse(map.get("end")));
+					c.add(Calendar.DATE, 1);
+					maxDate = c.getTime();
+					// System.out.println("desde" + minDate + "hasta " + maxDate);
+					criteria.add(Restrictions.between("_date", minDate, maxDate));
+				} catch (ParseException e) {
+					throw new PatologyException("Formato de ruta invalido", e);
+				}
+			} else if (map.containsKey("date")) { // si quiere filtrar por una fecha
+													// especifica
+				try {
+					criteria.add(Restrictions.eq("_date", formatter.parse(map.get("date"))));
+				} catch (ParseException e) {
+					throw new PatologyException("Formato de ruta invalido", e);
+				}
 			}
 		}
-
+		
+		criteria.setFirstResult(page*maxItems);
+		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<ReportDomain> reports = criteria.list();
 		return reports;

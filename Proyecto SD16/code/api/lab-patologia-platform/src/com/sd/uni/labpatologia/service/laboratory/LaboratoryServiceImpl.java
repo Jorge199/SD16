@@ -82,9 +82,9 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 
 	@Override
 	@Transactional
-	public LaboratoryResult find(String textToFind) throws PatologyException {
+	public LaboratoryResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<LaboratoryDto> laboratories = new ArrayList<>();
-		for (LaboratoryDomain domain : _laboratoryDao.find(textToFind)) {
+		for (LaboratoryDomain domain : _laboratoryDao.find(textToFind, page, maxItems)) {
 			final LaboratoryDto dto = convertDomainToDto(domain);
 			laboratories.add(dto);
 		}

@@ -42,7 +42,7 @@ public class LaboratoryDaoImpl extends BaseDaoImpl<LaboratoryDomain> implements 
 	}
 
 	@Override
-	public List<LaboratoryDomain> find(String textToFind) {
+	public List<LaboratoryDomain> find(String textToFind, int page, int maxItems) {
 		Session session = _sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(LaboratoryDomain.class);
 		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))

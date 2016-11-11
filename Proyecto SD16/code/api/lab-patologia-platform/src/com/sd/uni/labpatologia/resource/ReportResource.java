@@ -34,10 +34,10 @@ public class ReportResource {
 	}
 
 	@GET
-	@Path("/search/{textToFind}")
+	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	public ReportResult search(@PathParam("textToFind") String textToFind) throws PatologyException {
-		return reportService.find(textToFind);
+	public ReportResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return reportService.find(textToFind, page, maxItems);
 	}
 	
 	@POST
