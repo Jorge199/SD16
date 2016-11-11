@@ -64,7 +64,7 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RequestDomain.class);
 		
-		if (!textToFind.equals("all")){
+		if (textToFind != null){
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 

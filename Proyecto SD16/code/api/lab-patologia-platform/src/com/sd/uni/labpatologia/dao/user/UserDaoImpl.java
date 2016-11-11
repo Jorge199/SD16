@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -72,42 +71,32 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 	}
 
 	
-	public List<UserDomain> find2(String textToFind) {
-
+	@Override
+	public List<UserDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(UserDomain.class);
-		Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
-		Criterion idCriterion = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
+		if (textToFind != null){
+			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"))
+					.add(Restrictions.ilike("_lastName", "%"+textToFind+"%")).add(Restrictions.ilike("_userName", "%"+textToFind+"%"))
+					.add(Restrictions.ilike("_sex", "%"+textToFind+"%"));
+			Criterion idCriterion = null;
+			if (StringUtils.isNumeric(textToFind)) {
+				idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
+			}
+			
+			if(idCriterion!=null){
+				criteria.add(Restrictions.or(propertyCriterion, idCriterion));
+			}else{
+				criteria.add(propertyCriterion);
+			}
 		}
 		
-		if(idCriterion!=null){
-			criteria.add(Restrictions.or(nameCriterion, idCriterion));
-		}else{
-			criteria.add(nameCriterion);
-		}
+		criteria.setFirstResult(page*maxItems);
+		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<UserDomain> users = criteria.list();
 		return users;
 	}
 
-	public List<UserDomain> find(String textToFind) {
-		Integer id = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			id = Integer.valueOf(textToFind);
-		}
-		Query q = sessionFactory.getCurrentSession().createQuery("from UserDomain where _name like :parameter or _password like :parameter or _id=:id");
-		q.setParameter("parameter", "%" + textToFind + "%");
-		q.setParameter("id", id);
-		return q.list();
-	}
-
-	@Override
-	public List<UserDomain> find(String textToFind, int page, int maxItems)
-			throws PatologyException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -47,6 +47,13 @@ public class PatientResource {
 	public PatientResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return _patientService.find(textToFind, page, maxItems);
 	}
+	
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	public PatientResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return _patientService.find(null, page, maxItems);
+	}
 
 	@POST
 	public PatientDTO save(PatientDTO patient) {

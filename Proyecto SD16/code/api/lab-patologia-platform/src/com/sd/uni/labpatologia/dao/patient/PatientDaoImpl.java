@@ -45,10 +45,10 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(PatientDomain.class);
 		//SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		if (!textToFind.equals("all")){
-			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
-					.add(Restrictions.ilike("_lastName", textToFind)).add(Restrictions.ilike("_document", textToFind))
-					.add(Restrictions.ilike("_sex", textToFind)).add(Restrictions.ilike("_address", textToFind)).add(Restrictions.ilike("_phone", textToFind));
+		if (textToFind != null){
+			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"))
+					.add(Restrictions.ilike("_lastName", "%"+textToFind+"%")).add(Restrictions.ilike("_document", "%"+textToFind+"%"))
+					.add(Restrictions.ilike("_sex", "%"+textToFind+"%")).add(Restrictions.ilike("_address", "%"+textToFind+"%")).add(Restrictions.ilike("_phone", "%"+textToFind+"%"));
 					Criterion idCriterion = null;
 					if (StringUtils.isNumeric(textToFind)) {
 						idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));

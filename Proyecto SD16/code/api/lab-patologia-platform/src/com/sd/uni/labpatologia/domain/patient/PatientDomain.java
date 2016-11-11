@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,8 @@ import javax.persistence.OneToMany;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
+import com.sd.uni.labpatologia.util.SexEnum;
 
 
 
@@ -38,8 +42,8 @@ public class PatientDomain extends BaseDomain {
 	@Column(name = "document", unique = true)
 	private String _document;
 
-	@Column(name = "sex")
-	private String _sex;
+	@Enumerated(EnumType.STRING)
+	private SexEnum _sex;
 	
 	@Column(name = "birthDate")
 	private Date _birthDate;
@@ -82,11 +86,11 @@ public class PatientDomain extends BaseDomain {
 		_document = document;
 	}
 	
-	public String getSex() {
+	public SexEnum getSex() {
 		return _sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(SexEnum sex) {
 		_sex = sex;
 	}
 

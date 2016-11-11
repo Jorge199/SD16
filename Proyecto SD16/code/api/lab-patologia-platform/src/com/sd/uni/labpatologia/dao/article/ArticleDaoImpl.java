@@ -45,7 +45,7 @@ public class ArticleDaoImpl  extends BaseDaoImpl<ArticleDomain> implements IArti
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ArticleDomain.class);
 		
-		if (!textToFind.equals("all")){
+		if (textToFind != null){
 			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"));	
 			Criterion idCriterion = null;
 			if (StringUtils.isNumeric(textToFind)) {

@@ -57,9 +57,9 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 
 	@Override
 	@Transactional
-	public RolResult find(String textToFind) {
+	public RolResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<RolDTO> rols = new ArrayList<>();
-		for (RolDomain domain : rolDao.find(textToFind)) {
+		for (RolDomain domain : rolDao.find(textToFind, page, maxItems)) {
 			final RolDTO dto = convertDomainToDto(domain);
 			rols.add(dto);
 		}
@@ -82,13 +82,6 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 		domain.setId(dto.getId());
 		domain.setName(dto.getName());
 		return domain;
-	}
-
-	@Override
-	public RolResult find(String textToFind, int page, int maxItems)
-			throws PatologyException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

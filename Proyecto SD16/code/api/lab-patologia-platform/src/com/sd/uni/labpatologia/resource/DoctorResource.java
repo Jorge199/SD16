@@ -47,6 +47,13 @@ public class DoctorResource {
 	public DoctorResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return _doctorService.find(textToFind, page, maxItems);
 	}
+	
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	public DoctorResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return _doctorService.find(null, page, maxItems);
+	}
 
 	@POST
 	public DoctorDto save(DoctorDto doctor) {

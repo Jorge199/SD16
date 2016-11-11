@@ -56,7 +56,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ReportDomain.class);
-		if (!textToFind.equals("all")){
+		if (textToFind != null){
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 

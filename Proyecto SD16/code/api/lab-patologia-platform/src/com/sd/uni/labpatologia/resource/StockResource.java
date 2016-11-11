@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import com.sd.uni.labpatologia.dto.stock_mov.StockDTO;
 import com.sd.uni.labpatologia.dto.stock_mov.StockResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
-import com.sd.uni.labpatologia.exception.StockException;
 import com.sd.uni.labpatologia.service.stock_mov.IStockService;
 
 
@@ -41,10 +40,17 @@ public class StockResource {
 	
 	/* http://localhost:8080/lab-patologia-platform/rest/stock/search/textToFind */
 	@GET
-	@Path("/search/{textToFind}")
+	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	public StockResult search(@PathParam("textToFind") String textToFind) throws PatologyException {
-		return _stockService.find(textToFind);
+	public StockResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return _stockService.find(textToFind, page, maxItems);
+	}
+	
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	public StockResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return _stockService.find(null, page, maxItems);
 	}
 	
 	@POST

@@ -40,6 +40,13 @@ public class ReportResource {
 		return reportService.find(textToFind, page, maxItems);
 	}
 	
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	public ReportResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return reportService.find(null, page, maxItems);
+	}
+	
 	@POST
 	public ReportDTO save(ReportDTO report) {
 		return reportService.save(report);

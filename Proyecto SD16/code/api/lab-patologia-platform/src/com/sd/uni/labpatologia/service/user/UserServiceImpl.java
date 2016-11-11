@@ -66,9 +66,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional
-	public UserResult find(String textToFind) {
+	public UserResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<UserDTO> users = new ArrayList<>();
-		for (UserDomain domain : userDao.find(textToFind)) {
+		for (UserDomain domain : userDao.find(textToFind, page, maxItems)) {
 			final UserDTO dto = convertDomainToDto(domain);
 			users.add(dto);
 		}
@@ -82,11 +82,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		final UserDTO dto = new UserDTO();
 		dto.setId(domain.getId());
 		dto.setName(domain.getName());
+		dto.setUserName(domain.getUserName());
+		dto.setLastName(domain.getLastName());
+		dto.setSex(domain.getSex());
 		dto.setPassword(domain.getPassword());
 		dto.setRolId(domain.getRol().getId());
-		
 		dto.setMatricula(domain.getMatricula());
-		dto.setDoctor(domain.getDoctor());
 		return dto;
 	}
 
@@ -95,9 +96,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		final UserDomain domain = new UserDomain();
 		domain.setId(dto.getId());
 		domain.setName(dto.getName());
+		domain.setUserName(dto.getUserName());
+		domain.setLastName(dto.getLastName());
+		domain.setSex(dto.getSex());
 		domain.setPassword(dto.getPassword());
 		domain.setMatricula(dto.getMatricula());
-		domain.setDoctor(dto.getDoctor());
 		
 		try {
 			domain.setRol(rolDao.getById(dto.getRolId()));
@@ -106,13 +109,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		}
 		
 		return domain;
-	}
-
-	@Override
-	public UserResult find(String textToFind, int page, int maxItems)
-			throws PatologyException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

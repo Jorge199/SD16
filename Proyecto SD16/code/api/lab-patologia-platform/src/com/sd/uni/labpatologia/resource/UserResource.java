@@ -43,6 +43,13 @@ public class UserResource {
 	public UserResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return userService.find(textToFind, page, maxItems);
 	}
+	
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	public UserResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return userService.find(null, page, maxItems);
+	}
 
 	@POST
 	public UserDTO save(UserDTO user) {

@@ -35,6 +35,9 @@ public class DoctorDomain extends BaseDomain{
 	@Column(name = "email")
 	private String _email;
 	
+	@Column(name = "especialidad")
+	private String _especialidad;
+	
 	public Integer getId() {
 		return _id;
 	}
@@ -82,6 +85,13 @@ public class DoctorDomain extends BaseDomain{
 	}
 	public void setEmail(String email) {
 		_email = email;
+	}
+	
+	public String getEspecialidad() {
+		return _especialidad;
+	}
+	public void setEspecialidad(String especialidad) {
+		_especialidad = especialidad;
 	}
 	
 	

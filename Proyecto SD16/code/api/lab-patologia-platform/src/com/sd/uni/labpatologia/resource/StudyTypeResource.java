@@ -40,6 +40,13 @@ public class StudyTypeResource {
 		return studyTypeService.find(textToFind, page, maxItems);
 	}
 
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	public StudyTypeResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return studyTypeService.find(null, page, maxItems);
+	}
+	
 	@POST
 	public StudyTypeDTO save(StudyTypeDTO estudio) {
 		return studyTypeService.save(estudio);

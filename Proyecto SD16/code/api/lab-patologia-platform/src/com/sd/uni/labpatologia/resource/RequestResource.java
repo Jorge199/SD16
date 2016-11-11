@@ -44,5 +44,12 @@ public class RequestResource {
 	public RequestResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return requestService.find(textToFind, page, maxItems);
 	}
+	
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	public RequestResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return requestService.find(null, page, maxItems);
+	}
 }
 

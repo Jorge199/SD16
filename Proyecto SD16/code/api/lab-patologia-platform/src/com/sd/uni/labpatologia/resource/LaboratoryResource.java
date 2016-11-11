@@ -47,6 +47,13 @@ public class LaboratoryResource {
 	public LaboratoryResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return _laboratoryService.find(textToFind, page, maxItems);
 	}
+	
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	public LaboratoryResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return _laboratoryService.find(null, page, maxItems);
+	}
 
 	@POST
 	public LaboratoryDto save(LaboratoryDto laboratory) {

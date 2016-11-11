@@ -41,42 +41,29 @@ public class RolDaoImpl extends BaseDaoImpl<RolDomain> implements IRolDao {
 	}
 
 	
-	public List<RolDomain> find(String textToFind) {
-
+	@Override
+	public List<RolDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RolDomain.class);
-		Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
-		Criterion idCriterion = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
+		if (textToFind != null){
+			Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
+			Criterion idCriterion = null;
+			if (StringUtils.isNumeric(textToFind)) {
+				idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
+			}
+			
+			if(idCriterion!=null){
+				criteria.add(Restrictions.or(nameCriterion, idCriterion));
+			}else{
+				criteria.add(nameCriterion);
+			}
 		}
 		
-		if(idCriterion!=null){
-			criteria.add(Restrictions.or(nameCriterion, idCriterion));
-		}else{
-			criteria.add(nameCriterion);
-		}
+		criteria.setFirstResult(page*maxItems);
+		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<RolDomain> rols = criteria.list();
 		return rols;
-	}
-
-	public List<RolDomain> find2(String textToFind) {
-		Integer id = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			id = Integer.valueOf(textToFind);
-		}
-		Query q = sessionFactory.getCurrentSession().createQuery("from RolDomain where _name like :parameter or _id=:id");
-		q.setParameter("parameter", "%" + textToFind + "%");
-		q.setParameter("id", id);
-		return q.list();
-	}
-
-	@Override
-	public List<RolDomain> find(String textToFind, int page, int maxItems)
-			throws PatologyException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

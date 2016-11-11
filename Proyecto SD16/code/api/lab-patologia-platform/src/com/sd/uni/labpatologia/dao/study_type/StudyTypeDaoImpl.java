@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
-import com.sd.uni.labpatologia.domain.laboratory.LaboratoryDomain;
 import com.sd.uni.labpatologia.domain.study_type.StudyTypeDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
 
@@ -49,7 +48,7 @@ public class StudyTypeDaoImpl extends BaseDaoImpl<StudyTypeDomain> implements IS
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(StudyTypeDomain.class);
 		
-		if (!textToFind.equals("all")){
+		if (textToFind != null){
 			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
 					.add(Restrictions.ilike("_description", textToFind));
 			Criterion idCriterion = null;
