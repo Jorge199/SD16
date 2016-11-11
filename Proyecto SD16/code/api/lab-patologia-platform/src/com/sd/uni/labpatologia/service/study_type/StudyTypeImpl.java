@@ -68,6 +68,7 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 	}
 
 	@Override
+	@Transactional
 	public StudyTypeResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<StudyTypeDTO> studies = new ArrayList<>();
 		for (StudyTypeDomain domain : _studyTypeDao.find(textToFind, page, maxItems)) {

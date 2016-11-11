@@ -10,5 +10,6 @@ import com.sd.uni.labpatologia.rest.base.IBaseResource;
 public interface IStudyTypeResource extends IBaseResource<StudyTypeDTO> {
     
     public StudyTypeResult getAll();
+    public StudyTypeResult find(String textToFind);
 
 }

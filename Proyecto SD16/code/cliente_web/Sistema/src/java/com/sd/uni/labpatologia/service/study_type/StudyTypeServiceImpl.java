@@ -5,12 +5,10 @@ import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeResult;
 import com.sd.uni.labpatologia.rest.study_type.IStudyTypeResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,10 +73,18 @@ public class StudyTypeServiceImpl extends BaseServiceImpl<StudyTypeB, StudyTypeD
         return bean;
     }
 
-	@Override
-	public List<StudyTypeB> find(String textToFind, int maxItems, int page) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<StudyTypeB> find(String textToFind, int maxItems, int page) {
+        final StudyTypeResult result = _studyTypeResource.find(textToFind, maxItems, page);
+        final List<StudyTypeDTO> rList = null == result.getStudies() ? new ArrayList<StudyTypeDTO>()
+                : result.getStudies();
+
+        final List<StudyTypeB> requests = new ArrayList<StudyTypeB>();
+        for (StudyTypeDTO dto : rList) {
+            final StudyTypeB bean = convertDtoToBean(dto);
+            requests.add(bean);
+        }
+        return requests;
+    }
 
 }
