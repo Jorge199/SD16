@@ -43,7 +43,7 @@ class DoctorController {
 			message(code: 'doctor.label', default: 'Doctor'),
 			newDoctor.getId()
 		])
-		redirect(action: "show", id: newDoctor.getId())
+		redirect(action: "list", id: newDoctor.getId())
 	}
 	def show(Long id) {
 		def doctorInstance = doctorService.getById(id.intValue())
@@ -64,7 +64,7 @@ class DoctorController {
 						message(code: 'doctor.label', default: 'Doctor'),
 						id
 					])
-					redirect(action: "show")
+					redirect(action: "list")
 					return
 				}
 		[doctorInstance: doctorInstance]
