@@ -1,8 +1,8 @@
 package com.sd.uni.labpatologia.rest.rol;
 
 
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dto.rol.RolDTO;
@@ -18,18 +18,19 @@ public class RolResourceImpl extends BaseResourceImpl<RolDTO> implements
 	}
 
 	@Override
-	//@CacheEvict(value = CACHE_REGION, key = "'rol_' + #dto.id", condition = "#dto.id!=null")
+	@CacheEvict(value = CACHE_REGION, key = "'rol_' + #dto.id", condition = "#dto.id!=null")
 	public RolDTO save(RolDTO dto) {
 		final RolDTO rol = getWebResource().entity(dto).post(getDtoClass());
 		return rol;
 	}
 
-	//@Cacheable(value = CACHE_REGION, key = "'country_' + #id")
+	@Cacheable(value = CACHE_REGION, key = "'rol_' + #id")
 	@Override
 	public RolDTO getById(Integer id) {
 		return super.getById(id);
 	}
 
+	@Cacheable(value = CACHE_REGION, key = "'roles'")
 	@Override
 	public RolResult getAll() {
 		RolResult rols = getWebResource().get(RolResult.class);

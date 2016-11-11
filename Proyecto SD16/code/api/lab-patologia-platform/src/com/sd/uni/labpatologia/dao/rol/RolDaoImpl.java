@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.rol.RolDomain;
+import com.sd.uni.labpatologia.exception.PatologyException;
 
 @Repository
 public class RolDaoImpl extends BaseDaoImpl<RolDomain> implements IRolDao {
@@ -40,27 +41,21 @@ public class RolDaoImpl extends BaseDaoImpl<RolDomain> implements IRolDao {
 	}
 
 	
-	public List<RolDomain> find(String textToFind, int page, int maxItems) {
+	public List<RolDomain> find(String textToFind) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RolDomain.class);
-		
-		if (!textToFind.equals("all")){
-			Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
-			Criterion idCriterion = null;
-			if (StringUtils.isNumeric(textToFind)) {
-				idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
-			}
-			
-			if(idCriterion!=null){
-				criteria.add(Restrictions.or(nameCriterion, idCriterion));
-			}else{
-				criteria.add(nameCriterion);
-			}
+		Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
+		Criterion idCriterion = null;
+		if (StringUtils.isNumeric(textToFind)) {
+			idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
 		}
 		
-		criteria.setFirstResult(page*maxItems);
-		criteria.setMaxResults(maxItems);
+		if(idCriterion!=null){
+			criteria.add(Restrictions.or(nameCriterion, idCriterion));
+		}else{
+			criteria.add(nameCriterion);
+		}
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<RolDomain> rols = criteria.list();
 		return rols;
@@ -75,6 +70,13 @@ public class RolDaoImpl extends BaseDaoImpl<RolDomain> implements IRolDao {
 		q.setParameter("parameter", "%" + textToFind + "%");
 		q.setParameter("id", id);
 		return q.list();
+	}
+
+	@Override
+	public List<RolDomain> find(String textToFind, int page, int maxItems)
+			throws PatologyException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
