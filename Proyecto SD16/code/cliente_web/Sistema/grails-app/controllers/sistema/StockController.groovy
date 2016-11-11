@@ -2,25 +2,27 @@ package sistema
 
 import com.sd.uni.labpatologia.beans.article.ArticleB
 import com.sd.uni.labpatologia.service.article.IArticleService
+import com.sd.uni.labpatologia.service.stock_mov.IStockService
 
 class StockController {
 	
 	static allowedMethods = [save: "POST", 	 delete: "POST"]
 	//services
 	def IArticleService articleService
+	def IStockService stockService
 	
 	def index() {
 		redirect(action: "listar", params: params)
 	}
 
 	def add(){
-		def articles = articleService.getAll()
-		render(view: "stock_mov", model: [articleInstanceList: articles, articleInstanceTotal: articles?.size() , view_opc:"add"])	
+		def stockIn = stockService.getAll()
+		render(view: "stock_mov", model: [stockInstanceList: stockIn, stockInstanceTotal: stockIn?.size() , view_opc:"add"])
 	}
 	
 	def remove(){
-		def articles = articleService.getAll()
-		render(view: "stock_mov", model: [articleInstanceList: articles, articleInstanceTotal: articles?.size()])
+		def stockIn = stockService.getAll()
+		render(view: "stock_mov", model: [stockInstanceList: stockIn, stockInstanceTotal: stockIn?.size() , view_opc:"rm"])
 	}
 	
 	def crear_articulo(){
@@ -49,7 +51,17 @@ class StockController {
 		[articleInstanceList: articles, articleInstanceTotal: articles?.size()]
 	}
 
-	def edit(){
-	
+	def edit(Long id){
+		def articleInstance = articleService.getById(id.intValue())
+		if (!articleInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'article.label', default: 'Article'),
+				id
+			])
+			redirect(action: "listar")
+			return
+		}
+
+		[articleInstance: articleInstance]
 	}
 }

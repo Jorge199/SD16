@@ -25,7 +25,7 @@
 									<span class="required-indicator">*</span>
 								</label>
 								
-								<g:textField class="form-control" name="name"/>
+								<g:textField class="form-control" required="" name="name" maxlength="60" />
 								
 							</div>
 							 <div class="col-md-6">
@@ -33,7 +33,7 @@
 										Cantidad
 										<span class="required-indicator">*</span>
 									</label>
-									<g:textField class="form-control" name="units"/>
+									<g:textField class="form-control" required="" maxlength="10" name="units"/>
 							</div>
 						</div>
 						<div class="row">
@@ -42,14 +42,14 @@
 										Descripcion
 										<span class="required-indicator">*</span>
 									</label>
-									<g:textField class="form-control" name="description"/>									
+									<g:textField class="form-control" required="" minlength="2" maxlength="50" name="description"/>
 								</div>
 						      <div class="col-md-6">
 									<label>
 										Cantidad en Stock
 										<span class="required-indicator">*</span>
 									</label>
-									<g:textField class="form-control" name="count_stock"/>
+									<g:textField class="form-control" required=""  maxlength="10" name="count_stock"/>
 								
 								</div>						
 						</div>
@@ -66,6 +66,5 @@
    
     <!-- Bootstrap Core JavaScript -->
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
-								
 	</body>
 </html>

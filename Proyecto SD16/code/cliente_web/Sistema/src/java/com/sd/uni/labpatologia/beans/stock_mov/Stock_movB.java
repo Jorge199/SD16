@@ -9,22 +9,22 @@ package com.sd.uni.labpatologia.beans.stock_mov;
  *
  * @author User
  */
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.sd.uni.labpatologia.beans.article.ArticleB;
 import com.sd.uni.labpatologia.beans.base.BaseBean;
 
 public class Stock_movB extends BaseBean {
 	private static final long serialVersionUID = 1L;
-	private String _name;
-	private String _last_name;
-	private Integer _ci;
-	private String _address;
-	private String _phone;
-	private String _email;
-	//private RequestB _request;
+	private Integer _count;
+	private Date _date;
+	private Integer _mov_type;
+	private ArticleB _article;
 
 	public Stock_movB(Map<String, String> params) {
 		super(params);
@@ -35,59 +35,54 @@ public class Stock_movB extends BaseBean {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
-		setName(params.get("name"));
-		setLastName(params.get("last_name"));	
-                setCi(Integer.parseInt(params.get("ci")));
-                setLastName(params.get("last_name"));
-                setAddress(params.get("address"));
-                setPhone(params.get("phone"));
-                setEmail(params.get("email"));
+		setCount(Integer.parseInt(params.get("count")));
+		setMovtype(Integer.parseInt(params.get("mov_type")));
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			//setDate(formato.parse(params.get("date")));
+			//para que no lance error
+			if(null != params.get("date")){
+				setDate(formato.parse(params.get("date")));
+			}
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		
+
+		}
 	}
 
-	public String getName() {
-		return _name;
+	public Integer getCount() {
+		return _count;
 	}
 	
-	public void setName(String name) {
-		_name = name;
+	public void setCount(Integer c) {
+		_count = c;
 	}
 	
-	public String getLastName() {
-		return _last_name;
+	public Integer getMovtype() {
+		return _mov_type;
 	}
 	
-	public void setLastName(String name) {
-		_last_name = name;
+	public void setMovtype(Integer c) {
+		_mov_type = c;
 	}
 	
-	public Integer getCi() {
-		return _ci;
-	}
-	public void setCi(Integer ci) {
-		_ci = ci;
+
+	
+	public ArticleB getArticle() {
+		return _article;
 	}
 	
-	public String getAddress() {
-		return _address;
+	public void setArticle(ArticleB ar) {
+		_article = ar;
 	}
 	
-	public void setAddress(String address) {
-		_address = address;
+	public Date getDate() {
+		return _date;
 	}
 	
-	public String getPhone() {
-		return _phone;
-	}
-	
-	public void setPhone(String phone) {
-		_phone = phone;
-	}
-	
-	public String getEmail() {
-		return _email;
-	}
-	
-	public void setEmail(String email) {
-		_email = email;
+	public void setDate(Date d) {
+		_date = d;
 	}
 }

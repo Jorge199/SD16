@@ -89,15 +89,21 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 
 	@Override
 	@Transactional
-	public StockResult find(String textToFind) throws PatologyException {
+	public StockResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<StockDTO> stocks = new ArrayList<>();
-		for (StockDomain domain : stockDao.find(textToFind)) {
+		for (StockDomain domain : stockDao.find(textToFind,page,maxItems)) {
 			final StockDTO dto = convertDomainToDto(domain);
 			stocks.add(dto);
 		}
 		final StockResult stockResult = new StockResult();
 		stockResult.setStocks(stocks);
 		return stockResult;
+	}
+
+	@Override
+	public StockResult find(String textToFind) throws PatologyException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

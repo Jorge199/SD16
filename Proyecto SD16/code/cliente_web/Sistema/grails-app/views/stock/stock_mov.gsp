@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="template">
-		<g:set var="entityName" value="${message(code: 'patient.label', default: 'Patient')}" />
+		<g:set var="entityName" value="${message(code: 'article.label', default: 'Article')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 		<asset:stylesheet src="application.css"/>
 		<asset:javascript src="application.js"/>
@@ -14,7 +14,12 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4>
-							<strong>Articulos en Stock</strong>
+						<g:if test="${view_opc=='add'}">
+							<strong>Agregar Articulos en Stock  </strong>
+						</g:if>
+						<g:else>
+							<strong>Quitar Articulos del Stock  </strong>
+						</g:else>
 						</h4>
 					</div>
 					<div class="panel-body">
@@ -58,9 +63,7 @@
 													</td>
 													
 													<td class="center">
-														<g:link action="show" class="btn btn-primary" id="${articleInstance.getId()}">${}<i class="fa fa-eye"></i> Ver Detalle</g:link>
-														<g:link action="edit" class="btn btn-success" id="${articleInstance.getId()}">${}<i class="fa fa-pencil"></i> Editar</g:link>
-				
+														<g:link action="edit" class="btn btn-success" id="${articleInstance.getId()}">${}<i class="fa fa-pencil"></i> Editar</g:link>				
 													</td>
 												</tr>
 				

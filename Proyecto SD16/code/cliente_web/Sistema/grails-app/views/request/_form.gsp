@@ -16,7 +16,7 @@
 	<div class="col-md-6">
 		<label for="code">
 			<g:message code="Codigo*" class="required-indicator"/>
-			<g:textField  required="" name="code" value="${requestInstance?.code}"/>
+			<g:textField  required=""  max="20" name="code" value="${requestInstance?.code}"/>
 		</label>
 	</div>
 	<div class="col-md-6">
