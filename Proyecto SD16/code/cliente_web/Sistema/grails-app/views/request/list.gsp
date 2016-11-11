@@ -38,8 +38,8 @@
 										</label>
 										<div class="col-md-9">
 											<g:select name="status" class="form-control input-sm"
-												from="${StatusEnum.values()}" 
-												name="statusSearch" optionKey="key"
+												from="${StatusEnum.values()}" name="statusSearch"
+												optionKey="key"
 												noSelection="${['null':'Seleccione un estado..']}"
 												required=""></g:select>
 										</div>
@@ -55,9 +55,9 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker1'>
-													<input type='text' class="form-control input-sm" name="startSearch"  /> <span
-														class="input-group-addon"> <span
-														class="glyphicon glyphicon-calendar"> </span>
+													<input type='text' class="form-control input-sm"
+														name="startSearch" /> <span class="input-group-addon">
+														<span class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
 											</div>
@@ -69,9 +69,9 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker2'>
-													<input type='text' class="form-control input-sm" name="endSearch" /> <span
-														class="input-group-addon"> <span
-														class="glyphicon glyphicon-calendar"> </span>
+													<input type='text' class="form-control input-sm"
+														name="endSearch" /> <span class="input-group-addon">
+														<span class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
 											</div>
@@ -102,7 +102,8 @@
 											<g:sortableColumn property="status" title="Estado" />
 											<g:sortableColumn property="doctor" title="Doctor" />
 											<g:sortableColumn property="patient" title="Paciente" />
-											<g:sortableColumn property="studyType" title="Tipo de estudio" />
+											<g:sortableColumn property="studyType"
+												title="Tipo de estudio" />
 											<td>Acciones</td>
 										</tr>
 									</thead>
@@ -111,42 +112,54 @@
 											var="requestInstance">
 
 											<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-												<td>
-													<g:if test="${requestInstance?.id}">
-														<label>${requestInstance?.id }</label>
-													</g:if>
-												</td>
-												<td>
-													<g:if test="${requestInstance?.date}">
-													<label>${requestInstance?.date}</label>
-													</g:if>
-												</td>
-												<td>
-													<g:if test="${requestInstance?.status}">
-													<g:textField name="status" from="${StatusEnum.values()}" value="${requestInstance?.status}" optionKey="key"
-													readonly="true"></g:textField>
-													</g:if>
-												</td>
-												<td>
-													<g:if test="${requestInstance?.doctor?.id}">
-													<label>${requestInstance?.doctor?.name}</label>
-													</g:if>
-												</td>
-												<td>
-													<g:if test="${requestInstance?.patient?.id}">
-													<label>${requestInstance?.patient?.name}</label>
-													</g:if>
-												</td>
-												<td>
-													<g:if test="${requestInstance?.studyType?.id}">
-													<label>${requestInstance?.studyType?.name}</label>
-													</g:if>
-												</td>
-									
-												<td class="center">
-												<g:link action="edit" class="btn btn-success" id="${requestInstance.getId()}">${}<i class="fa fa-pencil"></i> Editar</g:link>
-												<button class="btn btn-default" >${}<i class="fa fa-list-alt"></i> Generar Reporte</button>
-												</td>
+												<td><g:if test="${requestInstance?.id}">
+														<label>
+															${requestInstance?.id }
+														</label>
+													</g:if></td>
+												<td><g:if test="${requestInstance?.date}">
+														<label>
+															${requestInstance?.date}
+														</label>
+													</g:if></td>
+												<td><g:if test="${requestInstance?.status}">
+														<g:textField name="status" from="${StatusEnum.values()}"
+															value="${requestInstance?.status}" optionKey="key"
+															readonly="true"></g:textField>
+													</g:if></td>
+												<td><g:if test="${requestInstance?.doctor?.id}">
+														<label>
+															${requestInstance?.doctor?.name}
+														</label>
+													</g:if></td>
+												<td><g:if test="${requestInstance?.patient?.id}">
+														<label>
+															${requestInstance?.patient?.name}
+														</label>
+													</g:if></td>
+												<td><g:if test="${requestInstance?.studyType?.id}">
+														<label>
+															${requestInstance?.studyType?.name}
+														</label>
+													</g:if></td>
+
+												<td class="center"><g:link action="edit"
+														class="btn btn-success" id="${requestInstance.getId()}">
+														${}<i class="fa fa-pencil"></i> Editar</g:link>
+														<g:if
+														test="${requestInstance?.status==StatusEnum.PROCESADO}">
+														<g:link action="create" class="btn btn-default"
+															controller="report" id="${requestInstance.getId()}">
+															${}<i class="fa fa-list-alt"></i> Generar Informe</g:link>
+														</g:if>
+														<g:if
+														test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
+														<g:link action="edit" class="btn btn-default"
+															controller="report" id="${requestInstance.getId()}">
+															${}<i class="fa fa-list-alt"></i> Editar Informe</g:link>
+														</g:if>
+													
+													</td>
 											</tr>
 
 										</g:each>
@@ -182,7 +195,7 @@
 	<!-- Bootstrap datetimepicker -->
 	<script
 		src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.min.js"></script>
-		<script
+	<script
 		src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.es.js"></script>
 
 	<link rel="stylesheet"

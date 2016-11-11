@@ -21,13 +21,7 @@
 					<h4>
 						<strong>Lista de Informes </strong>
 					</h4>
-					Este boton estara en listar de Request, para cada estado
-					"Procesado"
 
-					<g:link action="create" class="btn btn-primary" id="${1}">
-						${}<i class="fa fa-plus"></i> Generar Informe</g:link>
-					<br>(Para cada estado "Terminado" aparecera el boton Editar
-					como el de abajo)
 				</div>
 				<div class="panel-body">
 					<g:if test="${flash.message}">
@@ -106,8 +100,8 @@
 									<thead>
 										<tr>
 											<g:sortableColumn property="id" title="ID" />
-											<g:sortableColumn property="request" title="Request" />
-											<g:sortableColumn property="date" title="Date" />
+											<g:sortableColumn property="request" title="Código Request" />
+											<g:sortableColumn property="date" title="Fecha" />
 											<g:sortableColumn property="diagnostic" title="Diagnostico" />
 											<g:sortableColumn property="observation"
 												title="Observaciones" />
@@ -123,7 +117,7 @@
 														${fieldValue(bean: reportInstance, field: "id")}
 													</g:link></td>
 												<td>
-													${fieldValue(bean: reportInstance, field: "request.id")}
+													${fieldValue(bean: reportInstance, field: "request.code")}
 												</td>
 												<td>
 													${fieldValue(bean: reportInstance, field: "date")}
