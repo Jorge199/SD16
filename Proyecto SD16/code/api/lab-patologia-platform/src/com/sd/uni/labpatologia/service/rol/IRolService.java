@@ -8,4 +8,5 @@ import com.sd.uni.labpatologia.service.base.IBaseService;
 
 public interface IRolService extends IBaseService<RolDTO, RolDomain, RolDaoImpl, RolResult> {
 
+	public RolResult find(String textToFind);
 }

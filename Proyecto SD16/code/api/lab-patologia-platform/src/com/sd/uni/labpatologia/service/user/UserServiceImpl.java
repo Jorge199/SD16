@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
+
 
 
 import com.sd.uni.labpatologia.dao.rol.IRolDao;
@@ -29,6 +34,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional
+	@CachePut(value = "lab-patologia-platform-cache", key = "'user_dto' + #id")
 	public UserDTO save(UserDTO dto) {
 		final UserDomain domain = convertDtoToDomain(dto);
 		final UserDomain userDomain = userDao.save(domain);
@@ -37,6 +43,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'user_' + #id")
 	public UserDTO getById(Integer id) throws PatologyException {
 		final UserDomain domain = userDao.getById(id);
 		final UserDTO dto = convertDomainToDto(domain);
@@ -45,6 +52,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'users_'")
 	public UserResult getAll() {
 		final List<UserDTO> user = new ArrayList<>();
 		for (UserDomain domain : userDao.findAll()) {
@@ -98,6 +106,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		}
 		
 		return domain;
+	}
+
+	@Override
+	public UserResult find(String textToFind, int page, int maxItems)
+			throws PatologyException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

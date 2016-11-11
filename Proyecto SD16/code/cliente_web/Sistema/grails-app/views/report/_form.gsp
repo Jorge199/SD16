@@ -36,7 +36,7 @@
 		<label> Observaciones <span class="required-indicator">*</span>
 		</label>
 		<g:textArea rows="5" cols="40" class="form-control"
-			name="observations" required=""
+			name="observations" required="" maxlength="250"
 			value="${reportInstance?.observations}" />
 	</div>
 </div>

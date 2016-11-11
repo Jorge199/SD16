@@ -43,7 +43,7 @@
 							<label> Diagnóstico <span class="required-indicator">*</span>
 							</label>
 							<g:textField class="form-control" name="diagnostic" required=""
-								value="${reportInstance?.diagnostic}" />
+								maxlength="100" value="${reportInstance?.diagnostic}" />
 						</div>
 					</div>
 					<div class="row">
@@ -51,7 +51,7 @@
 							<label> Observaciones <span class="required-indicator">*</span>
 							</label>
 							<g:textArea rows="5" cols="40" class="form-control"
-								name="observations" required=""
+								name="observations" required="" maxlength="250"
 								value="${reportInstance?.observations}" />
 						</div>
 					</div>

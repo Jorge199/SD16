@@ -7,7 +7,7 @@
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
-      <div class="container-fluid">
+       <div class="container-fluid">
         	<div class="row">
             	<div class="panel panel-default">		
                 	<div class="panel-heading">
@@ -20,7 +20,7 @@
 							</fieldset>
 							<fieldset class="buttons">
 								<br>
-								<button type="submit" class="btn btn-success" name="edit" value="${laboratoryInstance?.id}">
+								<button type="submit" class="btn btn-success" name="edit" value="${userInstance?.id}">
   									<i class="fa fa-pencil"></i> Actualizar  
 								</button>
 							</fieldset>
@@ -35,4 +35,3 @@
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
 
 </html>
-

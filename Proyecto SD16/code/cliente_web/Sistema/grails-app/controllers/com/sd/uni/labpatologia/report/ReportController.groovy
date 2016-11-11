@@ -7,6 +7,7 @@ import com.sd.uni.labpatologia.service.report.IReportService;
 import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
 import com.sd.uni.labpatologia.service.request.IRequestService;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
+import com.sd.uni.labpatologia.util.StatusEnum;
 
 class ReportController {
 	static allowedMethods = [save: "POST", update: "POST"]
@@ -57,12 +58,17 @@ class ReportController {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
 		reportInstance.setRequest(requestService.getById(Integer.parseInt(params.get("requestId"))))
+		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+		def requestInstance = requestService.getById(Integer.parseInt(params.get("requestId")))
+		requestInstance.setStatus(StatusEnum.TERMINADO)
+		requestService.save(requestInstance)
+		System.out.println(reportInstance.diagnostic)
 		def newReport= reportService.save(reportInstance)
 		if (!newReport?.getId()) {
 			//redirect(action: "list", id: newReport.getId())
 			//return
 		}
-		redirect(action: "list", id: newReport.getId())
+		redirect(action: "list", controller: "request")
 	}
 	
 	def edit(Integer id) {
