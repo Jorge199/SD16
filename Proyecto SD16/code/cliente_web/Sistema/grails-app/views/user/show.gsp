@@ -28,8 +28,8 @@
 							</div>
 							<div class="col-md-6">
 								<g:if test="${userInstance?.password}">
-								<label>Contraseña<span class="required-indicator">*</span></label>
-								<g:fieldValue class="form-control" bean="${userInstance}"  field="password"/>
+								<label>Contraseña<span class="required-indicator"> **********</span></label>
+								
 								</g:if>
 							</div>
 							<div class="col-md-6">

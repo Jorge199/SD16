@@ -1,5 +1,9 @@
 package com.sd.uni.labpatologia.rest.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.CacheManager;
+
 import com.sd.uni.labpatologia.dto.base.BaseDTO;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -9,7 +13,13 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 	private final Class<DTO> _dtoClass;
 	private final WebResource _webResource;
 
+
+	protected static final String CACHE_REGION = "labpatologia-client-web-cache";
 	private static final String BASE_URL = "http://localhost:8080/lab-patologia-platform/rest";
+	
+	@Autowired
+	@Qualifier("grailsCacheManager")
+	private CacheManager _cacheManager;
 	
 	public BaseResourceImpl(Class<DTO> dtoClass, String resourcePath) {
 		_dtoClass = dtoClass;
@@ -26,6 +36,9 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 
 	protected Class<DTO> getDtoClass() {
 		return _dtoClass;
+	}
+	protected CacheManager getCacheManager() {
+		return _cacheManager;
 	}
 
 	@Override

@@ -67,8 +67,7 @@ class UserController {
 			users = userService.getAll()
 		}
 		
-		
-		[userInstanceList: users, userInstanceTotal:users.size()]
+		render (template:"showResult", model:[userInstanceList: users, userInstanceTotal:users.size()])
 	}
 
 	

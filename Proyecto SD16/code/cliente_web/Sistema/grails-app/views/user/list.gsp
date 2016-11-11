@@ -11,7 +11,7 @@
 <asset:javascript src="application.js" />
 </head>
 <body >
-	<div class="container-fluid"   >
+	<div class="container-fluid" >
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -30,11 +30,13 @@
 					 
 					
    					
-   					<div id="searchbox">Buscar:
-
-   					<g:remoteField  update="updateMe" class="search-box"  name= "searching" paramName ="text" url="[action:'list', controller:'user']"/>
-					
+   					<div id="searchbox"> 
+					<label>Buscar :
+   					<g:remoteField  update="updateMe" id="searching" class="form-control"  name= "searching" paramName ="text" url="[action:'showResult', controller:'user']"/>
+					</label>
 					</div>
+					<p></p>
+					<p></p>
 					
 					<!--END BUSCAR -->
 					
@@ -42,7 +44,7 @@
 					<div class="dataTable_wrapper" >
 						<div class="row" >
 							<div class="col-sm-12" >
-								<div id="updateMe"  >
+								
 								<table   id="list-report" class="table table-striped table-bordered" cellspacing="0" width="100%">
 									<thead >
 										<tr>
@@ -57,11 +59,10 @@
 									</thead>
 									<tbody id="updateMe">
 										
-										<g:render template="/user/showResults"  id="updateMe">
+										<g:render template="/user/showResult"  id="updateMe">
 											</g:render>
 									</tbody>
 								</table>
-								</div>
 								
 								<div class="pagination"></div>
 							</div>
@@ -73,6 +74,18 @@
 	</div>
 	
 <script>
+$( document ).ready(function() {
+	$('#searching').on('propertychange input', function (e) {
+		var bla = $('#searching').val();
+	    if (val.lenght<3) {
+	    	$('#searching').delay();
+	    }
+	});
+
+});
+
+
+
 function ajaxSearch(str) {
 	
 	 if(str.length>5){
@@ -86,9 +99,7 @@ function ajaxSearch(str) {
 <script>
 function letterDelimiter(str) {
 	
-	 if(str.length>5){
-		 alert("entro")
-	 }
+	$(".container-fluid").css("color", "#000000");
   
 }
 </script>

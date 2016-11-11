@@ -3,6 +3,7 @@ package com.sd.uni.labpatologia.rest.study_type;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeResult;
 import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
+
 import org.springframework.stereotype.Repository;
 
 
@@ -19,9 +20,14 @@ public class StudyTypeResourceImpl extends BaseResourceImpl<StudyTypeDTO> implem
         return result;
     }
 
-    @Override
     public StudyTypeResult find(String textToFind, int maxItems, int page) {
         final StudyTypeResult result = findWR(textToFind, maxItems, page).get(StudyTypeResult.class);
         return result;
     }
+
+	@Override
+	public StudyTypeResult find(String textToFind) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
