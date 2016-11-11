@@ -16,7 +16,12 @@ public class StudyTypeResourceImpl extends BaseResourceImpl<StudyTypeDTO> implem
     @Override
     public StudyTypeResult getAll() {
         final StudyTypeResult result = getWebResource().get(StudyTypeResult.class);
-	return result;
+        return result;
     }
 
+    @Override
+    public StudyTypeResult find(String textToFind) {
+        final StudyTypeResult result = findWR(textToFind).get(StudyTypeResult.class);
+        return result;
+    }
 }

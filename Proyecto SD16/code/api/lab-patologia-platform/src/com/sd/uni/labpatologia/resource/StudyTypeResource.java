@@ -35,7 +35,7 @@ public class StudyTypeResource {
 	}
 	
 	@GET
-	@Path("search/{textToFind}")
+	@Path("/search/{textToFind}")
 	@Produces("application/xml")
 	public StudyTypeResult search(@PathParam("textToFind") String textToFind) throws PatologyException {
 		return studyTypeService.find(textToFind);
