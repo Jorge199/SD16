@@ -12,6 +12,9 @@ public class UserDTO extends BaseDTO {
 	private String _name;
 	private String _password;
 	private Integer _rolId;
+	private boolean _doctor;
+	private String _matricula;
+	
 
 	@XmlElement
 	public String getName() {
@@ -28,6 +31,16 @@ public class UserDTO extends BaseDTO {
 		return _rolId;
 	}
 	
+	@XmlElement
+	public boolean getDoctor(){
+		return _doctor;
+	}
+	
+	@XmlElement
+	public String getMatricula(){	
+		return _matricula;
+	}
+	
 
 	public void setName(String name) {
 		_name = name;
@@ -39,6 +52,14 @@ public class UserDTO extends BaseDTO {
 
 	public void setRolId(Integer rolId) {
 		_rolId = rolId;
+	}
+	
+	public void setMatricula(String matricula){
+		_matricula=matricula;
+	}
+	
+	public void setDoctor(boolean doctor){
+		_doctor=doctor;
 	}
 	
 }

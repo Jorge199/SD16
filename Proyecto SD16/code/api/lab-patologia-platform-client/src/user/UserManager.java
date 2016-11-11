@@ -31,12 +31,15 @@ public class UserManager extends AbstractBaseManager {
 		
 	}
 	
-	public void addUser(String name, String password, Integer rolId) {
+	public void addUser(String name, String password, Integer rolId, boolean doctor, String matricula) {
 		
 		UserDTO userDTO = new UserDTO();
 		userDTO.setName(name);
 		userDTO.setPassword(password);
 		userDTO.setRolId(rolId);
+		userDTO.setDoctor(doctor);
+		userDTO.setMatricula(matricula);
+		
 		
 		getJerseyClient().resource(getBaseUrl() + "/user").entity(userDTO).post(UserDTO.class);
 	}
@@ -48,6 +51,8 @@ public class UserManager extends AbstractBaseManager {
 			System.out.println("Name: "+p.getName());
 			System.out.println("Password: "+p.getPassword());
 			System.out.println("Rol: "+p.getRolId());
+			System.out.println("Doctor: "+p.getDoctor());
+			System.out.println("Matricula: "+p.getMatricula());
 			
 		}
 	}
@@ -57,6 +62,8 @@ public class UserManager extends AbstractBaseManager {
 		System.out.println("Name: "+ userResult.getName());
 		System.out.println("Password: "+ userResult.getPassword());
 		System.out.println("Rol: "+ userResult.getRolId());
+		System.out.println("Doctor: "+userResult.getDoctor());
+		System.out.println("Matricula: "+userResult.getMatricula());
 		
 	}
 	
@@ -66,6 +73,8 @@ public class UserManager extends AbstractBaseManager {
 			System.out.println("Name: "+c.getName());
 			System.out.println("Password: "+c.getPassword());
 			System.out.println("Rol: "+c.getRolId());
+			System.out.println("Doctor: "+ c.getDoctor());
+			System.out.println("Matricula: "+c.getMatricula());
 			
 		}
 		

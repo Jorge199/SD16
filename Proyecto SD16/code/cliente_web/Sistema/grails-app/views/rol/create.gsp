@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta name="layout" content="template">
-		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+		<g:set var="entityName" value="${message(code: 'laboratory.label', default: 'Laboratory')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 		<asset:stylesheet src="application.css"/>
 		<asset:javascript src="application.js"/>
@@ -13,7 +13,7 @@
         	<div class="row">
             	<div class="panel panel-default">		
                 	<div class="panel-heading">
-						<h4><strong>Registrarse</strong></h4>
+						<h4><strong>Registrar Rol</strong></h4>
 					</div>
 					<div class="panel-body">
 						<g:form action="save" >

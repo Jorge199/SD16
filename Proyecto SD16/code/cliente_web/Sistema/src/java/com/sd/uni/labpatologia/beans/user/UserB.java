@@ -17,6 +17,8 @@ public class UserB extends BaseBean {
 	private String _name;
 	private String _password;
 	private RolB _rol;
+	private String _matricula;
+	private boolean _doctor;
 
 	public UserB(Map<String, String> params) {
 		super(params);
@@ -42,9 +44,26 @@ public class UserB extends BaseBean {
 	public RolB getRol() {
 		return _rol;
 	}
+	
+	public boolean getDoctor() {
+		return _doctor;
+	}
+	
+	public String getMatricula() {
+		return _matricula;
+	}
+	
 
 	public void setRol(RolB rol) {
 		_rol = rol;
+	}
+	
+	public void setDoctor(boolean doctor) {
+		_doctor=doctor;
+	}
+	
+	public void setMatricula(String matricula) {
+		_matricula=matricula;
 	}
 
 	@Override
@@ -54,6 +73,8 @@ public class UserB extends BaseBean {
 		}
 		setName(params.get("name"));
 		setPassword(params.get("password"));
+		setDoctor(Boolean.valueOf(params.get("doctor")));
+		setMatricula(params.get("matricula"));
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 
 
-
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -73,33 +72,27 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 	}
 
 	
-	public List<UserDomain> find(String textToFind, int page, int maxItems) throws PatologyException{
+	public List<UserDomain> find2(String textToFind) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(UserDomain.class);
-		
-		if (!textToFind.equals("all")){
-			Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
-			Criterion idCriterion = null;
-			if (StringUtils.isNumeric(textToFind)) {
-				idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
-			}
-			
-			if(idCriterion!=null){
-				criteria.add(Restrictions.or(nameCriterion, idCriterion));
-			}else{
-				criteria.add(nameCriterion);
-			}
+		Criterion nameCriterion =Restrictions.ilike("_name", textToFind);
+		Criterion idCriterion = null;
+		if (StringUtils.isNumeric(textToFind)) {
+			idCriterion=Restrictions.eq("_id", Integer.valueOf(textToFind));
 		}
 		
-		criteria.setFirstResult(page*maxItems);
-		criteria.setMaxResults(maxItems);
+		if(idCriterion!=null){
+			criteria.add(Restrictions.or(nameCriterion, idCriterion));
+		}else{
+			criteria.add(nameCriterion);
+		}
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<UserDomain> users = criteria.list();
 		return users;
 	}
 
-	public List<UserDomain> find2(String textToFind) {
+	public List<UserDomain> find(String textToFind) {
 		Integer id = null;
 		if (StringUtils.isNumeric(textToFind)) {
 			id = Integer.valueOf(textToFind);
@@ -109,5 +102,12 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 		q.setParameter("id", id);
 		return q.list();
 	}
-	
+
+	@Override
+	public List<UserDomain> find(String textToFind, int page, int maxItems)
+			throws PatologyException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
