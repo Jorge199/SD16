@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 
 	@Override
 	@Transactional
+	@CachePut(value = "lab-patologia-platform-cache", key = "'rol_dto' + #id")
 	public RolDTO save(RolDTO dto) {
 		final RolDomain domain = convertDtoToDomain(dto);
 		final RolDomain rolDomain = rolDao.save(domain);
@@ -31,6 +34,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'rol_' + #id")
 	public RolDTO getById(Integer id) throws PatologyException {
 		final RolDomain domain = rolDao.getById(id);
 		final RolDTO dto = convertDomainToDto(domain);
@@ -39,6 +43,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'rols_'")
 	public RolResult getAll() {
 		final List<RolDTO> rols = new ArrayList<>();
 		for (RolDomain domain : rolDao.findAll()) {
@@ -52,9 +57,9 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 
 	@Override
 	@Transactional
-	public RolResult find(String textToFind, int page, int maxItems) throws PatologyException {
+	public RolResult find(String textToFind) {
 		final List<RolDTO> rols = new ArrayList<>();
-		for (RolDomain domain : rolDao.find(textToFind, page, maxItems)) {
+		for (RolDomain domain : rolDao.find(textToFind)) {
 			final RolDTO dto = convertDomainToDto(domain);
 			rols.add(dto);
 		}
@@ -77,6 +82,13 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 		domain.setId(dto.getId());
 		domain.setName(dto.getName());
 		return domain;
+	}
+
+	@Override
+	public RolResult find(String textToFind, int page, int maxItems)
+			throws PatologyException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
