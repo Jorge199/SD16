@@ -7,6 +7,6 @@ import com.sd.uni.labpatologia.rest.base.IBaseResource;
 public interface IRequestResource extends IBaseResource<RequestDTO> {
 
 	public RequestResult getAll();
-	public RequestResult find(String textToFind);
+	public RequestResult find(String textToFind, int maxItems, int page);
 
 }

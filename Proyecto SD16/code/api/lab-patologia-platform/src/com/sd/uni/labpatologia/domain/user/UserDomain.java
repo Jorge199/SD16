@@ -27,9 +27,16 @@ public class UserDomain extends BaseDomain {
 	
 	@Column(name = "password", nullable = false, unique = false)
 	private String _password;
+	
+	@Column(name = "doctor", nullable = false, unique = false)
+	private boolean _doctor;
+	
+	@Column(name = "matricula", nullable = true, unique = false)
+	private String _matricula;
 
 	@ManyToOne
 	private RolDomain _rol;
+	
 	
 	public Integer getId() {
 		return _id;
@@ -64,4 +71,20 @@ public class UserDomain extends BaseDomain {
 		_rol = rol;
 	}
 
+	public boolean getDoctor(){
+		return _doctor;
+	}
+	
+	
+	public String getMatricula(){	
+		return _matricula;
+	}
+	
+	public void setMatricula(String matricula){
+		_matricula=matricula;
+	}
+	
+	public void setDoctor(boolean doctor){
+		_doctor=doctor;
+	}
 }

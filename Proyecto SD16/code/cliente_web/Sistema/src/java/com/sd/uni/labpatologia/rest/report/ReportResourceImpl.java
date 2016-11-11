@@ -18,8 +18,8 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO> implements I
 		return result;
 	}
 	@Override
-	public ReportResult find(String textToFind) {
-		final ReportResult result = findWR(textToFind).get(ReportResult.class);
+	public ReportResult find(String textToFind, int maxItems, int page) {
+		final ReportResult result = findWR(textToFind, maxItems, page).get(ReportResult.class);
 		return result;
 	}
 

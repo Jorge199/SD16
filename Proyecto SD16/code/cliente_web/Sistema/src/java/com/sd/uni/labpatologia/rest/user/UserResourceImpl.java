@@ -9,6 +9,7 @@ import com.sd.uni.labpatologia.dto.laboratory.LaboratoryResult;
 import com.sd.uni.labpatologia.dto.user.UserDTO;
 import com.sd.uni.labpatologia.dto.user.UserResult;
 import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
+import com.sun.jersey.api.client.UniformInterface;
 
 @Repository("userResource")
 public class UserResourceImpl extends BaseResourceImpl<UserDTO> implements
@@ -25,4 +26,9 @@ public class UserResourceImpl extends BaseResourceImpl<UserDTO> implements
 		return users;
 	}
 
+	@Override
+	public UserResult find(String textToFind) {
+		final UserResult result = findWR(textToFind).get(UserResult.class);
+		return result;
+	}
 }

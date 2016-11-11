@@ -11,7 +11,7 @@ public interface IBaseDao<DOMAIN extends BaseDomain> {
 
 	public DOMAIN getById(Integer domainId)throws PatologyException;;
 	
-	public abstract List<DOMAIN>find(String textToFind) throws PatologyException;;
+	public abstract List<DOMAIN>find(String textToFind, int page, int maxItems) throws PatologyException;;
 
 	public List<DOMAIN> findAll();
 }

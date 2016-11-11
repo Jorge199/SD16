@@ -9,7 +9,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sd.uni.labpatologia.beans.laboratory.LaboratoryB;
 import com.sd.uni.labpatologia.beans.user.UserB;
+import com.sd.uni.labpatologia.dto.laboratory.LaboratoryDto;
+import com.sd.uni.labpatologia.dto.laboratory.LaboratoryResult;
 import com.sd.uni.labpatologia.dto.user.UserDTO;
 import com.sd.uni.labpatologia.dto.user.UserResult;
 import com.sd.uni.labpatologia.rest.user.IUserResource;
@@ -60,6 +63,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO> implements 
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("name", dto.getName());
 		params.put("password", dto.getPassword());
+		params.put("doctor", String.valueOf(dto.getDoctor()));
+		params.put("matricula", dto.getMatricula());
 		final UserB user = new UserB(params);
 		user.setRol(_rolService.getById(dto.getRolId()));
 		
@@ -74,13 +79,24 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO> implements 
 		dto.setRolId(bean.getRol().getId());
 		dto.setName(bean.getName());
 		dto.setPassword(bean.getPassword());
+		//modificar
+		dto.setDoctor(bean.getDoctor());
+		dto.setMatricula(bean.getMatricula());
 		return dto;
 	}
 
 	@Override
 	public List<UserB> find(String textToFind) {
-		// TODO Auto-generated method stub
-		return null;
+		final UserResult result = _userResource.find(textToFind);
+		final List<UserDTO> rList = null == result.getUsers() ? new ArrayList<UserDTO>()
+				: result.getUsers();
+
+		final List<UserB> users = new ArrayList<UserB>();
+		for (UserDTO dto : rList) {
+			final UserB bean = convertDtoToBean(dto);
+			users.add(bean);
+		}
+		return users;
 	}
 
 }

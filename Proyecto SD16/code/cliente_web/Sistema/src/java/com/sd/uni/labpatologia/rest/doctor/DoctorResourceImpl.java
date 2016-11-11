@@ -30,9 +30,9 @@ public class DoctorResourceImpl extends BaseResourceImpl<DoctorDto> implements I
 		return result;
 	}
         
-        @Override
-	public DoctorResult find(String textToFind) {
-		final DoctorResult result = findWR(textToFind).get(DoctorResult.class);
+    @Override
+	public DoctorResult find(String textToFind, int maxItems, int page) {
+		final DoctorResult result = findWR(textToFind, maxItems, page).get(DoctorResult.class);
 		return result;
 	}
 

@@ -35,10 +35,10 @@ public class RolResource {
 	}
 
 	@GET
-	@Path("search/{textToFind}")
+	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	public RolResult search(@PathParam("textToFind") String textToFind) {
-		return rolService.find(textToFind);
+	public RolResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return rolService.find(textToFind, page, maxItems);
 	}
 
 	@POST

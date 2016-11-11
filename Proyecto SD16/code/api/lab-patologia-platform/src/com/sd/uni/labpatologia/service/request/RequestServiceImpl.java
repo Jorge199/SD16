@@ -113,9 +113,9 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 
 	@Override
 	@Transactional
-	public RequestResult find(String textToFind) throws PatologyException {
+	public RequestResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<RequestDTO> requests = new ArrayList<>();
-		for (RequestDomain domain : requestDao.find(textToFind)) {
+		for (RequestDomain domain : requestDao.find(textToFind, page, maxItems)) {
 			final RequestDTO dto = convertDomainToDto(domain);
 			requests.add(dto);
 		}

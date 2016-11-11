@@ -66,7 +66,7 @@ public class CountryServiceImpl extends BaseServiceImpl<CountryDTO, CountryDomai
 	}
 
 	@Override
-	public CountryResult find(String textToFind) throws PatologyException {
+	public CountryResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		// TODO Auto-generated method stub
 		return null;
 	}

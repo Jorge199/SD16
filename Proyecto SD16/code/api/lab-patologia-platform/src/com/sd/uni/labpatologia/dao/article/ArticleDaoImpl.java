@@ -41,21 +41,27 @@ public class ArticleDaoImpl  extends BaseDaoImpl<ArticleDomain> implements IArti
 	}
 
 	@Override
-	public List<ArticleDomain> find(String textToFind) {
+	public List<ArticleDomain> find(String textToFind, int page, int maxItems) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ArticleDomain.class);
-		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"));
-				
-		Criterion idCriterion = null;
-		if (StringUtils.isNumeric(textToFind)) {
-			idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
-		}
+		
+		if (!textToFind.equals("all")){
+			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"));	
+			Criterion idCriterion = null;
+			if (StringUtils.isNumeric(textToFind)) {
+				idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
+			}
 
-		if (null != idCriterion) {
-			criteria.add(Restrictions.or(propertyCriterion, idCriterion));
-		} else {
-			criteria.add(propertyCriterion);
+			if (null != idCriterion) {
+				criteria.add(Restrictions.or(propertyCriterion, idCriterion));
+			} else {
+				criteria.add(propertyCriterion);
+			}
 		}
+		
+		
+		criteria.setFirstResult(page*maxItems);
+		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<ArticleDomain> requests = criteria.list();
 		return requests;

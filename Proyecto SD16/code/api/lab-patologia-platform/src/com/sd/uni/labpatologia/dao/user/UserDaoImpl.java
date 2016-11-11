@@ -4,6 +4,7 @@ package com.sd.uni.labpatologia.dao.user;
 import java.util.List;
 
 
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -19,8 +20,11 @@ import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.user.UserDomain;
 
 
+import com.sd.uni.labpatologia.exception.PatologyException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import org.apache.commons.codec.binary.Hex;
 
 
@@ -97,6 +101,13 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 		q.setParameter("parameter", "%" + textToFind + "%");
 		q.setParameter("id", id);
 		return q.list();
+	}
+
+	@Override
+	public List<UserDomain> find(String textToFind, int page, int maxItems)
+			throws PatologyException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

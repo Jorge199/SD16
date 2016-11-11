@@ -13,7 +13,7 @@
         	<div class="row">
             	<div class="panel panel-default">		
                 	<div class="panel-heading">
-						<h4><strong>Registrar Información del Usuario</strong></h4>
+						<h4><strong>Registrarse</strong></h4>
 					</div>
 					<div class="panel-body">
 						<g:form action="save" >

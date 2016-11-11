@@ -80,8 +80,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		return dto;
 	}
 	@Override
-	public List<ReportB> find (String textToFind) {
-		final ReportResult result = _reportResource.find(textToFind);
+	public List<ReportB> find (String textToFind, int maxItems, int page) {
+		final ReportResult result = _reportResource.find(textToFind, maxItems, page);
 		final List<ReportDTO> rList = null == result.getReports() ? new ArrayList<ReportDTO>()
 				: result.getReports();
 

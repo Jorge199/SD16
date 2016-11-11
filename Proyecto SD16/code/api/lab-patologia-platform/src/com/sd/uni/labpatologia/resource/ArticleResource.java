@@ -46,10 +46,10 @@ public class ArticleResource {
 	
 	/* http://localhost:8080/lab-patologia-platform/rest/article/search/textToFind */
 	@GET
-	@Path("/search/{textToFind}")
+	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	public ArticleResult search(@PathParam("textToFind") String textToFind) throws PatologyException {
-		return _articleService.find(textToFind);
+	public ArticleResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return _articleService.find(textToFind, page, maxItems);
 	}
 
 	

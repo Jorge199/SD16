@@ -10,8 +10,8 @@
 <asset:stylesheet src="application.css" />
 <asset:javascript src="application.js" />
 </head>
-<body>
-	<div class="container-fluid">
+<body >
+	<div class="container-fluid"   >
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -19,56 +19,50 @@
 						<strong>Lista de Usuarios</strong>
 					</h4>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body" >
 					<g:if test="${flash.message}">
 						<div class="message" role="status">
 							${flash.message}
 						</div>
 					</g:if>
-					<div class="dataTable_wrapper">
-						<div class="row">
-							<div class="col-sm-12">
-								<table id="list-report"
-									class="table table-striped table-bordered" cellspacing="0"
-									width="100%">
-									<thead>
+					
+					<!--EL BUSCAR -->
+					 
+					
+   					
+   					<div id="searchbox">Buscar:
+
+   					<g:remoteField  update="updateMe" class="search-box"  name= "searching" paramName ="text" url="[action:'list', controller:'user']"/>
+					
+					</div>
+					
+					<!--END BUSCAR -->
+					
+					
+					<div class="dataTable_wrapper" >
+						<div class="row" >
+							<div class="col-sm-12" >
+								<div id="updateMe"  >
+								<table   id="list-report" class="table table-striped table-bordered" cellspacing="0" width="100%">
+									<thead >
 										<tr>
 											<g:sortableColumn property="name" title="Nombre" />
 											<g:sortableColumn property="password" title="Contraseña" />
 											<g:sortableColumn property="rol" title="Rol" />
+											<g:sortableColumn property="doctor" title="doctor" />
+											<g:sortableColumn property="matricula" title="Matricula" />
 											
 											<td>Acciones</td>
 										</tr>
 									</thead>
-									<tbody>
-										<g:each in="${userInstanceList}" status="i"
+									<tbody id="updateMe">
 										
-											var="userInstance">
-
-											<tr>
-												<td>
-													${fieldValue(bean: userInstance, field: "name")}
-												</td>
-												<td>
-													${fieldValue(bean: userInstance, field: "password")}
-												</td>
-												<td>
-													${fieldValue(bean: userInstance, field: "rol.name")}
-												</td>
-												
-												
-												<%--  <td>${fieldValue(bean: userInstance, field: "user.id")}</td>		--%>
-												<td class="center">
-													<g:link action="show" class="btn btn-primary" id="${userInstance.getId()}">${}<i class="fa fa-eye"></i> Ver Detalle</g:link>
-													<g:link action="edit" class="btn btn-success" id="${userInstance.getId()}">${}<i class="fa fa-pencil"></i> Editar</g:link>
-
-												</td>
-											</tr>
-
-										</g:each>
-
+										<g:render template="/user/showResults"  id="updateMe">
+											</g:render>
 									</tbody>
 								</table>
+								</div>
+								
 								<div class="pagination"></div>
 							</div>
 						</div>
@@ -77,6 +71,28 @@
 			</div>
 		</div>
 	</div>
+	
+<script>
+function ajaxSearch(str) {
+	
+	 if(str.length>5){
+		 alert("entro")
+	 }
+  
+}
+</script>
+
+
+<script>
+function letterDelimiter(str) {
+	
+	 if(str.length>5){
+		 alert("entro")
+	 }
+  
+}
+</script>
+	
 	<!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 

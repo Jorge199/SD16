@@ -38,10 +38,10 @@ public class UserResource {
 	}
 
 	@GET
-	@Path("search/{textToFind}")
+	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	public UserResult search(@PathParam("textToFind") String textToFind) {
-		return userService.find(textToFind);
+	public UserResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+		return userService.find(textToFind, page, maxItems);
 	}
 
 	@POST

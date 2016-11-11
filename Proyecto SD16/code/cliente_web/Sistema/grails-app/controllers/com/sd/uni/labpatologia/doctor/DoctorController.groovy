@@ -23,9 +23,9 @@ class DoctorController {
 		def text = params.text
 		def doctors = null
 		if(null != text && !"".equals(text)){
-			doctors = doctorService.find(text)
+			doctors = doctorService.find(text,10,0)
 		}else{
-			doctors = doctorService.getAll()
+			doctors = doctorService.find("all",10,0)
 		}
 			
 		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size()]

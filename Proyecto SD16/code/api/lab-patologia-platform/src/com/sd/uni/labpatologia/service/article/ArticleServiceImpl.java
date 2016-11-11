@@ -110,9 +110,9 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 
 	@Override
 	@Transactional
-	public ArticleResult find(String textToFind) throws PatologyException {
+	public ArticleResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<ArticleDto> articles = new ArrayList<>();
-		for (ArticleDomain domain : _articleDao.find(textToFind)) {
+		for (ArticleDomain domain : _articleDao.find(textToFind, page, maxItems)) {
 			final ArticleDto dto = convertDomainToDto(domain);
 			articles.add(dto);
 		}

@@ -78,8 +78,8 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryB, Laborato
 		return dto;
 	}
 	@Override
-	public List<LaboratoryB> find(String textToFind) {
-		final LaboratoryResult result = _laboratoryResource.find(textToFind);
+	public List<LaboratoryB> find(String textToFind, int maxItems, int page) {
+		final LaboratoryResult result = _laboratoryResource.find(textToFind, maxItems, page);
 		final List<LaboratoryDto> rList = null == result.getLaboratories() ? new ArrayList<LaboratoryDto>()
 				: result.getLaboratories();
 

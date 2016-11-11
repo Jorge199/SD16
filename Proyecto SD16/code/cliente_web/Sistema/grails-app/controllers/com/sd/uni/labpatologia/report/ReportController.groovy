@@ -19,7 +19,7 @@ class ReportController {
 	}
 	
 	def list() {
-		def reports = reportService.getAll()
+		def reports = null
 		String textToFind="";
 		if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
 			textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
@@ -36,7 +36,9 @@ class ReportController {
 		
 		
 		if(!textToFind.equals("")){
-			reports = reportService.find(textToFind);
+			reports = reportService.find(textToFind,10,0);
+		}else{
+			reports = reportService.find("all",10,0);
 		}
 		textToFind ="";
 		System.out.println("Cantidad Reportes----------------------------->"+reports.size())

@@ -20,12 +20,59 @@ class UserController {
 	}
 
 	def list(Integer max) {
+		def text = params.text
 		userService=new UserServiceImpl()
 		def users = userService.getAll()
+		
+		if(null != text && !"".equals(text)){
+			
+			users = userService.find(text)
+			
+			
+			
+		}else{
+			users = userService.getAll()
+		}
 		
 		
 		[userInstanceList: users, userInstanceTotal:users.size()]
 	}
+	
+	def list2(Integer max) {
+		def text = params.text
+		userService=new UserServiceImpl()
+		def users = userService.getAll()
+		
+		if(null != text && !"".equals(text)){
+			users = userService.find(text)
+			
+		}else{
+			users = userService.getAll()
+		}
+		
+		
+		[userInstanceList: users, userInstanceTotal:users.size()]
+	}
+	
+	
+	def showResult(Integer max) {
+		def text = params.text
+		userService=new UserServiceImpl()
+		def users = userService.getAll()
+		
+		if(null != text && !"".equals(text)){
+			users = userService.find(text)
+			
+		}else{
+			users = userService.getAll()
+		}
+		
+		
+		[userInstanceList: users, userInstanceTotal:users.size()]
+	}
+
+	
+	
 
 	def create() {
 		[userInstance: new UserB(params), rols:rolService.getAll()]
@@ -77,45 +124,24 @@ class UserController {
 			return
 		}
 
-		[userInstance: userInstance]
+		[userInstance: userInstance, rols:rolService.getAll()]
 	}
 
-	def update(Long id, Long version) {
-		def userInstance = userService.getById(id.intValue())
-		if (!userInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'user.label', default: 'User'),
-				id
-			])
-			redirect(action: "list")
-			return
-		}
+	
 
-		if (version != null) {
-			if (userInstance.version > version) {
-				userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-						[
-							message(code: 'user.label', default: 'User')] as Object[],
-						"Another user has updated this User while you were editing")
-				render(view: "edit", model: [userInstance: userInstance])
-				return
-			}
-		}
-
-		userInstance.properties = params
-
-		if (!userInstance.save(flush: true)) {
-			render(view: "edit", model: [userInstance: userInstance])
-			return
-		}
-
-		flash.message = message(code: 'default.updated.message', args: [
-			message(code: 'user.label', default: 'User'),
-			userInstance.id
-		])
-		redirect(action: "show", id: userInstance.id)
+	def update(Integer id) {
+		def userInstance = new UserB(params)
+		userInstance.setId(id)
+		userInstance.setName(params.get("name"))
+		userInstance.setPassword(params.get("password"))
+		userInstance.setDoctor( Boolean.valueOf(params.get("doctor")))
+		userInstance.setMatricula(params.get("matricula"))
+		userInstance.setRol(rolService.getById(Integer.valueOf(params.rolId)))
+		userService.save(userInstance)
+		redirect(action: "list")
 	}
 
+	
 	def delete(Long id) {
 		def userInstance = userService.getById(id.intValue())
 		if (!userInstance) {

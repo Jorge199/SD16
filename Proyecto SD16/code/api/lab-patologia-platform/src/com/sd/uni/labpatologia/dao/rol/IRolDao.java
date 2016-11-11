@@ -7,5 +7,4 @@ import com.sd.uni.labpatologia.domain.rol.RolDomain;
 
 public interface IRolDao extends IBaseDao<RolDomain> {
 
-	public List<RolDomain>find(String textToFind);
 }

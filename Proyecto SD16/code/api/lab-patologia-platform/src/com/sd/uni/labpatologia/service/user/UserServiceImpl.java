@@ -76,6 +76,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		dto.setName(domain.getName());
 		dto.setPassword(domain.getPassword());
 		dto.setRolId(domain.getRol().getId());
+		
+		dto.setMatricula(domain.getMatricula());
+		dto.setDoctor(domain.getDoctor());
 		return dto;
 	}
 
@@ -85,6 +88,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		domain.setId(dto.getId());
 		domain.setName(dto.getName());
 		domain.setPassword(dto.getPassword());
+		domain.setMatricula(dto.getMatricula());
+		domain.setDoctor(dto.getDoctor());
+		
 		try {
 			domain.setRol(rolDao.getById(dto.getRolId()));
 		} catch (PatologyException e) {

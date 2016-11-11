@@ -20,8 +20,8 @@ public class PatientResourceImpl extends BaseResourceImpl<PatientDTO> implements
 	}
 	
 	@Override
-	public PatientResult find(String textToFind) {
-		final PatientResult result = findWR(textToFind).get(PatientResult.class);
+	public PatientResult find(String textToFind, int maxItems, int page) {
+		final PatientResult result = findWR(textToFind, maxItems, page).get(PatientResult.class);
 		return result;
 	}
 
