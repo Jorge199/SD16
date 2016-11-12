@@ -149,36 +149,28 @@
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
-					<li><a href="javascript:;" data-toggle="collapse"
-						data-target="#demo0"><i class="fa fa-fw fa-bars"></i> Ficha de Entrada
-							<i class="fa fa-fw fa-caret-down"></i></a>
-						<ul id="demo0" class="collapse">
-							<li class="active"><a href="/Sistema/request/create">Registrar</a>
-							</li>
-							<li class="active"><a href="/Sistema/request/list">Listar</a>
-							</li>
-						</ul></li>
+
+					<li><a href="/Sistema/request/list/"><i
+							class="fa fa-fw fa-bars"></i>Fichas de Entradas</a></li>
+
+					<li><a href="/Sistema/patient/list/"><i
+							class="fa fa-fw fa-user"></i>Pacientes</a></li>
+
+					<li><a href="/Sistema/doctor/list/"><i
+							class="fa fa-fw fa-user-md"></i>Doctores</a></li>
+
+					<li><a href="/Sistema/report/list/"><i
+							class="fa fa-fw fa-file-text-o"></i>Informes</a></li>
+
+
+					<li><a href="/Sistema/estadistica/index"><i
+							class="fa fa-fw fa-area-chart"></i> Estadistica</a></li>
+
+
+
 
 					<li><a href="javascript:;" data-toggle="collapse"
-						data-target="#demo1"><i class="fa fa-fw fa-user"></i> Paciente
-							<i class="fa fa-fw fa-caret-down"></i></a>
-						<ul id="demo1" class="collapse">
-							<li class="active"><a href="/Sistema/patient/create">Registrar</a>
-							</li>
-							<li class="active"><a href="/Sistema/patient/list">Listar</a>
-							</li>
-						</ul></li>
-
-					<li><a href="javascript:;" data-toggle="collapse"
-						data-target="#demo2"><i class="fa fa-fw fa-user-md"></i>
-							Doctor <i class="fa fa-fw fa-caret-down"></i></a>
-						<ul id="demo2" class="collapse">
-							<li><a href="/Sistema/doctor/create">Registrar</a></li>
-							<li><a href="/Sistema/doctor/list">Listar</a></li>
-						</ul></li>
-
-					<li><a href="javascript:;" data-toggle="collapse"
-						data-target="#demo3"><i class="fa fa-fw fa-flask"></i> Muestra
+						data-target="#demo3"><i class="fa fa-fw fa-flask"></i> Muestras
 							<i class="fa fa-fw fa-caret-down"></i></a>
 						<ul id="demo3" class="collapse">
 							<li><a href="/Sistema/muestra/crear">Registrar</a></li>
@@ -186,7 +178,7 @@
 						</ul></li>
 					<li><a href="javascript:;" data-toggle="collapse"
 						data-target="#demo4"><i class="fa fa-fw fa-info-circle"></i>
-							Laboratorio<i class="fa fa-fw fa-caret-down"></i></a>
+							Laboratorios<i class="fa fa-fw fa-caret-down"></i></a>
 						<ul id="demo4" class="collapse">
 							<li><a href="/Sistema/laboratory/create">Registrar</a></li>
 							<li><a href="/Sistema/Laboratory/list">Listar</a></li>
@@ -213,11 +205,6 @@
 						</ul></li>
 
 
-					<li><a href="/Sistema/report/list/"><i
-							class="fa fa-fw fa-file-text-o"></i>Informes</a></li>
-
-					<li><a href="/Sistema/estadistica/index"><i
-							class="fa fa-fw fa-area-chart"></i> Estadistica</a></li>
 
 				</ul>
 			</div>
@@ -228,13 +215,17 @@
 			<g:layoutBody />
 		</div>
 		<div class="panel-footer" align="center">
-			<strong>Copyright © 2016 - F.I.U.N.I</strong>
+			Desarrolladores: 
+				<a href="mailto:jorgeesquivelfernandez@gmail.com?Subject=Laboratorio%20SD2016">Jorge Esquivel</a> - 
+				<a href="mailto:jabel.oalex@gmail.com?Subject=Laboratorio%20SD2016">Alex Jiñes</a> -
+				<a href="mailto:taniamonges@gmail.com?Subject=Laboratorio%20SD2016">Tania Monges</a> 
+				<br> <a href="mailto:diazpany@gmail.com?Subject=Laboratorio%20SD2016">Jerson Paniagua</a> - 
+				<a href="mailto:fa.talavera95@gmail.com?Subject=Laboratorio%20SD2016">Fátima Talavera</a> 
+				<br> Líder del Proyecto: <a href="mailto:medinaldo@gmail.com?Subject=Laboratorio%20SD2016">Ing. Aldo Medina</a>
+				
+				<br> <strong>Copyright © 2016 - Sistemas Distribuídos - F.I.U.N.I</strong>
 		</div>
 	</div>
-
-
-
-
 </body>
 
 </html>
