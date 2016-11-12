@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -34,11 +35,15 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional
-	@CachePut(value = "lab-patologia-platform-cache", key = "'user_dto' + #id")
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'user_' + #user.id", condition="#dto.id!=null")
 	public UserDTO save(UserDTO dto) {
 		final UserDomain domain = convertDtoToDomain(dto);
-		final UserDomain userDomain = userDao.save(domain);
-		return convertDomainToDto(userDomain);
+		final UserDomain user = userDao.save(domain);
+		final UserDTO newDto = convertDomainToDto(user);
+		if (dto.getId() == null) {
+			getCacheManager().getCache("lab-patologia-platform-cache").put("user_" + user.getId(), newDto);
+		}
+		return newDto;
 	}
 
 	@Override
@@ -52,7 +57,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'users_'")
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'users'")
 	public UserResult getAll() {
 		final List<UserDTO> user = new ArrayList<>();
 		for (UserDomain domain : userDao.findAll()) {

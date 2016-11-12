@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -25,12 +26,15 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 
 	@Override
 	@Transactional
-	@CachePut(value = "lab-patologia-platform-cache", key = "'rol_dto' + #id")
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'rol_' + #rol.id", condition="#dto.id!=null")
 	public RolDTO save(RolDTO dto) {
 		final RolDomain domain = convertDtoToDomain(dto);
-		final RolDomain rolDomain = rolDao.save(domain);
-		return convertDomainToDto(rolDomain);
-	}
+		final RolDomain rol= rolDao.save(domain);
+		final RolDTO newDto = convertDomainToDto(rol);
+		if (dto.getId() == null) {
+			getCacheManager().getCache("lab-patologia-platform-cache").put("rol_" + rol.getId(), newDto);
+		}
+		return newDto;	}
 
 	@Override
 	@Transactional
@@ -43,7 +47,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 
 	@Override
 	@Transactional
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'rols_'")
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'roles'")
 	public RolResult getAll() {
 		final List<RolDTO> rols = new ArrayList<>();
 		for (RolDomain domain : rolDao.findAll()) {

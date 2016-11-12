@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import com.sd.uni.labpatologia.dao.request.RequestDaoImpl;
 import com.sd.uni.labpatologia.dao.study_type.IStudyTypeDao;
 import com.sd.uni.labpatologia.dao.user.IUserDao;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
+import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -47,16 +49,21 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 
 	@Override
 	@Transactional
-	@CachePut(value = "lab-patologia-platform-cache")
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'request_' + #request.id", condition="#dto.id!=null")
 	public RequestDTO save(RequestDTO dto) {
 		final RequestDomain domain = convertDtoToDomain(dto);
-		final RequestDomain requestDomain = requestDao.save(domain);
-		return convertDomainToDto(requestDomain);
+		final RequestDomain request = requestDao.save(domain);
+		final RequestDTO newDto = convertDomainToDto(request);
+		if (dto.getId() == null) {
+			getCacheManager().getCache("lab-patologia-platform-cache").put("request_" + request.getId(), newDto);
+		}
+		return newDto;
 	}
 
 	@Override
 	@Transactional
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'request_' + #id")
+	
 	public RequestDTO getById(Integer id) throws PatologyException {
 		final RequestDomain domain = requestDao.getById(id);
 		final RequestDTO dto = convertDomainToDto(domain);
@@ -65,7 +72,8 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 
 	@Override
 	@Transactional
-	@Cacheable(value = "lab-patologia-platform-cache")
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'requests'")
+	
 	public RequestResult getAll() {
 		final List<RequestDTO> requests = new ArrayList<>();
 		for (RequestDomain domain : requestDao.findAll()) {

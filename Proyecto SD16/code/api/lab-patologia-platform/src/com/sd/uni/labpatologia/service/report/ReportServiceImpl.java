@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -29,11 +30,15 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional
-	@CachePut(value = "lab-patologia-platform-cache", key = "'report_dto' + #id")
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'report_' + #report.id", condition="#dto.id!=null")
 	public ReportDTO save(ReportDTO dto) {
 		final ReportDomain domain = convertDtoToDomain(dto);
-		final ReportDomain reportDomain = reportDao.save(domain);
-		return convertDomainToDto(reportDomain);
+		final ReportDomain report = reportDao.save(domain);
+		final ReportDTO newDto = convertDomainToDto(report);
+		if (dto.getId() == null) {
+			getCacheManager().getCache("lab-patologia-platform-cache").put("report_" + report.getId(), newDto);
+		}
+		return newDto;
 	}
 
 	@Override
@@ -47,7 +52,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'reports_'")
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'reports'")
 	public ReportResult getAll() {
 		final List<ReportDTO> reports = new ArrayList<>();
 		for (ReportDomain domain : reportDao.findAll()) {

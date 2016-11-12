@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,14 +26,20 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 	
 	@Override
 	@Transactional
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'doctor_' + #doctor.id", condition="#dto.id!=null")
 	public DoctorDto save(DoctorDto dto) {
 		final DoctorDomain doctorDomain = convertDtoToDomain(dto);
 		final DoctorDomain doctor = _doctorDao.save(doctorDomain);
-		return convertDomainToDto(doctor);
+		final DoctorDto newDto = convertDomainToDto(doctor);
+		if (dto.getId() == null) {
+			getCacheManager().getCache("lab-patologia-platform-cache").put("doctor_" + doctor.getId(), newDto);
+		}
+		return newDto;
 	}
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'doctor_' + #id")
 	public DoctorDto getById(Integer id) throws PatologyException {
 		final DoctorDomain doctorDomain = _doctorDao.getById(id);
 		final DoctorDto doctorDTO = convertDomainToDto(doctorDomain);
@@ -40,6 +48,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'doctors'")
 	public DoctorResult getAll() {
 		final List<DoctorDto> doctors = new ArrayList<>();
 		for (DoctorDomain domain : _doctorDao.findAll()) {

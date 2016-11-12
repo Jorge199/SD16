@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,10 +33,15 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	
 	@Override
 	@Transactional
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'article_' + #article.id", condition="#dto.id!=null")
 	public ArticleDto save(ArticleDto dto) {
 		final ArticleDomain ArticleDomain = convertDtoToDomain(dto);
-		final ArticleDomain Article = _articleDao.save(ArticleDomain);
-		return convertDomainToDto(Article);
+		final ArticleDomain article = _articleDao.save(ArticleDomain);
+		final ArticleDto newDto= convertDomainToDto(article);
+		if(null == dto.getId()){
+			getCacheManager().getCache("lab-patologia-platform-cache").put("article_" + article.getId(), newDto);
+		}
+		return newDto;
 	}
 	 
 	@Override
@@ -66,6 +73,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'article_' + #id")
 	public ArticleDto getById(Integer id) throws PatologyException {
 		final ArticleDomain ArticleDomain = _articleDao.getById(id);
 		final ArticleDto ArticleDTO = convertDomainToDto(ArticleDomain);
@@ -74,6 +82,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'articles'")
 	public ArticleResult getAll() {
 		final List<ArticleDto> articles = new ArrayList<>();
 		for (ArticleDomain domain : _articleDao.findAll()) {

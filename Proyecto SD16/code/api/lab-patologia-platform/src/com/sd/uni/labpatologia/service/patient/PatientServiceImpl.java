@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.sd.uni.labpatologia.dao.patient.PatientDaoImpl;
 import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
+import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
@@ -25,11 +27,15 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 	
 	@Override
 	@Transactional
-	@CachePut(value = "lab-patologia-platform-cache", key = "'report_dto' + #id")
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'patient_' + #patient.id", condition="#dto.id!=null")
 	public PatientDTO save(PatientDTO dto) {
 		final PatientDomain patientDomain = convertDtoToDomain(dto);
 		final PatientDomain patient = patientDao.save(patientDomain);
-		return convertDomainToDto(patient);
+		final PatientDTO newDto = convertDomainToDto(patient);
+		if (dto.getId() == null) {
+			getCacheManager().getCache("lab-patologia-platform-cache").put("patient_" + patient.getId(), newDto);
+		}
+		return newDto;
 	}
 
 	@Override
@@ -43,7 +49,8 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 
 	@Override
 	@Transactional
-	@Cacheable(value = "lab-patologia-platform-cache")
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'patients'")
+	
 	public PatientResult getAll() {
 		final List<PatientDTO> patients = new ArrayList<>();
 		for (PatientDomain domain : patientDao.findAll()) {
