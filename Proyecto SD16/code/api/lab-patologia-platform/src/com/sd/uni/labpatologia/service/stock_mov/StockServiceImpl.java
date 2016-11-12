@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -23,18 +24,23 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 		implements IStockService {
 	@Autowired
 	private IStockDao stockDao;
-		
+
 	@Autowired
 	private IArticleDao articleDao;
 
-
 	@Override
 	@Transactional
-	@CachePut(value = "lab-patologia-platform-cache")
+
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'stocks'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'stock_' + #dto.id", condition = "#dto.id!=null")
 	public StockDTO save(StockDTO dto) {
 		final StockDomain domain = convertDtoToDomain(dto);
-		final StockDomain stockDomain = stockDao.save(domain);
-		return convertDomainToDto(stockDomain);
+		final StockDomain stock = stockDao.save(domain);
+		StockDTO newDto = convertDomainToDto(stock);
+		if (dto.getId() == null) {
+			getCacheManager().getCache("lab-patologia-platform-cache").put("stock_" + stock.getId(), newDto);
+		}
+		return newDto;
 	}
 
 	@Override
@@ -48,7 +54,7 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 
 	@Override
 	@Transactional
-	@Cacheable(value = "lab-patologia-platform-cache")
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'stocks'")
 	public StockResult getAll() {
 		final List<StockDTO> stocks = new ArrayList<>();
 		for (StockDomain domain : stockDao.findAll()) {
@@ -64,10 +70,14 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 	protected StockDTO convertDomainToDto(StockDomain domain) {
 		final StockDTO dto = new StockDTO();
 		dto.setId(domain.getId());
-		if (null != domain.getArticle()) dto.setArticleId(domain.getArticle().getId());
-		if (null != domain.getCount()) dto.setCount(domain.getCount());
-		if (null != domain.getMovtype()) dto.setMovtype(domain.getMovtype());
-		if (null != domain.getDate()) dto.setDate(domain.getDate());
+		if (null != domain.getArticle())
+			dto.setArticleId(domain.getArticle().getId());
+		if (null != domain.getCount())
+			dto.setCount(domain.getCount());
+		if (null != domain.getMovtype())
+			dto.setMovtype(domain.getMovtype());
+		if (null != domain.getDate())
+			dto.setDate(domain.getDate());
 		return dto;
 	}
 
@@ -76,13 +86,17 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 		final StockDomain domain = new StockDomain();
 		domain.setId(dto.getId());
 		try {
-			if (null != dto.getArticleId()) domain.setArticle(articleDao.getById(dto.getArticleId()) );
+			if (null != dto.getArticleId())
+				domain.setArticle(articleDao.getById(dto.getArticleId()));
 		} catch (PatologyException e) {
 			e.printStackTrace();
 		}
-		if (null != dto.getCount()) domain.setCount(dto.getCount());
-		if (null != dto.getMovtype()) domain.setMovtype(dto.getMovtype());
-		if (null != dto.getDate()) domain.setDate(dto.getDate());
+		if (null != dto.getCount())
+			domain.setCount(dto.getCount());
+		if (null != dto.getMovtype())
+			domain.setMovtype(dto.getMovtype());
+		if (null != dto.getDate())
+			domain.setDate(dto.getDate());
 
 		return domain;
 	}
@@ -91,7 +105,7 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 	@Transactional
 	public StockResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<StockDTO> stocks = new ArrayList<>();
-		for (StockDomain domain : stockDao.find(textToFind,page,maxItems)) {
+		for (StockDomain domain : stockDao.find(textToFind, page, maxItems)) {
 			final StockDTO dto = convertDomainToDto(domain);
 			stocks.add(dto);
 		}
@@ -107,4 +121,3 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 	}
 
 }
-

@@ -19,22 +19,24 @@ import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 @Service
-public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImpl, RolResult>
-		implements IRolService {
+public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImpl, RolResult> implements IRolService {
 	@Autowired
 	private IRolDao rolDao;
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'rol_' + #rol.id", condition="#dto.id!=null")
+
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'roles'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'rol_' + #dto.id", condition = "#dto.id!=null")
 	public RolDTO save(RolDTO dto) {
 		final RolDomain domain = convertDtoToDomain(dto);
-		final RolDomain rol= rolDao.save(domain);
+		final RolDomain rol = rolDao.save(domain);
 		final RolDTO newDto = convertDomainToDto(rol);
 		if (dto.getId() == null) {
 			getCacheManager().getCache("lab-patologia-platform-cache").put("rol_" + rol.getId(), newDto);
 		}
-		return newDto;	}
+		return newDto;
+	}
 
 	@Override
 	@Transactional

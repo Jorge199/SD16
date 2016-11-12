@@ -1,49 +1,50 @@
 package com.sd.uni.labpatologia.service.article;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sd.uni.labpatologia.dao.article.IArticleDao;
 import com.sd.uni.labpatologia.dao.article.ArticleDaoImpl;
+import com.sd.uni.labpatologia.dao.article.IArticleDao;
 import com.sd.uni.labpatologia.dao.stock_mov.IStockDao;
 import com.sd.uni.labpatologia.domain.article.ArticleDomain;
 import com.sd.uni.labpatologia.domain.stock_mov.StockDomain;
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
-import com.sd.uni.labpatologia.exception.*;
+import com.sd.uni.labpatologia.exception.PatologyException;
+import com.sd.uni.labpatologia.exception.StockException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
-
 @Service
-public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomain, ArticleDaoImpl, ArticleResult> implements IArticleService{
-	
+public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomain, ArticleDaoImpl, ArticleResult>
+		implements IArticleService {
+
 	@Autowired
 	private IArticleDao _articleDao;
 
 	@Autowired
 	private IStockDao _stockDao;
-	
+
 	@Override
 	@Transactional
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'article_' + #article.id", condition="#dto.id!=null")
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'articles'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'article_' + #dto.id", condition = "#dto.id!=null")
 	public ArticleDto save(ArticleDto dto) {
 		final ArticleDomain ArticleDomain = convertDtoToDomain(dto);
 		final ArticleDomain article = _articleDao.save(ArticleDomain);
-		final ArticleDto newDto= convertDomainToDto(article);
-		if(null == dto.getId()){
+		final ArticleDto newDto = convertDomainToDto(article);
+		if (null == dto.getId()) {
 			getCacheManager().getCache("lab-patologia-platform-cache").put("article_" + article.getId(), newDto);
 		}
 		return newDto;
 	}
-	 
+
 	@Override
 	@Transactional
 	public ArticleDto add_to_stock(Integer id, Integer c) throws PatologyException {
@@ -57,20 +58,20 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		_stockDao.save(stockDomain);
 		return convertDomainToDto(Article);
 	}
-	
+
 	@Override
 	@Transactional
-	public ArticleDto remove_from_stock(Integer id, Integer c) throws PatologyException , StockException{
+	public ArticleDto remove_from_stock(Integer id, Integer c) throws PatologyException, StockException {
 		final ArticleDomain ArticleDomain = _articleDao.getById(id);
-		if(c < ArticleDomain.getCount() ){
-			ArticleDomain.setCount((ArticleDomain.getCount() - c));			
+		if (c < ArticleDomain.getCount()) {
+			ArticleDomain.setCount((ArticleDomain.getCount() - c));
 			final ArticleDomain Article = _articleDao.save(ArticleDomain);
-			return convertDomainToDto(Article);		
+			return convertDomainToDto(Article);
 		} else {
 			throw new StockException("Stock insuficiente");
 		}
-	}	
-	
+	}
+
 	@Override
 	@Transactional
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'article_' + #id")
@@ -129,7 +130,5 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		ArticleResult.setArticles(articles);
 		return ArticleResult;
 	}
-
-	
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,8 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 	
 	@Override
 	@Transactional
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'doctor_' + #doctor.id", condition="#dto.id!=null")
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'doctors'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'doctor_' + #dto.id", condition="#dto.id!=null")
 	public DoctorDto save(DoctorDto dto) {
 		final DoctorDomain doctorDomain = convertDtoToDomain(dto);
 		final DoctorDomain doctor = _doctorDao.save(doctorDomain);

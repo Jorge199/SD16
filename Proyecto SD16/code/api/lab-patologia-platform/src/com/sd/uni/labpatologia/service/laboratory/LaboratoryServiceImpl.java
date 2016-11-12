@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,16 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 	
 	@Override
 	@Transactional
-	@CachePut(value = "lab-patologia-platform-cache")
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'laboratories'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'laboratory_' + #dto.id", condition="#dto.id!=null")
 	public LaboratoryDto save(LaboratoryDto dto) {
 		final LaboratoryDomain laboratoryDomain = convertDtoToDomain(dto);
 		final LaboratoryDomain laboratory = _laboratoryDao.save(laboratoryDomain);
-		return convertDomainToDto(laboratory);
+		final LaboratoryDto newDto= convertDomainToDto(laboratory);
+		if (dto.getId() == null) {
+			getCacheManager().getCache("lab-patologia-platform-cache").put("laboratory_" + laboratory.getId(), newDto);
+		}
+		return newDto;
 	}
 	
 	@Override
@@ -45,7 +51,7 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 
 	@Override
 	@Transactional
-	@Cacheable(value = "lab-patologia-platform-cache")
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'laboratories'")
 	public LaboratoryResult getAll() {
 		final List<LaboratoryDto> laboratories = new ArrayList<>();
 		for (LaboratoryDomain domain : _laboratoryDao.findAll()) {

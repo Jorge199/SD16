@@ -30,7 +30,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'report_' + #report.id", condition="#dto.id!=null")
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'reports'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'report_' + #dto.id", condition="#dto.id!=null")
 	public ReportDTO save(ReportDTO dto) {
 		final ReportDomain domain = convertDtoToDomain(dto);
 		final ReportDomain report = reportDao.save(domain);

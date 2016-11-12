@@ -35,7 +35,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'user_' + #user.id", condition="#dto.id!=null")
+
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'users'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'user_' + #dto.id", condition="#dto.id!=null")
 	public UserDTO save(UserDTO dto) {
 		final UserDomain domain = convertDtoToDomain(dto);
 		final UserDomain user = userDao.save(domain);

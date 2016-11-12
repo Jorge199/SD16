@@ -27,13 +27,14 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 	
 	@Override
 	@Transactional
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'patient_' + #patient.id", condition="#dto.id!=null")
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'patients'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'patient_' + #dto.id", condition="#dto.id!=null")
 	public PatientDTO save(PatientDTO dto) {
 		final PatientDomain patientDomain = convertDtoToDomain(dto);
 		final PatientDomain patient = patientDao.save(patientDomain);
 		final PatientDTO newDto = convertDomainToDto(patient);
-		if (dto.getId() == null) {
-			getCacheManager().getCache("lab-patologia-platform-cache").put("patient_" + patient.getId(), newDto);
+		if (null==dto.getId() ) {
+			getCacheManager().getCache("lab-patologia-platform-cache").put("patient_" +newDto.getId(), newDto);
 		}
 		return newDto;
 	}
@@ -50,7 +51,6 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 	@Override
 	@Transactional
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'patients'")
-	
 	public PatientResult getAll() {
 		final List<PatientDTO> patients = new ArrayList<>();
 		for (PatientDomain domain : patientDao.findAll()) {

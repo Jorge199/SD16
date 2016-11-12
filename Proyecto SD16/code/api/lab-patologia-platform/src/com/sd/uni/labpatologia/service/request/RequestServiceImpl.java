@@ -49,7 +49,8 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'request_' + #request.id", condition="#dto.id!=null")
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'requests'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'request_' + #dto.id", condition="#dto.id!=null")
 	public RequestDTO save(RequestDTO dto) {
 		final RequestDomain domain = convertDtoToDomain(dto);
 		final RequestDomain request = requestDao.save(domain);
@@ -63,7 +64,6 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	@Override
 	@Transactional
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'request_' + #id")
-	
 	public RequestDTO getById(Integer id) throws PatologyException {
 		final RequestDomain domain = requestDao.getById(id);
 		final RequestDTO dto = convertDomainToDto(domain);
@@ -73,7 +73,6 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	@Override
 	@Transactional
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'requests'")
-	
 	public RequestResult getAll() {
 		final List<RequestDTO> requests = new ArrayList<>();
 		for (RequestDomain domain : requestDao.findAll()) {

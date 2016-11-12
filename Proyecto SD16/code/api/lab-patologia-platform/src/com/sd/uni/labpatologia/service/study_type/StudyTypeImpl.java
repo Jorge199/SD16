@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,13 +20,16 @@ import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 @Service
-public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain, StudyTypeDaoImpl, StudyTypeResult> implements IStudyTypeService {
+public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain, StudyTypeDaoImpl, StudyTypeResult>
+		implements IStudyTypeService {
 	@Autowired
 	private IStudyTypeDao _studyTypeDao;
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'studytype_' + #studytype.id", condition="#dto.id!=null")
+
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'studiestypes'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'studytype_' + #dto.id", condition = "#dto.id!=null")
 	public StudyTypeDTO save(StudyTypeDTO dto) {
 		final StudyTypeDomain domain = convertDtoToDomain(dto);
 		final StudyTypeDomain study = _studyTypeDao.save(domain);
