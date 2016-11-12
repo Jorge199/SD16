@@ -25,9 +25,5 @@ public class StudyTypeResourceImpl extends BaseResourceImpl<StudyTypeDTO> implem
         return result;
     }
 
-	@Override
-	public StudyTypeResult find(String textToFind) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }

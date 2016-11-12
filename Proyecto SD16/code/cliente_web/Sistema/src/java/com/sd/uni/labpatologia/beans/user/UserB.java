@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.sd.uni.labpatologia.beans.base.BaseBean;
 import com.sd.uni.labpatologia.beans.rol.RolB;
+import com.sd.uni.labpatologia.util.SexEnum;
 
 public class UserB extends BaseBean {
 
@@ -15,11 +16,13 @@ public class UserB extends BaseBean {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String _name;
+	private String _lastName;
+	private String _userName;
 	private String _password;
 	private RolB _rol;
 	private String _matricula;
-	private boolean _doctor;
-
+	private SexEnum _sex;
+	
 	public UserB(Map<String, String> params) {
 		super(params);
 	}
@@ -31,8 +34,23 @@ public class UserB extends BaseBean {
 	public void setName(String name) {
 		_name = name;
 	}
-	
-	
+		
+	public String getLastName() {
+		return _lastName;
+	}
+
+	public void setLastName(String lastName) {
+		_lastName = lastName;
+	}
+
+	public String getUserName() {
+		return _userName;
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
 	public String getPassword() {
 		return _password;
 	}
@@ -45,25 +63,24 @@ public class UserB extends BaseBean {
 		return _rol;
 	}
 	
-	public boolean getDoctor() {
-		return _doctor;
+	public void setRol(RolB rol) {
+		_rol = rol;
 	}
 	
 	public String getMatricula() {
 		return _matricula;
 	}
 	
-
-	public void setRol(RolB rol) {
-		_rol = rol;
-	}
-	
-	public void setDoctor(boolean doctor) {
-		_doctor=doctor;
-	}
-	
 	public void setMatricula(String matricula) {
 		_matricula=matricula;
+	}
+
+	public SexEnum getSex() {
+		return _sex;
+	}
+
+	public void setSex(SexEnum sex) {
+		_sex = sex;
 	}
 
 	@Override
@@ -72,8 +89,9 @@ public class UserB extends BaseBean {
 			setId(Integer.valueOf(params.get("id")));
 		}
 		setName(params.get("name"));
+		setUserName(params.get("userName"));
+		setLastName(params.get("lastName"));
 		setPassword(params.get("password"));
-		setDoctor(Boolean.valueOf(params.get("doctor")));
 		setMatricula(params.get("matricula"));
 	}
 

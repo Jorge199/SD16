@@ -1,20 +1,20 @@
 
 package com.sd.uni.labpatologia.beans.patient;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+
 import com.sd.uni.labpatologia.beans.base.BaseBean;
+import com.sd.uni.labpatologia.util.SexEnum;
 
 public class PatientB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _lastName;
 	private String _document;
-	private String _sex;
+	private SexEnum _sex;
 	private Date _birthDate;
 	private String _address;
 	private String _phone;
@@ -48,11 +48,11 @@ public class PatientB extends BaseBean {
 		_document = document;
 	}
 	
-	public String getSex() {
+	public SexEnum getSex() {
 		return _sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(SexEnum sex) {
 		_sex = sex;
 	}
 
@@ -87,15 +87,6 @@ public class PatientB extends BaseBean {
 		setName(params.get("name"));
 		setLastName(params.get("lastName"));	
         setDocument(params.get("document"));
-        setSex(params.get("sex"));
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			if(null != params.get("birthDate")){
-				setBirthDate(format.parse(params.get("birthDate")));
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
         setAddress(params.get("address"));
         setPhone(params.get("phone"));
 	}

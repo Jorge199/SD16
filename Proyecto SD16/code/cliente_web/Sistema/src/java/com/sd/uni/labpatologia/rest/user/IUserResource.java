@@ -9,5 +9,5 @@ public interface IUserResource extends IBaseResource<UserDTO> {
 
 	public UserResult getAll();
 	
-	public UserResult find(String textToFind);
+	public UserResult find(String textToFind, int maxItems, int page);
 }

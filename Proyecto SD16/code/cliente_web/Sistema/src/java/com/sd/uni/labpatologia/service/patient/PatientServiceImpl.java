@@ -63,15 +63,11 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>imp
 		params.put("name", dto.getName());
 		params.put("lastName", dto.getLastName());
 		params.put("document", dto.getDocument());
-		params.put("sex", dto.getSex());
-		
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		params.put("birthDate", format.format(dto.getBirthDate()));    
-        params.put("address", dto.getAddress());
+		params.put("address", dto.getAddress());
         params.put("phone", dto.getPhone());
-
-		final PatientB patientB = new PatientB(params);
-		
+        final PatientB patientB = new PatientB(params);
+		patientB.setSex(dto.getSex());
+		patientB.setBirthDate(dto.getBirthDate());    
 		return patientB;
 	}
 

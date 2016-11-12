@@ -27,8 +27,8 @@ public class UserResourceImpl extends BaseResourceImpl<UserDTO> implements
 	}
 
 	@Override
-	public UserResult find(String textToFind) {
-		final UserResult result = findWR(textToFind).get(UserResult.class);
+	public UserResult find(String textToFind, int maxItems, int page) {
+		final UserResult result = findWR(textToFind, maxItems, page).get(UserResult.class);
 		return result;
 	}
 }

@@ -23,6 +23,7 @@ public class DoctorB extends BaseBean {
 	private String _address;
 	private String _phone;
 	private String _email;
+	private String _especialidad;
 	private DoctorB _doctor;
 
 	public DoctorB(Map<String, String> params) {
@@ -83,19 +84,28 @@ public class DoctorB extends BaseBean {
 		_doctor = doctor;
 	}
         
+	public String getEspecialidad() {
+		return _especialidad;
+	}
+
+	public void setEspecialidad(String especialidad) {
+		_especialidad = especialidad;
+	}
+
 	@Override
 	protected void create(Map<String, String> params) {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
-                if (!StringUtils.isBlank(params.get("ci"))) {
+        if (!StringUtils.isBlank(params.get("ci"))) {
 			setCi(Integer.valueOf(params.get("ci")));
 		}
 		setName(params.get("name"));
 		setLastName(params.get("last_name"));	
-                setAddress(params.get("address"));
-                setPhone(params.get("phone"));
-                setEmail(params.get("email"));
+        setAddress(params.get("address"));
+        setPhone(params.get("phone"));
+        setEmail(params.get("email"));
+        setEspecialidad(params.get("especialidad"));
 	}
 
 }

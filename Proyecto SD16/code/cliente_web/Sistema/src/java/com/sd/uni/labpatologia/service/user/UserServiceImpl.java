@@ -59,15 +59,15 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO> implements 
 	@Override
 	protected UserB convertDtoToBean(UserDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
-		
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("name", dto.getName());
+		params.put("lastName", dto.getLastName());
+		params.put("userName", dto.getUserName());
 		params.put("password", dto.getPassword());
-		params.put("doctor", String.valueOf(dto.getDoctor()));
 		params.put("matricula", dto.getMatricula());
 		final UserB user = new UserB(params);
 		user.setRol(_rolService.getById(dto.getRolId()));
-		
+		user.setSex(dto.getSex());
 		return user;
 		
 	}
@@ -78,16 +78,16 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO> implements 
 		dto.setId(bean.getId());
 		dto.setRolId(bean.getRol().getId());
 		dto.setName(bean.getName());
+		dto.setUserName(bean.getUserName());
+		dto.setLastName(bean.getLastName());
 		dto.setPassword(bean.getPassword());
-		//modificar
-		dto.setDoctor(bean.getDoctor());
 		dto.setMatricula(bean.getMatricula());
 		return dto;
 	}
 
 	@Override
-	public List<UserB> find(String textToFind) {
-		final UserResult result = _userResource.find(textToFind);
+	public List<UserB> find(String textToFind, int maxItems, int page) {
+		final UserResult result = _userResource.find(textToFind, maxItems, page);
 		final List<UserDTO> rList = null == result.getUsers() ? new ArrayList<UserDTO>()
 				: result.getUsers();
 

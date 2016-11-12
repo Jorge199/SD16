@@ -20,17 +20,16 @@ import org.springframework.stereotype.Service;
 import com.sd.uni.labpatologia.beans.doctor.DoctorB;
 import com.sd.uni.labpatologia.dto.doctor.DoctorDto;
 import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
-import com.sd.uni.labpatologia.rest.doctor.DoctorResourceImpl;
 import com.sd.uni.labpatologia.rest.doctor.IDoctorResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 @Service("doctorService")
 public class DoctorServiceImpl extends BaseServiceImpl<DoctorB, DoctorDto>
-		implements IDoctorService {
+implements IDoctorService {
 
 	@Autowired
 	private IDoctorResource _doctorResource;
-        
+
 	public DoctorServiceImpl() {
 	}
 
@@ -69,11 +68,12 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorB, DoctorDto>
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("name", dto.getName());
 		params.put("last_name", dto.getLastName());
-                params.put("ci", String.valueOf(dto.getCi()));
-                params.put("address", dto.getAddress());
-                params.put("phone", dto.getPhone());
-                params.put("email", dto.getEmail());
-       
+		params.put("ci", String.valueOf(dto.getCi()));
+		params.put("address", dto.getAddress());
+		params.put("phone", dto.getPhone());
+		params.put("email", dto.getEmail());
+		params.put("especialidad", dto.getEspecialidad());
+
 		final DoctorB doctorB = new DoctorB(params);
 		return doctorB;
 	}
@@ -86,8 +86,9 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorB, DoctorDto>
 		dto.setLastName(bean.getLastName());
 		dto.setCi(bean.getCi());
 		dto.setAddress(bean.getAddress());
-                dto.setPhone(bean.getPhone());
-                dto.setEmail(bean.getEmail());
+		dto.setPhone(bean.getPhone());
+		dto.setEmail(bean.getEmail());
+		dto.setEspecialidad(bean.getEspecialidad());
 		return dto;
 	}
 
