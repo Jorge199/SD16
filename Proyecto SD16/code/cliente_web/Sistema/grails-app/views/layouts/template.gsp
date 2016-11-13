@@ -155,9 +155,10 @@
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
-
+					<li><a href="/Sistema/inicio/index"><i
+							class="fa fa-fw fa-bars"></i>Menu</a></li>
 					<li><a href="/Sistema/request/list/"><i
-							class="fa fa-fw fa-bars"></i>Fichas de Entradas</a></li>
+							class="fa fa-fw fa-file-text"></i>Fichas de Entradas</a></li>
 
 					<li><a href="/Sistema/patient/list/"><i
 							class="fa fa-fw fa-user"></i>Pacientes</a></li>
@@ -168,7 +169,7 @@
 					<li><a href="/Sistema/report/list/"><i
 							class="fa fa-fw fa-file-text-o"></i>Informes</a></li>
 
-					<li><a href="/Sistema/report/list/"><i
+					<li><a href="#"><i
 							class="fa fa-fw fa-medkit"></i>Insumos</a></li>
 
 

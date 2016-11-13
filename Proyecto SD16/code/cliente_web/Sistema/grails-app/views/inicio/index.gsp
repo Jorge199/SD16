@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                        <fieldset class="form">
-							<g:render contextPath="../laboratory" template="list"/>
+							<g:render contextPath="/laboratory" template="list"/>
 						</fieldset>
                     </div>
                 </div>
