@@ -44,7 +44,7 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'stock_' + #id")
 	public StockDTO getById(Integer id) throws PatologyException {
 		final StockDomain domain = stockDao.getById(id);
@@ -53,7 +53,7 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'stocks'")
 	public StockResult getAll() {
 		final List<StockDTO> stocks = new ArrayList<>();
@@ -102,7 +102,7 @@ public class StockServiceImpl extends BaseServiceImpl<StockDTO, StockDomain, Sto
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public StockResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<StockDTO> stocks = new ArrayList<>();
 		for (StockDomain domain : stockDao.find(textToFind, page, maxItems)) {

@@ -41,7 +41,7 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'studytype_' + #id")
 	public StudyTypeDTO getById(Integer id) throws PatologyException {
 		final StudyTypeDomain domain = _studyTypeDao.getById(id);
@@ -50,7 +50,7 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'studiestypes'")
 	public StudyTypeResult getAll() {
 		final List<StudyTypeDTO> estudios = new ArrayList<>();
@@ -82,7 +82,7 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public StudyTypeResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<StudyTypeDTO> studies = new ArrayList<>();
 		for (StudyTypeDomain domain : _studyTypeDao.find(textToFind, page, maxItems)) {

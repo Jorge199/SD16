@@ -49,7 +49,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'user_' + #id")
 	public UserDTO getById(Integer id) throws PatologyException {
 		final UserDomain domain = userDao.getById(id);
@@ -58,7 +58,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'users'")
 	public UserResult getAll() {
 		final List<UserDTO> user = new ArrayList<>();
@@ -72,7 +72,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public UserResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<UserDTO> users = new ArrayList<>();
 		for (UserDomain domain : userDao.find(textToFind, page, maxItems)) {

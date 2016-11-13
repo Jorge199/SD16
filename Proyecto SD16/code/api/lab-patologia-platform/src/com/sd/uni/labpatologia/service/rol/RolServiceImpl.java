@@ -39,7 +39,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'rol_' + #id")
 	public RolDTO getById(Integer id) throws PatologyException {
 		final RolDomain domain = rolDao.getById(id);
@@ -48,7 +48,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'roles'")
 	public RolResult getAll() {
 		final List<RolDTO> rols = new ArrayList<>();
@@ -62,7 +62,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public RolResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<RolDTO> rols = new ArrayList<>();
 		for (RolDomain domain : rolDao.find(textToFind, page, maxItems)) {

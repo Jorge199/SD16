@@ -40,7 +40,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'doctor_' + #id")
 	public DoctorDto getById(Integer id) throws PatologyException {
 		final DoctorDomain doctorDomain = _doctorDao.getById(id);
@@ -49,7 +49,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'doctors'")
 	public DoctorResult getAll() {
 		final List<DoctorDto> doctors = new ArrayList<>();
@@ -92,7 +92,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public DoctorResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<DoctorDto> doctors = new ArrayList<>();
 		for (DoctorDomain domain : _doctorDao.find(textToFind, page, maxItems)) {

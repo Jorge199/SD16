@@ -41,7 +41,7 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'laboratory_' + #id")
 	public LaboratoryDto getById(Integer id) throws PatologyException {
 		final LaboratoryDomain laboratoryDomain = _laboratoryDao.getById(id);
@@ -50,7 +50,7 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'laboratories'")
 	public LaboratoryResult getAll() {
 		final List<LaboratoryDto> laboratories = new ArrayList<>();
@@ -87,7 +87,7 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public LaboratoryResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<LaboratoryDto> laboratories = new ArrayList<>();
 		for (LaboratoryDomain domain : _laboratoryDao.find(textToFind, page, maxItems)) {

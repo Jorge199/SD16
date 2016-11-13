@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.service.article;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.article.ArticleDaoImpl;
 import com.sd.uni.labpatologia.dao.article.IArticleDao;
-import com.sd.uni.labpatologia.dao.stock_mov.IStockDao;
 import com.sd.uni.labpatologia.domain.article.ArticleDomain;
-import com.sd.uni.labpatologia.domain.stock_mov.StockDomain;
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -28,8 +27,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	@Autowired
 	private IArticleDao _articleDao;
 
-	@Autowired
-	private IStockDao _stockDao;
+	
 
 	@Override
 	@Transactional
@@ -45,20 +43,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		return newDto;
 	}
 
-	@Override
-	@Transactional
-	public ArticleDto add_to_stock(Integer id, Integer c) throws PatologyException {
-		final ArticleDomain ArticleDomain = _articleDao.getById(id);
-		final StockDomain stockDomain = new StockDomain();
-		stockDomain.setArticle(ArticleDomain);
-		stockDomain.setCount(c);
-		stockDomain.setMovtype(StockDomain.INC_VALUE);
-		ArticleDomain.setCount((c + ArticleDomain.getCount()));
-		final ArticleDomain Article = _articleDao.save(ArticleDomain);
-		_stockDao.save(stockDomain);
-		return convertDomainToDto(Article);
-	}
-
+	
 	@Override
 	@Transactional
 	public ArticleDto remove_from_stock(Integer id, Integer c) throws PatologyException, StockException {
@@ -73,7 +58,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'article_' + #id")
 	public ArticleDto getById(Integer id) throws PatologyException {
 		final ArticleDomain ArticleDomain = _articleDao.getById(id);
@@ -82,7 +67,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'articles'")
 	public ArticleResult getAll() {
 		final List<ArticleDto> articles = new ArrayList<>();
@@ -119,7 +104,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public ArticleResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<ArticleDto> articles = new ArrayList<>();
 		for (ArticleDomain domain : _articleDao.find(textToFind, page, maxItems)) {
@@ -129,6 +114,13 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		final ArticleResult ArticleResult = new ArticleResult();
 		ArticleResult.setArticles(articles);
 		return ArticleResult;
+	}
+
+
+	@Override
+	public ArticleDto add_to_stock(Integer c, Integer c2) throws PatologyException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

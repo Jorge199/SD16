@@ -43,7 +43,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'report_' + #id")
 	public ReportDTO getById(Integer id) throws PatologyException {
 		final ReportDomain domain = reportDao.getById(id);
@@ -52,7 +52,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'reports'")
 	public ReportResult getAll() {
 		final List<ReportDTO> reports = new ArrayList<>();
@@ -92,7 +92,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public ReportResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<ReportDTO> reports = new ArrayList<>();
 		for (ReportDomain domain : reportDao.find(textToFind, page, maxItems)) {

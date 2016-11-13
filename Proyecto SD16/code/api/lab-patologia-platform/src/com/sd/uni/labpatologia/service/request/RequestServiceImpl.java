@@ -62,7 +62,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'request_' + #id")
 	public RequestDTO getById(Integer id) throws PatologyException {
 		final RequestDomain domain = requestDao.getById(id);
@@ -71,7 +71,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'requests'")
 	public RequestResult getAll() {
 		final List<RequestDTO> requests = new ArrayList<>();
@@ -119,7 +119,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public RequestResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<RequestDTO> requests = new ArrayList<>();
 		for (RequestDomain domain : requestDao.find(textToFind, page, maxItems)) {
