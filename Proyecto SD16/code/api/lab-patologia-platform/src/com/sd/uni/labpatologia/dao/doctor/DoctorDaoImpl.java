@@ -54,7 +54,7 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorDomain> implements IDoctorD
 					.add(Restrictions.ilike("_last_name", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_address", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_phone", "%"+textToFind+"%"))
-					.add(Restrictions.ilike("_especialidad", "%"+textToFind+"%"))
+					.add(Restrictions.ilike("_speciality", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_email", "%"+textToFind+"%"));				
 			Criterion idCriterion = null;
 			if (StringUtils.isNumeric(textToFind)) {

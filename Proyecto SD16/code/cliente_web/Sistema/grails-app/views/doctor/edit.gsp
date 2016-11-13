@@ -30,7 +30,7 @@
 										<i class="fa fa-primary"></i> Guardar
 									</button>
 									<a class="btn btn-default" href="/Sistema/doctor/list"
-										role="button"><i class="fa fa-ban"></i> Cancelar</a>
+										role="button"><i class="fa fa-times"></i> Cancelar</a>
 								</div>
 							</div>
 						</fieldset>

@@ -14,7 +14,7 @@ public class DoctorDto extends BaseDTO{
 	private String _address;
 	private String _phone;
 	private String _email;
-	private String _especialidad;
+	private String _speciality;
 
 
 	@XmlElement
@@ -71,11 +71,11 @@ public class DoctorDto extends BaseDTO{
 	}
 	
 	@XmlElement
-	public String getEspecialidad() {
-		return _especialidad;
+	public String getSpeciality() {
+		return _speciality;
 	}
 	
-	public void setEspecialidad(String especialidad) {
-		_especialidad = especialidad;
+	public void setSpeciality(String speciality) {
+		_speciality = speciality;
 	}
 }

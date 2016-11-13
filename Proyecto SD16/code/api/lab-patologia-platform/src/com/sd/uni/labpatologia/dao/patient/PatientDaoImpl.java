@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
+import com.sd.uni.labpatologia.util.SexEnum;
 
 @Repository
 public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatientDao {
@@ -48,12 +49,14 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 		if (textToFind != null){
 			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_lastName", "%"+textToFind+"%")).add(Restrictions.ilike("_document", "%"+textToFind+"%"))
-					.add(Restrictions.ilike("_sex", "%"+textToFind+"%")).add(Restrictions.ilike("_address", "%"+textToFind+"%")).add(Restrictions.ilike("_phone", "%"+textToFind+"%"));
+					.add(Restrictions.ilike("_address", "%"+textToFind+"%")).add(Restrictions.ilike("_phone", "%"+textToFind+"%"));
 					Criterion idCriterion = null;
 					if (StringUtils.isNumeric(textToFind)) {
 						idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
 					}
-
+					if(textToFind.contains("sex_")){
+						criteria.add(Restrictions.ilike("_sex", "%"+SexEnum.valueOf(textToFind)+"%"));
+					}
 					if (idCriterion != null) {
 						criteria.add(Restrictions.or(propertyCriterion, idCriterion));
 					} else {

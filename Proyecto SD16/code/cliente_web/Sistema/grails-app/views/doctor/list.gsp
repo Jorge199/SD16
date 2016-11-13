@@ -52,9 +52,12 @@
 											<g:sortableColumn property="name" title="Nombre" />
 											<g:sortableColumn property="last_name" title="Apellido" />
 											<g:sortableColumn property="ci" title="C.I" />
-											<g:sortableColumn property="address" title="Direcccion" />
-											<g:sortableColumn property="email" title="Correo" />
+											<g:sortableColumn property="speciality" title="Especialidad" />
 											<g:sortableColumn property="phone" title="Telefono" />
+											<g:sortableColumn property="email" title="Correo" />
+											<g:sortableColumn property="address" title="Direcccion" />
+											
+											
 											<td></td>
 										</tr>
 									</thead>
