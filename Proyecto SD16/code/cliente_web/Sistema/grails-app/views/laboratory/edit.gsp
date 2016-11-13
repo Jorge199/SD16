@@ -21,7 +21,7 @@
 							<fieldset class="buttons">
 								<br>
 								<button type="submit" class="btn btn-success" name="edit" value="${laboratoryInstance?.id}">
-  									<i class="fa fa-pencil"></i> Actualizar  
+  									<i class="fa fa-floppy-o"></i> Guardar  
 								</button>
 							</fieldset>
 						</g:form>						

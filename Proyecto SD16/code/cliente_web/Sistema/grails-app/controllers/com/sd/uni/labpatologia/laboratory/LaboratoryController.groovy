@@ -5,8 +5,11 @@ import com.sd.uni.labpatologia.beans.laboratory.LaboratoryB
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 
 
+
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.beans.factory.annotation.Autowired;
+
+import sistema.InicioController;
 
 
 class LaboratoryController {
@@ -19,7 +22,7 @@ class LaboratoryController {
 		redirect(action: "list", params: params)
 	}
 	
-	def list() {	
+	def _list() {	
 		def text = params.text
 		def laboratories = null
 		if(null != text && !"".equals(text)){
@@ -33,15 +36,7 @@ class LaboratoryController {
 		System.out.println("Cantidad Laboratorios----------------------------->"+laboratories.size())
 		[laboratoryInstanceList: laboratories, reportInstanceTotal: laboratories?.size()]
 	}
-	/*
-	def search(){
-		def text = params.text
-		def results = laboratoryService.find(text)
-		System.out.println("ingresado"+text)
-		System.out.println("busqueda"+results)
-		render(view: "list",model: [results:results])
-	}
-	*/
+	
 	
 	def create(Integer id) {
 		def laboratoryInstance = new LaboratoryB(params)
@@ -56,23 +51,10 @@ class LaboratoryController {
 		if (!newLaboratory?.getId()) {
 		
 		}
-		redirect(action: "list", id: newLaboratory.getId())
+		redirect(action: "_list", id: newLaboratory.getId())
 	}
 	
-	def show(long id){
-		def laboratoryInstance = laboratoryService.getById(id.intValue())
-		if (!laboratoryInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'laboratory.label', default: 'Laboratory'),
-				id
-			])
-			redirect(action: "list")
-			return
-		}
-
-		[laboratoryInstance: laboratoryInstance]
-
-	}
+	
 	
 	def edit(Integer id) {
 		def laboratoryInstance = laboratoryService.getById(Integer.parseInt(params.get("id")))
@@ -82,7 +64,7 @@ class LaboratoryController {
 						message(code: 'laboratory.label', default: 'Laboratory'),
 						id
 					])
-					redirect(action: "show")
+					redirect(uri: "/inicio/index")
 					return
 				}
 		[laboratoryInstance: laboratoryInstance]
@@ -96,7 +78,7 @@ class LaboratoryController {
 		laboratoryInstance.setName(params.get("name"))
 		laboratoryInstance.setPhone(params.get("phone"))
 		laboratoryService.save(laboratoryInstance)
-		redirect(action: "list")
+		redirect(uri: "/inicio/index")
 	}
 
 

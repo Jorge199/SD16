@@ -23,7 +23,7 @@
 							<fieldset class="buttons">
 								<br>
 								<button type="submit" class="btn btn-primary" name="create" value="${message(code: 'default.button.create.label', default: 'Create')}">
-  									<i class="fa fa-floppy-o"></i> Crear  
+  									<i class="fa fa-floppy-o"></i> Guardar  
 								</button>
 							</fieldset>
 						</g:form>						

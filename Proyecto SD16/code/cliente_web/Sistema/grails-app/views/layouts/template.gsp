@@ -48,7 +48,13 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a href="/Sistema/" class="navbar-brand"><strong>Laboratorio</strong></a>
+				<a href="#" class="navbar-brand"><strong>
+					<g:each in="${laboratoryInstanceList}" status="i" var="laboratoryInstance">
+						<g:if test="${laboratoryInstance?.name}">
+						<h4><strong>${fieldValue(bean: laboratoryInstance, field: "name")}</strong></h4>
+						</g:if>
+					</g:each>
+				</strong></a>
 			</div>
 			<!-- Top Menu Items -->
 			<ul class="nav navbar-right top-nav">
@@ -162,48 +168,8 @@
 					<li><a href="/Sistema/report/list/"><i
 							class="fa fa-fw fa-file-text-o"></i>Informes</a></li>
 
-
-					<li><a href="/Sistema/estadistica/index"><i
-							class="fa fa-fw fa-area-chart"></i> Estadistica</a></li>
-
-
-
-
-					<li><a href="javascript:;" data-toggle="collapse"
-						data-target="#demo3"><i class="fa fa-fw fa-flask"></i> Muestras
-							<i class="fa fa-fw fa-caret-down"></i></a>
-						<ul id="demo3" class="collapse">
-							<li><a href="/Sistema/muestra/crear">Registrar</a></li>
-							<li><a href="/Sistema/muestra/listar">Listar</a></li>
-						</ul></li>
-					<li><a href="javascript:;" data-toggle="collapse"
-						data-target="#demo4"><i class="fa fa-fw fa-info-circle"></i>
-							Laboratorios<i class="fa fa-fw fa-caret-down"></i></a>
-						<ul id="demo4" class="collapse">
-							<li><a href="/Sistema/laboratory/create">Registrar</a></li>
-							<li><a href="/Sistema/Laboratory/list">Listar</a></li>
-						</ul></li>
-					<%-- STOCK --%>
-					<li><a href="javascript:;" data-toggle="collapse"
-						data-target="#stock_ops"><i class="fa fa-fw fa-shopping-cart"></i>
-							Stock<i class="fa fa-fw fa-caret-down"></i></a>
-						<ul id="stock_ops" class="collapse">
-							<li><a href="/Sistema/stock/listar">Consultar Stock</a> <a
-								href="/Sistema/stock/crear_articulo">Agregar Articulo</a></li>
-
-							<li><a href="javascript:;" data-toggle="collapse"
-								data-target="#stock_ops_art">Movimiento de Stock<i
-									class="fa fa-fw fa-caret-down"></i></a>
-								<ul id="stock_ops_art" class="collapse">
-									<li><a href="/Sistema/stock/add">Ingreso de Articulos</a>
-									</li>
-
-									<li><a href="/Sistema/stock/remove">Egreso de
-											Articulos</a></li>
-								</ul></li>
-
-						</ul></li>
-
+					<li><a href="/Sistema/report/list/"><i
+							class="fa fa-fw fa-medkit"></i>Insumos</a></li>
 
 
 				</ul>

@@ -16,9 +16,9 @@
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                           <center> Acceso Directo <small>(Principales funciones del sistema)</small></center>
-                        </h1>
+                       <fieldset class="form">
+							<g:render contextPath="../laboratory" template="list"/>
+						</fieldset>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -31,17 +31,17 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-area-chart fa-5x"></i>
+                                        <i class="fa fa-info-circle fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>Estadisticas</div>
+                               
+                                        <div>Informaciòn del Laboratorio</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="/Sistema/estadistica/index">
+                            <a href="/Sistema/laboratory/edit/1">
                                 <div class="panel-footer">
-                                    <span class="pull-left">Ver Detalle</span>
+                                    <span class="pull-left">Editar</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -53,11 +53,16 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-flask fa-5x"></i>
+                                        <i class="fa fa fa-fw fa-bars fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>Nuevas Muestras</div>
+                                        <g:if test="${requestInstanceList?.size()}">
+                                        <div class="huge">${requestInstanceList.size()}</div>
+                                        </g:if>
+                                        <g:else>
+                                        <div class="huge">0</div>
+                                        </g:else>
+                                        <div>Fichas de entrada</div>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +83,12 @@
                                         <i class="fa fa-child fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
+                                    	<g:if test="${patientInstanceList?.size()}">
+                                        <div class="huge">${patientInstanceList.size()}</div>
+                                        </g:if>
+                                        <g:else>
+                                        <div class="huge">0</div>
+                                        </g:else>
                                         <div>Pacientes</div>
                                     </div>
                                 </div>
@@ -100,7 +110,12 @@
                                         <i class="fa fa-medkit fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">13</div>
+                                        <g:if test="${articleInstanceList?.size()}">
+                                        <div class="huge">${articleInstanceList.size()}</div>
+                                        </g:if>
+                                        <g:else>
+                                        <div class="huge">0</div>
+                                        </g:else>
                                         <div>Insumos</div>
                                     </div>
                                 </div>
