@@ -72,6 +72,7 @@ implements IDoctorService {
 		params.put("address", dto.getAddress());
 		params.put("phone", dto.getPhone());
 		params.put("email", dto.getEmail());
+		params.put("speciality", dto.getSpeciality());
 
 		final DoctorB doctorB = new DoctorB(params);
 		doctorB.setCi(dto.getCi());

@@ -56,8 +56,6 @@
 											<g:sortableColumn property="phone" title="Telefono" />
 											<g:sortableColumn property="email" title="Correo" />
 											<g:sortableColumn property="address" title="Direcccion" />
-											
-											
 											<td></td>
 										</tr>
 									</thead>
@@ -76,15 +74,19 @@
 													${fieldValue(bean: doctorInstance, field: "ci")}
 												</td>
 												<td>
-													${fieldValue(bean: doctorInstance, field: "address")}
-												</td>
-												<td>
-													${fieldValue(bean: doctorInstance, field: "email")}
+													${fieldValue(bean: doctorInstance, field: "speciality")}
 												</td>
 												<td>
 													${fieldValue(bean: doctorInstance, field: "phone")}
 												</td>
 
+												<td>
+													${fieldValue(bean: doctorInstance, field: "email")}
+												</td>
+
+												<td>
+													${fieldValue(bean: doctorInstance, field: "address")}
+												</td>
 												<%--  <td>${fieldValue(bean: laboratoryInstance, field: "laboratory.id")}</td>		--%>
 												<td class="center"><g:link action="edit"
 														class="btn btn-success" id="${doctorInstance.getId()}">

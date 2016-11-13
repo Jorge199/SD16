@@ -26,7 +26,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 
 	@Override
 	public PatientDomain save(PatientDomain domain) {
-		sessionFactory.getCurrentSession().save(domain);
+		sessionFactory.getCurrentSession().saveOrUpdate(domain);
 		return domain;
 	}
 

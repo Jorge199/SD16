@@ -39,7 +39,7 @@ public class PatientDomain extends BaseDomain {
 	@Column(name = "lastName")
 	private String _lastName;
 
-	@Column(name = "document", unique = true)
+	@Column(name = "document")
 	private String _document;
 
 	@Enumerated(EnumType.STRING)

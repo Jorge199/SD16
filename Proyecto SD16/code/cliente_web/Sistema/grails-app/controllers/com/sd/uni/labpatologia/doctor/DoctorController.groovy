@@ -23,7 +23,7 @@ class DoctorController {
 		def text = params.text
 		def doctors = null
 		if(null != text && !"".equals(text)){
-			doctors = doctorService.find(text)//getAll()//find(text,10,0)
+			doctors = doctorService.find(text,10,0)//getAll()//find(text,10,0)
 		}else{
 			doctors = doctorService.getAll()//find("all",10,0)
 		}
@@ -76,7 +76,13 @@ class DoctorController {
 			doctorInstance.setEmail(params.get("email"))
 			doctorInstance.setName(params.get("name"))
 			doctorInstance.setLastName(params.get("last_name"))
-			doctorInstance.setCi(Integer.parseInt(params.get("ci")))
+			try{
+				if(null!=params.get("ci")){
+					doctorInstance.setCi(Integer.parseInt(params.get("ci")))
+				}
+			}catch (NumberFormatException e){
+					e.stackTrace
+			}
 			doctorInstance.setPhone(params.get("phone"))
 			doctorInstance.setSpeciality(params.get("speciality"))
 			doctorService.save(doctorInstance)

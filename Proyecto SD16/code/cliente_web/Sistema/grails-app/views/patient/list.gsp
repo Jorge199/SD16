@@ -49,12 +49,12 @@
 										<tr>
 											<g:sortableColumn property="name" title="Nombre" />
 											<g:sortableColumn property="lastName" title="Apellido" />
-											<g:sortableColumn property="document" title="C.I" />
 											<g:sortableColumn property="sex" title="Sexo" />
+											<g:sortableColumn property="document" title="C.I" />
 											<g:sortableColumn property="birthDate" title="Fecha de Nac." />
 											<g:sortableColumn property="address" title="Direcccion" />
 											<g:sortableColumn property="phone" title="Telefono" />
-											<td>Acciones</td>
+											<td></td>
 										</tr>
 									</thead>
 									<tbody>
@@ -69,13 +69,13 @@
 													${fieldValue(bean: patientInstance, field: "lastName")}
 												</td>
 												<td>
-													${fieldValue(bean: patientInstance, field: "document")}
-												</td>
-												<td>
 													${fieldValue(bean: patientInstance, field: "sex")}
 												</td>
 												<td>
-													${fieldValue(bean: patientInstance, field: "birthDate")}
+													${fieldValue(bean: patientInstance, field: "document")}
+												</td>
+												<td>
+													${formatDate(format: 'dd/MM/yyyy', date:patientInstance.getBirthDate())}
 												</td>
 												<td>
 													${fieldValue(bean: patientInstance, field: "address")}
@@ -85,11 +85,8 @@
 												</td>
 
 												<%--  <td>${fieldValue(bean: patientInstance, field: "patient.id")}</td>		--%>
-												<td class="center"><g:link action="show"
-														class="btn btn-primary" id="${patientInstance.getId()}">
-														${}<i class="fa fa-eye"></i> Ver Detalle</g:link> <g:link
-														action="edit" class="btn btn-success"
-														id="${patientInstance.getId()}">
+												<td class="center"><g:link action="edit"
+														class="btn btn-success" id="${patientInstance.getId()}">
 														${}<i class="fa fa-pencil"></i> Editar</g:link></td>
 											</tr>
 
