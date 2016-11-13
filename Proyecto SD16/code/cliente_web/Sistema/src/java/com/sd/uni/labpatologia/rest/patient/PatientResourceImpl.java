@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.rest.patient;
 
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
@@ -17,21 +18,25 @@ public class PatientResourceImpl extends BaseResourceImpl<PatientDTO> implements
 	}
 
 	@Override
-	@CacheEvict(value = CACHE_REGION, key = "'patient_' + #dto.id", condition = "#dto.id!=null")
-	public PatientDTO save(PatientDTO dto) {
-		final PatientDTO patient = getWebResource().entity(dto).post(
-				getDtoClass());
-		return patient;
+	@CacheEvict(value = CACHE_REGION, key = "'patients'")
+	@CachePut(value = CACHE_REGION, key = "'patient_' + #patient.id", condition = "#patient.id!=null")
+	public PatientDTO save(PatientDTO patient) {
+		PatientDTO newDto = super.save(patient);
+		if (null == patient.getId()) {
+			getCacheManager().getCache(CACHE_REGION).put(
+					"patient_" + patient.getId(), newDto);
+		}
+		return newDto;
 	}
 
-	@Cacheable(value = CACHE_REGION, key = "'patient_' + #id")
 	@Override
+	@Cacheable(value = CACHE_REGION, key = "'patient_' + #id")
 	public PatientDTO getById(Integer id) {
 		return super.getById(id);
 	}
 
-	@Cacheable(value = CACHE_REGION, key = "'patients'")
 	@Override
+	@Cacheable(value = CACHE_REGION, key = "'patients'")
 	public PatientResult getAll() {
 		final PatientResult result = getWebResource().get(PatientResult.class);
 		return result;

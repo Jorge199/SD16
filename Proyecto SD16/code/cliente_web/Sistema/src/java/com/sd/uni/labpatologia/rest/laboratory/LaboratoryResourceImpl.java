@@ -1,10 +1,15 @@
 package com.sd.uni.labpatologia.rest.laboratory;
 
+import com.sd.uni.labpatologia.dto.doctor.DoctorDto;
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryDto;
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryResult;
+import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 @Repository("laboratoryResource")
@@ -13,6 +18,24 @@ public class LaboratoryResourceImpl extends BaseResourceImpl<LaboratoryDto> impl
 		super(LaboratoryDto.class,"/laboratory");
 	}
 
+
+	@Override
+	@CachePut(value = CACHE_REGION, key = "'laboratory_' + #laboratory.id", condition = "#laboratory.id!=null")
+	public LaboratoryDto save(LaboratoryDto laboratory) {
+		LaboratoryDto newDto = super.save(laboratory);
+		if (null == laboratory.getId()) {
+			getCacheManager().getCache(CACHE_REGION).put(
+					"laboratory_" + newDto.getId(), newDto);
+		}
+		return newDto;
+	}
+	
+	@Cacheable(value = CACHE_REGION, key = "'laboratory_' + #id")
+	@Override
+	public LaboratoryDto getById(Integer id) {
+		return super.getById(id);
+	}
+	
 	@Override
 	public LaboratoryResult getAll() {
 		final LaboratoryResult result = getWebResource().get(LaboratoryResult.class);

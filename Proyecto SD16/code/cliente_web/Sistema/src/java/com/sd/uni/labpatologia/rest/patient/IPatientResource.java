@@ -2,6 +2,7 @@ package com.sd.uni.labpatologia.rest.patient;
 
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
+import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.rest.base.IBaseResource;
 
 public interface IPatientResource extends IBaseResource<PatientDTO> {
