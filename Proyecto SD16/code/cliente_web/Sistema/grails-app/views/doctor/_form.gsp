@@ -23,4 +23,5 @@
 		<label>Teléfono<span class="required-indicator"></span></label>
 		<input type="text" class="form-control" pattern="[\(09]\d{2}\d{2}[\)]\d{3}[\-]\d{3}" maxlength="20" title='Formato: (9999)999-999' name="phone" value="${doctorInstance?.phone}"/>
 	</div>
+	
 </div>

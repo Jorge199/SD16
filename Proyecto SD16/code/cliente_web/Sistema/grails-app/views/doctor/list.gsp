@@ -20,17 +20,27 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<g:if test="${flash.message}">
-						<div class="message" role="status">
-							${flash.message}
-						</div>
-					</g:if>
-                                        
-                                        <g:form action="list">
-   					<g:textField name="text" />
-   					<g:submitButton name="list" value="Buscar" class="btn btn-primary" />
+					<div class="col-sm-4">
+						<a class="btn btn-success" href="/Sistema/doctor/create"
+							role="button"><i class="fa fa-plus"></i> Agregar Doctor</a>
+
+
+					</div>
+					<div class="col-sm-6">
+						<g:form action="list" class="form-search">
+
+							<div class="input-group col-md-10">
+								<input type="text" name="text" class="form-control"
+									placeholder="Ingrese un texto para buscar" /> <span
+									class="input-group-btn">
+									<button class="btn btn-primary" name="list" value="Buscar">
+										<span class=" glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
 						</g:form>
-                                        
+					</div>
+					<br> <br> <br>
 					<div class="dataTable_wrapper">
 						<div class="row">
 							<div class="col-sm-12">
@@ -40,27 +50,26 @@
 									<thead>
 										<tr>
 											<g:sortableColumn property="name" title="Nombre" />
-                                                                                        <g:sortableColumn property="last_name" title="Apellido" />
-                                                                                        <g:sortableColumn property="ci" title="C.I" />
+											<g:sortableColumn property="last_name" title="Apellido" />
+											<g:sortableColumn property="ci" title="C.I" />
 											<g:sortableColumn property="address" title="Direcccion" />
 											<g:sortableColumn property="email" title="Correo" />
 											<g:sortableColumn property="phone" title="Telefono" />
-											<td>Acciones</td>
+											<td></td>
 										</tr>
 									</thead>
 									<tbody>
 										<g:each in="${doctorInstanceList}" status="i"
-										
 											var="doctorInstance">
 
 											<tr>
 												<td>
 													${fieldValue(bean: doctorInstance, field: "name")}
 												</td>
-                                                                                                <td>
+												<td>
 													${fieldValue(bean: doctorInstance, field: "lastName")}
 												</td>
-                                                                                                <td>
+												<td>
 													${fieldValue(bean: doctorInstance, field: "ci")}
 												</td>
 												<td>
@@ -72,13 +81,11 @@
 												<td>
 													${fieldValue(bean: doctorInstance, field: "phone")}
 												</td>
-												
-												<%--  <td>${fieldValue(bean: laboratoryInstance, field: "laboratory.id")}</td>		--%>
-												<td class="center">
-													<g:link action="show" class="btn btn-primary" id="${doctorInstance.getId()}">${}<i class="fa fa-eye"></i> Ver Detalle</g:link>
-													<g:link action="edit" class="btn btn-success" id="${doctorInstance.getId()}">${}<i class="fa fa-pencil"></i> Editar</g:link>
 
-												</td>
+												<%--  <td>${fieldValue(bean: laboratoryInstance, field: "laboratory.id")}</td>		--%>
+												<td class="center"><g:link action="edit"
+														class="btn btn-success" id="${doctorInstance.getId()}">
+														${}<i class="fa fa-pencil"></i> Editar</g:link></td>
 											</tr>
 
 										</g:each>

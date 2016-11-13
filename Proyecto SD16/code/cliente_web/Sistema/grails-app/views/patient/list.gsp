@@ -20,11 +20,25 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<g:if test="${flash.message}">
-						<div class="message" role="status">
-							${flash.message}
-						</div>
-					</g:if>
+					<div class="col-sm-4">
+						<a class="btn btn-success" href="/Sistema/patient/create"
+							role="button"><i class="fa fa-plus"></i> Agregar Paciente</a>
+					</div>
+					<div class="col-sm-6">
+						<g:form action="list" class="form-search">
+
+							<div class="input-group col-md-10">
+								<input type="text" name="text" class="form-control"
+									placeholder="Ingrese un texto para buscar" /> <span
+									class="input-group-btn">
+									<button class="btn btn-primary" name="list" value="Buscar">
+										<span class=" glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+						</g:form>
+					</div>
+					<br> <br> <br>
 					<div class="dataTable_wrapper">
 						<div class="row">
 							<div class="col-sm-12">
@@ -45,7 +59,6 @@
 									</thead>
 									<tbody>
 										<g:each in="${patientInstanceList}" status="i"
-										
 											var="patientInstance">
 
 											<tr>
@@ -70,13 +83,14 @@
 												<td>
 													${fieldValue(bean: patientInstance, field: "phone")}
 												</td>
-												
-												<%--  <td>${fieldValue(bean: patientInstance, field: "patient.id")}</td>		--%>
-												<td class="center">
-													<g:link action="show" class="btn btn-primary" id="${patientInstance.getId()}">${}<i class="fa fa-eye"></i> Ver Detalle</g:link>
-													<g:link action="edit" class="btn btn-success" id="${patientInstance.getId()}">${}<i class="fa fa-pencil"></i> Editar</g:link>
 
-												</td>
+												<%--  <td>${fieldValue(bean: patientInstance, field: "patient.id")}</td>		--%>
+												<td class="center"><g:link action="show"
+														class="btn btn-primary" id="${patientInstance.getId()}">
+														${}<i class="fa fa-eye"></i> Ver Detalle</g:link> <g:link
+														action="edit" class="btn btn-success"
+														id="${patientInstance.getId()}">
+														${}<i class="fa fa-pencil"></i> Editar</g:link></td>
 											</tr>
 
 										</g:each>
