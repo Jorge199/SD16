@@ -12,6 +12,8 @@
 </head>
 <body>
 	<%@ page import="com.sd.uni.labpatologia.util.DiagnosticEnum"%>
+	
+	
 
 
 	<div class="container-fluid">
@@ -50,30 +52,32 @@
 								<div class="col-md-6">
 									<div
 										class="fieldcontain ${hasErrors(bean: reportInstance, field: 'start', 'error')} required">
-										<div class="col-md-1">
-											<label for="start"> <g:message code="Desde" />
+										<div class="col-md-4">
+											<label for="start"> <g:message
+													code="Desde (Fecha de Informe)" />
 											</label>
 										</div>
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker1'>
-													<input type='text' class="form-control input-sm" name="startSearch"  /> <span
-														class="input-group-addon"> <span
-														class="glyphicon glyphicon-calendar"> </span>
+													<input type='text' class="form-control input-sm"
+														name="startSearch" /> <span class="input-group-addon">
+														<span class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
 											</div>
 										</div>
-										<div class="col-md-1">
-											<label for="start"> <g:message code="Hasta" />
+										<div class="col-md-4">
+											<label for="start"> <g:message
+													code="Hasta (Fecha de Informe)" />
 											</label>
 										</div>
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker2'>
-													<input type='text' class="form-control input-sm" name="endSearch" /> <span
-														class="input-group-addon"> <span
-														class="glyphicon glyphicon-calendar"> </span>
+													<input type='text' class="form-control input-sm"
+														name="endSearch" /> <span class="input-group-addon">
+														<span class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
 											</div>
@@ -99,13 +103,16 @@
 									width="100%">
 									<thead>
 										<tr>
-											<g:sortableColumn property="id" title="ID" />
-											<g:sortableColumn property="request" title="Código Request" />
-											<g:sortableColumn property="date" title="Fecha" />
+											<g:sortableColumn property="request"
+												title="Código de Solicitud" />
+											<g:sortableColumn property="date_request"
+												title="Fecha de Solicitud" />
+											<g:sortableColumn property="date_report"
+												title="Fecha de Informe" />
+											<g:sortableColumn property="patient" title="Paciente" />
+											<g:sortableColumn property="doctor" title="Doctor" />
 											<g:sortableColumn property="diagnostic" title="Diagnostico" />
-											<g:sortableColumn property="observation"
-												title="Observaciones" />
-											<td>Acciones</td>
+											<td></td>
 										</tr>
 									</thead>
 									<tbody>
@@ -113,20 +120,27 @@
 											var="reportInstance">
 
 											<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-												<td><g:link action="show" id="${reportInstance.id}">
-														${fieldValue(bean: reportInstance, field: "id")}
+												<td><g:link action="edit" controller="request"
+														id="${reportInstance.request.id}">
+														${fieldValue(bean: reportInstance, field: "request.code")}
 													</g:link></td>
+
 												<td>
-													${fieldValue(bean: reportInstance, field: "request.code")}
+													${formatDate(format: 'dd/MM/yyyy', date:reportInstance.getRequest().getDate())}
 												</td>
 												<td>
-													${fieldValue(bean: reportInstance, field: "date")}
+													${formatDate(format: 'dd/MM/yyyy', date:reportInstance.getDate())}
+												</td>
+												<td>
+													${fieldValue(bean: reportInstance, field: "request.patient.name")}
+													${fieldValue(bean: reportInstance, field: "request.patient.lastName")}
+												</td>
+												<td>
+													${fieldValue(bean: reportInstance, field: "request.doctor.name")}
+													${fieldValue(bean: reportInstance, field: "request.doctor.lastName")}
 												</td>
 												<td>
 													${fieldValue(bean: reportInstance, field: "diagnostic")}
-												</td>
-												<td>
-													${fieldValue(bean: reportInstance, field: "observations")}
 												</td>
 
 												<%--  <td>${fieldValue(bean: reportInstance, field: "request.id")}</td>		--%>
@@ -140,21 +154,23 @@
 
 									</tbody>
 								</table>
-								
+
 								<div class="panel-body">
 									<g:form action="list">
 										<g:hiddenField name="text" value="${text}" />
 										<g:if test="${page > 0}">
 											<fieldset class="buttons col-sm-1">
-												<button type="submit" class="btn btn-default" name="page" value="${page - 1}">
-													<i class="fa fa-arrow-left"></i> Anterior 
+												<button type="submit" class="btn btn-default" name="page"
+													value="${page - 1}">
+													<i class="fa fa-arrow-left"></i> Anterior
 												</button>
 											</fieldset>
 										</g:if>
 										<g:if test="${siguiente > 0}">
 											<fieldset class="buttons col-sm-1">
-												<button type="submit" class="btn btn-default" name="page" value="${page + 1}">
-													<i class="fa fa-arrow-right"></i> Siguiente 
+												<button type="submit" class="btn btn-default" name="page"
+													value="${page + 1}">
+													<i class="fa fa-arrow-right"></i> Siguiente
 												</button>
 											</fieldset>
 										</g:if>
@@ -187,7 +203,7 @@
 	<!-- Bootstrap datetimepicker -->
 	<script
 		src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.min.js"></script>
-		<script
+	<script
 		src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.es.js"></script>
 
 	<link rel="stylesheet"

@@ -105,7 +105,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		dto.setStudyId(domain.getStudyType().getId());
 		dto.setDoctorId(domain.getDoctor().getId());
 		dto.setDate(domain.getDate());
-		dto.setUserId(domain.getUser().getId());
+		//dto.setUserId(domain.getUser().getId());
 		dto.setStatus(domain.getStatus());
 		return dto;
 	}
@@ -117,7 +117,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		domain.setPatient(patientDao.getById(dto.getPatientId()));
 		domain.setStudyType(studyTypeDao.getById(dto.getStudyId()));
 	    domain.setDoctor(doctorDao.getById(dto.getDoctorId()));
-		domain.setUser(userDao.getById(dto.getUserId()));
+		//domain.setUser(userDao.getById(dto.getUserId()));
 		
 		domain.setNote(dto.getNote());
 		domain.setDate(dto.getDate());

@@ -17,7 +17,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4>
-						<strong>Registrar Informe</strong>
+						<strong>Generar Informe</strong>
 					</h4>
 				</div>
 				<div class="panel-body">
@@ -31,7 +31,7 @@
 								<div class="text-right">
 									<button type="submit" class="btn btn-primary" name="create"
 										value="${reportInstance?.request?.id}">
-										<i class="fa fa-floppy-o"></i> Reportar
+										<i class="fa fa-floppy-o"></i> Guardar
 									</button>
 								</div>
 							</div>
