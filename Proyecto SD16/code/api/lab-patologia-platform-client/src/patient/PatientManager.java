@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
+import com.sd.uni.labpatologia.util.SexEnum;
 
 import base.AbstractBaseManager;
 
@@ -17,7 +18,7 @@ public class PatientManager extends AbstractBaseManager {
 		patientDTO.setName(nombre);
 		patientDTO.setLastName(lastName);
 		patientDTO.setDocument(document);
-		patientDTO.setSex(sex);
+		patientDTO.setSex(SexEnum.valueOf(sex));
 		patientDTO.setBirthDate(birthDate);
 		patientDTO.setAddress(address);
 		patientDTO.setPhone(phone);
