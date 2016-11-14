@@ -3,6 +3,8 @@ package com.sd.uni.labpatologia.report
 import java.text.SimpleDateFormat;
 
 import com.sd.uni.labpatologia.beans.report.ReportB
+import com.sd.uni.labpatologia.service.doctor.IDoctorService;
+import com.sd.uni.labpatologia.service.patient.IPatientService;
 import com.sd.uni.labpatologia.service.report.IReportService;
 import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
 import com.sd.uni.labpatologia.service.request.IRequestService;
@@ -15,6 +17,8 @@ class ReportController {
 	//service
 	def IReportService reportService;
 	def IRequestService requestService;
+	def IDoctorService doctorService;
+	def IPatientService patientService;
 	def index() {
 		redirect(action: "list", params: params)
 	}

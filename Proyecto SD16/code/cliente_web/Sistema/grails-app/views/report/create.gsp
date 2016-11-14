@@ -27,10 +27,17 @@
 						</fieldset>
 						<fieldset class="buttons">
 							<br>
-							<button type="submit" class="btn btn-primary" name="create"
-								value="${reportInstance?.request?.id}">
-								<i class="fa fa-floppy-o"></i> Crear
-							</button>
+							<div class="col-xs-8">
+								<div class="text-right">
+									<button type="submit" class="btn btn-primary" name="create"
+										value="${reportInstance?.request?.id}">
+										<i class="fa fa-floppy-o"></i> Reportar
+									</button>
+								</div>
+							</div>
+
+
+
 						</fieldset>
 					</g:form>
 				</div>

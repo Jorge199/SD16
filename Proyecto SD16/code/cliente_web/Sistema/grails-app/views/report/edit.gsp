@@ -23,14 +23,22 @@
 							</fieldset>
 							<fieldset class="buttons">
 								<br>
-								<button type="submit" class="btn btn-success" name="edit" value="${reportInstance?.id}">
-  									<i class="fa fa-pencil"></i> Actualizar  
+								<div class="col-xs-8">
+								<div class="text-right">
+									<button type="submit" class="btn btn-primary" name="edit" value="${reportInstance?.id}">
+  									<i class="fa fa-save"></i> Guardar  
 								</button>
+								</div>
+							</div>
+								
 							</fieldset>
 						</g:form>						
 					</div>
 				</div>
 			</div>
 		</div>
+		    <!-- Bootstrap Core JavaScript -->
+    <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
+		
 </body>
 </html>

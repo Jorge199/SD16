@@ -24,6 +24,10 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	private IReportResource _reportResource;
 	@Autowired
 	private IRequestService _requestService;
+	@Autowired
+	private IRequestService _patienService;
+	@Autowired
+	private IRequestService _doctorService;
 
 	public ReportServiceImpl() {
 	}
