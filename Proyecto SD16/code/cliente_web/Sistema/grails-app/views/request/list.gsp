@@ -28,15 +28,22 @@
 						</div>
 					</g:if>
 					<div class="row">
+						<div class="col-md-4">
+							<a class="btn btn-success" href="/Sistema/request/create"
+							role="button"><i class="fa fa-plus"></i>Agregar Ficha</a>
+						</div>
+						<br><br>
 						<div class="panel-body">
 							<g:form action="list">
 								<div class="col-md-4">
+											
 									<div
 										class="fieldcontain ${hasErrors(bean: requestInstance, field: 'status', 'error')} required">
 										<label class="col-sm-3" for="status"> <g:message
 												code="Estado" />
 										</label>
 										<div class="col-md-9">
+		
 											<g:select name="status" class="form-control input-sm"
 												from="${StatusEnum.values()}" name="statusSearch"
 												optionKey="key"
@@ -48,8 +55,8 @@
 								<div class="col-md-6">
 									<div
 										class="fieldcontain ${hasErrors(bean: requestInstance, field: 'start', 'error')} required">
-										<div class="col-md-1">
-											<label for="start"> <g:message code="Desde" />
+										<div class="col-md-4">
+											<label for="start"> <g:message code="Desde Fecha" />
 											</label>
 										</div>
 										<div class="col-md-5">
@@ -62,8 +69,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-1">
-											<label for="start"> <g:message code="Hasta" />
+										<div class="col-md-4">
+											<label for="start"> <g:message code="Hasta Fecha" />
 											</label>
 										</div>
 										<div class="col-md-5">
@@ -83,7 +90,9 @@
 									<button type="submit" class="btn btn-primary" name="list">
 										<i class="fa fa-search"></i> Buscar
 									</button>
+									<br>
 								</fieldset>
+								
 							</g:form>
 						</div>
 					</div>
@@ -97,14 +106,13 @@
 									width="100%">
 									<thead>
 										<tr>
-											<g:sortableColumn property="id" title="Nª" />
+											<g:sortableColumn property="id" title="Codigo" />
 											<g:sortableColumn property="date" title="Fecha" />
 											<g:sortableColumn property="status" title="Estado" />
 											<g:sortableColumn property="doctor" title="Doctor" />
 											<g:sortableColumn property="patient" title="Paciente" />
-											<g:sortableColumn property="studyType"
-												title="Tipo de estudio" />
-											<td>Acciones</td>
+											<g:sortableColumn property="studyType" title="Tipo de estudio" />
+											<td></td>
 										</tr>
 									</thead>
 									<tbody>
@@ -112,9 +120,9 @@
 											var="requestInstance">
 
 											<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-												<td><g:if test="${requestInstance?.id}">
+												<td><g:if test="${requestInstance?.code}">
 														<label>
-															${requestInstance?.id }
+															${requestInstance?.code }
 														</label>
 													</g:if></td>
 												<td><g:if test="${requestInstance?.date}">
@@ -167,25 +175,7 @@
 
 									</tbody>
 								</table>
-								<div class="panel-body">
-									<g:form action="list">
-										<g:hiddenField name="text" value="${text}" />
-										<g:if test="${page > 0}">
-											<fieldset class="buttons col-sm-1">
-												<button type="submit" class="btn btn-default" name="page" value="${page - 1}">
-													<i class="fa fa-arrow-left"></i> Anterior 
-												</button>
-											</fieldset>
-										</g:if>
-										<g:if test="${siguiente > 0}">
-											<fieldset class="buttons col-sm-1">
-												<button type="submit" class="btn btn-default" name="page" value="${page + 1}">
-													<i class="fa fa-arrow-right"></i> Siguiente 
-												</button>
-											</fieldset>
-										</g:if>
-									</g:form>
-								</div>
+								<div class="pagination"></div>
 							</div>
 						</div>
 					</div>
