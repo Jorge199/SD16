@@ -13,9 +13,11 @@
 		<g:field type="email" class="form-control" maxlength="50" name="email" value="${laboratoryInstance?.email }"/>
 	</div>
 	<div class="col-md-6">
-		<label>Telèfono<span class="required-indicator"></span></label>
-		<input type="text" class="form-control" pattern="[\(09]\d{2}\d{2}[\)]\d{3}[\-]\d{3}" maxlength="20" title='Formato: (9999)999-999' name="phone" value="${laboratoryInstance?.phone}"/>
-	</div>
+		<label>Teléfono</label> <input type="text" class="form-control"
+			id="phoneNum" maxlength="20" placeholder="Ingrese un Número"
+			data-mask="(9999) 999-999" name="phone" 
+			value="${laboratoryInstance?.phone}" />
+        </div>
 </div>
 
 

@@ -89,7 +89,11 @@ class PatientController {
 		}catch(NullPointerException n){
 			n.printStackTrace()
 		}
-		
+		patientInstance.setName(params.get("name"))
+                patientInstance.setLastName(params.get("lastName"))
+                patientInstance.setDocument(params.get("document"))
+                patientInstance.setAddress(params.get("address"))
+                patientInstance.setPhone(params.get("phone"))
 		patientService.save(patientInstance)
 		redirect(action: "list")
 

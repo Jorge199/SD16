@@ -33,5 +33,9 @@
    
     <!-- Bootstrap Core JavaScript -->
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
-
+    <!-- Jasny-Bootstrap JavaScript -->
+	<script src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$("#phoneNum").mask("(999) 999-9999");
+	</script>
 </html>

@@ -18,7 +18,7 @@
 
 	<div class="col-md-6">
 		<label>C.I</label>
-		<g:field type="number" class="form-control" name="ci" placeholder="Ingrese un número de Cédula"
+		<g:field type="number" class="form-control" min="100000" max="100000000" name="ci" placeholder="Ingrese un número de Cédula"
 			value="${doctorInstance?.ci}" />
 	</div>
 	<div class="col-md-6">

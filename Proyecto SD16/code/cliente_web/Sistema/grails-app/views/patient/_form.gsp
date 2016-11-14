@@ -3,12 +3,12 @@
 <div class="row">
 	<div class="col-md-6">
 		<label>Nombre<span class="required-indicator">*</span></label>
-		<g:textField class="form-control" required="" name="name"
+		<g:textField class="form-control" required="" maxlength="50" name="name"
 			placeholder="Ingrese un Nombre" value="${patientInstance?.name }" />
 	</div>
 	<div class="col-md-6">
 		<label>Apellido<span class="required-indicator">*</span></label>
-		<g:textField class="form-control" required="" name="lastName"
+		<g:textField class="form-control" required="" maxlength="50" name="lastName"
 			placeholder="Ingrese un Apellido"
 			value="${patientInstance?.lastName }" />
 	</div>
@@ -16,13 +16,14 @@
 
 	<div class="col-md-6">
 		<label>C.I</label>
-		<g:textField class="form-control" name="document"
+		<g:field type="number" class="form-control" 
+                        min="100000" max="100000000"  name="document"
 			placeholder="Ingrese un Número de Cédula"
 			value="${patientInstance?.document}" />
 	</div>
 	<div class="col-md-6">
 		<label>Dirección</label>
-		<g:textField class="form-control" name="address"
+		<g:textField class="form-control" name="address" maxlength="50"
 			placeholder="Ingrese una Dirección"
 			value="${patientInstance?.address}" />
 	</div>
