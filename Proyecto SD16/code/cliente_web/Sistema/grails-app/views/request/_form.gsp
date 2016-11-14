@@ -12,7 +12,7 @@
 	<div class=col-md-12>
 		<div class="col-md-4">
 				<label>Paciente<span class="required-indicator">*</span></label>
-				<g:select  class="form-control many-to-one" name="patient" from="${patients}" value="${requestInstance?.patient}"
+				<g:select  class="form-control many-to-one" name="patientId" from="${patients}" value="${requestInstance?.patient}"
 				optionKey="id" optionValue="name" required=""
 				noSelection="${['null':'Seleccione un paciente..']}"
 			  	required=""/>
@@ -20,7 +20,7 @@
 		
 		<div class="col-md-4">
 				<label>Doctor<span class="required-indicator">*</span></label>
-				<g:select class="form-control many-to-one" name="doctor" from="${doctors}"  value="${requestInstance?.doctor}"
+				<g:select class="form-control many-to-one" name="doctorId" from="${doctors}"  value="${requestInstance?.doctor}"
 				optionKey="id" optionValue="name" 
 				noSelection="${['null':'Seleccione un doctor..']}"
 				required=""/>
@@ -28,7 +28,7 @@
 		
 		<div class="col-md-4">
 			<label>Tipo de Estudio<span class="required-indicator">*</span></label>
-			<g:select  class="form-control" name="studyType" from="${studies}" value="${requestInstance?.studyType}"
+			<g:select  class="form-control" name="studyTypeId" from="${studies}" value="${requestInstance?.studyType}"
 			optionKey="id" optionValue="name" required=""
 			noSelection="${['null':'Seleccione un estudio..']}"
 			required=""/>

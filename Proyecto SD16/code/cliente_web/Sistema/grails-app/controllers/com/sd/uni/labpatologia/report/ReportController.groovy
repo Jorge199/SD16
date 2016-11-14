@@ -30,9 +30,6 @@ class ReportController {
 			page = Integer.parseInt(params.get("page"))
 		}
 		def reports = null
-		if(null != params.get("page")){
-			page = Integer.parseInt(params.get("page"))
-		}
 		String textToFind="";
 		if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
 			textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
