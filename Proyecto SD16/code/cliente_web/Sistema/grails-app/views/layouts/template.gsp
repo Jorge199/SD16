@@ -186,7 +186,7 @@
 				<a href="mailto:jorgeesquivelfernandez@gmail.com?Subject=Laboratorio%20SD2016">Jorge Esquivel</a> - 
 				<a href="mailto:jabel.oalex@gmail.com?Subject=Laboratorio%20SD2016">Alex Jiñes</a> -
 				<a href="mailto:taniamonges@gmail.com?Subject=Laboratorio%20SD2016">Tania Monges</a> 
-				<br> <a href="mailto:diazpany@gmail.com?Subject=Laboratorio%20SD2016">Jerson Paniagua</a> - 
+				<a href="mailto:diazpany@gmail.com?Subject=Laboratorio%20SD2016">Jerson Paniagua</a> - 
 				<a href="mailto:fa.talavera95@gmail.com?Subject=Laboratorio%20SD2016">Fátima Talavera</a> 
 				<br> Líder del Proyecto: <a href="mailto:medinaldo@gmail.com?Subject=Laboratorio%20SD2016">Ing. Aldo Medina</a>
 				
