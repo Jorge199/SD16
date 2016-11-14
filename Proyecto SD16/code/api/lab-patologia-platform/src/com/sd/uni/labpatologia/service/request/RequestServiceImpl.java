@@ -3,6 +3,7 @@ package com.sd.uni.labpatologia.service.request;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -17,12 +18,14 @@ import com.sd.uni.labpatologia.dao.request.IRequestDao;
 import com.sd.uni.labpatologia.dao.request.RequestDaoImpl;
 import com.sd.uni.labpatologia.dao.study_type.IStudyTypeDao;
 import com.sd.uni.labpatologia.dao.user.IUserDao;
+import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
+import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
 import com.sd.uni.labpatologia.util.StatusEnum;
 
 @Service
@@ -46,19 +49,27 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	@Autowired
 	private IReportDao reportDao;
 
-
+	private static Logger logger = Logger.getLogger(RequestServiceImpl.class);
+	
 	@Override
 	@Transactional
 	@CacheEvict(value= "lab-patologia-platform-cache",key = "'requests'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'request_' + #dto.id", condition="#dto.id!=null")
 	public RequestDTO save(RequestDTO dto) {
-		final RequestDomain domain = convertDtoToDomain(dto);
-		final RequestDomain request = requestDao.save(domain);
-		final RequestDTO newDto = convertDomainToDto(request);
-		if (dto.getId() == null) {
-			getCacheManager().getCache("lab-patologia-platform-cache").put("request_" + request.getId(), newDto);
+		try { 
+		    // Lanzo exepcion de tipo runtime para realizar rollback
+			final RequestDomain domain = convertDtoToDomain(dto);
+			final RequestDomain request = requestDao.save(domain);
+			final RequestDTO newDto = convertDomainToDto(request);
+			if (dto.getId() == null) {
+				getCacheManager().getCache("lab-patologia-platform-cache").put("request_" + request.getId(), newDto);
+			}
+			return newDto;
+		} catch(PatologyException ex) { 
+			 logger.error(ex);
+			 throw new RuntimeException("Error"+RequestServiceImpl.class+"" + ex.getMessage(), ex); 
 		}
-		return newDto;
+		
 	}
 
 	@Override
@@ -73,7 +84,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	@Override
 	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'requests'")
-	public RequestResult getAll() {
+	public RequestResult getAll(){
 		final List<RequestDTO> requests = new ArrayList<>();
 		for (RequestDomain domain : requestDao.findAll()) {
 			final RequestDTO dto = convertDomainToDto(domain);
@@ -85,36 +96,33 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	}
 
 	@Override
-	protected RequestDTO convertDomainToDto(RequestDomain domain) {
+	protected RequestDTO convertDomainToDto(RequestDomain domain){
 		final RequestDTO dto = new RequestDTO();
 		dto.setId(domain.getId());
-		if (null != domain.getNote()) dto.setNote(domain.getNote());
-		if (null != domain.getCode()) dto.setCode(domain.getCode());
-		if (null != domain.getPatient()) dto.setPatientId(domain.getPatient().getId());
-		if (null != domain.getStudyType())dto.setStudyId(domain.getStudyType().getId());
-		if (null != domain.getDoctor()) dto.setDoctorId(domain.getDoctor().getId());
-		if (null != domain.getDate()) dto.setDate(domain.getDate());
-		if (null != domain.getUser()) dto.setUserId(domain.getUser().getId());
-		if (null != domain.getStatus()) dto.setStatus(domain.getStatus());
+		dto.setNote(domain.getNote());
+		dto.setCode(domain.getCode());
+		dto.setPatientId(domain.getPatient().getId());
+		dto.setStudyId(domain.getStudyType().getId());
+		dto.setDoctorId(domain.getDoctor().getId());
+		dto.setDate(domain.getDate());
+		dto.setUserId(domain.getUser().getId());
+		dto.setStatus(domain.getStatus());
 		return dto;
 	}
 
 	@Override
-	protected RequestDomain convertDtoToDomain(RequestDTO dto) {
+	protected RequestDomain convertDtoToDomain(RequestDTO dto) throws PatologyException{
 		final RequestDomain domain = new RequestDomain();
 		domain.setId(dto.getId());
-		try {
-			if (null != dto.getPatientId()) domain.setPatient(patientDao.getById(dto.getPatientId()));
-			if (null != dto.getStudyId()) domain.setStudyType(studyTypeDao.getById(dto.getStudyId()));
-			if (null != dto.getDoctorId()) domain.setDoctor(doctorDao.getById(dto.getDoctorId()));
-			if (null != dto.getUserId()) domain.setUser(userDao.getById(dto.getUserId()));
-		} catch (PatologyException e) {
-			e.printStackTrace();
-		}
-		if (null != dto.getNote()) domain.setNote(dto.getNote());
-		if (null != dto.getDate()) domain.setDate(dto.getDate());
-		if (null != dto.getCode()) domain.setCode(dto.getCode());
-		if (null != dto.getStatus()) domain.setStatus(dto.getStatus());
+		domain.setPatient(patientDao.getById(dto.getPatientId()));
+		domain.setStudyType(studyTypeDao.getById(dto.getStudyId()));
+	    domain.setDoctor(doctorDao.getById(dto.getDoctorId()));
+		domain.setUser(userDao.getById(dto.getUserId()));
+		
+		domain.setNote(dto.getNote());
+		domain.setDate(dto.getDate());
+		domain.setCode(dto.getCode());
+		domain.setStatus(dto.getStatus());
 		return domain;
 	}
 

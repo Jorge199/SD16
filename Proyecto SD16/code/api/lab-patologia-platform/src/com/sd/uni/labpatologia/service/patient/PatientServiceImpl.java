@@ -3,6 +3,7 @@ package com.sd.uni.labpatologia.service.patient;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -13,11 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.uni.labpatologia.dao.patient.IPatientDao;
 import com.sd.uni.labpatologia.dao.patient.PatientDaoImpl;
 import com.sd.uni.labpatologia.domain.patient.PatientDomain;
+import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
+import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
+import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
+import com.sd.uni.labpatologia.service.request.RequestServiceImpl;
 
 @Service
 public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomain, PatientDaoImpl, PatientResult> implements IPatientService {
@@ -25,18 +30,26 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 	@Autowired
 	private IPatientDao patientDao;
 	
+	private static Logger logger = Logger.getLogger(PatientServiceImpl.class);
 	@Override
 	@Transactional
 	@CacheEvict(value= "lab-patologia-platform-cache",key = "'patients'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'patient_' + #dto.id", condition="#dto.id!=null")
 	public PatientDTO save(PatientDTO dto) {
-		final PatientDomain patientDomain = convertDtoToDomain(dto);
-		final PatientDomain patient = patientDao.save(patientDomain);
-		final PatientDTO newDto = convertDomainToDto(patient);
-		if (null==dto.getId() ) {
-			getCacheManager().getCache("lab-patologia-platform-cache").put("patient_" +newDto.getId(), newDto);
+		try { 
+		    // Lanzo exepcion de tipo runtime para realizar rollback
+			final PatientDomain patientDomain = convertDtoToDomain(dto);
+			final PatientDomain patient = patientDao.save(patientDomain);
+			final PatientDTO newDto = convertDomainToDto(patient);
+			if (null==dto.getId() ) {
+				getCacheManager().getCache("lab-patologia-platform-cache").put("patient_" +newDto.getId(), newDto);
+			}
+			return newDto;
+		} catch(PatologyException ex) { 
+			 logger.error(ex);
+			 throw new RuntimeException("Error"+PatientServiceImpl.class+"" + ex.getMessage(), ex); 
 		}
-		return newDto;
+		
 	}
 
 	@Override
@@ -78,7 +91,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 	}
 
 	@Override
-	protected PatientDomain convertDtoToDomain(PatientDTO dto) {
+	protected PatientDomain convertDtoToDomain(PatientDTO dto) throws PatologyException {
 		final PatientDomain patient = new PatientDomain();
 		patient.setId(dto.getId());
 		patient.setName(dto.getName());

@@ -29,7 +29,7 @@ public class CountryResource {
 
 	@GET
 	@Produces("application/xml")
-	public CountryResult getAll() {
+	public CountryResult getAll() throws PatologyException {
 		return countryService.getAll();
 	}
 

@@ -29,7 +29,7 @@ public class ReportResource {
 
 	@GET
 	@Produces("application/xml")
-	public ReportResult getAll() {
+	public ReportResult getAll() throws PatologyException {
 		return reportService.getAll();
 	}
 

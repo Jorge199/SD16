@@ -29,7 +29,7 @@ public class StudyTypeResource {
 
 	@GET
 	@Produces("application/xml")
-	public StudyTypeResult getAll() {
+	public StudyTypeResult getAll() throws PatologyException {
 		return studyTypeService.getAll();
 	}
 	
