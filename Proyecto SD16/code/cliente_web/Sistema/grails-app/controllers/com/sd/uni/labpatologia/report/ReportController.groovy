@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 
 import com.sd.uni.labpatologia.beans.report.ReportB
 import com.sd.uni.labpatologia.service.doctor.IDoctorService;
+import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.patient.IPatientService;
 import com.sd.uni.labpatologia.service.report.IReportService;
 import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
@@ -19,6 +20,7 @@ class ReportController {
 	def IRequestService requestService;
 	def IDoctorService doctorService;
 	def IPatientService patientService;
+	def ILaboratoryService laboratoryService;
 	def index() {
 		redirect(action: "list", params: params)
 	}
@@ -53,13 +55,13 @@ class ReportController {
 		}
 		textToFind ="";
 		System.out.println("Cantidad Reportes----------------------------->"+reports.size())
-		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size()]
+		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	
 	def create(Integer id) {
 		def reportInstance = new ReportB(params)
 		reportInstance.setRequest(requestService.getById(id))
-		[reportInstance: reportInstance] //, requests:requestService.getAll()]
+		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll()] //, requests:requestService.getAll()]
 	}
 	def save(Integer id) {
 		
@@ -92,7 +94,7 @@ class ReportController {
 					redirect(action: "list")
 					return
 				}
-		[reportInstance: reportInstance]
+		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	
 	def update(Integer id) {

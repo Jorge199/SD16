@@ -51,7 +51,7 @@ class LaboratoryController {
 		if (!newLaboratory?.getId()) {
 		
 		}
-		redirect(action: "_list", id: newLaboratory.getId())
+		redirect(uri: "/inicio/index")
 	}
 	
 	

@@ -10,7 +10,9 @@
 <meta name="author" content="">
 <asset:stylesheet src="application.css" />
 <asset:javascript src="application.js" />
-<title>Template</title>
+<title>
+	Sistema
+</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="${request.contextPath}/template/css/bootstrap.min.css?v=1"

@@ -3,6 +3,7 @@ package com.sd.uni.labpatologia.request
 import com.sd.uni.labpatologia.beans.request.RequestB
 import com.sd.uni.labpatologia.service.doctor.DoctorServiceImpl
 import com.sd.uni.labpatologia.service.doctor.IDoctorService
+import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.patient.IPatientService
 import com.sd.uni.labpatologia.service.patient.PatientServiceImpl
 import com.sd.uni.labpatologia.service.request.IRequestService
@@ -23,7 +24,8 @@ class RequestController {
 	def IPatientService patientService
 	def IStudyTypeService studyTypeService
 	def IUserService userService
-
+	def ILaboratoryService laboratoryService
+	
 	def index() {
 		redirect(action: "list",params: params)
 	}
@@ -57,14 +59,14 @@ class RequestController {
 		}
 		textToFind=""
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
-		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size()]
+		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
 
 	
 	}
 
 	def create() {
 		def requestInstance = new RequestB(params)
-		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll()]
+		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
 	def save(Integer id) {
@@ -95,7 +97,7 @@ class RequestController {
 					redirect(action: "list")
 					return
 				}
-		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll()]
+		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	
 	def update(Integer id) {

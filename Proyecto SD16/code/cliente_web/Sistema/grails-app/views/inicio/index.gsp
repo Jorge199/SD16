@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/Sistema/request/list">
                                 <div class="panel-footer">
                                     <span class="pull-left">Ver Detalle</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="/Sistema/paciente/crear">
+                            <a href="/Sistema/patient/list">
                                 <div class="panel-footer">
                                     <span class="pull-left">Ver Detalle</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
