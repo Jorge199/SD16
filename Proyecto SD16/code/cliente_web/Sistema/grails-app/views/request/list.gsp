@@ -30,7 +30,7 @@
 					<div class="row">
 						<div class="col-md-4">
 							<a class="btn btn-success" href="/Sistema/request/create"
-							role="button"><i class="fa fa-plus"></i>Agregar Ficha</a>
+							role="button"><i class="fa fa-plus"></i> Agregar Ficha</a>
 						</div>
 						<br><br>
 						<div class="panel-body">
@@ -120,36 +120,26 @@
 											var="requestInstance">
 
 											<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-												<td><g:if test="${requestInstance?.code}">
-														<label>
-															${requestInstance?.code }
-														</label>
-													</g:if></td>
-												<td><g:if test="${requestInstance?.date}">
-														<label>
-															${requestInstance?.date}
-														</label>
-													</g:if></td>
-												<td><g:if test="${requestInstance?.status}">
-														<g:textField name="status" from="${StatusEnum.values()}"
-															value="${requestInstance?.status}" optionKey="key"
-															readonly="true"></g:textField>
-													</g:if></td>
-												<td><g:if test="${requestInstance?.doctor?.id}">
-														<label>
-															${requestInstance?.doctor?.name}
-														</label>
-													</g:if></td>
-												<td><g:if test="${requestInstance?.patient?.id}">
-														<label>
-															${requestInstance?.patient?.name}
-														</label>
-													</g:if></td>
-												<td><g:if test="${requestInstance?.studyType?.id}">
-														<label>
-															${requestInstance?.studyType?.name}
-														</label>
-													</g:if></td>
+												<td>
+													${requestInstance?.code }
+												</td>
+												<td>
+													${formatDate(format: 'dd/MM/yyyy', date:requestInstance.getDate())}
+												</td>
+												<td>
+													${requestInstance?.status} 
+												</td>
+												<td>
+													${requestInstance?.doctor?.name} ${requestInstance?.doctor?.lastName}
+													<br>${requestInstance?.doctor?.phone}
+												</td>
+												<td>
+													${requestInstance?.patient?.name} ${requestInstance?.patient?.lastName}
+													<br>${requestInstance?.patient?.phone}
+												</td>
+												<td>
+													${requestInstance?.studyType?.name}
+												</td>
 
 												<td class="center"><g:link action="edit"
 														class="btn btn-success" id="${requestInstance.getId()}">
@@ -158,13 +148,13 @@
 														test="${requestInstance?.status==StatusEnum.PROCESADO}">
 														<g:link action="create" class="btn btn-default"
 															controller="report" id="${requestInstance.getId()}">
-															${}<i class="fa fa-list-alt"></i> Generar Informe</g:link>
+															${}<i class="fa fa-list-alt"></i> Informar</g:link>
 														</g:if>
 														<g:if
 														test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
 														<g:link action="edit" class="btn btn-default"
 															controller="report" id="${requestInstance.getId()}">
-															${}<i class="fa fa-list-alt"></i> Editar Informe</g:link>
+															${}<i class="fa fa-list-alt"></i> Informe</g:link>
 														</g:if>
 													
 													</td>
@@ -175,7 +165,25 @@
 
 									</tbody>
 								</table>
-								<div class="pagination"></div>
+								<div class="panel-body">
+									<g:form action="list">
+										<g:hiddenField name="text" value="${text}" />
+										<g:if test="${page > 0}">
+											<fieldset class="buttons col-sm-1">
+												<button type="submit" class="btn btn-default" name="page" value="${page - 1}">
+													<i class="fa fa-arrow-left"></i> Anterior 
+												</button>
+											</fieldset>
+										</g:if>
+										<g:if test="${siguiente > 0}">
+											<fieldset class="buttons col-sm-1">
+												<button type="submit" class="btn btn-default" name="page" value="${page + 1}">
+													<i class="fa fa-arrow-right"></i> Siguiente 
+												</button>
+											</fieldset>
+										</g:if>
+									</g:form>
+								</div>
 							</div>
 						</div>
 					</div>

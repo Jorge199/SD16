@@ -21,10 +21,16 @@
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="buttons">
-								<br>
-								<button type="submit" class="btn btn-success" name="edit" value="${requestInstance?.id}">
-  									<i class="fa fa-pencil"></i> Guardar  
-								</button>
+								<br> <br>
+								<div class="col-xs-10">
+									<div class="text-right">
+										<button type="submit" class="btn btn-success" name="edit" value="${requestInstance?.id}">
+		  									<i class="fa fa-pencil"></i> Guardar  
+										</button>
+										<a class="btn btn-default" href="/Sistema/request/list"
+										role="button"><i class="fa fa-times"></i> Cancelar</a>
+									</div>
+								</div>
 							</fieldset>
 						</g:form>						
 					</div>

@@ -70,8 +70,10 @@ class RequestController {
 	def save(Integer id) {
 		
 		def requestInstance = new RequestB(params)
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		requestInstance.setDate(formatter.parse(formatter.format(new Date())));
+		if(""!=params.get("date")){
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			requestInstance.setDate(formatter.parse(params.get("date")));
+		}
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
@@ -100,14 +102,21 @@ class RequestController {
 	
 	def update(Integer id) {
 		def requestInstance = new RequestB(params)
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		requestInstance.setDate(formatter.parse(formatter.format(new Date())));
+		requestInstance.setId(Integer.parseInt(params.get("edit")))
+		if(""!=params.get("date")){
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			requestInstance.setDate(formatter.parse(params.get("date")));
+		}
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
-		requestInstance.setId(Integer.parseInt(params.get("edit")))
-		requestInstance.setStatus(StatusEnum.valueOf(params.get("status")))
-		requestInstance.setCode(params.get("code"))
+		if (!"".equals(params.get("code"))){
+			requestInstance.setCode(params.get("code1")+"/"+params.get("code"))
+			requestInstance.setStatus(StatusEnum.valueOf(params.get("status")))
+		}else{
+			requestInstance.setCode(params.get("code1"))
+			requestInstance.setStatus(StatusEnum.valueOf(params.get("statusOld")))
+		}		
 		requestInstance.setNote(params.get("note"))
 		requestService.save(requestInstance)
 		redirect(action: "list")
