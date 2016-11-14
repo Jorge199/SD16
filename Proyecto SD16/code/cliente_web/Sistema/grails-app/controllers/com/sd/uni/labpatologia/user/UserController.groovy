@@ -4,6 +4,7 @@ package com.sd.uni.labpatologia.user
 import org.springframework.dao.DataIntegrityViolationException
 
 import com.sd.uni.labpatologia.beans.user.UserB
+import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.rol.*
 import com.sd.uni.labpatologia.service.user.*
 
@@ -14,7 +15,7 @@ class UserController {
 	//service
 	def IUserService userService =new UserServiceImpl()
 	def IRolService rolService=new RolServiceImpl()
-
+	def ILaboratoryService laboratoryService
 	def index() {
 		redirect(action: "list", params: params)
 	}
@@ -37,7 +38,7 @@ class UserController {
 			siguiente = userService.find(null,10,page+1)
 		}
 		
-		[userInstanceList: users, userInstanceTotal:users.size(), page: page, siguiente: siguiente?.size()]
+		[userInstanceList: users, userInstanceTotal:users.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	
 	def list2(Integer max) {
@@ -53,7 +54,7 @@ class UserController {
 		}
 		
 		
-		[userInstanceList: users, userInstanceTotal:users.size()]
+		[userInstanceList: users, userInstanceTotal:users.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	
 	
@@ -76,7 +77,7 @@ class UserController {
 	
 
 	def create() {
-		[userInstance: new UserB(params), rols:rolService.getAll()]
+		[userInstance: new UserB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
 	def save() {
@@ -125,7 +126,7 @@ class UserController {
 			return
 		}
 
-		[userInstance: userInstance, rols:rolService.getAll()]
+		[userInstance: userInstance, rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
 	

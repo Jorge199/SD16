@@ -4,6 +4,7 @@ package com.sd.uni.labpatologia.rol
 import org.springframework.dao.DataIntegrityViolationException
 
 import com.sd.uni.labpatologia.beans.rol.RolB
+import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.rol.*
 
 
@@ -13,7 +14,7 @@ class RolController {
 
 	//service
 	def IRolService rolService =new RolServiceImpl()
-	
+	def ILaboratoryService laboratoryService
 
 	def index() {
 		redirect(action: "list", params: params)
@@ -35,7 +36,7 @@ class RolController {
 		}
 		
 		
-		[rolInstanceList: rols, rolInstanceTotal:rols.size()]
+		[rolInstanceList: rols, rolInstanceTotal:rols.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	
 	def list2(Integer max) {
@@ -51,7 +52,7 @@ class RolController {
 		}
 		
 		
-		[rolInstanceList: rols, rolInstanceTotal:rols.size()]
+		[rolInstanceList: rols, rolInstanceTotal:rols.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	
 	
@@ -75,7 +76,7 @@ class RolController {
 	
 
 	def create() {
-		[rolInstance: new RolB(params), rols:rolService.getAll()]
+		[rolInstance: new RolB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
 	def save() {
@@ -123,7 +124,7 @@ class RolController {
 			return
 		}
 
-		[rolInstance: rolInstance, rols:rolService.getAll()]
+		[rolInstance: rolInstance, rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
 	

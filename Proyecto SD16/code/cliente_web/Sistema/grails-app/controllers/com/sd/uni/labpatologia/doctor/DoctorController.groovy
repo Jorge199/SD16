@@ -3,6 +3,7 @@ package com.sd.uni.labpatologia.doctor
 import com.sd.uni.labpatologia.beans.doctor.DoctorB
 import com.sd.uni.labpatologia.service.doctor.DoctorServiceImpl
 import com.sd.uni.labpatologia.service.doctor.IDoctorService
+import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,11 @@ class DoctorController {
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	//services
 	def IDoctorService doctorService
-
+	def ILaboratoryService laboratoryService
 
 
 	def create(){
-		[doctorInstance: new DoctorB(params)]
+		[doctorInstance: new DoctorB(params),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
 	def list(Integer max) {
@@ -35,7 +36,7 @@ class DoctorController {
 			siguiente = doctorService.find(null,10,page+1)
 		}
 
-		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size(), page: page, siguiente: siguiente?.size()]
+		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
 	def save() {
@@ -73,7 +74,7 @@ class DoctorController {
 				redirect(action: "list")
 				return
 			}
-			[doctorInstance: doctorInstance]
+			[doctorInstance: doctorInstance,laboratoryInstanceList: laboratoryService.getAll()]
 		}
 
 		def update(Integer id) {

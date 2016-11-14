@@ -52,24 +52,21 @@
 				<label>Paciente <span class="required-indicator">*</span></label>
 				<g:select  class="form-control many-to-one" name="patientId" from="${patients}" value="${requestInstance?.patient?.id}"
 				optionKey="id" optionValue="name" required=""
-				noSelection="${['null':'Seleccione un paciente..']}"
-			  	required=""/>
+				noSelection="${['null':'Seleccione un paciente..']}"/>
 		</div>
 		
 		<div class="col-md-4">
 				<label>Doctor <span class="required-indicator">*</span></label>
 				<g:select class="form-control many-to-one" name="doctorId" from="${doctors}"  value="${requestInstance?.doctor?.id}"
-				optionKey="id" optionValue="name" 
-				noSelection="${['null':'Seleccione un doctor..']}"
-				required=""/>
+				optionKey="id" optionValue="name" required=""
+				noSelection="${['null':'Seleccione un doctor..']}" />
 		</div>
 		
 		<div class="col-md-4">
 			<label>Tipo de Estudio <span class="required-indicator">*</span></label>
-			<g:select  class="form-control" name="studyTypeId" from="${studies}" value="${requestInstance?.studyType?.id}"
+			<g:select  class="form-control many-to-one" name="studyTypeId" from="${studies}" value="${requestInstance?.studyType?.id}"
 			optionKey="id" optionValue="name" required=""
-			noSelection="${['null':'Seleccione un estudio..']}"
-			required=""/>
+			noSelection="${['null':'Seleccione un estudio..']}" />
 		</div>
 	</div>
 	<br><br>

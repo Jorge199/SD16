@@ -7,7 +7,10 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/inicio/index")
+        "/"(view:"/inicio/index"){
+			controller = "Inicio"
+			action = "index"
+		}
 		"401"(view:'/error/error401')
 		"403"(view:'/error/error403')
 		"404"(view:'/error/error404')

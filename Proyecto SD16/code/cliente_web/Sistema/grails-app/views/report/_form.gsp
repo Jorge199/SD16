@@ -101,8 +101,8 @@
 					<g:select name="diagnostic" class="form-control"
 						from="${DiagnosticEnum.values()}"
 						value="${reportInstance?.diagnostic}" optionKey="key"
-						noSelection="${['null':'Seleccione un diagnostico..']}"
-						required=""></g:select>
+						noSelection="${['SIN_INDICIOS':'Seleccione un diagnostico..']}"
+						></g:select>
 				</div>
 			</div>
 			<div class="col-md-10">
