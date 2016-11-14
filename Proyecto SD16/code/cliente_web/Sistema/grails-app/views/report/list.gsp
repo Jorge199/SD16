@@ -37,10 +37,10 @@
 								<div class="col-md-4">
 									<div
 										class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
-										<label class="col-sm-3" for="diagnostic"> <g:message
+										<label class="col-sm-4" for="diagnostic"> <g:message
 												code="Diagnostico" />
 										</label>
-										<div class="col-md-9">
+										<div class="col-md-8">
 											<g:select name="diagnostic" class="form-control input-sm"
 												from="${DiagnosticEnum.values()}" value="${}"
 												name="diagnosticSearch" optionKey="key"

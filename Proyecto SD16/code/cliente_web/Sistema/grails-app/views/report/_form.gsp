@@ -1,4 +1,3 @@
-<%@page import="java.time.Period"%>
 <%@ page import="com.sd.uni.labpatologia.util.DiagnosticEnum"%>
 <div class="row">
 	<div class="panel panel-default">
