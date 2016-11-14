@@ -155,7 +155,7 @@
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
-					<li><a href="/Sistema/"><i
+					<li><a href="/Sistema/inicio/index"><i
 							class="fa fa-fw fa-bars"></i>Menu</a></li>
 					<li><a href="/Sistema/request/list/"><i
 							class="fa fa-fw fa-file-text"></i>Fichas de Entradas</a></li>
