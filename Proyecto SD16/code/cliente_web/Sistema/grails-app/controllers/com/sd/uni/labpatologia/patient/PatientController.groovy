@@ -23,14 +23,21 @@ class PatientController {
 	}
 
 	def list(Integer max) {
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
 		def text = params.text
 		def patients = null
 		if(null != text && !"".equals(text)){
-			patients = patientService.find(text,10,0)//getAll()//find(text,10,0)
+			patients = patientService.find(text,10,page)
+			siguiente = patientService.find(text,10,page+1)
 		}else{
-			patients = patientService.getAll()//find("all",10,0)
+			patients = patientService.find(null,10,page)
+			siguiente = patientService.find(null,10,page+1)
 		}		
-		[patientInstanceList: patients, patientInstanceTotal: patients?.size()]
+		[patientInstanceList: patients, patientInstanceTotal: patients?.size(), page: page, siguiente: siguiente?.size()]
 	}
 
 	def save() {

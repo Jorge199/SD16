@@ -20,15 +20,22 @@ class DoctorController {
 	}
 
 	def list(Integer max) {
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
 		def text = params.text
 		def doctors = null
 		if(null != text && !"".equals(text)){
-			doctors = doctorService.find(text,10,0)//getAll()//find(text,10,0)
+			doctors = doctorService.find(text,10,page)
+			siguiente = doctorService.find(text,10,page+1)
 		}else{
-			doctors = doctorService.getAll()//find("all",10,0)
+			doctors = doctorService.find(null,10,page)
+			siguiente = doctorService.find(null,10,page+1)
 		}
 
-		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size()]
+		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size(), page: page, siguiente: siguiente?.size()]
 	}
 
 	def save() {

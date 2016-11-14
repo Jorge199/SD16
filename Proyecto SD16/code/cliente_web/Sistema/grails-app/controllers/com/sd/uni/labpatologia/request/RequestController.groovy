@@ -29,6 +29,11 @@ class RequestController {
 	}
 
 	def list() {
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
 		def requests = null
 		String textToFind=""
 		if(null!=params.get("statusSearch") && !"".equals(params.get("statusSearch")) && !"null".equals(params.get("statusSearch"))){
@@ -44,13 +49,15 @@ class RequestController {
 		}
 		
 		if(!textToFind.equals("")){
-			requests = requestService.find(textToFind,10,0)
+			requests = requestService.find(textToFind,10,page)
+			siguiente = requestService.find(textToFind,10,page+1)
 		}else{
-			requests = requestService.find("all",10,0)
+			requests = requestService.find(null,10,page)
+			siguiente = requestService.find(null,10,page+1)
 		}
 		textToFind=""
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
-		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll()]
+		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size()]
 
 	
 	}
@@ -63,13 +70,12 @@ class RequestController {
 	def save(Integer id) {
 		
 		def requestInstance = new RequestB(params)
-		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		requestInstance.setDate(formatter.parse(formatter.format(new Date())));
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
-		
+		requestInstance.setStatus(StatusEnum.RECIBIDO)
 		def newRequest= requestService.save(requestInstance)
 		if (!newRequest?.getId()) {
 			//redirect(action: "list", id: newReport.getId())
