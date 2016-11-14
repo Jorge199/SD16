@@ -30,7 +30,7 @@ public class RolResource {
 
 	@GET
 	@Produces("application/xml")
-	public RolResult getAll() {
+	public RolResult getAll() throws PatologyException {
 		return rolService.getAll();
 	}
 

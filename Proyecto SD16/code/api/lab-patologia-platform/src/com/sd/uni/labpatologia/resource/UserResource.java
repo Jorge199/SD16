@@ -33,7 +33,7 @@ public class UserResource {
 
 	@GET
 	@Produces("application/xml")
-	public UserResult getAll() {
+	public UserResult getAll() throws PatologyException {
 		return userService.getAll();
 	}
 

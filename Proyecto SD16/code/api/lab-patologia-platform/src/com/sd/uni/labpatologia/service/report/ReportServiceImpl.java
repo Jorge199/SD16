@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.service.report;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
+import org.apache.log4j.Logger;
 
 @Service
 public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, ReportDaoImpl, ReportResult>
@@ -27,19 +29,27 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	
 	@Autowired
 	private IRequestDao requestDao;
-
+	
+	private static Logger logger = Logger.getLogger(ReportServiceImpl.class);
 	@Override
 	@Transactional
 	@CacheEvict(value= "lab-patologia-platform-cache",key = "'reports'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'report_' + #dto.id", condition="#dto.id!=null")
 	public ReportDTO save(ReportDTO dto) {
-		final ReportDomain domain = convertDtoToDomain(dto);
-		final ReportDomain report = reportDao.save(domain);
-		final ReportDTO newDto = convertDomainToDto(report);
-		if (dto.getId() == null) {
-			getCacheManager().getCache("lab-patologia-platform-cache").put("report_" + report.getId(), newDto);
+		try { 
+		    // Lanzo exepcion de tipo runtime para realizar rollback
+			final ReportDomain domain = convertDtoToDomain(dto);
+			final ReportDomain report = reportDao.save(domain);
+			final ReportDTO newDto = convertDomainToDto(report);
+			if (dto.getId() == null) {
+				getCacheManager().getCache("lab-patologia-platform-cache").put("report_" + report.getId(), newDto);
+			}
+			return newDto;
+		} catch(PatologyException ex) { 
+			 logger.error(ex);
+			 throw new RuntimeException("Error"+ReportServiceImpl.class+"" + ex.getMessage(), ex); 
 		}
-		return newDto;
+
 	}
 
 	@Override
@@ -54,7 +64,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	@Override
 	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'reports'")
-	public ReportResult getAll() {
+	public ReportResult getAll() throws PatologyException {
 		final List<ReportDTO> reports = new ArrayList<>();
 		for (ReportDomain domain : reportDao.findAll()) {
 			final ReportDTO dto = convertDomainToDto(domain);
@@ -66,7 +76,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 
 	@Override
-	protected ReportDTO convertDomainToDto(ReportDomain domain) {
+	protected ReportDTO convertDomainToDto(ReportDomain domain)throws PatologyException {
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
 		dto.setRequestId(domain.getRequest().getId());
@@ -77,14 +87,10 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 
 	@Override
-	protected ReportDomain convertDtoToDomain(ReportDTO dto) {
+	protected ReportDomain convertDtoToDomain(ReportDTO dto) throws PatologyException{
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
-		try {
-			domain.setRequest(requestDao.getById(dto.getRequestId()));
-		} catch (PatologyException e) {
-			e.printStackTrace();
-		}
+		domain.setRequest(requestDao.getById(dto.getRequestId()));
 		domain.setDiagnostic(dto.getDiagnostic());
 		domain.setDate(dto.getDate());
 		domain.setObservations(dto.getObservations());

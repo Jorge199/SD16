@@ -2,6 +2,7 @@ package com.sd.uni.labpatologia.resource;
 
 
 import javax.ws.rs.GET;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -15,7 +16,6 @@ import com.sd.uni.labpatologia.dto.article.ArticleResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.exception.StockException;
 import com.sd.uni.labpatologia.service.article.IArticleService;
-import com.sd.uni.labpatologia.service.stock_mov.IStockService;
 
 
 @Path("/article")
@@ -25,8 +25,7 @@ public class ArticleResource {
 	@Autowired
 	private IArticleService _articleService;
 
-	@Autowired
-	private IStockService _stock;	
+		
 	
 	
 	/* http://localhost:8080/lab-patologia-platform/rest/article/1 */
@@ -40,7 +39,7 @@ public class ArticleResource {
 	/* http://localhost:8080/lab-patologia-platform/rest/article */
 	@GET
 	@Produces("application/xml")
-	public ArticleResult getAll() {
+	public ArticleResult getAll() throws PatologyException {
 		return _articleService.getAll();
 	}
 	

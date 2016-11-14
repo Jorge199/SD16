@@ -36,7 +36,7 @@ public class PatientResource {
 	/* http://localhost:8080/lab-patologia-platform/rest/patient */
 	@GET
 	@Produces("application/xml")
-	public PatientResult getAll() {
+	public PatientResult getAll() throws PatologyException {
 		return _patientService.getAll();
 	}
 	

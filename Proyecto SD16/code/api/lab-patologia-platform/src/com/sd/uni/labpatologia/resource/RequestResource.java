@@ -29,7 +29,7 @@ public class RequestResource {
 
 	@GET
 	@Produces("application/xml")
-	public RequestResult getAll() {
+	public RequestResult getAll() throws PatologyException {
 		return requestService.getAll();
 	}
 

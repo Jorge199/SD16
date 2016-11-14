@@ -34,7 +34,7 @@ public class StockResource {
 	/* http://localhost:8080/lab-patologia-platform/rest/stock */
 	@GET
 	@Produces("application/xml")
-	public StockResult getAll() {
+	public StockResult getAll() throws PatologyException {
 		return _stockService.getAll();
 	}
 	

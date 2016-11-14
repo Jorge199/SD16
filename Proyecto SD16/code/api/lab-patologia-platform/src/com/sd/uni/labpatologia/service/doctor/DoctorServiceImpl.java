@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -14,10 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.uni.labpatologia.dao.doctor.IDoctorDao;
 import com.sd.uni.labpatologia.dao.doctor.DoctorDaoImpl;
 import com.sd.uni.labpatologia.domain.doctor.DoctorDomain;
+import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.dto.doctor.DoctorDto;
 import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
+import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
+import com.sd.uni.labpatologia.service.patient.PatientServiceImpl;
 
 
 @Service
@@ -25,18 +29,27 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 	@Autowired
 	private IDoctorDao _doctorDao;
 	
+	private static Logger logger = Logger.getLogger(DoctorServiceImpl.class);
+	
 	@Override
 	@Transactional
 	@CacheEvict(value= "lab-patologia-platform-cache",key = "'doctors'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'doctor_' + #dto.id", condition="#dto.id!=null")
 	public DoctorDto save(DoctorDto dto) {
-		final DoctorDomain doctorDomain = convertDtoToDomain(dto);
-		final DoctorDomain doctor = _doctorDao.save(doctorDomain);
-		final DoctorDto newDto = convertDomainToDto(doctor);
-		if (dto.getId() == null) {
-			getCacheManager().getCache("lab-patologia-platform-cache").put("doctor_" + doctor.getId(), newDto);
+		try { 
+		    // Lanzo exepcion de tipo runtime para realizar rollback
+			final DoctorDomain doctorDomain = convertDtoToDomain(dto);
+			final DoctorDomain doctor = _doctorDao.save(doctorDomain);
+			final DoctorDto newDto = convertDomainToDto(doctor);
+			if (dto.getId() == null) {
+				getCacheManager().getCache("lab-patologia-platform-cache").put("doctor_" + doctor.getId(), newDto);
+			}
+			return newDto;
+		} catch(PatologyException ex) { 
+			 logger.error(ex);
+			 throw new RuntimeException("Error"+PatientServiceImpl.class+"" + ex.getMessage(), ex); 
 		}
-		return newDto;
+		
 	}
 
 	@Override
@@ -78,7 +91,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 	}
 
 	@Override
-	protected DoctorDomain convertDtoToDomain(DoctorDto dto) {
+	protected DoctorDomain convertDtoToDomain(DoctorDto dto) throws PatologyException{
 		final DoctorDomain doctor = new DoctorDomain();
 		doctor.setId(dto.getId());
 		doctor.setName(dto.getName());

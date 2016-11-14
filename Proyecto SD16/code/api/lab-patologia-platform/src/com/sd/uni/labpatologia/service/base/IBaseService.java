@@ -11,7 +11,7 @@ public interface IBaseService<DTO extends BaseDTO, DOMAIN extends BaseDomain, DA
 
 	public DTO getById(Integer id) throws PatologyException;
 
-	public R getAll();
+	public R getAll() throws PatologyException;
 	
 	
 	public R find(String textToFind, int page, int maxItems) throws PatologyException;
