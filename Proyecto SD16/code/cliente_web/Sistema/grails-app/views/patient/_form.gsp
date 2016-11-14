@@ -36,41 +36,21 @@
 	<div class="col-md-3">
 		<label class="col-md-4 form-label">Sexo</label>
 		<div class="col-md-9">
-
-			<g:if
-				test="${SexEnum.valueOf("FEMENINO").equals(patientInstance?.sex)}">
-				<label class="radio-inline"> <input id="sex"
-					value="MASCULINO" name="sex" type="radio"
-					value="${patientInstance?.sex}"> ${SexEnum.MASCULINO}</label>
-				<label class="radio-inline"> <input id="sex"
-					value="FEMENINO" name="sex" type="radio"
-					value="${patientInstance?.sex}" checked> ${SexEnum.FEMENINO}</label>
-			</g:if>
-			<g:elseif
-				test="${SexEnum.valueOf("MASCULINO").equals(patientInstance?.sex)}">
-				<label class="radio-inline"> <input id="sex"
-					value="MASCULINO" name="sex" type="radio"
-					value="${patientInstance?.sex}" checked> ${SexEnum.MASCULINO}</label>
-				<label class="radio-inline"> <input id="sex"
-					value="FEMENINO" name="sex" type="radio"
-					value="${patientInstance?.sex}"> ${SexEnum.FEMENINO}</label>
-			</g:elseif>
-			<g:else>
-				<label class="radio-inline"> <input id="sex"
-					value="MASCULINO" name="sex" type="radio"
-					value="${patientInstance?.sex}"> ${SexEnum.MASCULINO}</label>
-				<label class="radio-inline"> <input id="sex"
-					value="FEMENINO" name="sex" type="radio"
-					value="${patientInstance?.sex}"> ${SexEnum.FEMENINO}</label>
-
-			</g:else>
+				<label class="radio-inline"> 
+					<g:radio name="sex" value="${SexEnum.MASCULINO}" checked="${patientInstance?.sex == SexEnum.MASCULINO }"/>
+				 	${SexEnum.MASCULINO}
+				</label>
+				<label class="radio-inline"> 
+					<g:radio name="sex" value="${SexEnum.FEMENINO}" checked="${patientInstance?.sex == SexEnum.FEMENINO }"/>
+				 	${SexEnum.FEMENINO}
+				</label>
 		</div>
 	</div>
 	<div class="col-md-3">
 		<label>Fecha de Nacimiento</label>
 		<div class='input-group date' id='datetimepicker1'>
 			<input type='text' class="form-control" name="birthDate"
-				value="${patientInstance?.birthDate}" /> <span
+				value="${formatDate(format: 'dd-MM-yyyy', date:patientInstance.getBirthDate())}" /> <span
 				class="input-group-addon"> <span
 				class="glyphicon glyphicon-calendar"> </span>
 			</span>

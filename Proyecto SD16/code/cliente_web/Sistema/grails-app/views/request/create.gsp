@@ -37,5 +37,40 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+
+	<!-- Moment -->
+	<script src=" ${request.contextPath}/template/js/moment.js"></script>
+	<script src=" ${request.contextPath}/template/js/es.js"></script>
+
+	<!-- Transition -->
+	<script src=" ${request.contextPath}/template/js/transition.js"></script>
+
+	<!-- Collapse -->
+	<script src=" ${request.contextPath}/template/js/collapse.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
+
+
+	<!-- Bootstrap datetimepicker -->
+	<script
+		src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.min.js"></script>
+	<script
+		src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.es.js"></script>
+
+	<link rel="stylesheet"
+		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
+	<script type="text/javascript">
+		$(function() {
+			$('#datetimepicker1').datetimepicker({
+				format : 'DD-MM-YYYY',
+				locale : 'es',
+			});
+		});
+	</script>
 </body>
 </html>

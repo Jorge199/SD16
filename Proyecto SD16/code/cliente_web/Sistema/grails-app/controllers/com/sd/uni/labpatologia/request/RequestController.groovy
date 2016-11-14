@@ -103,8 +103,7 @@ class RequestController {
 	}
 	
 	def update(Integer id) {
-		def requestInstance = new RequestB(params)
-		requestInstance.setId(Integer.parseInt(params.get("edit")))
+		def requestInstance = requestService.getById(Integer.parseInt(params.get("edit")))
 		if(""!=params.get("date")){
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			requestInstance.setDate(formatter.parse(params.get("date")));
@@ -112,13 +111,10 @@ class RequestController {
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
-		if (!"".equals(params.get("code"))){
-			requestInstance.setCode(params.get("code1")+"/"+params.get("code"))
+		if (!"".equals(params.get("code1"))){
+			requestInstance.setCode(params.get("code")+"/"+params.get("code1"))
 			requestInstance.setStatus(StatusEnum.valueOf(params.get("status")))
-		}else{
-			requestInstance.setCode(params.get("code1"))
-			requestInstance.setStatus(StatusEnum.valueOf(params.get("statusOld")))
-		}		
+		}	
 		requestInstance.setNote(params.get("note"))
 		requestService.save(requestInstance)
 		redirect(action: "list")
