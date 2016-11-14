@@ -1,67 +1,49 @@
+<%@ page import="java.lang.System"%>
 <%@ page import="com.sd.uni.labpatologia.util.StatusEnum" %>
 <div class="row">
-
-	<div class="col-md-6">
-		<div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'patient', 'error')} required">
-			<label for="patient">
-			<g:message code="Paciente*" class="required-indicator"/>
-			</label>
-			<g:select  name="patientId" from="${patients}" value="${requestInstance?.patient}"
-			optionKey="id" optionValue="name" required="" class="many-to-one"
-		  	required=""/>
+	<div class=col-md-12>
+		<div class="col-md-4">
+			<label>Codigo<span class="required-indicator">*</span></label>
+			<g:textField  class="form-control" required=""  max="20" name="code" 
+			placeholder="Ingrese un codigo" value="${requestInstance?.code}"/>
 		</div>
 	</div>
-	
-	
-	<div class="col-md-6">
-		<label for="code">
-			<g:message code="Codigo*" class="required-indicator"/>
-			<g:textField  required=""  max="20" name="code" value="${requestInstance?.code}"/>
-		</label>
-	</div>
-	<div class="col-md-6">
-		<div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'studyType', 'error')} required">
-			<label for="studyType">
-			<g:message code="Tipo de estudio" />
-			<span class="required-indicator">*</span>
-			</label>
-			<g:select  name="studyTypeId" from="${studies}" value="${requestInstance?.studyType}"
-			optionKey="id" optionValue="name" required="" class="many-to-one"
+	<br><br>
+	<div class=col-md-12>
+		<div class="col-md-4">
+				<label>Paciente<span class="required-indicator">*</span></label>
+				<g:select  class="form-control many-to-one" name="patient" from="${patients}" value="${requestInstance?.patient}"
+				optionKey="id" optionValue="name" required=""
+				noSelection="${['null':'Seleccione un paciente..']}"
+			  	required=""/>
+		</div>
+		
+		<div class="col-md-4">
+				<label>Doctor<span class="required-indicator">*</span></label>
+				<g:select class="form-control many-to-one" name="doctor" from="${doctors}"  value="${requestInstance?.doctor}"
+				optionKey="id" optionValue="name" 
+				noSelection="${['null':'Seleccione un doctor..']}"
+				required=""/>
+		</div>
+		
+		<div class="col-md-4">
+			<label>Tipo de Estudio<span class="required-indicator">*</span></label>
+			<g:select  class="form-control" name="studyType" from="${studies}" value="${requestInstance?.studyType}"
+			optionKey="id" optionValue="name" required=""
+			noSelection="${['null':'Seleccione un estudio..']}"
 			required=""/>
 		</div>
 	</div>
-	
-	<br></br>
-	<div class="col-md-6">
-		<div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'doctor', 'error')} required">
-			<label for="doctor">
-			<g:message code="Doctor" />
-			<span class="required-indicator">*</span>
-			</label>
-			<g:select name="doctorId" from="${doctors}"  value="${requestInstance?.doctor}"
-			optionKey="id" optionValue="name" required="" class="many-to-one"/>
+	<br><br>
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<label>Observaciones<span class="required-indicator">*</span></label>
+			<g:textArea class="form-control" rows="5" cols="40" class="form-control"
+				name="note" required="" maxlength="250"
+				placeholder="Ingrese sus observaciones"
+				value="${requestInstance?.note}" />
 		</div>
 	</div>
 	
-	<div class="col-md-6">
-		<label for="note">
-			<g:message code="Observacion*" class="required-indicator"/>
-			<g:textField  required="" name="note" value="${requestInstance?.note}"/>
-		</label>
-	</div>
-	
-	<br></br>
-
-	<div class="col-md-6">
-		<div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'status', 'error')} required">
-			<label for="status">
-			<g:message code="Estado" />
-			<span class="required-indicator">*</span>
-			</label>
-			<g:select name="status" from="${StatusEnum.values()}" value="${StatusEnum}" optionKey="key"
-			required=""></g:select>
-		</div>
-	</div>
-
-
 </div>
+

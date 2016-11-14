@@ -94,7 +94,25 @@
 
 									</tbody>
 								</table>
-								<div class="pagination"></div>
+								<div class="panel-body">
+									<g:form action="list">
+										<g:hiddenField name="text" value="${text}" />
+										<g:if test="${page > 0}">
+											<fieldset class="buttons col-sm-1">
+												<button type="submit" class="btn btn-default" name="page" value="${page - 1}">
+													<i class="fa fa-arrow-left"></i> Anterior 
+												</button>
+											</fieldset>
+										</g:if>
+										<g:if test="${siguiente > 0}">
+											<fieldset class="buttons col-sm-1">
+												<button type="submit" class="btn btn-default" name="page" value="${page + 1}">
+													<i class="fa fa-arrow-right"></i> Siguiente 
+												</button>
+											</fieldset>
+										</g:if>
+									</g:form>
+								</div>
 							</div>
 						</div>
 					</div>

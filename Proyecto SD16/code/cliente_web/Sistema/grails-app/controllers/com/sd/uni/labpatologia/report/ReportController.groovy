@@ -24,7 +24,15 @@ class ReportController {
 	}
 	
 	def list() {
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
 		def reports = null
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
 		String textToFind="";
 		if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
 			textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
@@ -39,15 +47,16 @@ class ReportController {
 			}
 		}
 		
-		
 		if(!textToFind.equals("")){
-			reports = reportService.find(textToFind,10,0);
+			reports = reportService.find(textToFind,10,page);
+			siguiente = reportService.find(textToFind,10,page+1);
 		}else{
-			reports = reportService.find("all",10,0);
+			reports = reportService.find(null,10,page);
+			siguiente = reportService.find(null,10,page+1);
 		}
 		textToFind ="";
 		System.out.println("Cantidad Reportes----------------------------->"+reports.size())
-		[reportInstanceList: reports, reportInstanceTotal: reports?.size()]
+		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size()]
 	}
 	
 	def create(Integer id) {

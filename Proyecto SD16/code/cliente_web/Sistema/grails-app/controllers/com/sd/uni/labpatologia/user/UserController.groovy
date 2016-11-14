@@ -20,22 +20,24 @@ class UserController {
 	}
 
 	def list(Integer max) {
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
 		def text = params.text
 		userService=new UserServiceImpl()
 		def users = userService.getAll()
 		
 		if(null != text && !"".equals(text)){
-			
-			users = userService.find(text)
-			
-			
-			
+			users = userService.find(text,10,page)
+			siguiente = userService.find(text,10,page+1)
 		}else{
-			users = userService.getAll()
+			users = userService.find(null,10,page)
+			siguiente = userService.find(null,10,page+1)
 		}
 		
-		
-		[userInstanceList: users, userInstanceTotal:users.size()]
+		[userInstanceList: users, userInstanceTotal:users.size(), page: page, siguiente: siguiente?.size()]
 	}
 	
 	def list2(Integer max) {
