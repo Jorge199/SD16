@@ -28,7 +28,7 @@ public class UserManager extends AbstractBaseManager {
 		
 	}
 	
-	public void addUser(String name, String password, Integer rolId, boolean doctor, String matricula) {
+	public void addUser(String name, String password, Integer rolId, String matricula,String userName) {
 		
 		UserDTO userDTO = new UserDTO();
 		userDTO.setName(name);
@@ -36,7 +36,7 @@ public class UserManager extends AbstractBaseManager {
 		userDTO.setRolId(rolId);
 //		userDTO.setDoctor(doctor);
 		//userDTO.setMatricula(matricula);
-		
+		userDTO.setUserName(userName);
 		
 		getJerseyClient().resource(getBaseUrl() + "/user").entity(userDTO).post(UserDTO.class);
 	}
