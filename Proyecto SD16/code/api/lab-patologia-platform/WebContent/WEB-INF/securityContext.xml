@@ -23,13 +23,13 @@
 			
 			<sec:jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="
-                SELECT userName, password
+                SELECT userName, password, true as enabled
                 FROM user WHERE userName = ?"
 
             	authorities-by-username-query="
                 SELECT u.userName, r.name
-                FROM user u, role r
-                WHERE u._role_id = r.id
+                FROM user u, rol r
+                WHERE u._rol_id = r.id
                 AND u.userName = ?"
 			/>
 		</sec:authentication-provider>
