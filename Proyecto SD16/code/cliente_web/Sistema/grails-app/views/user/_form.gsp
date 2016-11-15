@@ -30,7 +30,7 @@
 				optionKey="id" optionValue="name" required=""
 				noSelection="${['':'Seleccione un rol..']}"/>
 		</div>
-	<div class="col-md-3" id="update">
+	<div class="col-md-3" id="update" style="display: none">
 		<label>Matricula<span class="required-indicator">*</span></label>
 		<g:field class="form-control" type="number"
 			name="registrationNumber" value="${userInstance?.registrationNumber}" />

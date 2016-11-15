@@ -44,8 +44,8 @@
 	window.onload=function() {
 		var element = document.getElementById('updater')
 		 var selectedValue =  element.options[element.selectedIndex].text; 
-		 if (selectedValue != "Doctor") { 
-	    	    document.getElementById('update').style.display = 'none';
+		 if (selectedValue == "Doctor") { 
+	    	    document.getElementById('update').style.display = '';
 	    }
 	};
     

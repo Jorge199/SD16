@@ -37,9 +37,9 @@ public class WsPathologyLaboratory {
 	private static void loadRols(){
 		UserManager user = new UserManager();
 		user.addRols();
-		user.addUser("Eliana", "password", 1, "", "eli12");
+		user.addUser("Eliana", "password", 1, "", "eli1");
 		user.addUser("Eliana2", "password", 2, "", "eli12");
-		user.addUser("Eliana3", "password", 3, "cirujano", "eli12");
+		user.addUser("Eliana3", "password", 3, "cirujano", "eli123");
 	}
 	/*
 	 * Cargo datos de prueba de request(ficha)
