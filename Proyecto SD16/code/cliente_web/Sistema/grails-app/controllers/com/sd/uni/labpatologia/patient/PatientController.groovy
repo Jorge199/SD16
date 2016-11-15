@@ -37,7 +37,7 @@ class PatientController {
 			patients = patientService.find(null,10,page)
 			siguiente = patientService.find(null,10,page+1)
 		}		
-		[patientInstanceList: patients, patientInstanceTotal: patients?.size(), page: page, siguiente: siguiente?.size()]
+		[patientInstanceList: patients, patientInstanceTotal: patients?.size(), page: page, siguiente: siguiente?.size(), text: text]
 	}
 
 	def save() {

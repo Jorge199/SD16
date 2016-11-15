@@ -38,18 +38,21 @@ class RequestController {
 		}
 		def requests = null
 		String textToFind=""
-		if(null!=params.get("statusSearch") && !"".equals(params.get("statusSearch")) && !"null".equals(params.get("statusSearch"))){
-			textToFind+="status="+params.get("statusSearch")+'&'
-		}
-		if((!"".equals(params.get("startSearch"))) && !"".equals(params.get("endSearch")) && (null != params.get("startSearch")) && (null != params.get("endSearch"))){
-			textToFind+="start="+params.get("startSearch")+'&'
-			textToFind+="end="+params.get("endSearch")
+		if (params.containsKey("text")){
+			textToFind= params.get("text");
 		}else{
-			if((null != params.get("startSearch")) && !"".equals(params.get("startSearch"))){
-				textToFind+="date="+params.get("startSearch")
+			if(null!=params.get("statusSearch") && !"".equals(params.get("statusSearch")) && !"null".equals(params.get("statusSearch"))){
+				textToFind+="status="+params.get("statusSearch")+'&'
+			}
+			if((!"".equals(params.get("startSearch"))) && !"".equals(params.get("endSearch")) && (null != params.get("startSearch")) && (null != params.get("endSearch"))){
+				textToFind+="start="+params.get("startSearch")+'&'
+				textToFind+="end="+params.get("endSearch")
+			}else{
+				if((null != params.get("startSearch")) && !"".equals(params.get("startSearch"))){
+					textToFind+="date="+params.get("startSearch")
+				}
 			}
 		}
-		
 		if(!textToFind.equals("")){
 			requests = requestService.find(textToFind,10,page)
 			siguiente = requestService.find(textToFind,10,page+1)
@@ -57,9 +60,8 @@ class RequestController {
 			requests = requestService.find(null,10,page)
 			siguiente = requestService.find(null,10,page+1)
 		}
-		textToFind=""
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
-		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
+		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind]
 
 	
 	}
@@ -111,6 +113,7 @@ class RequestController {
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
+		requestInstance.setCode(params.get("code"))
 		if (!"".equals(params.get("code1")) && (null != params.get("status")) && params.containsKey("code1")){
 			requestInstance.setCode(params.get("code")+"/"+params.get("code1"))
 			requestInstance.setStatus(StatusEnum.valueOf(params.get("status")))
