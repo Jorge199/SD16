@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.stock_mov.StockDTO;
@@ -34,6 +35,7 @@ public class StockResource {
 	/* http://localhost:8080/lab-patologia-platform/rest/stock */
 	@GET
 	@Produces("application/xml")
+	@Secured({"SUPERUSER"})
 	public StockResult getAll() throws PatologyException {
 		return _stockService.getAll();
 	}
