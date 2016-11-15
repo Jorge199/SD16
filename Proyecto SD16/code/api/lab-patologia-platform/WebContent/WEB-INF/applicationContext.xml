@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:sec="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context
@@ -10,7 +11,9 @@
     http://www.springframework.org/schema/tx 
     http://www.springframework.org/schema/tx/spring-tx.xsd
     http://www.springframework.org/schema/cache 
-    http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
+    http://www.springframework.org/schema/cache/spring-cache-3.1.xsd
+    http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<tx:annotation-driven />
 
@@ -34,7 +37,7 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 		<property name="packagesToScan" value="com.sd.uni.labpatologia.domain" />
@@ -79,5 +82,11 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy">
+	</bean>
+	
+	<!-- Spring Security Configuration -->
+	<import resource="securityContext.xml" />
 
 </beans>
