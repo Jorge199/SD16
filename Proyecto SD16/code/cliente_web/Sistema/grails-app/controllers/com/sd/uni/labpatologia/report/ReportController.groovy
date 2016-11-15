@@ -66,19 +66,20 @@ class ReportController {
 		reportInstance.setRequest(requestService.getById(id))
 		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll()] //, requests:requestService.getAll()]
 	}
-	def save(Integer id) {
+	def save() {
 		
 		def reportInstance = new ReportB(params)
 		//request
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		reportInstance.setId(Integer.parseInt(params.get("requestId")));
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
 		reportInstance.setRequest(requestService.getById(Integer.parseInt(params.get("requestId"))))
 		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("requestId")))
 		requestInstance.setStatus(StatusEnum.TERMINADO)
-		requestService.save(requestInstance)
-		System.out.println(reportInstance.diagnostic)
 		def newReport= reportService.save(reportInstance)
+		requestService.save(requestInstance)
+		
 		if (!newReport?.getId()) {
 			//redirect(action: "list", id: newReport.getId())
 			//return

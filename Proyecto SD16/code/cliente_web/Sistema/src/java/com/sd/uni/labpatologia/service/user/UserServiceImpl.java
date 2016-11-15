@@ -64,7 +64,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO> implements 
 		params.put("lastName", dto.getLastName());
 		params.put("userName", dto.getUserName());
 		params.put("password", dto.getPassword());
-		params.put("registrationNumber", String.valueOf(dto.getRegistrationNumber()));
+		params.put("registrationNumber", dto.getRegistrationNumber());
 		final UserB user = new UserB(params);
 		user.setRol(_rolService.getById(dto.getRolId()));
 		user.setSex(dto.getSex());
