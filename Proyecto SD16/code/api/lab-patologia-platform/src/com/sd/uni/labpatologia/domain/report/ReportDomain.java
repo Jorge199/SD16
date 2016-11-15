@@ -20,7 +20,6 @@ import com.sd.uni.labpatologia.util.DiagnosticEnum;
 @Table(name = "report")
 public class ReportDomain extends BaseDomain {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 

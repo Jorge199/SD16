@@ -58,7 +58,7 @@
         	  }
     	};
     </script>
-	<script language='javascript' type='text/javascript'>
+	<script type='text/javascript'>
     function check(input) {
         if (input.value != document.getElementById('pass1').value) {
             input.setCustomValidity('Password Must be Matching.');
