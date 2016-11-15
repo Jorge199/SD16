@@ -173,6 +173,8 @@
 
 					<li><a href="#"><i
 							class="fa fa-fw fa-medkit"></i>Insumos</a></li>
+					<li><a href="/Sistema/user/list/"><i
+							class="fa fa-fw fa-user"></i>Usuarios</a></li>
 
 
 				</ul>

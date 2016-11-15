@@ -15,24 +15,24 @@
 	</div>
 	<div class="col-md-6">
 		<label>Constraseña<span class="required-indicator">*</span></label>
-		<g:textField class="form-control" required="" name="password"
+		<g:textField class="form-control" required="" name="password" id="pass1"
 			placeholder="Ingrese la contraseña" />
 	</div>
 	<div class="col-md-6">
 		<label>Repita la Constraseña<span class="required-indicator">*</span></label>
-		<g:textField class="form-control" required="" name="password2"
+		<g:textField class="form-control" required="" name="password2" oninput="check(this)"
 			placeholder="Vuelva a ingresar la contraseña" />
 	</div>
 
-	<div class="col-md-4">
-				<label>Rol <span class="required-indicator">*</span></label>
-				<g:select  class="form-control" name="rolId" from="${rols}" value="${userInstance?.rol?.id}"
-				optionKey="id" optionValue="name" required=""
-				noSelection="${[1:'Seleccione un rol..']}"/>
-		</div>
 	<div class="col-md-3">
+				<label>Rol <span class="required-indicator">*</span></label>
+				<g:select id="updater" class="form-control" name="rolId" from="${rols}" value="${userInstance?.rol?.id}"
+				optionKey="id" optionValue="name" required=""
+				noSelection="${['':'Seleccione un rol..']}"/>
+		</div>
+	<div class="col-md-3" id="update">
 		<label>Matricula<span class="required-indicator">*</span></label>
-		<g:textField class="form-control" required=""
+		<g:textField class="form-control"
 			name="registrationNumber" value="${userInstance?.registrationNumber}" />
 	</div>
 
