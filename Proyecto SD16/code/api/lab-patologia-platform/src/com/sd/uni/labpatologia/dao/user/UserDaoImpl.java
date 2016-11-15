@@ -34,7 +34,6 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 
 	@Override
 	public UserDomain save(UserDomain domain) {
-		domain=encryptPassword(domain);
 		sessionFactory.getCurrentSession().saveOrUpdate(domain);
 		return domain;
 	}
@@ -49,27 +48,6 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(UserDomain.class);
 		return criteria.list();
 	}
-	
-	
-	public UserDomain encryptPassword(UserDomain domain){
-		MessageDigest md = null;
-		String password = domain.getPassword();
-	        try {
-				md= MessageDigest.getInstance("SHA-512");
-		        md.update(password.getBytes());
-		        byte[] mb = md.digest();
-		        String encPassword=String.valueOf(Hex.encodeHex(mb));
-		        domain.setPassword(encPassword);
-		        System.out.println(encPassword);
-		        
-	        } catch (NoSuchAlgorithmException e) {
-	        	
-	            System.out.println("Error");
-	        }
-	        
-	        return domain;
-	}
-
 	
 	@Override
 	public List<UserDomain> find(String textToFind, int page, int maxItems) throws PatologyException {

@@ -21,10 +21,15 @@
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="buttons">
-								<br>
-								<button type="submit" class="btn btn-primary" name="create" value="${message(code: 'default.button.create.label', default: 'Create')}">
-  									<i class="fa fa-floppy-o"></i> Crear  
-								</button>
+								<div class="col-xs-10">
+									<div class="text-right">
+										<button type="submit" class="btn btn-primary" name="edit" value="${userInstance?.id}">
+		  									<i class="fa fa-save"></i> Guardar  
+										</button>
+										<a class="btn btn-default" href="/Sistema/user/list"
+										role="button"><i class="fa fa-times"></i> Cancelar</a>
+									</div>
+								</div>
 							</fieldset>
 						</g:form>						
 					</div>

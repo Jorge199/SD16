@@ -12,8 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 import com.sd.uni.labpatologia.domain.rol.RolDomain;
@@ -85,8 +84,14 @@ public class UserDomain extends BaseDomain {
 		return _password;
 	}
 
-	public void setPassword(String password) {
-		_password = password;
+	public void setPassword(String password, Integer id) {
+		if(null==id){
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String hashedPassword = passwordEncoder.encode(password);
+			_password = hashedPassword;
+		}else{
+			_password = password;
+		}		
 	}
 	
 	public RolDomain getRol() {

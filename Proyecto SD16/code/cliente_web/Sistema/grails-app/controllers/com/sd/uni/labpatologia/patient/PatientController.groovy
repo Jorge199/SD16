@@ -85,7 +85,7 @@ class PatientController {
 			patientInstance.setBirthDate(formatter.parse(params.get("birthDate")));
 		}
 		try{
-			patientInstance.setSex(SexEnum.valueOf(params.get("sex")))
+			patientInstance.setSex(SexEnum.valueOf(params.get("sex").toUpperCase()))
 		}catch(NullPointerException n){
 			n.printStackTrace()
 		}

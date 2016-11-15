@@ -106,7 +106,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		domain.setUserName(dto.getUserName());
 		domain.setLastName(dto.getLastName());
 		domain.setSex(dto.getSex());
-		domain.setPassword(dto.getPassword());
+		domain.setPassword(dto.getPassword(), dto.getId());
 		domain.setRegistrationNumber(dto.getRegistrationNumber());
 		
 		try {

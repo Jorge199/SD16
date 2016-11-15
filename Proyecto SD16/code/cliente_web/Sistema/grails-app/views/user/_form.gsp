@@ -32,7 +32,7 @@
 		</div>
 	<div class="col-md-3" id="update">
 		<label>Matricula<span class="required-indicator">*</span></label>
-		<g:textField class="form-control"
+		<g:field class="form-control" type="number"
 			name="registrationNumber" value="${userInstance?.registrationNumber}" />
 	</div>
 
