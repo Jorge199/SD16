@@ -7,6 +7,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.study_type.StudyTypeDTO;
@@ -29,6 +30,7 @@ public class StudyTypeResource {
 
 	@GET
 	@Produces("application/xml")
+	@Secured({"SUPERUSER"})
 	public StudyTypeResult getAll() throws PatologyException {
 		return studyTypeService.getAll();
 	}

@@ -36,7 +36,6 @@
 										role="button"><i class="fa fa-times"></i> Cancelar</a>
 								</div>
 							</div>
-
 						</fieldset>
 					</g:form>
 				</div>

@@ -50,14 +50,14 @@
 		<div class="col-md-4">
 				<label>Paciente <span class="required-indicator">*</span></label>
 				<g:select  class="form-control many-to-one" name="patientId" from="${patients}" value="${requestInstance?.patient?.id}"
-				optionKey="id" optionValue="name" required=""
+				optionKey="id" optionValue="fullName" required=""
 				noSelection="${['':'Seleccione un paciente..']}"/>
 		</div>
 		
 		<div class="col-md-4">
 				<label>Doctor <span class="required-indicator">*</span></label>
 				<g:select class="form-control many-to-one" name="doctorId" from="${doctors}"  value="${requestInstance?.doctor?.id}"
-				optionKey="id" optionValue="name" required=""
+				optionKey="id" optionValue="fullName" required=""
 				noSelection="${['':'Seleccione un doctor..']}" />
 		</div>
 		

@@ -36,7 +36,7 @@ class DoctorController {
 			siguiente = doctorService.find(null,10,page+1)
 		}
 
-		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
+		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: text]
 	}
 
 	def save() {

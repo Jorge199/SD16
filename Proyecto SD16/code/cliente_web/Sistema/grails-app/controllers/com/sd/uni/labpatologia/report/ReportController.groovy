@@ -33,19 +33,23 @@ class ReportController {
 		}
 		def reports = null
 		String textToFind="";
-		if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
-			textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
-		}
-		if((!"".equals(params.get("startSearch")) && !"".equals(params.get("endSearch"))) &&
-			(null!=(params.get("startSearch")) && null!=params.get("endSearch"))){
-			textToFind+="start="+params.get("startSearch")+'&'
-			textToFind+="end="+params.get("endSearch")
+		if (params.containsKey("text")){
+			textToFind= params.get("text");
 		}else{
-			if(null!=(params.get("startSearch")) && !"".equals(params.get("startSearch"))){
-				textToFind+="date="+params.get("startSearch")
+		
+			if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
+				textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
+			}
+			if((!"".equals(params.get("startSearch")) && !"".equals(params.get("endSearch"))) &&
+				(null!=(params.get("startSearch")) && null!=params.get("endSearch"))){
+				textToFind+="start="+params.get("startSearch")+'&'
+				textToFind+="end="+params.get("endSearch")
+			}else{
+				if(null!=(params.get("startSearch")) && !"".equals(params.get("startSearch"))){
+					textToFind+="date="+params.get("startSearch")
+				}
 			}
 		}
-		
 		if(!textToFind.equals("")){
 			reports = reportService.find(textToFind,10,page);
 			siguiente = reportService.find(textToFind,10,page+1);
@@ -53,9 +57,8 @@ class ReportController {
 			reports = reportService.find(null,10,page);
 			siguiente = reportService.find(null,10,page+1);
 		}
-		textToFind ="";
 		System.out.println("Cantidad Reportes----------------------------->"+reports.size())
-		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
+		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind]
 	}
 	
 	def create(Integer id) {
