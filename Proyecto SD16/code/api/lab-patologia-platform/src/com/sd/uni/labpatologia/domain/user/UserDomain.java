@@ -27,20 +27,20 @@ public class UserDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 
-	@Column(name = "userName", nullable = false, unique = true)
+	@Column(name = "userName", nullable = false)//. unique = true)
 	private String _userName;
 	
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = true)
 	private String _name;
 	
-	@Column(name = "lastName", nullable = false)
+	@Column(name = "lastName", nullable = true)
 	private String _lastName;
 	
 	@Column(name = "password", nullable = false, unique = false)
 	private String _password;
 	
-	@Column(name = "matricula", nullable = true, unique = false)
-	private String _matricula;
+	@Column(name = "registrationNumber", nullable = true)
+	private Integer _registrationNumber;
 	
 	@Enumerated(EnumType.STRING)
 	private SexEnum _sex;
@@ -97,12 +97,12 @@ public class UserDomain extends BaseDomain {
 		_rol = rol;
 	}
 	
-	public String getMatricula(){	
-		return _matricula;
+	public Integer getRegistrationNumber(){	
+		return _registrationNumber;
 	}
 	
-	public void setMatricula(String matricula){
-		_matricula=matricula;
+	public void setRegistrationNumber(Integer registrationNumber){
+		_registrationNumber=registrationNumber;
 	}
 
 	public SexEnum getSex() {

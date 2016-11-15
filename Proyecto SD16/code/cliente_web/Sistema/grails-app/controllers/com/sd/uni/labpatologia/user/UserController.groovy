@@ -93,7 +93,7 @@ class UserController {
 			message(code: 'user.label', default: 'User'),
 			userInstance.getId()
 		])
-		redirect(action: "show", id: userInstance.getId())
+		redirect(action: "list")
 	}
 	
 	
@@ -136,8 +136,9 @@ class UserController {
 		userInstance.setId(id)
 		userInstance.setName(params.get("name"))
 		userInstance.setPassword(params.get("password"))
-		userInstance.setDoctor( Boolean.valueOf(params.get("doctor")))
-		userInstance.setMatricula(params.get("matricula"))
+		try{
+			userInstance.setRegistrationNumber(Integer.valueOf(params.get("registrationNumber")))
+		}catch(NumberFormatException nfe){}
 		userInstance.setRol(rolService.getById(Integer.valueOf(params.rolId)))
 		userService.save(userInstance)
 		redirect(action: "list")

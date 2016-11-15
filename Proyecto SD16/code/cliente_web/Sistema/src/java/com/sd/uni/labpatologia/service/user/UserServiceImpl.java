@@ -64,7 +64,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO> implements 
 		params.put("lastName", dto.getLastName());
 		params.put("userName", dto.getUserName());
 		params.put("password", dto.getPassword());
-		params.put("matricula", dto.getMatricula());
+		params.put("registrationNumber", String.valueOf(dto.getRegistrationNumber()));
 		final UserB user = new UserB(params);
 		user.setRol(_rolService.getById(dto.getRolId()));
 		user.setSex(dto.getSex());
@@ -81,7 +81,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO> implements 
 		dto.setUserName(bean.getUserName());
 		dto.setLastName(bean.getLastName());
 		dto.setPassword(bean.getPassword());
-		dto.setMatricula(bean.getMatricula());
+		dto.setRegistrationNumber(bean.getRegistrationNumber());
 		return dto;
 	}
 

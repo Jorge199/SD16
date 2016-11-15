@@ -15,7 +15,7 @@ public class UserDTO extends BaseDTO {
 	private String _lastName;
 	private String _password;
 	private Integer _rolId;
-	private String _matricula;
+	private Integer _registrationNumber;
 	private SexEnum _sex;
 
 	@XmlElement
@@ -64,12 +64,12 @@ public class UserDTO extends BaseDTO {
 	}
 	
 	@XmlElement
-	public String getMatricula(){	
-		return _matricula;
+	public Integer getRegistrationNumber(){	
+		return _registrationNumber;
 	}
 	
-	public void setMatricula(String matricula){
-		_matricula=matricula;
+	public void setRegistrationNumber(Integer registrationNumber){
+		_registrationNumber=registrationNumber;
 	}
 	
 	@XmlElement

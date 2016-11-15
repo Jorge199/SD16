@@ -94,7 +94,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		dto.setSex(domain.getSex());
 		dto.setPassword(domain.getPassword());
 		dto.setRolId(domain.getRol().getId());
-		dto.setMatricula(domain.getMatricula());
+		dto.setRegistrationNumber(domain.getRegistrationNumber());
 		return dto;
 	}
 
@@ -107,7 +107,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		domain.setLastName(dto.getLastName());
 		domain.setSex(dto.getSex());
 		domain.setPassword(dto.getPassword());
-		domain.setMatricula(dto.getMatricula());
+		domain.setRegistrationNumber(dto.getRegistrationNumber());
 		
 		try {
 			domain.setRol(rolDao.getById(dto.getRolId()));
