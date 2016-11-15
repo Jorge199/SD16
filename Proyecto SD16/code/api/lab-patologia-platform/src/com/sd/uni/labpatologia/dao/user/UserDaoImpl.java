@@ -55,12 +55,11 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 		Criteria criteria = session.createCriteria(UserDomain.class);
 		if (textToFind != null){
 			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"))
+					.add(Restrictions.ilike("_registrationNumber", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_lastName", "%"+textToFind+"%")).add(Restrictions.ilike("_userName", "%"+textToFind+"%"));
 			Criterion idCriterion = null;
 			if (StringUtils.isNumeric(textToFind)) {
-				idCriterion=Restrictions.disjunction().add(Restrictions.eq("_id", Integer.valueOf(textToFind)))
-						.add(Restrictions.ilike("_registrationNumber", Integer.valueOf(textToFind)));
-				
+				idCriterion=Restrictions.disjunction().add(Restrictions.eq("_id", Integer.valueOf(textToFind)));
 			}
 			
 			if(idCriterion!=null){

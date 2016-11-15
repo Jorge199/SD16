@@ -39,17 +39,25 @@
    
     <!-- Bootstrap Core JavaScript -->
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-		document.getElementById('update').style.display = 'none';
-		document.getElementById('updater').onchange = function() {
-			var selectedValue = this.options[this.selectedIndex].text;
-			if (selectedValue == "Doctor") {
-				document.getElementById('update').style.display = '';
-			} else {
-				document.getElementById('update').style.display = 'none';
-			}
-		};
-	</script>
+ 
+<script type="text/javascript">
+	window.onload=function() {
+		var element = document.getElementById('updater')
+		 var selectedValue =  element.options[element.selectedIndex].text; 
+		 if (selectedValue != "Doctor") { 
+	    	    document.getElementById('update').style.display = 'none';
+	    }
+	};
+    
+    document.getElementById('updater').onchange = function () {
+    	  var selectedValue = this.options[this.selectedIndex].text; 
+    	  if (selectedValue == "Doctor") { 
+    	    document.getElementById('update').style.display = '';
+    	  }else{
+    		  document.getElementById('update').style.display = 'none'; 
+        	  }
+    	};
+    </script>
 	<script language='javascript' type='text/javascript'>
     function check(input) {
         if (input.value != document.getElementById('pass1').value) {

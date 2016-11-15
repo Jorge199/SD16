@@ -20,7 +20,7 @@ public class UserB extends BaseBean {
 	private String _userName;
 	private String _password;
 	private RolB _rol;
-	private Integer _registrationNumber;
+	private String _registrationNumber;
 	private SexEnum _sex;
 	
 	public UserB(Map<String, String> params) {
@@ -67,11 +67,11 @@ public class UserB extends BaseBean {
 		_rol = rol;
 	}
 	
-	public Integer getRegistrationNumber() {
+	public String getRegistrationNumber() {
 		return _registrationNumber;
 	}
 	
-	public void setRegistrationNumber(Integer registrationNumber) {
+	public void setRegistrationNumber(String registrationNumber) {
 		_registrationNumber=registrationNumber;
 	}
 
@@ -92,11 +92,7 @@ public class UserB extends BaseBean {
 		setUserName(params.get("userName"));
 		setLastName(params.get("lastName"));
 		setPassword(params.get("password"));
-		try{
-			setRegistrationNumber(Integer.valueOf(params.get("registrationNumber")));
-		}catch(NumberFormatException nfe){
-			
-		}
+		setRegistrationNumber(params.get("registrationNumber"));
 		
 	}
 

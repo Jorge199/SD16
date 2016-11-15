@@ -26,7 +26,7 @@ public class UserDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 
-	@Column(name = "userName", nullable = false)//. unique = true)
+	@Column(name = "userName", nullable = false, unique = true)
 	private String _userName;
 	
 	@Column(name = "name", nullable = true)
@@ -39,7 +39,7 @@ public class UserDomain extends BaseDomain {
 	private String _password;
 	
 	@Column(name = "registrationNumber", nullable = true)
-	private Integer _registrationNumber;
+	private String _registrationNumber;
 	
 	@Enumerated(EnumType.STRING)
 	private SexEnum _sex;
@@ -102,11 +102,11 @@ public class UserDomain extends BaseDomain {
 		_rol = rol;
 	}
 	
-	public Integer getRegistrationNumber(){	
+	public String getRegistrationNumber(){	
 		return _registrationNumber;
 	}
 	
-	public void setRegistrationNumber(Integer registrationNumber){
+	public void setRegistrationNumber(String registrationNumber){
 		_registrationNumber=registrationNumber;
 	}
 

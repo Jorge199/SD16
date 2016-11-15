@@ -133,12 +133,10 @@ class UserController {
 
 	def update(Integer id) {
 		def userInstance = new UserB(params)
-		userInstance.setId(id)
+		userInstance.setId(Integer.parseInt(params.get("edit")))
 		userInstance.setName(params.get("name"))
 		userInstance.setPassword(params.get("password"))
-		try{
-			userInstance.setRegistrationNumber(Integer.valueOf(params.get("registrationNumber")))
-		}catch(NumberFormatException nfe){}
+		userInstance.setRegistrationNumber(params.get("registrationNumber"))
 		userInstance.setRol(rolService.getById(Integer.valueOf(params.rolId)))
 		userService.save(userInstance)
 		redirect(action: "list")
