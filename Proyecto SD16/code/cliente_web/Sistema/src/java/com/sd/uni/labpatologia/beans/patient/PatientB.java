@@ -18,11 +18,19 @@ public class PatientB extends BaseBean {
 	private Date _birthDate;
 	private String _address;
 	private String _phone;
+	private String _fullName;
 
+	public String getFullName() {
+		return _name + " " + _lastName;
+	}
+	
+	public void setFullName(String name) {
+		_fullName = name;
+	}
+	
 	public PatientB(Map<String, String> params) {
 		super(params);
 	}
-
 
 	public String getName() {
 		return _name;
@@ -89,5 +97,6 @@ public class PatientB extends BaseBean {
         setDocument(params.get("document"));
         setAddress(params.get("address"));
         setPhone(params.get("phone"));
+        setFullName(params.get("name") + " " + params.get("lastName"));
 	}
 }

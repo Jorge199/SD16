@@ -25,7 +25,16 @@ public class DoctorB extends BaseBean {
 	private String _email;
 	private String _speciality;
 	private DoctorB _doctor;
+	private String _fullName;
 
+	public String getFullName() {
+		return _name + " " + _last_name;
+	}
+	
+	public void setFullName(String name) {
+		_fullName = name;
+	}
+	
 	public DoctorB(Map<String, String> params) {
 		super(params);
 	}
@@ -103,6 +112,7 @@ public class DoctorB extends BaseBean {
         setPhone(params.get("phone"));
         setEmail(params.get("email"));
         setSpeciality(params.get("speciality"));
+        setFullName(params.get("name") + " " + params.get("lastName"));
 	}
 
 }

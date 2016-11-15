@@ -25,13 +25,13 @@ public class RequestB extends BaseBean {
 	private StudyTypeB _studyType;
 	private String _code;
 	private StatusEnum _status;
-	
+
 
 	public RequestB(Map<String, String> params) {
 		super(params);
 	}
 
-	
+
 	public String getNote() {
 		return _note;
 	}
@@ -60,8 +60,8 @@ public class RequestB extends BaseBean {
 	public void setDoctor(DoctorB doctor) {
 		_doctor = doctor;
 	}
-	
-	
+
+
 
 	public PatientB getPatient() {
 		return _patient;
@@ -81,7 +81,7 @@ public class RequestB extends BaseBean {
 	public void setUser(UserB user) {
 		_user = user;
 	}*/
-	
+
 	public String getCode() {
 		return _code;
 	}
@@ -122,21 +122,20 @@ public class RequestB extends BaseBean {
 		//para que no lance error 
 		if (!StringUtils.isBlank(params.get("status"))) {
 			setStatus(StatusEnum.valueOf(params.get("status")));
-		
-		
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			//setDate(formato.parse(params.get("date")));
-			//para que no lance error
-			if(null != params.get("date")){
-				setDate(formato.parse(params.get("date")));
-			}
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		
 
+
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			try {
+				//setDate(formato.parse(params.get("date")));
+				//para que no lance error
+				if(null != params.get("date")){
+					setDate(formato.parse(params.get("date")));
+				}
+
+			} catch (ParseException e) {
+				e.printStackTrace();
+
+			}
 		}
-	}
 	}
 }

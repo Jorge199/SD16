@@ -111,10 +111,10 @@ class RequestController {
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
-		if (!"".equals(params.get("code1"))){
+		if (!"".equals(params.get("code1")) && (null != params.get("status")) && params.containsKey("code1")){
 			requestInstance.setCode(params.get("code")+"/"+params.get("code1"))
 			requestInstance.setStatus(StatusEnum.valueOf(params.get("status")))
-		}	
+		}
 		requestInstance.setNote(params.get("note"))
 		requestService.save(requestInstance)
 		redirect(action: "list")
