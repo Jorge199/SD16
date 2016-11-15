@@ -12,6 +12,7 @@ import patient.PatientManager;
 import report.ReportManager;
 import request.RequestManager;
 import study_type.StudyTypeManager;
+import user.UserManager;
 
 public class WsPathologyLaboratory {
 
@@ -20,6 +21,7 @@ public class WsPathologyLaboratory {
 		laboratoryManager();
 		patientManager();
 		doctorManager();
+		loadRols();
 		// loadRequestData(); // carga fichas, si no tengo request (fichas)
 		// cargadas no puedo generar reportes
 		// loadReportData(); // carga reportes de prueba
@@ -31,6 +33,11 @@ public class WsPathologyLaboratory {
 		System.out.println("Datos Cargados");
 	}
 
+	
+	private static void loadRols(){
+		UserManager user = new UserManager();
+		user.addRols();
+	}
 	/*
 	 * Cargo datos de prueba de request(ficha)
 	 */

@@ -18,25 +18,25 @@ public class RolResourceImpl extends BaseResourceImpl<RolDTO> implements
 	}
 
 	@Override
-	@CacheEvict(value = CACHE_REGION, key = "'roles'")
-	@CachePut(value = CACHE_REGION, key = "'rol_' + #rol.id", condition = "#rol.id!=null")
+//	@CacheEvict(value = CACHE_REGION, key = "'roles'")
+//	@CachePut(value = CACHE_REGION, key = "'rol_' + #rol.id", condition = "#rol.id!=null")
 	public RolDTO save(RolDTO rol) {
 		RolDTO newDto = super.save(rol);
-		if (null == rol.getId()) {
-			getCacheManager().getCache(CACHE_REGION).put(
-					"rol_" + newDto.getId(), newDto);
-		}
+		//if (null == rol.getId()) {
+		//	getCacheManager().getCache(CACHE_REGION).put(
+	//				"rol_" + newDto.getId(), newDto);
+		//}
 		return newDto;
 	}
 
-	@Cacheable(value = CACHE_REGION, key = "'rol_' + #id")
+	//@Cacheable(value = CACHE_REGION, key = "'rol_' + #id")
 	@Override
 	public RolDTO getById(Integer id) {
 		return super.getById(id);
 	}
 
 	@Override
-	@Cacheable(value = CACHE_REGION, key = "'roles'")
+	//@Cacheable(value = CACHE_REGION, key = "'roles'")
 	public RolResult getAll() {
 		RolResult rols = getWebResource().get(RolResult.class);
 		return rols;
