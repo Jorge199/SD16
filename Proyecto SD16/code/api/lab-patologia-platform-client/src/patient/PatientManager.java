@@ -13,12 +13,12 @@ public class PatientManager extends AbstractBaseManager {
 		super();
 	}
 	
-	public void addPatient(String nombre, String lastName, String document,String sex, Date birthDate,String address, String phone) {
+	public void addPatient(String nombre, String lastName, String document,SexEnum sex, Date birthDate,String address, String phone) {
 		PatientDTO patientDTO = new PatientDTO();
 		patientDTO.setName(nombre);
 		patientDTO.setLastName(lastName);
 		patientDTO.setDocument(document);
-		patientDTO.setSex(SexEnum.valueOf(sex));
+		patientDTO.setSex(sex);
 		patientDTO.setBirthDate(birthDate);
 		patientDTO.setAddress(address);
 		patientDTO.setPhone(phone);

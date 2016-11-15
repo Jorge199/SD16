@@ -4,23 +4,25 @@ import base.AbstractBaseManager;
 import com.sd.uni.labpatologia.dto.user.UserDTO;
 import com.sd.uni.labpatologia.dto.user.UserResult;
 import com.sd.uni.labpatologia.dto.rol.RolDTO;
-import com.sd.uni.labpatologia.dto.rol.RolResult;
+import com.sd.uni.labpatologia.util.SexEnum;
 
 public class UserManager extends AbstractBaseManager {
 	public UserManager() {
+		
+		
 		super();
 	}
 	
 	public void addRols(){
 		
 		RolDTO rolDTO1 = new RolDTO();
-		rolDTO1.setName("Administrador");
+		rolDTO1.setName("ROLE_ADMINISTRADOR");
 		
 		RolDTO rolDTO2 = new RolDTO();
-		rolDTO2.setName("Secretaria");
+		rolDTO2.setName("ROLE_SECRETARIA");
 		
 		RolDTO rolDTO3 = new RolDTO();
-		rolDTO3.setName("Doctor");
+		rolDTO3.setName("ROLE_DOCTOR");
 		
 		getJerseyClient().resource(getBaseUrl() + "/rol").entity(rolDTO1).post(RolDTO.class);
 		getJerseyClient().resource(getBaseUrl() + "/rol").entity(rolDTO2).post(RolDTO.class);
@@ -28,15 +30,16 @@ public class UserManager extends AbstractBaseManager {
 		
 	}
 	
-	public void addUser(String name, String password, Integer rolId, String matricula,String userName) {
+	public void addUser(String name, String userName, String lastName, String password, Integer rolId, Integer registrationNumber, SexEnum sex) {
 		
 		UserDTO userDTO = new UserDTO();
 		userDTO.setName(name);
+		userDTO.setUserName(userName);
+		userDTO.setLastName(lastName);
 		userDTO.setPassword(password);
 		userDTO.setRolId(rolId);
-//		userDTO.setDoctor(doctor);
-		//userDTO.setMatricula(matricula);
-		userDTO.setUserName(userName);
+		userDTO.setRegistrationNumber(registrationNumber);
+		userDTO.setSex(sex);
 		
 		getJerseyClient().resource(getBaseUrl() + "/user").entity(userDTO).post(UserDTO.class);
 	}
@@ -48,9 +51,7 @@ public class UserManager extends AbstractBaseManager {
 			System.out.println("Name: "+p.getName());
 			System.out.println("Password: "+p.getPassword());
 			System.out.println("Rol: "+p.getRolId());
-			//System.out.println("Doctor: "+p.getDoctor());
-		//	System.out.println("Matricula: "+p.getMatricula());
-		//	
+			
 		}
 	}
 	
@@ -59,8 +60,6 @@ public class UserManager extends AbstractBaseManager {
 		System.out.println("Name: "+ userResult.getName());
 		System.out.println("Password: "+ userResult.getPassword());
 		System.out.println("Rol: "+ userResult.getRolId());
-		//System.out.println("Doctor: "+userResult.getDoctor());
-	//	System.out.println("Matricula: "+userResult.getMatricula());
 		
 	}
 	
@@ -70,8 +69,6 @@ public class UserManager extends AbstractBaseManager {
 			System.out.println("Name: "+c.getName());
 			System.out.println("Password: "+c.getPassword());
 			System.out.println("Rol: "+c.getRolId());
-		//	System.out.println("Doctor: "+ c.getDoctor());
-		//	System.out.println("Matricula: "+c.getMatricula());
 			
 		}
 		

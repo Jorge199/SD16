@@ -5,8 +5,9 @@ import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
+import com.sd.uni.labpatologia.util.SexEnum;
 
-import doctor.DoctorManager;
+//import doctor.DoctorManager;
 import laboratory.LaboratoryManager;
 import patient.PatientManager;
 import report.ReportManager;
@@ -18,10 +19,9 @@ public class WsPathologyLaboratory {
 
 	public static void main(String[] args) {
 		System.out.println("Cargar Datos");
-		laboratoryManager();
-		patientManager();
-		doctorManager();
-		loadRols();
+		//laboratoryManager();
+		//patientManager();
+		//doctorManager();
 		// loadRequestData(); // carga fichas, si no tengo request (fichas)
 		// cargadas no puedo generar reportes
 		// loadReportData(); // carga reportes de prueba
@@ -29,18 +29,11 @@ public class WsPathologyLaboratory {
 
 		// testRequest();
 
-		testStudyType();
+		//testStudyType();
+		addUsersAndRoles();
 		System.out.println("Datos Cargados");
 	}
 
-	
-	private static void loadRols(){
-		UserManager user = new UserManager();
-		user.addRols();
-		user.addUser("Eliana", "password", 1, "", "eli1");
-		user.addUser("Eliana2", "password", 2, "", "eli12");
-		user.addUser("Eliana3", "password", 3, "cirujano", "eli123");
-	}
 	/*
 	 * Cargo datos de prueba de request(ficha)
 	 */
@@ -60,28 +53,28 @@ public class WsPathologyLaboratory {
 		PatientManager patientManager = new PatientManager();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		try {
-			patientManager.addPatient("Karina Belen", "Sanabria Rios", "4763428", "FEMENINO",
+			patientManager.addPatient("Karina Belen", "Sanabria Rios", "4763428", SexEnum.FEMENINO,
 					formatter.parse("18-3-1993"), "Cap Miranda", "0985641789");
-			patientManager.addPatient("Eliana", "Duarte Sanabria", "4893558", "FEMENINO", formatter.parse("1-2-1984"),
+			patientManager.addPatient("Eliana", "Duarte Sanabria", "4893558", SexEnum.FEMENINO, formatter.parse("1-2-1984"),
 					"Barrio Mosquito", "0985237233");
-			patientManager.addPatient("Juan Carlos", "Perez Diaz", "2363438", "MASCULINO",
+			patientManager.addPatient("Juan Carlos", "Perez Diaz", "2363438", SexEnum.MASCULINO,
 					formatter.parse("12-06-1995"), "Barrio Obrero", "0985681789");
-			patientManager.addPatient("Pablo Daniel", "Aquino allasi", "17823758", "MASCULINO",
+			patientManager.addPatient("Pablo Daniel", "Aquino allasi", "17823758", SexEnum.MASCULINO,
 					formatter.parse("11-08-1990"), "Encarnacion", "0986245779");
-			patientManager.addPatient("Pedro Emilio", "Gonzalez Mendieta", "3765478", "MASCULINO",
+			patientManager.addPatient("Pedro Emilio", "Gonzalez Mendieta", "3765478", SexEnum.MASCULINO,
 					formatter.parse("17-6-1953"), "CDE", "0985241749");
-			patientManager.addPatient("Carla Luisa", "Fernandez Acuña", "23893659", "FEMENINO",
+			patientManager.addPatient("Carla Luisa", "Fernandez Acuña", "23893659", SexEnum.FEMENINO,
 					formatter.parse("15-7-1968"), "Asuncion", "0985233533");
-			patientManager.addPatient("Luis Nicolas", "Bado Amarilla", "3423428", "MASCULINO",
+			patientManager.addPatient("Luis Nicolas", "Bado Amarilla", "3423428", SexEnum.MASCULINO,
 					formatter.parse("2-04-1949"), "Chaco", "0985444779");
-			patientManager.addPatient("Cesar", "Portillo Centurion", "15297418", "MASCULINO",
+			patientManager.addPatient("Cesar", "Portillo Centurion", "15297418", SexEnum.MASCULINO,
 					formatter.parse("30-08-1988"), "Quiteria", "0985585479");
 			
 			for(int i=0;i<30;i++){
 				if(i%2==0){
-					patientManager.addPatient("paciente"+i, "apellidp"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), "MASCULINO", new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
+					patientManager.addPatient("paciente"+i, "apellidp"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.MASCULINO, new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
 				}else{
-					patientManager.addPatient("paciente"+i, "apellidp"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), "FEMENINO", new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
+					patientManager.addPatient("paciente"+i, "apellidp"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.FEMENINO, new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
 
 				}
 				
@@ -97,7 +90,7 @@ public class WsPathologyLaboratory {
 		// patientManager.getByPropertyPatient("Karina");
 	}
 
-private static void doctorManager(){
+/*private static void doctorManager(){
 	
 	System.out.println("###### DOCTORES #####");
 	
@@ -111,7 +104,7 @@ private static void doctorManager(){
 		for(int i=0;i<30;i++){
 			doctortManager.addDoctor("Direccion"+i+"........",ThreadLocalRandom.current().nextInt(1000, 7000000),"paciente"+i+"@email.com","apellido"+i,"nombre"+i,	Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)),"");
 		}
-}
+}*/
 
 	private static void laboratoryManager() {
 		System.out.println("###### LABORATORIO #####");
@@ -234,6 +227,15 @@ private static void doctorManager(){
 		// s.getByPropertyStudyType("cancer");
 		// System.out.println("No me funciona");
 
+	}
+	
+	public static void addUsersAndRoles(){
+		UserManager u = new UserManager();
+		u.addRols();
+		u.addUser("Alex", "admin", "Jines", "admin", 1, 000, SexEnum.MASCULINO);
+		u.addUser("Fatima", "secre", "Talavera", "secre", 2, 000, SexEnum.FEMENINO);
+		u.addUser("Jerson", "doctor", "Derulo", "doctor", 3, 000, SexEnum.MASCULINO);
+		System.out.println("###### User y Roles #######");
 	}
 
 }
