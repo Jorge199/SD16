@@ -14,6 +14,7 @@ public class StockResourceImpl extends BaseResourceImpl<StockDTO> implements ISt
 
 	@Override
 	public StockResult getAll() {
+		setWebResourceBasicAuthFilter();
 		final StockResult result = getWebResource().get(StockResult.class);
 		return result;
 	}

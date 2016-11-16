@@ -36,24 +36,27 @@ public class UserResourceImpl extends BaseResourceImpl<UserDTO> implements
 	@Override
 	//@Cacheable(value = CACHE_REGION, key = "'user_' + #id")
 	public UserDTO getById(Integer id) {
+		setWebResourceBasicAuthFilter();
 		return super.getById(id);
 	}
 	
 	@Override
 	//@Cacheable(value = CACHE_REGION, key = "'users'")
 	public UserResult getAll() {
+		setWebResourceBasicAuthFilter();
 		UserResult users = getWebResource().get(UserResult.class);
 		return users;
 	}
 
 	@Override
 	public UserResult find(String textToFind, int maxItems, int page) {
+		setWebResourceBasicAuthFilter();
 		final UserResult result = findWR(textToFind, maxItems, page).get(UserResult.class);
 		return result;
 	}
 	
 	@Override
-	public UserDTO getByUsername(String username) {		
+	public UserDTO getByUsername(String username) {
 		return getWebResource().path("/username/" + username).get(getDtoClass());
 	}
 }

@@ -39,12 +39,14 @@ public class RequestResourceImpl extends BaseResourceImpl<RequestDTO> implements
 	@Override
 	@Cacheable(value = CACHE_REGION, key = "'requests'")
 	public RequestResult getAll() {
+		setWebResourceBasicAuthFilter();
 		final RequestResult result = getWebResource().get(RequestResult.class);
 		return result;
 	}
 
 	@Override
 	public RequestResult find(String textToFind, int maxItems, int page) {
+		setWebResourceBasicAuthFilter();
 		final RequestResult result = findWR(textToFind, maxItems, page).get(
 				RequestResult.class);
 		return result;

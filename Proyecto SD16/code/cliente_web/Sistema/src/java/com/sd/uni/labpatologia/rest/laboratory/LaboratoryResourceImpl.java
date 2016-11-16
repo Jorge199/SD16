@@ -38,12 +38,14 @@ public class LaboratoryResourceImpl extends BaseResourceImpl<LaboratoryDto> impl
 	
 	@Override
 	public LaboratoryResult getAll() {
+		setWebResourceBasicAuthFilter();
 		final LaboratoryResult result = getWebResource().get(LaboratoryResult.class);
 		return result;
 	}
 
 	@Override
 	public LaboratoryResult find(String textToFind, int maxItems, int page) {
+		setWebResourceBasicAuthFilter();
 		final LaboratoryResult result = findWR(textToFind, maxItems, page).get(LaboratoryResult.class);
 		return result;
 	}

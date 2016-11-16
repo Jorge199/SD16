@@ -38,12 +38,14 @@ public class PatientResourceImpl extends BaseResourceImpl<PatientDTO> implements
 	@Override
 	@Cacheable(value = CACHE_REGION, key = "'patients'")
 	public PatientResult getAll() {
+		setWebResourceBasicAuthFilter();
 		final PatientResult result = getWebResource().get(PatientResult.class);
 		return result;
 	}
 
 	@Override
 	public PatientResult find(String textToFind, int maxItems, int page) {
+		setWebResourceBasicAuthFilter();
 		final PatientResult result = findWR(textToFind, maxItems, page).get(
 				PatientResult.class);
 		return result;

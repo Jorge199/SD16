@@ -16,11 +16,13 @@ public class StudyTypeResourceImpl extends BaseResourceImpl<StudyTypeDTO> implem
 
     @Override
     public StudyTypeResult getAll() {
+    	setWebResourceBasicAuthFilter();
         final StudyTypeResult result = getWebResource().get(StudyTypeResult.class);
         return result;
     }
 
     public StudyTypeResult find(String textToFind, int maxItems, int page) {
+    	setWebResourceBasicAuthFilter();
         final StudyTypeResult result = findWR(textToFind, maxItems, page).get(StudyTypeResult.class);
         return result;
     }

@@ -38,6 +38,7 @@ public class ArticleResourceImpl extends BaseResourceImpl<ArticleDto> implements
 	@Override
 	@Cacheable(value = CACHE_REGION, key = "'articles'")
 	public ArticleResult getAll() {
+		setWebResourceBasicAuthFilter();
 		final ArticleResult result = getWebResource().get(ArticleResult.class);
 		return result;
 	}

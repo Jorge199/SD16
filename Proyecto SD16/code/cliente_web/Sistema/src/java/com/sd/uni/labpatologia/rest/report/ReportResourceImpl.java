@@ -38,12 +38,14 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO> implements
 	@Override
 	@Cacheable(value = CACHE_REGION, key = "'reports'")
 	public ReportResult getAll() {
+		setWebResourceBasicAuthFilter();
 		final ReportResult result = getWebResource().get(ReportResult.class);
 		return result;
 	}
 
 	@Override
 	public ReportResult find(String textToFind, int maxItems, int page) {
+		setWebResourceBasicAuthFilter();
 		final ReportResult result = findWR(textToFind, maxItems, page).get(
 				ReportResult.class);
 		return result;

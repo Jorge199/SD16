@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
@@ -29,6 +30,7 @@ public class PatientResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_DOCTOR", "ROLE_ADMINISTRADOR", "ROLE_SECRETARIA"})
 	public PatientDTO getById(@PathParam("id") Integer patientId) throws PatologyException {
 		return _patientService.getById(patientId);
 	}
@@ -36,6 +38,7 @@ public class PatientResource {
 	/* http://localhost:8080/lab-patologia-platform/rest/patient */
 	@GET
 	@Produces("application/xml")
+	@Secured({"ROLE_DOCTOR", "ROLE_ADMINISTRADOR", "ROLE_SECRETARIA"})
 	public PatientResult getAll() throws PatologyException {
 		return _patientService.getAll();
 	}
@@ -44,6 +47,7 @@ public class PatientResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
+	@Secured({"ROLE_DOCTOR", "ROLE_ADMINISTRADOR", "ROLE_SECRETARIA"})
 	public PatientResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return _patientService.find(textToFind, page, maxItems);
 	}
@@ -51,6 +55,7 @@ public class PatientResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
+	@Secured({"ROLE_DOCTOR", "ROLE_ADMINISTRADOR", "ROLE_SECRETARIA"})
 	public PatientResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return _patientService.find(null, page, maxItems);
 	}

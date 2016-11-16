@@ -38,12 +38,14 @@ public class DoctorResourceImpl extends BaseResourceImpl<DoctorDto> implements
 	@Override
 	@Cacheable(value = CACHE_REGION, key = "'doctors'")
 	public DoctorResult getAll() {
+		setWebResourceBasicAuthFilter();
 		final DoctorResult result = getWebResource().get(DoctorResult.class);
 		return result;
 	}
 
 	@Override
 	public DoctorResult find(String textToFind, int maxItems, int page) {
+		setWebResourceBasicAuthFilter();
 		final DoctorResult result = findWR(textToFind, maxItems, page).get(
 				DoctorResult.class);
 		return result;

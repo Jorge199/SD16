@@ -32,7 +32,7 @@ public class RolResourceImpl extends BaseResourceImpl<RolDTO> implements
 	@Cacheable(value = CACHE_REGION, key = "'rol_' + #id")
 	@Override
 	public RolDTO getById(Integer id) {
-		return super.getById(id);
+		return getWebResource().path("/" + id).get(RolDTO.class);
 	}
 
 	@Override
