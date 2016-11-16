@@ -10,4 +10,6 @@ public interface IUserResource extends IBaseResource<UserDTO> {
 	public UserResult getAll();
 	
 	public UserResult find(String textToFind, int maxItems, int page);
+
+	public UserDTO getByUsername(String username);
 }

@@ -17,7 +17,9 @@ public class UserDTO extends BaseDTO {
 	private Integer _rolId;
 	private String _registrationNumber;
 	private SexEnum _sex;
-
+	private String _accountExpired;
+	private String _accountLocked;
+	private String _passwordExpired;
 	@XmlElement
 	public String getName() {
 		return _name;
@@ -80,6 +82,31 @@ public class UserDTO extends BaseDTO {
 	public void setSex(SexEnum sex) {
 		_sex = sex;
 	}
+	@XmlElement
+	public String getAccountExpired() {
+		return _accountExpired;
+	}
+
+	public void setAccountExpired(String _accountExpired) {
+		this._accountExpired = _accountExpired;
+	}
+
+	@XmlElement
+	public String getAccountLocked() {
+		return _accountLocked;
+	}
+
+	public void setAccountLocked(String _accountLocked) {
+		this._accountLocked = _accountLocked;
+	}
 	
+	@XmlElement
+	public String getPasswordExpired() {
+		return _passwordExpired;
+	}
+
+	public void setPasswordExpired(String _passwordExpired) {
+		this._passwordExpired = _passwordExpired;
+	}
 	
 }

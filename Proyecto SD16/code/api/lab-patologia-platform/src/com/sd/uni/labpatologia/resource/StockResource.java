@@ -35,7 +35,7 @@ public class StockResource {
 	/* http://localhost:8080/lab-patologia-platform/rest/stock */
 	@GET
 	@Produces("application/xml")
-	@Secured({"SUPERUSER"})
+	@Secured({"ROLE_DOCTOR"})
 	public StockResult getAll() throws PatologyException {
 		return _stockService.getAll();
 	}

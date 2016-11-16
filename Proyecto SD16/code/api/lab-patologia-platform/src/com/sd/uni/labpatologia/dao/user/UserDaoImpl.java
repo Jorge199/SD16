@@ -1,12 +1,10 @@
 package com.sd.uni.labpatologia.dao.user;
 
-
 import java.util.List;
-
-
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -18,14 +16,12 @@ import org.springframework.stereotype.Repository;
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.user.UserDomain;
 
-
 import com.sd.uni.labpatologia.exception.PatologyException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.binary.Hex;
-
 
 @Repository
 public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
@@ -48,33 +44,41 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(UserDomain.class);
 		return criteria.list();
 	}
-	
+
 	@Override
 	public List<UserDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(UserDomain.class);
-		if (textToFind != null){
-			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"))
-					.add(Restrictions.ilike("_registrationNumber", "%"+textToFind+"%"))
-					.add(Restrictions.ilike("_lastName", "%"+textToFind+"%")).add(Restrictions.ilike("_userName", "%"+textToFind+"%"));
+		if (textToFind != null) {
+			Criterion propertyCriterion = Restrictions.disjunction()
+					.add(Restrictions.ilike("_name", "%" + textToFind + "%"))
+					.add(Restrictions.ilike("_registrationNumber", "%" + textToFind + "%"))
+					.add(Restrictions.ilike("_lastName", "%" + textToFind + "%"))
+					.add(Restrictions.ilike("_userName", "%" + textToFind + "%"));
 			Criterion idCriterion = null;
 			if (StringUtils.isNumeric(textToFind)) {
-				idCriterion=Restrictions.disjunction().add(Restrictions.eq("_id", Integer.valueOf(textToFind)));
+				idCriterion = Restrictions.disjunction().add(Restrictions.eq("_id", Integer.valueOf(textToFind)));
 			}
-			
-			if(idCriterion!=null){
+
+			if (idCriterion != null) {
 				criteria.add(Restrictions.or(propertyCriterion, idCriterion));
-			}else{
+			} else {
 				criteria.add(propertyCriterion);
 			}
 		}
-		
-		criteria.setFirstResult(page*maxItems);
+
+		criteria.setFirstResult(page * maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<UserDomain> users = criteria.list();
 		return users;
 	}
 
+	public UserDomain getByUsername(String name) {
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select * from user where username=:name");
+		query.addEntity(UserDomain.class);
+		query.setString("name", name);
+		return (UserDomain) query.uniqueResult();
+	}
 
 }

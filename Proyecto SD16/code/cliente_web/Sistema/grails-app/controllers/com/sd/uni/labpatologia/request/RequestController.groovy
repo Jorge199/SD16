@@ -1,18 +1,17 @@
 package com.sd.uni.labpatologia.request
 
+import grails.plugin.springsecurity.annotation.Secured
+
+import java.text.SimpleDateFormat
+
 import com.sd.uni.labpatologia.beans.request.RequestB
-import com.sd.uni.labpatologia.service.doctor.DoctorServiceImpl
 import com.sd.uni.labpatologia.service.doctor.IDoctorService
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.patient.IPatientService
-import com.sd.uni.labpatologia.service.patient.PatientServiceImpl
 import com.sd.uni.labpatologia.service.request.IRequestService
 import com.sd.uni.labpatologia.service.study_type.IStudyTypeService
-import com.sd.uni.labpatologia.service.study_type.StudyTypeServiceImpl
 import com.sd.uni.labpatologia.service.user.IUserService
-import com.sd.uni.labpatologia.util.StatusEnum;
-
-import java.text.SimpleDateFormat
+import com.sd.uni.labpatologia.util.StatusEnum
 
 class RequestController {
 
@@ -25,11 +24,16 @@ class RequestController {
 	def IStudyTypeService studyTypeService
 	def IUserService userService
 	def ILaboratoryService laboratoryService
-	
+
 	def index() {
 		redirect(action: "list",params: params)
 	}
 
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def list() {
 		def page = 0
 		def siguiente
@@ -63,16 +67,26 @@ class RequestController {
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
 		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind]
 
-	
+
 	}
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 
 	def create() {
 		def requestInstance = new RequestB(params)
 		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 
 	def save(Integer id) {
-		
+
 		def requestInstance = new RequestB(params)
 		if(""!=params.get("date")){
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -90,20 +104,28 @@ class RequestController {
 		redirect(action: "list", id: newRequest.getId())
 	}
 
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR'
+	])
 	def edit(Integer id) {
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("id")))
-				//si no existe esa id
-				if (!requestInstance) {
-					flash.message = message(code: 'default.not.found.message', args: [
-						message(code: 'request.label', default: 'Request'),
-						id
-					])
-					redirect(action: "list")
-					return
-				}
+		//si no existe esa id
+		if (!requestInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'request.label', default: 'Request'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
 		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
-	
+
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR'
+	])
 	def update(Integer id) {
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("edit")))
 		if(""!=params.get("date")){

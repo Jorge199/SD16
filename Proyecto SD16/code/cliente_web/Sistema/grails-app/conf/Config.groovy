@@ -115,3 +115,20 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+grails.plugin.springsecurity.providerManager.eraseCredentialsAfterAuthentication=false
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+
+grails.plugin.springsecurity.providerNames = [
+	'myAuthenticationProvider',
+	'anonymousAuthenticationProvider',
+	'rememberMeAuthenticationProvider']

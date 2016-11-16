@@ -30,7 +30,6 @@ public class StudyTypeResource {
 
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_DOCTOR"})
 	public StudyTypeResult getAll() throws PatologyException {
 		return studyTypeService.getAll();
 	}

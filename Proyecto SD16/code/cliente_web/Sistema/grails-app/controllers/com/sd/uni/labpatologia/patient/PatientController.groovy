@@ -1,7 +1,10 @@
 package com.sd.uni.labpatologia.patient
 import com.sd.uni.labpatologia.beans.patient.PatientB
+import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.patient.*
 import com.sd.uni.labpatologia.util.SexEnum;
+
+import grails.plugin.springsecurity.annotation.Secured;
 
 import java.text.SimpleDateFormat
 
@@ -14,14 +17,30 @@ class PatientController {
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	//services
 	def IPatientService patientService=new PatientServiceImpl()
+	@Autowired def IAuthService authService
 
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def index() {
 		redirect(action: "list", params: params)
 	}
+
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def create(){
 		[patientInstance: new PatientB(params)]
 	}
-
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def list(Integer max) {
 		def page = 0
 		def siguiente
@@ -36,19 +55,24 @@ class PatientController {
 		}else{
 			patients = patientService.find(null,10,page)
 			siguiente = patientService.find(null,10,page+1)
-		}		
+		}
 		[patientInstanceList: patients, patientInstanceTotal: patients?.size(), page: page, siguiente: siguiente?.size(), text: text]
 	}
 
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def save() {
 		def patientInstance = new PatientB(params)
-		
+
 		if(""!=params.get("birthDate")){
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			patientInstance.setBirthDate(formatter.parse(params.get("birthDate")));
 		}
-		
-		
+
+
 		try{
 			patientInstance.setSex(SexEnum.valueOf(params.get("sex")))
 		}catch(NullPointerException n){
@@ -68,13 +92,22 @@ class PatientController {
 		redirect(action: "list")
 	}
 
-
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def edit(Long id) {
 		def patientInstance = patientService.getById((Integer.parseInt(params.get("id"))))
-		
+
 		[patientInstance: patientInstance]
 	}
 
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def update(Long id) {
 		def patientInstance = patientService.getById(Integer.parseInt(params.get("edit")))
 		System.out.println(patientInstance.getId())
@@ -90,10 +123,10 @@ class PatientController {
 			n.printStackTrace()
 		}
 		patientInstance.setName(params.get("name"))
-                patientInstance.setLastName(params.get("lastName"))
-                patientInstance.setDocument(params.get("document"))
-                patientInstance.setAddress(params.get("address"))
-                patientInstance.setPhone(params.get("phone"))
+		patientInstance.setLastName(params.get("lastName"))
+		patientInstance.setDocument(params.get("document"))
+		patientInstance.setAddress(params.get("address"))
+		patientInstance.setPhone(params.get("phone"))
 		patientService.save(patientInstance)
 		redirect(action: "list")
 

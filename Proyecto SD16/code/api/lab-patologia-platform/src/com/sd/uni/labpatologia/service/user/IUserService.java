@@ -7,5 +7,5 @@ import com.sd.uni.labpatologia.dto.user.UserResult;
 import com.sd.uni.labpatologia.service.base.IBaseService;
 
 public interface IUserService extends IBaseService<UserDTO, UserDomain, UserDaoImpl, UserResult> {
-
+	UserDTO getByUsername(String username);
 }

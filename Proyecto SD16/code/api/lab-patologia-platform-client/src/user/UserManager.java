@@ -38,7 +38,7 @@ public class UserManager extends AbstractBaseManager {
 		userDTO.setLastName(lastName);
 		userDTO.setPassword(password);
 		userDTO.setRolId(rolId);
-		userDTO.setRegistrationNumber(registrationNumber);
+		//userDTO.setRegistrationNumber(registrationNumber);
 		userDTO.setSex(sex);
 		
 		getJerseyClient().resource(getBaseUrl() + "/user").entity(userDTO).post(UserDTO.class);

@@ -51,4 +51,9 @@ public class UserResourceImpl extends BaseResourceImpl<UserDTO> implements
 		final UserResult result = findWR(textToFind, maxItems, page).get(UserResult.class);
 		return result;
 	}
+	
+	@Override
+	public UserDTO getByUsername(String username) {		
+		return getWebResource().path("/username/" + username).get(getDtoClass());
+	}
 }

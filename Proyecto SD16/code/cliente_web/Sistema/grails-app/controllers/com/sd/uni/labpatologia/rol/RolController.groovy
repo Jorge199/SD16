@@ -1,9 +1,13 @@
 package com.sd.uni.labpatologia.rol
 
 
+import grails.plugin.springsecurity.annotation.Secured;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException
 
 import com.sd.uni.labpatologia.beans.rol.RolB
+import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.rol.*
 
@@ -15,70 +19,76 @@ class RolController {
 	//service
 	def IRolService rolService =new RolServiceImpl()
 	def ILaboratoryService laboratoryService
-
+	@Autowired def IAuthService authService
+	@Secured(['ROLE_ADMINISTRADOR'])
 	def index() {
 		redirect(action: "list", params: params)
 	}
+	@Secured(['ROLE_ADMINISTRADOR'])
 
 	def list(Integer max) {
 		def text = params.text
 		rolService=new RolServiceImpl()
 		def rols = rolService.getAll()
-		
+
 		if(null != text && !"".equals(text)){
-			
+
 			rols = rolService.find(text)
-			
-			
-			
+
+
+
 		}else{
 			rols = rolService.getAll()
 		}
-		
-		
+
+
 		[rolInstanceList: rols, rolInstanceTotal:rols.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
-	
+	@Secured(['ROLE_ADMINISTRADOR'])
+
 	def list2(Integer max) {
 		def text = params.text
 		rolService=new RolServiceImpl()
 		def rols = rolService.getAll()
-		
+
 		if(null != text && !"".equals(text)){
 			rols = rolService.find(text)
-			
+
 		}else{
 			rols = rolService.getAll()
 		}
-		
-		
+
+
 		[rolInstanceList: rols, rolInstanceTotal:rols.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
-	
-	
+
+
+	@Secured(['ROLE_ADMINISTRADOR'])
 	def showResult(Integer max) {
 		def text = params.text
 		rolService=new RolServiceImpl()
 		def rols = rolService.getAll()
-		
+
 		if(null != text && !"".equals(text)){
 			rols = rolService.find(text)
-			
+
 		}else{
 			rols = rolService.getAll()
 		}
-		
-		
+
+
 		[rolInstanceList: rols, rolInstanceTotal:rols.size()]
 	}
 
-	
-	
 
+
+
+	@Secured(['ROLE_ADMINISTRADOR'])
 	def create() {
 		[rolInstance: new RolB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
+	@Secured(['ROLE_ADMINISTRADOR'])
 	def save() {
 		def newRol = new RolB(params)
 		def rolInstance = rolService.save(newRol)
@@ -93,12 +103,13 @@ class RolController {
 		])
 		redirect(action: "show", id: rolInstance.getId())
 	}
-	
-	
-	
-	
-	
 
+
+
+
+
+	@Secured(['ROLE_ADMINISTRADOR'])
+	
 	def show(Long id) {
 		def rolInstance = rolService.getById(id.intValue())
 		if (!rolInstance) {
@@ -112,7 +123,8 @@ class RolController {
 
 		[rolInstance: rolInstance]
 	}
-
+	@Secured(['ROLE_ADMINISTRADOR'])
+	
 	def edit(Long id) {
 		def rolInstance = rolService.getById(id.intValue())
 		if (!rolInstance) {
@@ -127,17 +139,19 @@ class RolController {
 		[rolInstance: rolInstance, rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
-	
 
+	@Secured(['ROLE_ADMINISTRADOR'])
+	
 	def update(Integer id) {
 		def rolInstance = new RolB(params)
 		rolInstance.setId(id)
 		rolInstance.setName(params.get("name"))
-		
+
 		rolService.save(rolInstance)
 		redirect(action: "list")
 	}
 
+	@Secured(['ROLE_ADMINISTRADOR'])
 	
 	def delete(Long id) {
 		def rolInstance = rolService.getById(id.intValue())

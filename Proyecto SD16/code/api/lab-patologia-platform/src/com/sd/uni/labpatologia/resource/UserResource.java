@@ -53,7 +53,12 @@ public class UserResource {
 
 	@POST
 	public UserDTO save(UserDTO user) {
-		
 		return userService.save(user);
+	}
+	@GET
+	@Path("/username/{username}")
+	@Produces("application/json")
+	public UserDTO getByUsername(@PathParam("username") String username) {
+		return userService.getByUsername(username);
 	}
 }

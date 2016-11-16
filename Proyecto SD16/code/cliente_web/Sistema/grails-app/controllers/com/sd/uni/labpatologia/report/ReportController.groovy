@@ -2,7 +2,10 @@ package com.sd.uni.labpatologia.report
 
 import java.text.SimpleDateFormat;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.sd.uni.labpatologia.beans.report.ReportB
+import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.doctor.IDoctorService;
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.patient.IPatientService;
@@ -11,6 +14,7 @@ import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
 import com.sd.uni.labpatologia.service.request.IRequestService;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
 import com.sd.uni.labpatologia.util.StatusEnum;
+import grails.plugin.springsecurity.annotation.Secured
 
 class ReportController {
 	static allowedMethods = [save: "POST", update: "POST"]
@@ -21,10 +25,14 @@ class ReportController {
 	def IDoctorService doctorService;
 	def IPatientService patientService;
 	def ILaboratoryService laboratoryService;
+	@Autowired def IAuthService authService
+	
+	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
 	def index() {
 		redirect(action: "list", params: params)
 	}
 	
+	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
 	def list() {
 		def page = 0
 		def siguiente
@@ -60,12 +68,13 @@ class ReportController {
 		System.out.println("Cantidad Reportes----------------------------->"+reports.size())
 		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind]
 	}
-	
+	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
 	def create(Integer id) {
 		def reportInstance = new ReportB(params)
 		reportInstance.setRequest(requestService.getById(id))
 		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll()] //, requests:requestService.getAll()]
 	}
+	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
 	def save() {
 		
 		def reportInstance = new ReportB(params)
@@ -86,7 +95,7 @@ class ReportController {
 		}
 		redirect(action: "list", controller: "request")
 	}
-	
+	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
 	def edit(Integer id) {
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
 				//si no existe esa id
@@ -100,7 +109,7 @@ class ReportController {
 				}
 		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll()]
 	}
-	
+	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
 	def update(Integer id) {
 		def reportInstance = new ReportB(params)
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");

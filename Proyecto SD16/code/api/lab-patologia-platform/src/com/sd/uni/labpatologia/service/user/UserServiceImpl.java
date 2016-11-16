@@ -83,6 +83,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		usuarioResult.setUsers(users);
 		return usuarioResult;
 	}
+	
+	@Cacheable(value="lab-patologia-platform-cache", key="'user_' + #username")
+	@Transactional(readOnly = true)
+	public UserDTO getByUsername(String username) {
+		final UserDomain userDomain = userDao.getByUsername(username);
+		return convertDomainToDto(userDomain);
+	}
 
 	@Override
 	protected UserDTO convertDomainToDto(UserDomain domain) {

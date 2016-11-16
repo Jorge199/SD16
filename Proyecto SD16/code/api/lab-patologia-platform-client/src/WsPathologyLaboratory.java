@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
 import com.sd.uni.labpatologia.util.SexEnum;
 
+import doctor.DoctorManager;
 //import doctor.DoctorManager;
 import laboratory.LaboratoryManager;
 import patient.PatientManager;
@@ -19,9 +20,9 @@ public class WsPathologyLaboratory {
 
 	public static void main(String[] args) {
 		System.out.println("Cargar Datos");
-		//laboratoryManager();
-		//patientManager();
-		//doctorManager();
+		laboratoryManager();
+		patientManager();
+		doctorManager();
 		// loadRequestData(); // carga fichas, si no tengo request (fichas)
 		// cargadas no puedo generar reportes
 		// loadReportData(); // carga reportes de prueba
@@ -29,7 +30,7 @@ public class WsPathologyLaboratory {
 
 		// testRequest();
 
-		//testStudyType();
+		testStudyType();
 		addUsersAndRoles();
 		System.out.println("Datos Cargados");
 	}
@@ -90,7 +91,7 @@ public class WsPathologyLaboratory {
 		// patientManager.getByPropertyPatient("Karina");
 	}
 
-/*private static void doctorManager(){
+private static void doctorManager(){
 	
 	System.out.println("###### DOCTORES #####");
 	
@@ -104,7 +105,7 @@ public class WsPathologyLaboratory {
 		for(int i=0;i<30;i++){
 			doctortManager.addDoctor("Direccion"+i+"........",ThreadLocalRandom.current().nextInt(1000, 7000000),"paciente"+i+"@email.com","apellido"+i,"nombre"+i,	Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)),"");
 		}
-}*/
+}
 
 	private static void laboratoryManager() {
 		System.out.println("###### LABORATORIO #####");

@@ -1,6 +1,8 @@
 package com.sd.uni.labpatologia.user
 
 
+import grails.plugin.springsecurity.annotation.Secured;
+
 import org.springframework.dao.DataIntegrityViolationException
 
 import com.sd.uni.labpatologia.beans.user.UserB
@@ -20,6 +22,8 @@ class UserController {
 		redirect(action: "list", params: params)
 	}
 
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
+	
 	def list(Integer max) {
 		def page = 0
 		def siguiente
@@ -40,6 +44,7 @@ class UserController {
 		
 		[userInstanceList: users, userInstanceTotal:users.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
 	
 	def list2(Integer max) {
 		def text = params.text
@@ -57,6 +62,7 @@ class UserController {
 		[userInstanceList: users, userInstanceTotal:users.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
 	
 	def showResult(Integer max) {
 		def text = params.text
@@ -75,11 +81,13 @@ class UserController {
 
 	
 	
-
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
+	
 	def create() {
 		[userInstance: new UserB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
-
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
+	
 	def save() {
 		def newUser = new UserB(params)
 		newUser.setRol(rolService.getById(Integer.valueOf(params.rolId)))
@@ -100,7 +108,8 @@ class UserController {
 	
 	
 	
-
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
+	
 	def show(Long id) {
 		def userInstance = userService.getById(id.intValue())
 		if (!userInstance) {
@@ -114,7 +123,8 @@ class UserController {
 
 		[userInstance: userInstance]
 	}
-
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
+	
 	def edit(Long id) {
 		def userInstance = userService.getById(id.intValue())
 		if (!userInstance) {
@@ -130,7 +140,8 @@ class UserController {
 	}
 
 	
-
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
+	
 	def update(Integer id) {
 		def userInstance = new UserB(params)
 		userInstance.setId(Integer.parseInt(params.get("edit")))
@@ -142,6 +153,7 @@ class UserController {
 		redirect(action: "list")
 	}
 
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
 	
 	def delete(Long id) {
 		def userInstance = userService.getById(id.intValue())

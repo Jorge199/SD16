@@ -1,7 +1,5 @@
 package com.sd.uni.labpatologia.domain.user;
 
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,26 +26,34 @@ public class UserDomain extends BaseDomain {
 
 	@Column(name = "userName", nullable = false, unique = true)
 	private String _userName;
-	
+
 	@Column(name = "name", nullable = true)
 	private String _name;
-	
+
 	@Column(name = "lastName", nullable = true)
 	private String _lastName;
-	
+
 	@Column(name = "password", nullable = false, unique = false)
 	private String _password;
-	
+
 	@Column(name = "registrationNumber", nullable = true)
 	private String _registrationNumber;
-	
+
+	@Column(name = "account_expired", nullable = true)
+	private Boolean _accountExpired;
+
+	@Column(name = "account_locked", nullable = true)
+	private Boolean _accountLocked;
+
+	@Column(name = "password_expired", nullable = true)
+	private Boolean _passwordExpired;
+
 	@Enumerated(EnumType.STRING)
 	private SexEnum _sex;
 
 	@ManyToOne
 	private RolDomain _rol;
-	
-	
+
 	public Integer getId() {
 		return _id;
 	}
@@ -63,7 +69,7 @@ public class UserDomain extends BaseDomain {
 	public void setName(String name) {
 		_name = name;
 	}
-	
+
 	public String getUserName() {
 		return _userName;
 	}
@@ -71,7 +77,7 @@ public class UserDomain extends BaseDomain {
 	public void setUserName(String user_name) {
 		_userName = user_name;
 	}
-	
+
 	public String getLastName() {
 		return _lastName;
 	}
@@ -85,15 +91,15 @@ public class UserDomain extends BaseDomain {
 	}
 
 	public void setPassword(String password, Integer id) {
-		if(null==id){
+		if (null == id) {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String hashedPassword = passwordEncoder.encode(password);
 			_password = hashedPassword;
-		}else{
+		} else {
 			_password = password;
-		}		
+		}
 	}
-	
+
 	public RolDomain getRol() {
 		return _rol;
 	}
@@ -101,13 +107,13 @@ public class UserDomain extends BaseDomain {
 	public void setRol(RolDomain rol) {
 		_rol = rol;
 	}
-	
-	public String getRegistrationNumber(){	
+
+	public String getRegistrationNumber() {
 		return _registrationNumber;
 	}
-	
-	public void setRegistrationNumber(String registrationNumber){
-		_registrationNumber=registrationNumber;
+
+	public void setRegistrationNumber(String registrationNumber) {
+		_registrationNumber = registrationNumber;
 	}
 
 	public SexEnum getSex() {
@@ -117,7 +123,29 @@ public class UserDomain extends BaseDomain {
 	public void setSex(SexEnum sex) {
 		_sex = sex;
 	}
-	
-	
-	
+
+	public String getAccountExpired() {
+		return _accountExpired.toString();
+	}
+
+	public void setAccountExpired(String _accountExpired) {
+		this._accountExpired = Boolean.valueOf(_accountExpired);
+	}
+
+	public String getAccountLocked() {
+		return _accountLocked.toString();
+	}
+
+	public void setAccountLocked(String _accountLocked) {
+		this._accountLocked = Boolean.valueOf(_accountLocked);
+	}
+
+	public String getPasswordExpired() {
+		return _passwordExpired.toString();
+	}
+
+	public void setPasswordExpired(String _passwordExpired) {
+		this._passwordExpired = Boolean.valueOf(_passwordExpired);
+	}
+
 }

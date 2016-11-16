@@ -57,6 +57,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO> implements 
 	}
 
 	@Override
+	public UserB getByUsername(String username) {
+		final UserDTO dto = _userResource.getByUsername(username);
+		return convertDtoToBean(dto);
+	}
+	
+	@Override
 	protected UserB convertDtoToBean(UserDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));

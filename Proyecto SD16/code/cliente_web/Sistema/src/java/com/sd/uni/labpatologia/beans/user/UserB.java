@@ -22,7 +22,7 @@ public class UserB extends BaseBean {
 	private RolB _rol;
 	private String _registrationNumber;
 	private SexEnum _sex;
-	
+	private String _accountLocked;	
 	public UserB(Map<String, String> params) {
 		super(params);
 	}
@@ -82,7 +82,12 @@ public class UserB extends BaseBean {
 	public void setSex(SexEnum sex) {
 		_sex = sex;
 	}
-
+	public String getAccountLocked() {
+		return _accountLocked;
+	}
+	public void setAccountLocked(String _accountLocked) {
+		this._accountLocked = _accountLocked;
+	}
 	@Override
 	protected void create(Map<String, String> params) {
 		if (!StringUtils.isBlank(params.get("id"))) {
@@ -93,6 +98,8 @@ public class UserB extends BaseBean {
 		setLastName(params.get("lastName"));
 		setPassword(params.get("password"));
 		setRegistrationNumber(params.get("registrationNumber"));
+		setAccountLocked(params.get("accountLocked"));
+
 		
 	}
 
