@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.patient
 import com.sd.uni.labpatologia.beans.patient.PatientB
 import com.sd.uni.labpatologia.service.auth.IAuthService;
+import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.patient.*
 import com.sd.uni.labpatologia.util.SexEnum;
 
@@ -17,6 +18,7 @@ class PatientController {
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	//services
 	def IPatientService patientService=new PatientServiceImpl()
+	def ILaboratoryService laboratoryService
 	@Autowired def IAuthService authService
 
 	@Secured([
@@ -34,7 +36,7 @@ class PatientController {
 		'ROLE_SECRETARIA'
 	])
 	def create(){
-		[patientInstance: new PatientB(params)]
+		[patientInstance: new PatientB(params),laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	@Secured([
 		'ROLE_DOCTOR',
@@ -56,7 +58,7 @@ class PatientController {
 			patients = patientService.find(null,10,page)
 			siguiente = patientService.find(null,10,page+1)
 		}
-		[patientInstanceList: patients, patientInstanceTotal: patients?.size(), page: page, siguiente: siguiente?.size(), text: text]
+		[patientInstanceList: patients, patientInstanceTotal: patients?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
 	@Secured([
@@ -100,7 +102,7 @@ class PatientController {
 	def edit(Long id) {
 		def patientInstance = patientService.getById((Integer.parseInt(params.get("id"))))
 
-		[patientInstance: patientInstance]
+		[patientInstance: patientInstance,laboratoryInstanceList: laboratoryService.getAll()]
 	}
 
 	@Secured([

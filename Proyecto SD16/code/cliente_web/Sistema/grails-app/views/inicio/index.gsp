@@ -62,7 +62,7 @@
                                         <g:else>
                                         <div class="huge">0</div>
                                         </g:else>
-                                        <div>Fichas de entrada</div>
+                                        <div>Fichas recibidas</div>
                                     </div>
                                 </div>
                             </div>

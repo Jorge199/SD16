@@ -77,7 +77,7 @@ class LaboratoryController {
 			redirect(uri: "/inicio/index")
 			return
 		}
-		[laboratoryInstance: laboratoryInstance]
+		[laboratoryInstance: laboratoryInstance,laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	@Secured([
 		'ROLE_DOCTOR',
