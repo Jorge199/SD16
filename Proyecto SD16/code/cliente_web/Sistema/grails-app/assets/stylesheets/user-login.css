@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+/*
+over-ride "Weak" message, show font in dark grey
+*/
+
+.progress-bar {
+    color: #333;
+} 
+
+
+img{
+	opacity:0.5;
+}
+body {
+ background-color: transparent;
+}
+
+.login-form {
+    margin-top: 70px;
+    margin-left: 350px;
+}
+
+form[role=login] {
+	height: 430px;
+	width: 450px;
+    color: #5d5d5d;
+    background: #f2f2f2;
+    padding: 23px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 20px;
+}
+    form[role=login] img {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 35px;
+    }
+    form[role=login] input,
+    form[role=login] button {
+        font-size: 18px;
+        margin: 26px 0;
+    }
+    form[role=login] > div {
+        text-align: center;
+    }
+    
+.form-links {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 50px;
+}
+    .form-links a {
+        color: #fff;
+    }
+   
