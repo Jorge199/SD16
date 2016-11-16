@@ -73,9 +73,9 @@ public class WsPathologyLaboratory {
 			
 			for(int i=0;i<30;i++){
 				if(i%2==0){
-					patientManager.addPatient("paciente"+i, "apellidp"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.MASCULINO, new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
+					patientManager.addPatient("paciente"+i, "apellido"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.MASCULINO, new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
 				}else{
-					patientManager.addPatient("paciente"+i, "apellidp"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.FEMENINO, new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
+					patientManager.addPatient("paciente"+i, "apellido"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.FEMENINO, new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
 
 				}
 				
@@ -236,6 +236,7 @@ private static void doctorManager(){
 		u.addUser("Alex", "admin", "Jines", "admin", 1, 000, SexEnum.MASCULINO);
 		u.addUser("Fatima", "secre", "Talavera", "secre", 2, 000, SexEnum.FEMENINO);
 		u.addUser("Jerson", "doctor", "Derulo", "doctor", 3, 000, SexEnum.MASCULINO);
+		u.addUser("Jorge", "tecnico", "Esquivel", "tecnico", 3, 000, SexEnum.MASCULINO);
 		System.out.println("###### User y Roles #######");
 	}
 
