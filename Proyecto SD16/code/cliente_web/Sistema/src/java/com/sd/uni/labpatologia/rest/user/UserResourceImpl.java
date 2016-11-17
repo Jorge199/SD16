@@ -24,7 +24,7 @@ public class UserResourceImpl extends BaseResourceImpl<UserDTO> implements
 //	@CacheEvict(value = CACHE_REGION, key = "'users'")
 //	@CachePut(value = CACHE_REGION, key = "'user_' + #user.id", condition = "#user.id!=null")
 	public UserDTO save(UserDTO user) {
-		UserDTO newDto = super.save(user);
+		UserDTO newDto = getWebResource().entity(user).post(UserDTO.class);
 	//	if (user.getId() == null) {
 		//	getCacheManager().getCache(CACHE_REGION).put(
 			//		"user_" + newDto.getId(), newDto);
@@ -36,27 +36,29 @@ public class UserResourceImpl extends BaseResourceImpl<UserDTO> implements
 	@Override
 	//@Cacheable(value = CACHE_REGION, key = "'user_' + #id")
 	public UserDTO getById(Integer id) {
-		setWebResourceBasicAuthFilter();
-		return super.getById(id);
+		return getWebResource().path("/" + id).get(UserDTO.class);
 	}
 	
 	@Override
 	//@Cacheable(value = CACHE_REGION, key = "'users'")
 	public UserResult getAll() {
-		setWebResourceBasicAuthFilter();
 		UserResult users = getWebResource().get(UserResult.class);
 		return users;
 	}
 
 	@Override
 	public UserResult find(String textToFind, int maxItems, int page) {
-		setWebResourceBasicAuthFilter();
-		final UserResult result = findWR(textToFind, maxItems, page).get(UserResult.class);
-		return result;
+		if (null == textToFind){
+
+			return getWebResource().path("/search/" + maxItems + "/" + page).get(UserResult.class);
+		}else{
+			return getWebResource().path("/search/" + maxItems + "/" + page + "/" + textToFind).get(UserResult.class);
+		}
 	}
 	
 	@Override
 	public UserDTO getByUsername(String username) {
+		
 		return getWebResource().path("/username/" + username).get(getDtoClass());
 	}
 }

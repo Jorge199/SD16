@@ -7,6 +7,7 @@ import com.sd.uni.labpatologia.service.request.IRequestService
 import com.sd.uni.labpatologia.util.StatusEnum;
 
 import grails.gsp.PageRenderer
+import grails.plugin.springsecurity.SpringSecurityUtils;
 import grails.plugin.springsecurity.annotation.Secured;
 
 class InicioController {
@@ -14,16 +15,18 @@ class InicioController {
 	def IPatientService patientService
 	def IArticleService articleService
 	def IRequestService requestService
-   
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_SECRETARIA'])
+	
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_SECRETARIA','ROLE_TECNICO'])
 	 def index() { 
 		String text = "status=RECIBIDO"
+		if(SpringSecurityUtils.ifNotGranted("ROLE_TECNICO")){
+			def cantRecibido = requestService.find(text,0,0)
+			[laboratoryInstanceList:laboratoryService.getAll(),
+				patientInstanceList:patientService.getAll(),
+				articleInstanceList:articleService.getAll(),
+				requestInstanceList:cantRecibido]
+		}
 		
-		def cantRecibido = requestService.find(text,0,0)
-		[laboratoryInstanceList:laboratoryService.getAll(),
-			patientInstanceList:patientService.getAll(),
-			articleInstanceList:articleService.getAll(),
-			requestInstanceList:cantRecibido]
 	}
 	
 }

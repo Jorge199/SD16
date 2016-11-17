@@ -25,6 +25,11 @@ class RequestController {
 	def IUserService userService
 	def ILaboratoryService laboratoryService
 
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def index() {
 		redirect(action: "list",params: params)
 	}
@@ -66,25 +71,23 @@ class RequestController {
 		}
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
 		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind]
-
-
 	}
+
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
 		'ROLE_SECRETARIA'
 	])
-
 	def create() {
 		def requestInstance = new RequestB(params)
 		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
+
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
 		'ROLE_SECRETARIA'
 	])
-
 	def save(Integer id) {
 
 		def requestInstance = new RequestB(params)
@@ -104,9 +107,10 @@ class RequestController {
 		redirect(action: "list", id: newRequest.getId())
 	}
 
-	@Secured([
+		@Secured([
 		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR'
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
 	])
 	def edit(Integer id) {
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("id")))
