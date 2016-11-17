@@ -236,7 +236,7 @@ private static void doctorManager(){
 		u.addUser("Alex", "admin", "Jines", "admin", 1, 000, SexEnum.MASCULINO);
 		u.addUser("Fatima", "secre", "Talavera", "secre", 2, 000, SexEnum.FEMENINO);
 		u.addUser("Jerson", "doctor", "Derulo", "doctor", 3, 000, SexEnum.MASCULINO);
-		u.addUser("Jorge", "tecnico", "Esquivel", "tecnico", 3, 000, SexEnum.MASCULINO);
+		u.addUser("Jorge", "tecnico", "Esquivel", "tecnico", 4, 000, SexEnum.MASCULINO);
 		System.out.println("###### User y Roles #######");
 	}
 
