@@ -18,6 +18,7 @@ public class DoctorManager extends AbstractBaseManager {
 		doctorDto.setName(name);
 		doctorDto.setPhone(phone);
 		doctorDto.setSpeciality(speciality);
+		setAdminAut();
 		getJerseyClient().resource(getBaseUrl() + "/doctor").entity(doctorDto).post(DoctorDto.class);
 
 	}

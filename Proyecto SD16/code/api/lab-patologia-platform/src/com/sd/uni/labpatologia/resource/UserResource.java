@@ -1,7 +1,5 @@
 package com.sd.uni.labpatologia.resource;
 
-
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -9,6 +7,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.user.UserDTO;
@@ -25,7 +24,6 @@ public class UserResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-
 	public UserDTO getById(@PathParam("id") Integer userId) throws PatologyException {
 		return userService.getById(userId);
 
@@ -40,14 +38,16 @@ public class UserResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	public UserResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+	public UserResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page,
+			@PathParam("max") Integer maxItems) throws PatologyException {
 		return userService.find(textToFind, page, maxItems);
 	}
-	
+
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	public UserResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
+	public UserResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems)
+			throws PatologyException {
 		return userService.find(null, page, maxItems);
 	}
 
@@ -55,6 +55,7 @@ public class UserResource {
 	public UserDTO save(UserDTO user) {
 		return userService.save(user);
 	}
+
 	@GET
 	@Path("/username/{username}")
 	@Produces("application/json")

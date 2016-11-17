@@ -24,12 +24,14 @@ public class StudyTypeResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA"})
 	public StudyTypeDTO getById(@PathParam("id") Integer estudioId) throws PatologyException {
 		return studyTypeService.getById(estudioId);
 	}
 
 	@GET
 	@Produces("application/xml")
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA"})
 	public StudyTypeResult getAll() throws PatologyException {
 		return studyTypeService.getAll();
 	}
@@ -37,6 +39,7 @@ public class StudyTypeResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA"})
 	public StudyTypeResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return studyTypeService.find(textToFind, page, maxItems);
 	}
@@ -44,11 +47,13 @@ public class StudyTypeResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA"})
 	public StudyTypeResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return studyTypeService.find(null, page, maxItems);
 	}
 	
 	@POST
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA"})
 	public StudyTypeDTO save(StudyTypeDTO estudio) {
 		return studyTypeService.save(estudio);
 	}

@@ -28,6 +28,7 @@ public class StockResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA","ROLE_TECNICO"})
 	public StockDTO getById(@PathParam("id") Integer stockId) throws PatologyException {
 		return _stockService.getById(stockId);
 	}
@@ -35,7 +36,7 @@ public class StockResource {
 	/* http://localhost:8080/lab-patologia-platform/rest/stock */
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_DOCTOR"})
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA","ROLE_TECNICO"})
 	public StockResult getAll() throws PatologyException {
 		return _stockService.getAll();
 	}
@@ -44,6 +45,7 @@ public class StockResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA","ROLE_TECNICO"})
 	public StockResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return _stockService.find(textToFind, page, maxItems);
 	}
@@ -51,11 +53,13 @@ public class StockResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA","ROLE_TECNICO"})
 	public StockResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws PatologyException {
 		return _stockService.find(null, page, maxItems);
 	}
 	
 	@POST
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_TECNICO"})
 	public StockDTO save(StockDTO art) {
 		return _stockService.save(art);
 	}
