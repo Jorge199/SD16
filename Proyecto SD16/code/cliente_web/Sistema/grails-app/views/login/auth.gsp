@@ -14,7 +14,7 @@ body{
 background-color: transparent;
 }
 html{
-	background: url(http://biologiainteresante.com/wp-content/uploads/2014/09/ADN.jpeg);
+	background-image: url(${request.contextPath}/images/ADN.jpeg)
 }
 </style>
 </head>
