@@ -30,25 +30,37 @@
 					<div class="row">
 						<div class="col-md-4">
 							<a class="btn btn-success" href="/Sistema/request/create"
-							role="button"><i class="fa fa-plus"></i> Agregar Ficha</a>
+								role="button"><i class="fa fa-plus"></i> Agregar Ficha</a>
 						</div>
-						<br><br>
+						<br> <br>
 						<div class="panel-body">
 							<g:form action="list">
 								<div class="col-md-4">
-											
+
 									<div
 										class="fieldcontain ${hasErrors(bean: requestInstance, field: 'status', 'error')} required">
-										<label class="col-sm-3" for="status"> <g:message
+										<label class="col-md-3" for="status"> <g:message
 												code="Estado" />
 										</label>
 										<div class="col-md-9">
-		
-											<g:select name="status" class="form-control input-sm"
-												from="${StatusEnum.values()}" name="statusSearch"
-												optionKey="key"
-												noSelection="${['null':'Seleccione un estado..']}"
-												required=""></g:select>
+											<div class="form-group">
+												<g:select name="status" class="form-control input-sm"
+													from="${StatusEnum.values()}" name="statusSearch"
+													optionKey="key"
+													noSelection="${['null':'Seleccione un estado..']}"
+													required=""></g:select>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<label for="patient"> <g:message code="Paciente" />
+										</label>
+									</div>
+									<div class="col-md-9">
+										<div class="form-group">
+											<input type="text" name="patient" class="form-control input-sm"
+									placeholder="Ingrese dato del paciente" />
 										</div>
 									</div>
 								</div>
@@ -92,7 +104,7 @@
 									</button>
 									<br>
 								</fieldset>
-								
+
 							</g:form>
 						</div>
 					</div>
@@ -111,7 +123,8 @@
 											<g:sortableColumn property="status" title="Estado" />
 											<g:sortableColumn property="doctor" title="Doctor" />
 											<g:sortableColumn property="patient" title="Paciente" />
-											<g:sortableColumn property="studyType" title="Tipo de estudio" />
+											<g:sortableColumn property="studyType"
+												title="Tipo de estudio" />
 											<td></td>
 										</tr>
 									</thead>
@@ -127,15 +140,15 @@
 													${formatDate(format: 'dd/MM/yyyy', date:requestInstance.getDate())}
 												</td>
 												<td>
-													${requestInstance?.status} 
+													${requestInstance?.status}
 												</td>
 												<td>
 													${requestInstance?.doctor?.name} ${requestInstance?.doctor?.lastName}
-													<br>${requestInstance?.doctor?.phone}
+													<br> ${requestInstance?.doctor?.phone}
 												</td>
 												<td>
 													${requestInstance?.patient?.name} ${requestInstance?.patient?.lastName}
-													<br>${requestInstance?.patient?.phone}
+													<br> ${requestInstance?.patient?.phone}
 												</td>
 												<td>
 													${requestInstance?.studyType?.name}
@@ -143,21 +156,17 @@
 
 												<td class="center"><g:link action="edit"
 														class="btn btn-success" id="${requestInstance.getId()}">
-														${}<i class="fa fa-pencil"></i> Editar</g:link>
-														<g:if
+														${}<i class="fa fa-pencil"></i> Editar</g:link> <g:if
 														test="${requestInstance?.status==StatusEnum.PROCESADO}">
 														<g:link action="create" class="btn btn-default"
 															controller="report" id="${requestInstance.getId()}">
 															${}<i class="fa fa-list-alt"></i> Informar</g:link>
-														</g:if>
-														<g:if
+													</g:if> <g:if
 														test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
 														<g:link action="edit" class="btn btn-default"
 															controller="report" id="${requestInstance.getId()}">
 															${}<i class="fa fa-list-alt"></i> Informe</g:link>
-														</g:if>
-													
-													</td>
+													</g:if></td>
 											</tr>
 
 										</g:each>
@@ -165,7 +174,7 @@
 
 									</tbody>
 								</table>
-								<g:render template="/layouts/paginate"/>
+								<g:render template="/layouts/paginate" />
 							</div>
 						</div>
 					</div>

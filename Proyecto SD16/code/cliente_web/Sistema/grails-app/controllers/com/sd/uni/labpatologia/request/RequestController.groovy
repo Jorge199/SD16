@@ -47,9 +47,13 @@ class RequestController {
 		}
 		def requests = null
 		String textToFind=""
+		System.out.println(params)
 		if (params.containsKey("text")){
 			textToFind= params.get("text");
 		}else{
+			if(null!=params.get("patient") && !"".equals(params.get("patient")) && !"null".equals(params.get("patient"))){
+				textToFind+="patient="+params.get("patient")+'&'
+			}
 			if(null!=params.get("statusSearch") && !"".equals(params.get("statusSearch")) && !"null".equals(params.get("statusSearch"))){
 				textToFind+="status="+params.get("statusSearch")+'&'
 			}
