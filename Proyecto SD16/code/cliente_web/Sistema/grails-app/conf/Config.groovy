@@ -95,6 +95,7 @@ environments {
     }
 }
 
+grails.server.port.http = 8090
 // log4j configuration
 log4j.main = {
     // Example of changing the log pattern for the default console appender:
@@ -122,6 +123,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/index':                         ['permitAll'],
 	'/index.gsp':                     ['permitAll'],
 	'/assets/**':                     ['permitAll'],
+	'/**/fonts/**':                   ['permitAll'],
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],

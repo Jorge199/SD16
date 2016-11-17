@@ -26,7 +26,6 @@ class LaboratoryController {
 		redirect(action: "list", params: params)
 	}
 	@Secured([
-		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR'
 	])
 	def _list() {
@@ -43,24 +42,6 @@ class LaboratoryController {
 		System.out.println("Cantidad Laboratorios----------------------------->"+laboratories.size())
 		[laboratoryInstanceList: laboratories, reportInstanceTotal: laboratories?.size()]
 	}
-
-
-	def create(Integer id) {
-		def laboratoryInstance = new LaboratoryB(params)
-		[laboratoryInstance: laboratoryInstance]
-
-	}
-	def save(Integer id) {
-
-		def laboratoryInstance = new LaboratoryB(params)
-
-		def newLaboratory = laboratoryService.save(laboratoryInstance)
-		if (!newLaboratory?.getId()) {
-
-		}
-		redirect(uri: "/inicio/index")
-	}
-
 
 	@Secured([
 		'ROLE_DOCTOR',

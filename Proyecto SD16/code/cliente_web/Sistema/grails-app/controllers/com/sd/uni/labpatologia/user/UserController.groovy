@@ -44,23 +44,7 @@ class UserController {
 		
 		[userInstanceList: users, userInstanceTotal:users.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
 	
-	def list2(Integer max) {
-		def text = params.text
-		userService=new UserServiceImpl()
-		def users = userService.getAll()
-		
-		if(null != text && !"".equals(text)){
-			users = userService.find(text)
-			
-		}else{
-			users = userService.getAll()
-		}
-		
-		
-		[userInstanceList: users, userInstanceTotal:users.size(),laboratoryInstanceList: laboratoryService.getAll()]
-	}
 	
 	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
 	
@@ -81,12 +65,13 @@ class UserController {
 
 	
 	
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
+	@Secured(['ROLE_ADMINISTRADOR'])
 	
 	def create() {
 		[userInstance: new UserB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
+	
+	@Secured(['ROLE_ADMINISTRADOR'])
 	
 	def save() {
 		def newUser = new UserB(params)
@@ -104,12 +89,9 @@ class UserController {
 		redirect(action: "list")
 	}
 	
+
 	
-	
-	
-	
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
-	
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])	
 	def show(Long id) {
 		def userInstance = userService.getById(id.intValue())
 		if (!userInstance) {
@@ -123,6 +105,7 @@ class UserController {
 
 		[userInstance: userInstance]
 	}
+	
 	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
 	
 	def edit(Long id) {
@@ -153,33 +136,4 @@ class UserController {
 		redirect(action: "list")
 	}
 
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
-	
-	def delete(Long id) {
-		def userInstance = userService.getById(id.intValue())
-		if (!userInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'user.label', default: 'User'),
-				id
-			])
-			redirect(action: "list")
-			return
-		}
-
-		try {
-			userInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [
-				message(code: 'user.label', default: 'User'),
-				id
-			])
-			redirect(action: "list")
-		}
-		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [
-				message(code: 'user.label', default: 'User'),
-				id
-			])
-			redirect(action: "show", id: id)
-		}
-	}
 }

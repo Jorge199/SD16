@@ -62,14 +62,7 @@ class DoctorController {
 		flash.message = message(code: 'default.created.message', args: [message(code: 'doctor.label', default: 'Doctor'), newDoctor.getId()])
 		redirect(action: "list", id: newDoctor.getId())
 	}
-	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
-	def show(Long id) {
-		def doctorInstance = doctorService.getById(id.intValue())
-		if (!doctorInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'doctor.label', default: 'Doctor'), id])
-		}
-		[doctorInstance: doctorInstance]
-	}
+	
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def edit(Integer id) {
 		def doctorInstance = doctorService.getById(Integer.parseInt(params.get("id")))
