@@ -22,7 +22,7 @@ public class PatientManager extends AbstractBaseManager {
 		patientDTO.setBirthDate(birthDate);
 		patientDTO.setAddress(address);
 		patientDTO.setPhone(phone);
-
+		setAdminAut();
 		getJerseyClient().resource(getBaseUrl() + "/patient").entity(patientDTO).post(PatientDTO.class);
 	}
 	

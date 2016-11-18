@@ -15,7 +15,7 @@ public class StudyTypeManager extends AbstractBaseManager{
 		StudyTypeDTO estudioDTO = new StudyTypeDTO();
 		estudioDTO.setName(name);
 		estudioDTO.setDescription(description);
-		
+		setAdminAut();
 		getJerseyClient().resource(getBaseUrl() + "/study_type").entity(estudioDTO).post(StudyTypeDTO.class);
 	}
 	

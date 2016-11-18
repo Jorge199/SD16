@@ -24,6 +24,7 @@ public class WsPathologyLaboratory {
 
 	public static void main(String[] args) {
 		System.out.println("Cargar Datos");
+		addUsersAndRoles();
 		laboratoryManager();
 		patientManager();
 		doctorManager();
@@ -62,8 +63,8 @@ public class WsPathologyLaboratory {
 		try {
 			patientManager.addPatient("Karina Belen", "Sanabria Rios", "4763428", SexEnum.FEMENINO,
 					formatter.parse("18-3-1993"), "Cap Miranda", "0985641789");
-			patientManager.addPatient("Eliana", "Duarte Sanabria", "4893558", SexEnum.FEMENINO, formatter.parse("1-2-1984"),
-					"Barrio Mosquito", "0985237233");
+			patientManager.addPatient("Eliana", "Duarte Sanabria", "4893558", SexEnum.FEMENINO,
+					formatter.parse("1-2-1984"), "Barrio Mosquito", "0985237233");
 			patientManager.addPatient("Juan Carlos", "Perez Diaz", "2363438", SexEnum.MASCULINO,
 					formatter.parse("12-06-1995"), "Barrio Obrero", "0985681789");
 			patientManager.addPatient("Pablo Daniel", "Aquino allasi", "17823758", SexEnum.MASCULINO,
@@ -76,15 +77,21 @@ public class WsPathologyLaboratory {
 					formatter.parse("2-04-1949"), "Chaco", "0985444779");
 			patientManager.addPatient("Cesar", "Portillo Centurion", "15297418", SexEnum.MASCULINO,
 					formatter.parse("30-08-1988"), "Quiteria", "0985585479");
-			
-			for(int i=0;i<30;i++){
-				if(i%2==0){
-					patientManager.addPatient("paciente"+i, "apellido"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.MASCULINO, new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
-				}else{
-					patientManager.addPatient("paciente"+i, "apellido"+i, Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.FEMENINO, new Date() , "direccion"+i, Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));	
+
+			for (int i = 0; i < 30; i++) {
+				if (i % 2 == 0) {
+					patientManager.addPatient("paciente" + i, "apellido" + i,
+							Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.MASCULINO,
+							new Date(), "direccion" + i,
+							Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));
+				} else {
+					patientManager.addPatient("paciente" + i, "apellido" + i,
+							Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.FEMENINO,
+							new Date(), "direccion" + i,
+							Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));
 
 				}
-				
+
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -97,21 +104,29 @@ public class WsPathologyLaboratory {
 		// patientManager.getByPropertyPatient("Karina");
 	}
 
-private static void doctorManager(){
-	
-	System.out.println("###### DOCTORES #####");
-	
-	DoctorManager doctortManager = new DoctorManager();
-		doctortManager.addDoctor("Direccion1........",928163,"paciente1@email.com","Ortiz","Alejandro Ruben","0985441759","urologo");
-		doctortManager.addDoctor("Direccion2........",294276,"paciente2@email.com","Amarilla","Mario Jose","0985741739","traumatologo");
-		doctortManager.addDoctor("Direccion3........",392467,"paciente3@email.com","Quiroga","Celeste Pelmaza","0985344539","odontologo");
-		doctortManager.addDoctor("Direccion4........",198769,"paciente4email.com","Laoz","Dalila Maria","0985423686","neumologo");
-		doctortManager.addDoctor("Direccion5........",498464,"paciente5@email.com","Queen","Leila Daniela","0985495683","ginecologo");
-		doctortManager.addDoctor("Direccion6........",368763,"paciente6@email.com","Fariña","Luis","0985462759","pediatra");
-		for(int i=0;i<30;i++){
-			doctortManager.addDoctor("Direccion"+i+"........",ThreadLocalRandom.current().nextInt(1000, 7000000),"paciente"+i+"@email.com","apellido"+i,"nombre"+i,	Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)),"");
+	private static void doctorManager() {
+
+		System.out.println("###### DOCTORES #####");
+
+		DoctorManager doctortManager = new DoctorManager();
+		doctortManager.addDoctor("Direccion1........", 928163, "paciente1@email.com", "Ortiz", "Alejandro Ruben",
+				"0985441759", "urologo");
+		doctortManager.addDoctor("Direccion2........", 294276, "paciente2@email.com", "Amarilla", "Mario Jose",
+				"0985741739", "traumatologo");
+		doctortManager.addDoctor("Direccion3........", 392467, "paciente3@email.com", "Quiroga", "Celeste Pelmaza",
+				"0985344539", "odontologo");
+		doctortManager.addDoctor("Direccion4........", 198769, "paciente4email.com", "Laoz", "Dalila Maria",
+				"0985423686", "neumologo");
+		doctortManager.addDoctor("Direccion5........", 498464, "paciente5@email.com", "Queen", "Leila Daniela",
+				"0985495683", "ginecologo");
+		doctortManager.addDoctor("Direccion6........", 368763, "paciente6@email.com", "Fariña", "Luis", "0985462759",
+				"pediatra");
+		for (int i = 0; i < 30; i++) {
+			doctortManager.addDoctor("Direccion" + i + "........", ThreadLocalRandom.current().nextInt(1000, 7000000),
+					"paciente" + i + "@email.com", "apellido" + i, "nombre" + i,
+					Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)), "");
 		}
-}
+	}
 
 	private static void laboratoryManager() {
 		System.out.println("###### LABORATORIO #####");
@@ -235,7 +250,6 @@ private static void doctorManager(){
 		// System.out.println("No me funciona");
 		
 	}
-	
 	public static void addUsersAndRoles(){
 		System.out.println("###### User y Roles #######");
 		UserManager u = new UserManager();

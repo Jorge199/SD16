@@ -25,6 +25,11 @@ class RequestController {
 	def IUserService userService
 	def ILaboratoryService laboratoryService
 
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def index() {
 		redirect(action: "list",params: params)
 	}
@@ -42,9 +47,13 @@ class RequestController {
 		}
 		def requests = null
 		String textToFind=""
+		System.out.println(params)
 		if (params.containsKey("text")){
 			textToFind= params.get("text");
 		}else{
+			if(null!=params.get("patient") && !"".equals(params.get("patient")) && !"null".equals(params.get("patient"))){
+				textToFind+="patient="+params.get("patient")+'&'
+			}
 			if(null!=params.get("statusSearch") && !"".equals(params.get("statusSearch")) && !"null".equals(params.get("statusSearch"))){
 				textToFind+="status="+params.get("statusSearch")+'&'
 			}
@@ -66,25 +75,23 @@ class RequestController {
 		}
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
 		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind]
-
-
 	}
+
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
 		'ROLE_SECRETARIA'
 	])
-
 	def create() {
 		def requestInstance = new RequestB(params)
 		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
 	}
+
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
 		'ROLE_SECRETARIA'
 	])
-
 	def save(Integer id) {
 
 		def requestInstance = new RequestB(params)
@@ -104,9 +111,10 @@ class RequestController {
 		redirect(action: "list", id: newRequest.getId())
 	}
 
-	@Secured([
+		@Secured([
 		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR'
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
 	])
 	def edit(Integer id) {
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("id")))

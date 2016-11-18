@@ -1,4 +1,7 @@
 <%@ page import="com.sd.uni.labpatologia.util.DiagnosticEnum"%>
+<head>
+ <ckeditor:resources/>
+</head>
 <div class="row">
 	<div class="panel panel-default">
 		<div class="panel-heading">Datos de la Solicitud</div>
@@ -104,12 +107,12 @@
 						></g:select>
 				</div>
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-12">
 		<label> Observaciones <span class="required-indicator">*</span>
 		</label>
-		<g:textArea rows="5" cols="40" class="form-control"
-			name="observations" required="" maxlength="250"
-			value="${reportInstance?.observations}" />
+			<ckeditor:editor name="observations" height="400px" width="100%">
+				${initialValue}
+			</ckeditor:editor>
 	</div>
 
 		</div>

@@ -15,12 +15,12 @@
 	</div>
 	<div class="col-md-6">
 		<label>Constraseña<span class="required-indicator">*</span></label>
-		<g:passwordField class="form-control" required="" name="password" id="pass1" value="${userInstance?.password }"
+		<g:passwordField class="form-control" required="" name="password" id="pass1" value="${}"
 			placeholder="Ingrese la contraseña" />
 	</div>
 	<div class="col-md-6">
 		<label>Repita la Constraseña<span class="required-indicator">*</span></label>
-		<g:passwordField class="form-control" required="" name="password2" oninput="check(this)" value="${userInstance?.password }"
+		<g:passwordField class="form-control" required="" name="password2" oninput="check(this)" value="${}"
 			placeholder="Vuelva a ingresar la contraseña" />
 	</div>
 

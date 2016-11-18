@@ -27,12 +27,12 @@ class ReportController {
 	def ILaboratoryService laboratoryService;
 	@Autowired def IAuthService authService
 	
-	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
+	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR','ROLE_SECRETARIA'])
 	def index() {
 		redirect(action: "list", params: params)
 	}
 	
-	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
+	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR','ROLE_SECRETARIA'])
 	def list() {
 		def page = 0
 		def siguiente

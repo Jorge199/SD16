@@ -16,7 +16,7 @@ public class LaboratoryManager extends AbstractBaseManager {
 		laboratoryDTO.setAddress(address);
 		laboratoryDTO.setEmail(email);
 		laboratoryDTO.setPhone(phone);
-
+		setAdminAut();
 		getJerseyClient().resource(getBaseUrl() + "/laboratory").entity(laboratoryDTO).post(LaboratoryDto.class);
 	}
 	

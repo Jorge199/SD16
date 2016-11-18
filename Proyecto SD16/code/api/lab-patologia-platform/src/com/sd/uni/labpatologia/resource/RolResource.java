@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.rol.RolDTO;
@@ -49,7 +50,7 @@ public class RolResource {
 	}
 
 	@POST
-	public RolDTO save(RolDTO country) {
-		return rolService.save(country);
+	public RolDTO save(RolDTO rol) {
+		return rolService.save(rol);
 	}
 }

@@ -62,12 +62,20 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 	public List<RequestDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(RequestDomain.class);
+		Criteria criteria = session.createCriteria(RequestDomain.class, "request").createAlias("request._patient", "patient");
+		
 		
 		if (textToFind != null){
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 
+			if (map.containsKey("patient")) { // si quiere filtrar por patient
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("patient._name", "%"+map.get("patient")+"%"))
+				.add(Restrictions.ilike("patient._lastName", "%"+map.get("patient")+"%"))
+				.add(Restrictions.ilike("patient._document", "%"+map.get("patient")+"%"));
+				criteria.add(Restrictions.or(propertyCriterion));
+			}
+			
 			if (map.containsKey("note")) { // si quiere filtrar por note
 				criteria.add(Restrictions.ilike("_note", "%"+map.get("note")+"%"));
 			}

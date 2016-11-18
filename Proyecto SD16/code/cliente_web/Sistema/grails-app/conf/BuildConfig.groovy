@@ -74,5 +74,6 @@ grails.project.dependency.resolution = {
         //compile ":handlebars-asset-pipeline:1.3.0.3"
 		// Plugin para establecer seguridad por medio de roles
 		compile ':spring-security-core:2.0-RC6'
+		compile ":ckeditor:4.5.4.1"
     }
 }
