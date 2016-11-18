@@ -58,7 +58,7 @@ public class ArticleMovementResource {
 	}
 	
 	@POST
-	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_TECNICO"})
+	//@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_TECNICO"})
 	public ArticleMovementDTO save(ArticleMovementDTO art) {
 		return _stockService.save(art);
 	}
