@@ -80,21 +80,32 @@
 				<ul class="nav navbar-nav side-nav">
 					<li><a href="/Sistema/inicio/index"><i
 							class="fa fa-fw fa-bars"></i>Menu</a></li>
-					<li><a href="/Sistema/request/list/"><i
-							class="fa fa-fw fa-file-text"></i>Fichas de Entradas</a></li>
-
-					<li><a href="/Sistema/patient/list/"><i
-							class="fa fa-fw fa-user"></i>Pacientes</a></li>
-
-					<li><a href="/Sistema/doctor/list/"><i
-							class="fa fa-fw fa-user-md"></i>Doctores</a></li>
-
-					<li><a href="/Sistema/report/list/"><i
-							class="fa fa-fw fa-file-text-o"></i>Informes</a></li>
-
-					<li><a href="#"><i class="fa fa-fw fa-medkit"></i>Insumos</a></li>
-					<li><a href="/Sistema/user/list/"><i
+					
+					<sec:ifNotGranted roles='ROLE_TECNICO'>
+						<li><a href="/Sistema/request/list/"><i
+								class="fa fa-fw fa-file-text"></i>Fichas de Entradas</a></li>
+					
+						<li><a href="/Sistema/patient/list/"><i
+								class="fa fa-fw fa-user"></i>Pacientes</a></li>
+	
+						<li><a href="/Sistema/doctor/list/"><i
+								class="fa fa-fw fa-user-md"></i>Doctores</a></li>
+					</sec:ifNotGranted>
+					
+					<sec:ifNotGranted roles='ROLE_TECNICO, ROLE_SECRETARIA'>
+						<li><a href="/Sistema/report/list/"><i
+								class="fa fa-fw fa-file-text-o"></i>Informes</a></li>
+					</sec:ifNotGranted>
+					
+					<sec:ifNotGranted roles='ROLE_SECRETARIA'>
+						<li><a href="#"><i class="fa fa-fw fa-medkit"></i>Insumos</a></li>
+					</sec:ifNotGranted>
+					
+					<sec:ifNotGranted roles='ROLE_TECNICO, ROLE_SECRETARIA'>
+						<li><a href="/Sistema/user/list/"><i
 							class="fa fa-fw fa-user"></i>Usuarios</a></li>
+					</sec:ifNotGranted>
+					
 					<li><a href="Sistema/j_spring_security_logout"><i
 							class="fa fa-fw fa-power-off"></i> Salir del Sistema</a></li>
 
@@ -111,7 +122,7 @@
 			Desarrolladores: <a
 				href="mailto:jorgeesquivelfernandez@gmail.com?Subject=Laboratorio%20SD2016">Jorge
 				Esquivel</a> - <a
-				href="mailto:jabel.oalex@gmail.com?Subject=Laboratorio%20SD2016">Alex
+				href="mailto:abel.oalex@gmail.com?Subject=Laboratorio%20SD2016">Alex
 				Jiñes</a> - <a
 				href="mailto:taniamonges@gmail.com?Subject=Laboratorio%20SD2016">Tania
 				Monges</a> <a
