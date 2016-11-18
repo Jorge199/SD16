@@ -79,7 +79,7 @@
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
 					<li><a href="/Sistema/inicio/index"><i
-							class="fa fa-fw fa-bars"></i>Menu</a></li>
+							class="fa fa-fw fa-bars"></i>Panel Principal</a></li>
 					
 					<sec:ifNotGranted roles='ROLE_TECNICO'>
 						<li><a href="/Sistema/request/list/"><i
@@ -106,8 +106,6 @@
 							class="fa fa-fw fa-user"></i>Usuarios</a></li>
 					</sec:ifNotGranted>
 					
-					<li><a href="Sistema/j_spring_security_logout"><i
-							class="fa fa-fw fa-power-off"></i> Salir del Sistema</a></li>
 
 
 				</ul>

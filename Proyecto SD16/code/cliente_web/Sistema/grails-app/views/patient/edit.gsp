@@ -21,7 +21,7 @@
 						</fieldset>
 						<fieldset class="buttons">
 							<br>
-							<div class="col-xs-10">
+							<div class="col-xs-12">
 								<div class="text-right">
 									<button type="submit" class="btn btn-primary " name="edit"
 										value="${patientInstance?.id}">

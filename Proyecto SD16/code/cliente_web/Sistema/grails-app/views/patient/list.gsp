@@ -71,7 +71,7 @@
 												<td>
 													${fieldValue(bean: patientInstance, field: "sex")}
 												</td>
-												<td>
+												<td class="numbers">
 													${fieldValue(bean: patientInstance, field: "document")}
 												</td>
 												<td>
@@ -85,7 +85,7 @@
 												</td>
 
 												<%--  <td>${fieldValue(bean: patientInstance, field: "patient.id")}</td>		--%>
-												<td class="center"><g:link action="edit"
+												<td width="80" class="center"><g:link action="edit"
 														class="btn btn-success" id="${patientInstance.getId()}">
 														${}<i class="fa fa-pencil"></i> Editar</g:link></td>
 											</tr>

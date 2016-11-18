@@ -15,7 +15,7 @@
 	<div class="col-md-6">
 		<label>Teléfono</label> <input type="text" class="form-control"
 			id="phoneNum" maxlength="20" placeholder="Ingrese un Número"
-			data-mask="(9999) 999-999" name="phone" 
+			data-mask="(999) 999-999" name="phone" 
 			value="${laboratoryInstance?.phone}" />
         </div>
 </div>
