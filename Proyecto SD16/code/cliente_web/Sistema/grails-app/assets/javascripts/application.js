@@ -27,4 +27,11 @@ if (typeof jQuery !== 'undefined') {
 	  $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
 	});
 
+	 
+      $(document).ready(function() {
+          $(".numbers").each(function() {
+              $(this).format({format:"#.###", locale:"us"});
+          });
+      });
+
 

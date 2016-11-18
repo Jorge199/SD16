@@ -7,8 +7,8 @@
 	value="${message(code: 'doctor.label', default: 'Doctor')}" />
 <title><g:message code="default.create.label"
 		args="[entityName]" /></title>
-<asset:stylesheet src="application.css" />
-<asset:javascript src="application.js" />
+	<asset:stylesheet src="application.css" />
+	<asset:javascript src="application.js" />
 </head>
 <body>
 	<div class="container-fluid">
@@ -70,7 +70,7 @@
 												<td>
 													${fieldValue(bean: doctorInstance, field: "lastName")}
 												</td>
-												<td>
+												<td class="numbers">
 													${fieldValue(bean: doctorInstance, field: "ci")}
 												</td>
 												<td>
@@ -88,7 +88,7 @@
 													${fieldValue(bean: doctorInstance, field: "address")}
 												</td>
 												<%--  <td>${fieldValue(bean: laboratoryInstance, field: "laboratory.id")}</td>		--%>
-												<td class="center"><g:link action="edit"
+												<td width="80" class="center"><g:link action="edit"
 														class="btn btn-success" id="${doctorInstance.getId()}">
 														${}<i class="fa fa-pencil"></i> Editar</g:link></td>
 											</tr>

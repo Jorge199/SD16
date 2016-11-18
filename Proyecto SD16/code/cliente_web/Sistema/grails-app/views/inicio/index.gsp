@@ -37,7 +37,7 @@
 							</div>
 							<div class="col-xs-9 text-right">
 
-								<div>Informaciòn del Laboratorio</div>
+								<div>Información del Laboratorio</div>
 							</div>
 						</div>
 					</div>

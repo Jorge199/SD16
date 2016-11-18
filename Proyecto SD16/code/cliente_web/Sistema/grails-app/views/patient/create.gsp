@@ -27,7 +27,7 @@
 						</fieldset>
 						<fieldset class="buttons">
 							<br> <br>
-							<div class="col-xs-10">
+							<div class="col-xs-12">
 								<div class="text-right">
 									<button type="submit" class="btn btn-primary " name="create"
 										value="${message(code: 'default.button.create.label', default: 'Create')}">

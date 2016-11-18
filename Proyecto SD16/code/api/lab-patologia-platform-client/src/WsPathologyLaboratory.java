@@ -134,8 +134,8 @@ public class WsPathologyLaboratory {
 
 		LaboratoryManager laboratoryManager = new LaboratoryManager();
 		// System.out.println("##### Agregar datos #####");
-		laboratoryManager.addLaboratory("An√°lisis Patol√≥gico", "Tte. Honorio Gonz√°lez", "patologia@email.com",
-				"192030");
+		laboratoryManager.addLaboratory("An·lisis PatolÛgico", "Tte. Honorio Gonz·lez", "patologia@email.com",
+				"(071) 202-596");
 		// laboratoryManager.addLaboratory("clinica", "alborada",
 		// "clinica@email.com", "192030");
 
