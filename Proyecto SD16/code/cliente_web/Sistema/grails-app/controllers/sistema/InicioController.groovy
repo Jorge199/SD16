@@ -1,5 +1,8 @@
 package sistema
 
+import com.sd.uni.labpatologia.beans.article.ArticleB
+import com.sd.uni.labpatologia.beans.patient.PatientB
+import com.sd.uni.labpatologia.beans.request.RequestB
 import com.sd.uni.labpatologia.service.article.IArticleService
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService;
 import com.sd.uni.labpatologia.service.patient.IPatientService
@@ -19,11 +22,22 @@ class InicioController {
 	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_SECRETARIA','ROLE_TECNICO'])
 	def index() {
 		String text = "status=RECIBIDO"
-
-		def cantRecibido = requestService.find(text,0,0)
+		List<PatientB> patients = null
+		List<ArticleB> articles = null
+		List<RequestB> cantRecibido = null
+		
+		if (SpringSecurityUtils.ifNotGranted('ROLE_TECNICO')) {
+			patients = patientService.getAll()
+			cantRecibido = requestService.find(text,0,0)
+		}
+		
+		if (SpringSecurityUtils.ifNotGranted('ROLE_SECRETARIA')) {
+			articles = articleService.getAll()
+		}
+		
 		[laboratoryInstanceList:laboratoryService.getAll(),
-			patientInstanceList:patientService.getAll(),
-			articleInstanceList:articleService.getAll(),
+			patientInstanceList:patients,
+			articleInstanceList:articles,
 			requestInstanceList:cantRecibido]
 
 
