@@ -36,7 +36,7 @@ public class WsPathologyLaboratory {
 		// testRequest();
 
 		testStudyType();
-		addUsersAndRoles();
+		//addUsersAndRoles();
 		//addArticles();
 		//addArticleMovements();
 		System.out.println("Datos Cargados");

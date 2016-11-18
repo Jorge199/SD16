@@ -111,7 +111,7 @@
 		<label> Observaciones <span class="required-indicator">*</span>
 		</label>
 			<ckeditor:editor name="observations" height="400px" width="100%" >
-				<g:if> </g:if>${reportInstance?.observations} 
+				${reportInstance?.observations} 
 			</ckeditor:editor>
 	</div>
 
