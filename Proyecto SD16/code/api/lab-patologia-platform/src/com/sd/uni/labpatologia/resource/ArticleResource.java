@@ -59,26 +59,26 @@ public class ArticleResource {
 	}
 
 	
-	/* http://localhost:8080/lab-patologia-platform/rest/article/add/{id}/{c} */
+	/* http://localhost:8080/lab-patologia-platform/rest/article/add/{id}/{c} 
 	@GET
-	@Path("/add/{id}/{c}")
+	@Path("/add/{id}/{quantity}")
 	@Produces("application/xml")
-	public ArticleDto add_to_stock(@PathParam("id") Integer id,@PathParam("c") Integer c) throws PatologyException {
+	public ArticleDto put(@PathParam("id") Integer id,@PathParam("quantity") Integer quantity) throws PatologyException {
 
-		return _articleService.add_to_stock(id,c);
+		return _articleService.put(id,quantity);
 	}
 
-	/* http://localhost:8080/lab-patologia-platform/rest/article/remove/{id}/{c} */
+	/* http://localhost:8080/lab-patologia-platform/rest/article/remove/{id}/{c} 
 	@GET
-	@Path("/remove/{id}/{c}")
+	@Path("/remove/{id}/{quantity}")
 	@Produces("application/xml")
-	public ArticleDto remove_to_stock(@PathParam("id") Integer id,@PathParam("c") Integer c) throws PatologyException, StockException {
-		return _articleService.remove_from_stock(id,c);
-	}
+	public ArticleDto remove_to_stock(@PathParam("id") Integer id,@PathParam("quantity") Integer quantity) throws PatologyException, StockException {
+		return _articleService.withdraw(id,quantity);
+	}*/
 	
 	@POST
-	public ArticleDto save(ArticleDto art) {
-		return _articleService.save(art);
+	public ArticleDto save(ArticleDto article) {
+		return _articleService.save(article);
 	}
 
 }

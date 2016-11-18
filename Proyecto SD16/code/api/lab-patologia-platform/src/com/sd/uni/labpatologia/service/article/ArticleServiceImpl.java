@@ -43,20 +43,6 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		return newDto;
 	}
 
-	
-	@Override
-	@Transactional
-	public ArticleDto remove_from_stock(Integer id, Integer c) throws PatologyException, StockException {
-		final ArticleDomain ArticleDomain = _articleDao.getById(id);
-		if (c < ArticleDomain.getCount()) {
-			ArticleDomain.setCount((ArticleDomain.getCount() - c));
-			final ArticleDomain Article = _articleDao.save(ArticleDomain);
-			return convertDomainToDto(Article);
-		} else {
-			throw new StockException("Stock insuficiente");
-		}
-	}
-
 	@Override
 	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'article_' + #id")
@@ -88,7 +74,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		Article.setName(domain.getName());
 		Article.setDescription(domain.getDescription());
 		Article.setUnits(domain.getUnits());
-		Article.setCount(domain.getCount());
+		Article.setQuantity(domain.getQuantity());
 		return Article;
 	}
 
@@ -99,7 +85,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		Article.setName(dto.getName());
 		Article.setDescription(dto.getDescription());
 		Article.setUnits(dto.getUnits());
-		Article.setCount(dto.getCount());
+		Article.setQuantity(dto.getQuantity());
 		return Article;
 	}
 
@@ -116,11 +102,24 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		return ArticleResult;
 	}
 
-
 	@Override
-	public ArticleDto add_to_stock(Integer c, Integer c2) throws PatologyException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArticleDto put(Integer id, Integer quantity) throws PatologyException {
+		final ArticleDomain ArticleDomain = _articleDao.getById(id);
+		ArticleDomain.setQuantity((ArticleDomain.getQuantity() + quantity));
+		final ArticleDomain Article = _articleDao.save(ArticleDomain);
+		return convertDomainToDto(Article);
 	}
 
+	@Override
+	@Transactional
+	public ArticleDto withdraw(Integer id, Integer quantity) throws PatologyException, StockException {
+		final ArticleDomain ArticleDomain = _articleDao.getById(id);
+		if (quantity <= ArticleDomain.getQuantity()) {
+			ArticleDomain.setQuantity((ArticleDomain.getQuantity() - quantity));
+			final ArticleDomain Article = _articleDao.save(ArticleDomain);
+			return convertDomainToDto(Article);
+		} else {
+			throw new StockException("Stock insuficiente");
+		}
+	}
 }

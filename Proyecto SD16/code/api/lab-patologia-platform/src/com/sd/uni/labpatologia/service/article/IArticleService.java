@@ -10,9 +10,9 @@ import com.sd.uni.labpatologia.service.base.IBaseService;
 
 public interface IArticleService extends IBaseService<ArticleDto, ArticleDomain, ArticleDaoImpl, ArticleResult>{
 
-	ArticleDto add_to_stock(Integer c, Integer c2) throws PatologyException;
+	ArticleDto put(Integer id, Integer quantity) throws PatologyException;
 
-	ArticleDto remove_from_stock(Integer id, Integer c)
+	ArticleDto withdraw(Integer id, Integer quantity)
 			throws PatologyException, StockException;
 	
 }

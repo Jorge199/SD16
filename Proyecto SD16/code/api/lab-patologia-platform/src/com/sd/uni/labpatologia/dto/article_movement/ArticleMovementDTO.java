@@ -1,4 +1,4 @@
-package com.sd.uni.labpatologia.dto.stock_mov;
+package com.sd.uni.labpatologia.dto.article_movement;
 
 
 import java.util.Date;
@@ -7,15 +7,16 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.uni.labpatologia.dto.base.BaseDTO;
+import com.sd.uni.labpatologia.util.MovementTypeEnum;
 import com.sd.uni.labpatologia.util.StatusEnum;
 
-@XmlRootElement(name = "stock")
-public class StockDTO extends BaseDTO {
+@XmlRootElement(name = "articleMovement")
+public class ArticleMovementDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1L;
 	private Integer _articleId;
 	private Integer _count;
-	private Integer _mov_type;
+	private MovementTypeEnum _mov_type;
 	private Date _date;
 	
 	@XmlElement
@@ -27,22 +28,21 @@ public class StockDTO extends BaseDTO {
 		_articleId = aId;
 	}
 
-	
 	@XmlElement
-	public Integer getCount() {
+	public Integer getQuantity() {
 		return _count;
 	}
 
-	public void setCount(Integer count) {
+	public void setQuantity(Integer count) {
 		_count = count;
 	}
 	
 	@XmlElement
-	public Integer getMovtype() {
+	public MovementTypeEnum getMovtype() {
 		return _mov_type;
 	}
 
-	public void setMovtype(Integer mov) {
+	public void setMovtype(MovementTypeEnum mov) {
 		_mov_type = mov;
 	}
 	

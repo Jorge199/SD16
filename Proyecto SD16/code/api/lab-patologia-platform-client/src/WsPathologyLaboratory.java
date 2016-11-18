@@ -1,12 +1,16 @@
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
+import com.sd.uni.labpatologia.util.MovementTypeEnum;
 import com.sd.uni.labpatologia.util.SexEnum;
 
+import article.ArticleManager;
+import article_movement.ArticleMovementManager;
 import doctor.DoctorManager;
 //import doctor.DoctorManager;
 import laboratory.LaboratoryManager;
@@ -32,6 +36,8 @@ public class WsPathologyLaboratory {
 
 		testStudyType();
 		addUsersAndRoles();
+		addArticles();
+		addArticleMovements();
 		System.out.println("Datos Cargados");
 	}
 
@@ -212,8 +218,8 @@ private static void doctorManager(){
 	}
 
 	public static void testStudyType() {
-		StudyTypeManager s = new StudyTypeManager();
 		System.out.println("###### ESTUDIOS #####");
+		StudyTypeManager s = new StudyTypeManager();
 		s.addStudy("Cancer", "alguncancer");
 		s.addStudy("Gripe", "alguna gripe");
 		s.addStudy("Cancer de mama", "cancer de mama");
@@ -227,17 +233,36 @@ private static void doctorManager(){
 		// System.out.println("\nObtenemos el estudio por propiedad = cancer");
 		// s.getByPropertyStudyType("cancer");
 		// System.out.println("No me funciona");
-
+		
 	}
 	
 	public static void addUsersAndRoles(){
+		System.out.println("###### User y Roles #######");
 		UserManager u = new UserManager();
 		u.addRols();
 		u.addUser("Alex", "admin", "Jines", "admin", 1, 000, SexEnum.MASCULINO);
 		u.addUser("Fatima", "secre", "Talavera", "secre", 2, 000, SexEnum.FEMENINO);
 		u.addUser("Jerson", "doctor", "Derulo", "doctor", 3, 000, SexEnum.MASCULINO);
 		u.addUser("Jorge", "tecnico", "Esquivel", "tecnico", 4, 000, SexEnum.MASCULINO);
-		System.out.println("###### User y Roles #######");
+		
+	}
+	
+	public static void addArticles(){
+		System.out.println("###### Articulos #######");
+		ArticleManager a = new ArticleManager();
+		a.addArticle("Alcohol A1", "Ese que parece alcohol", "Botellas de 1 litro");
+		a.addArticle("Alcohol A2", "Ese que parece alcohol también", "Botellas de 200 ml");
+		
+	}
+	
+	public static void addArticleMovements(){
+		System.out.println("###### Movimientos de articulos #######");
+		ArticleMovementManager a = new ArticleMovementManager();
+		a.addArticle(1, Calendar.getInstance().getTime(), MovementTypeEnum.ENTRADA, 5);
+		a.addArticle(2, Calendar.getInstance().getTime(), MovementTypeEnum.ENTRADA, 6);
+		a.addArticle(1, Calendar.getInstance().getTime(), MovementTypeEnum.SALIDA, 1);
+		a.addArticle(2, Calendar.getInstance().getTime(), MovementTypeEnum.SALIDA, 1);
+		
 	}
 
 }

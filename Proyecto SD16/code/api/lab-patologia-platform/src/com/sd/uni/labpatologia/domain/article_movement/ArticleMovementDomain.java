@@ -1,9 +1,11 @@
-package com.sd.uni.labpatologia.domain.stock_mov;
+package com.sd.uni.labpatologia.domain.article_movement;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,11 +13,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
+import com.sd.uni.labpatologia.util.MovementTypeEnum;
 import com.sd.uni.labpatologia.domain.article.ArticleDomain;
 
 @Entity
-@Table(name = "stock_mov")
-public class StockDomain extends BaseDomain{
+@Table(name = "article_movement")
+public class ArticleMovementDomain extends BaseDomain{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -24,18 +27,14 @@ public class StockDomain extends BaseDomain{
 	@ManyToOne
 	private ArticleDomain _article;
 	
-	@Column(name = "count")
-	private Integer _count;
+	@Column(name = "quantity")
+	private Integer _quantity;
 
-	@Column(name = "mov_type")
-	private Integer _mov_type;
+	@Enumerated(EnumType.STRING)
+	private MovementTypeEnum _movement_type;
 	
 	@Column(name = "date")
 	private Date _date;
-	
-	public static Integer INC_VALUE = 1;
-	
-	public static Integer DEC_VALUE = 0;
 	
 	public Integer getId() {
 		return _id;
@@ -53,19 +52,19 @@ public class StockDomain extends BaseDomain{
 		_article = ad;
 	}
 	
-	public Integer getCount() {
-		return _count;
+	public Integer getQuantity() {
+		return _quantity;
 	}
 
-	public void setCount(Integer c) {
-		_count = c;
+	public void setQuantity(Integer c) {
+		_quantity = c;
 	}
 	
-	public Integer getMovtype() {
-		return _mov_type;
+	public MovementTypeEnum getMovtype() {
+		return _movement_type;
 	}
-	public void setMovtype(Integer mt) {
-		_mov_type = mt;
+	public void setMovtype(MovementTypeEnum movementType) {
+		_movement_type = movementType;
 	}
 	
 	public Date getDate() {

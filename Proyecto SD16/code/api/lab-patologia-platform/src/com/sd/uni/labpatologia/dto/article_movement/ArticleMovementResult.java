@@ -1,4 +1,4 @@
-package com.sd.uni.labpatologia.dto.stock_mov;
+package com.sd.uni.labpatologia.dto.article_movement;
 
 
 import java.util.List;
@@ -8,17 +8,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.uni.labpatologia.dto.base.BaseResult;
 
-@XmlRootElement(name = "stockResult")
-public class StockResult extends BaseResult<StockDTO> {
+@XmlRootElement(name = "articleMovementResult")
+public class ArticleMovementResult extends BaseResult<ArticleMovementDTO> {
 
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement
-	public List<StockDTO> getStocks() {
+	public List<ArticleMovementDTO> getArticleMovements() {
 		return getList();
 	}
 
-	public void setStocks(List<StockDTO> dtos) {
+	public void setArticleMovements(List<ArticleMovementDTO> dtos) {
 		super.setList(dtos);
 	}
 }
