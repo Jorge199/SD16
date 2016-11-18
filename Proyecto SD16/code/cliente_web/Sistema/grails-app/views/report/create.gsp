@@ -9,9 +9,9 @@
 		args="[entityName]" /></title>
 <asset:stylesheet src="application.css" />
 <asset:javascript src="application.js" />
+
 </head>
 <body>
-
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel panel-default">
@@ -22,8 +22,11 @@
 				</div>
 				<div class="panel-body">
 					<g:form action="save">
+					
 						<fieldset class="form">
+							
 							<g:render template="form" />
+
 						</fieldset>
 						<fieldset class="buttons">
 							<br>
@@ -44,5 +47,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

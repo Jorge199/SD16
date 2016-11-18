@@ -1,7 +1,6 @@
 
 package com.sd.uni.labpatologia.service.patient;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +15,6 @@ import com.sd.uni.labpatologia.dto.patient.PatientResult;
 import com.sd.uni.labpatologia.rest.patient.IPatientResource;
 import com.sd.uni.labpatologia.rest.patient.PatientResourceImpl;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
-import com.sd.uni.labpatologia.service.patient.IPatientService;
 
 @Service("patientService")
 public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>implements IPatientService {

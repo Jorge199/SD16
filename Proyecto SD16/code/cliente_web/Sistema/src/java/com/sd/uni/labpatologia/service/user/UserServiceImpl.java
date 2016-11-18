@@ -9,10 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sd.uni.labpatologia.beans.laboratory.LaboratoryB;
 import com.sd.uni.labpatologia.beans.user.UserB;
-import com.sd.uni.labpatologia.dto.laboratory.LaboratoryDto;
-import com.sd.uni.labpatologia.dto.laboratory.LaboratoryResult;
 import com.sd.uni.labpatologia.dto.user.UserDTO;
 import com.sd.uni.labpatologia.dto.user.UserResult;
 import com.sd.uni.labpatologia.rest.user.IUserResource;

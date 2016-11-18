@@ -3,7 +3,6 @@ package com.sd.uni.labpatologia.rest.stock_mov;
 //import com.sd.uni.labpatologia.dto.stock_mov.StockDTO;
 
 //import com.sd.uni.labpatologia.dto.stock_mov.StockResult;
-import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
 import org.springframework.stereotype.Repository;
 
 @Repository("stockResource")

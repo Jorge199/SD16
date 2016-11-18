@@ -11,7 +11,6 @@ import com.sd.uni.labpatologia.beans.base.BaseBean;
 import com.sd.uni.labpatologia.beans.doctor.DoctorB;
 import com.sd.uni.labpatologia.beans.patient.PatientB;
 import com.sd.uni.labpatologia.beans.study_type.StudyTypeB;
-import com.sd.uni.labpatologia.beans.user.UserB;
 import com.sd.uni.labpatologia.util.StatusEnum;
 
 public class RequestB extends BaseBean {

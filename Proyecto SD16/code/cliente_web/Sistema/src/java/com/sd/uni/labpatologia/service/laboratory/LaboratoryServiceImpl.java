@@ -9,11 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sd.uni.labpatologia.beans.laboratory.LaboratoryB;
-import com.sd.uni.labpatologia.beans.report.ReportB;
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryDto;
 import com.sd.uni.labpatologia.dto.laboratory.LaboratoryResult;
-import com.sd.uni.labpatologia.dto.report.ReportDTO;
-import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.rest.laboratory.ILaboratoryResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
