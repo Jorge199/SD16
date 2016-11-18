@@ -9,7 +9,6 @@ package com.sd.uni.labpatologia.beans.article;
  *
  * @author User
  */
-import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;

@@ -14,7 +14,6 @@ import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.rest.report.IReportResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 import com.sd.uni.labpatologia.service.request.IRequestService;
-import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 @Service("reportService")
 public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>

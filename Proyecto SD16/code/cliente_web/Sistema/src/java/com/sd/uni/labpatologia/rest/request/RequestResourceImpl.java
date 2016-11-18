@@ -5,7 +5,6 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
-import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;

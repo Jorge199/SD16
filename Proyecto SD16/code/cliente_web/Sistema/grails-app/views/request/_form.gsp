@@ -17,24 +17,32 @@
 			<label>Codigo <span class="required-indicator">*</span></label>
 			<div>
 				<g:if test="${requestInstance?.status == StatusEnum.RECIBIDO }">
-					<div class="col-sm-5">
+					<div class="col-sm-4">
 						<g:field type="text" name="code" readonly="readonly" class="form-control" value="${requestInstance?.code}"/>
 					</div>
-					<div class="col-sm-7">
-						<g:textField type="number" class="form-control"  max="20" name="code1" 
-						placeholder="Numero de cortes" />
-					</div>
-					<g:hiddenField name="status" value="${StatusEnum.PROCESO.name()}" />
+					
+					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+						<div class="col-sm-4">
+							<g:textField type="number" class="form-control"  max="20" name="code_cortes" 
+							placeholder="Nro de cortes" />
+						</div>
+						<div class="col-sm-4">
+							<g:textField type="number" class="form-control"  max="20" name="code_laminas" 
+							placeholder="Nro de laminas"/>
+						</div>
+					</sec:ifAnyGranted>
+					
 				</g:if>
 				<g:elseif test="${requestInstance?.status==StatusEnum.PROCESO }">
-					<div class="col-sm-5">
+					<div class="col-sm-4">
 						<g:field type="text" name="code" readonly="readonly" class="form-control" value="${requestInstance?.code}"/>
 					</div>
-					<div class="col-sm-7">
-						<g:textField type="number" class="form-control"  max="20" name="code1" 
-						placeholder="Numero de laminas"/>
-					</div>
-					<g:hiddenField name="status" value="${StatusEnum.PROCESADO.name()}" />
+					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+						<div class="col-sm-4">
+							<g:textField type="number" class="form-control"  max="20" name="code_laminas" 
+							placeholder="Nro de laminas"/>
+						</div>
+					</sec:ifAnyGranted>
 				</g:elseif>
 				<g:else>
 					<g:textField  class="form-control" required=""  max="20" name="code" 

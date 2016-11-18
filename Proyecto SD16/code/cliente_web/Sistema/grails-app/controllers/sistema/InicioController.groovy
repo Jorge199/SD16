@@ -1,5 +1,8 @@
 package sistema
 
+import com.sd.uni.labpatologia.beans.article.ArticleB
+import com.sd.uni.labpatologia.beans.patient.PatientB
+import com.sd.uni.labpatologia.beans.request.RequestB
 import com.sd.uni.labpatologia.service.article.IArticleService
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService;
 import com.sd.uni.labpatologia.service.patient.IPatientService
@@ -15,27 +18,29 @@ class InicioController {
 	def IPatientService patientService
 	def IArticleService articleService
 	def IRequestService requestService
-	
+
 	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_SECRETARIA','ROLE_TECNICO'])
-	 def index() { 
+	def index() {
 		String text = "status=RECIBIDO"
-		if(SpringSecurityUtils.ifAllGranted('ROLE_ADMINISTRADOR, ROLE_DOCTOR')){
-			def cantRecibido = requestService.find(text,0,0)
-			[laboratoryInstanceList:laboratoryService.getAll(),
-				patientInstanceList:patientService.getAll(),
-				articleInstanceList:articleService.getAll(),
-				requestInstanceList:cantRecibido]
-		} else if(SpringSecurityUtils.ifAllGranted('ROLE_TECNICO')){
-			def cantRecibido = requestService.find(text,0,0)
-			[laboratoryInstanceList:laboratoryService.getAll(),
-				requestInstanceList:cantRecibido]
-		} else if(SpringSecurityUtils.ifAllGranted('ROLE_SECRETARIA')){
-			def cantRecibido = requestService.find(text,0,0)
-			[laboratoryInstanceList:laboratoryService.getAll(),
-				patientInstanceList:patientService.getAll(),
-				requestInstanceList:cantRecibido]
+		List<PatientB> patients = null
+		List<ArticleB> articles = null
+		List<RequestB> cantRecibido = null
+		
+		if (SpringSecurityUtils.ifNotGranted('ROLE_TECNICO')) {
+			patients = patientService.getAll()
+			cantRecibido = requestService.find(text,0,0)
 		}
 		
+		if (SpringSecurityUtils.ifNotGranted('ROLE_SECRETARIA')) {
+			articles = articleService.getAll()
+		}
+		
+		[laboratoryInstanceList:laboratoryService.getAll(),
+			patientInstanceList:patients,
+			articleInstanceList:articles,
+			requestInstanceList:cantRecibido]
+
+
 	}
-	
+
 }

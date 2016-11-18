@@ -9,8 +9,8 @@ import com.sd.uni.labpatologia.util.DiagnosticEnum;
 import com.sd.uni.labpatologia.util.MovementTypeEnum;
 import com.sd.uni.labpatologia.util.SexEnum;
 
-import article.ArticleManager;
-import article_movement.ArticleMovementManager;
+//import article.ArticleManager;
+//import article_movement.ArticleMovementManager;
 import doctor.DoctorManager;
 //import doctor.DoctorManager;
 import laboratory.LaboratoryManager;
@@ -36,9 +36,9 @@ public class WsPathologyLaboratory {
 		// testRequest();
 
 		testStudyType();
-		addUsersAndRoles();
-		addArticles();
-		addArticleMovements();
+		//addUsersAndRoles();
+		//addArticles();
+		//addArticleMovements();
 		System.out.println("Datos Cargados");
 	}
 
@@ -260,12 +260,12 @@ public class WsPathologyLaboratory {
 		u.addUser("Jorge", "tecnico", "Esquivel", "tecnico", 4, 000, SexEnum.MASCULINO);
 		
 	}
-	
+	/*
 	public static void addArticles(){
 		System.out.println("###### Articulos #######");
 		ArticleManager a = new ArticleManager();
 		a.addArticle("Alcohol A1", "Ese que parece alcohol", "Botellas de 1 litro");
-		a.addArticle("Alcohol A2", "Ese que parece alcohol también", "Botellas de 200 ml");
+		a.addArticle("Alcohol A2", "Ese que parece alcohol tambiï¿½n", "Botellas de 200 ml");
 		
 	}
 	
@@ -277,6 +277,6 @@ public class WsPathologyLaboratory {
 		a.addArticle(1, Calendar.getInstance().getTime(), MovementTypeEnum.SALIDA, 1);
 		a.addArticle(2, Calendar.getInstance().getTime(), MovementTypeEnum.SALIDA, 1);
 		
-	}
+	}*/
 
 }

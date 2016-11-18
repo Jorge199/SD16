@@ -110,8 +110,8 @@
 			<div class="col-md-12">
 		<label> Observaciones <span class="required-indicator">*</span>
 		</label>
-			<ckeditor:editor name="observations" height="400px" width="100%">
-				${initialValue}
+			<ckeditor:editor name="observations" height="400px" width="100%" >
+				${reportInstance?.observations} 
 			</ckeditor:editor>
 	</div>
 

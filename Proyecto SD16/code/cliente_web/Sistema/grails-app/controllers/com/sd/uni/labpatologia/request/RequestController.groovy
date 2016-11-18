@@ -144,9 +144,17 @@ class RequestController {
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
 		requestInstance.setCode(params.get("code"))
-		if (!"".equals(params.get("code1")) && (null != params.get("status")) && params.containsKey("code1")){
-			requestInstance.setCode(params.get("code")+"/"+params.get("code1"))
-			requestInstance.setStatus(StatusEnum.valueOf(params.get("status")))
+		if (!"".equals(params.get("code_cortes")) && params.containsKey("code_cortes")){
+			if (!"".equals(params.get("code_laminas")) && params.containsKey("code_laminas")){
+				requestInstance.setCode(params.get("code")+"/"+params.get("code_cortes")+"/"+params.get("code_laminas"))
+				requestInstance.setStatus(StatusEnum.PROCESADO)
+			}else{	
+				requestInstance.setCode(params.get("code")+"/"+params.get("code_cortes"))
+				requestInstance.setStatus(StatusEnum.PROCESO)
+			}	
+		}else if (requestInstance.getStatus() == StatusEnum.PROCESO && !"".equals(params.get("code_laminas")) && params.containsKey("code_laminas")){	
+			requestInstance.setCode(params.get("code")+"/"+params.get("code_laminas"))
+			requestInstance.setStatus(StatusEnum.PROCESADO)
 		}
 		requestInstance.setNote(params.get("note"))
 		requestService.save(requestInstance)

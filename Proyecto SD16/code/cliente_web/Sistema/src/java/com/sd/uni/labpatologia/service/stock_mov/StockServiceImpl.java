@@ -1,4 +1,4 @@
-package com.sd.uni.labpatologia.service.stock_mov;
+/*package com.sd.uni.labpatologia.service.stock_mov;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,3 +82,4 @@ public class StockServiceImpl extends BaseServiceImpl<Stock_movB, StockDTO> impl
 	}
 
 }
+*/

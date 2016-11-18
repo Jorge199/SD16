@@ -1,6 +1,5 @@
 package com.sd.uni.labpatologia.service.request;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +7,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 
 import com.sd.uni.labpatologia.beans.request.RequestB;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
@@ -19,7 +16,6 @@ import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 import com.sd.uni.labpatologia.service.doctor.IDoctorService;
 import com.sd.uni.labpatologia.service.patient.IPatientService;
 import com.sd.uni.labpatologia.service.study_type.IStudyTypeService;
-import com.sd.uni.labpatologia.service.user.IUserService;
 
 @Service("requestService")
 public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
