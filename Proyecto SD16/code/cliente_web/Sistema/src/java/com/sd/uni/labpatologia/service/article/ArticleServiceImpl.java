@@ -57,7 +57,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleB, ArticleDto> im
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("units", String.valueOf(dto.getUnits()));		
-		params.put("count_stock", String.valueOf(dto.getCount()));
+	//	params.put("count_stock", String.valueOf(dto.getCount()));
 		params.put("name", dto.getName());
 		params.put("description", dto.getDescription());
 		final ArticleB articleB = new ArticleB(params);
@@ -70,8 +70,8 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleB, ArticleDto> im
 		dto.setId(bean.getId());
 		dto.setName(bean.getName());
 		dto.setDescription(bean.getDescription());
-		dto.setUnits(bean.getUnits());
-		dto.setCount(dto.getCount());
+	//	dto.setUnits(bean.getUnits());
+	//	dto.setCount(dto.getCount());
 		return dto;
 	}
 	@Override
