@@ -42,7 +42,8 @@ class UserController {
 			siguiente = userService.find(null,10,page+1)
 		}
 		
-		[userInstanceList: users, userInstanceTotal:users.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll()]
+		[userInstanceList: users, userInstanceTotal:users.size(), page: page, siguiente: siguiente?.size(),
+			text:text, laboratoryInstanceList: laboratoryService.getAll()]
 	}
 	
 	

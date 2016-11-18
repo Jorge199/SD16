@@ -156,17 +156,20 @@
 
 												<td class="center"><g:link action="edit"
 														class="btn btn-success" id="${requestInstance.getId()}">
-														${}<i class="fa fa-pencil"></i> Editar</g:link> <g:if
-														test="${requestInstance?.status==StatusEnum.PROCESADO}">
-														<g:link action="create" class="btn btn-default"
-															controller="report" id="${requestInstance.getId()}">
-															${}<i class="fa fa-list-alt"></i> Informar</g:link>
-													</g:if> <g:if
-														test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
-														<g:link action="edit" class="btn btn-default"
-															controller="report" id="${requestInstance.getId()}">
-															${}<i class="fa fa-list-alt"></i> Informe</g:link>
-													</g:if></td>
+														${}<i class="fa fa-pencil"></i> Editar</g:link> 
+														<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+															<g:if test="${requestInstance?.status==StatusEnum.PROCESADO}">
+																<g:link action="create" class="btn btn-default"
+																controller="report" id="${requestInstance.getId()}">
+																${}<i class="fa fa-list-alt"></i> Informar</g:link>
+															</g:if> 
+															<g:if test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
+																<g:link action="edit" class="btn btn-default"
+																controller="report" id="${requestInstance.getId()}">
+																${}<i class="fa fa-list-alt"></i> Informe</g:link>
+															</g:if>
+														</sec:ifAnyGranted>
+												</td>
 											</tr>
 
 										</g:each>
