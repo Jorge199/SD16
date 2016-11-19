@@ -11,13 +11,14 @@ import org.springframework.stereotype.Service;
 import com.sd.uni.labpatologia.beans.article.ArticleB;
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
+import com.sd.uni.labpatologia.rest.article.ArticleResourceImpl;
 import com.sd.uni.labpatologia.rest.article.IArticleResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 @Service("articleService")
 public class ArticleServiceImpl extends BaseServiceImpl<ArticleB, ArticleDto> implements IArticleService{
 	@Autowired
-	private IArticleResource _articleResource;
+	private IArticleResource _articleResource = new ArticleResourceImpl();
 	
 	public ArticleServiceImpl() {
 		
@@ -35,7 +36,6 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleB, ArticleDto> im
 		final ArticleResult result = _articleResource.getAll();
 		final List<ArticleDto> articleList = null == result.getArticles() ? new ArrayList<ArticleDto>()
 				: result.getArticles();
-
 		final List<ArticleB> laboratories = new ArrayList<ArticleB>();
 		for (ArticleDto dto : articleList) {
 			final ArticleB bean = convertDtoToBean(dto);
@@ -56,8 +56,8 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleB, ArticleDto> im
 	protected ArticleB convertDtoToBean(ArticleDto dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
-		params.put("units", String.valueOf(dto.getUnits()));		
-	//	params.put("count_stock", String.valueOf(dto.getCount()));
+		params.put("units", dto.getUnits());		
+                params.put("quantity", String.valueOf(dto.getQuantity()));
 		params.put("name", dto.getName());
 		params.put("description", dto.getDescription());
 		final ArticleB articleB = new ArticleB(params);
@@ -70,14 +70,22 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleB, ArticleDto> im
 		dto.setId(bean.getId());
 		dto.setName(bean.getName());
 		dto.setDescription(bean.getDescription());
-	//	dto.setUnits(bean.getUnits());
-	//	dto.setCount(dto.getCount());
+                dto.setUnits(bean.getUnits());
+                dto.setQuantity(bean.getQuantity());
 		return dto;
 	}
 	@Override
 	public List<ArticleB> find(String textToFind, int maxItems, int page) {
-		// TODO Auto-generated method stub
-		return null;
+		final ArticleResult result = _articleResource.find(textToFind, maxItems, page);
+		final List<ArticleDto> rList = null == result.getArticles() ? new ArrayList<ArticleDto>()
+				: result.getArticles();
+
+		final List<ArticleB> articles = new ArrayList<ArticleB>();
+		for (ArticleDto dto : rList) {
+			final ArticleB bean = convertDtoToBean(dto);
+			articles.add(bean);
+		}
+		return articles;
 	}
 
 }

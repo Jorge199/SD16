@@ -6,4 +6,5 @@ import com.sd.uni.labpatologia.rest.base.IBaseResource;
 
 public interface IArticleResource extends IBaseResource<ArticleDto> {
 	public ArticleResult getAll();
+        public ArticleResult find(String textToFind, int maxItems, int page);
 }

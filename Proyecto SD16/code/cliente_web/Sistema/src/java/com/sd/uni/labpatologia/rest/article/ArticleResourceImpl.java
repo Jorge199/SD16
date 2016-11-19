@@ -42,4 +42,12 @@ public class ArticleResourceImpl extends BaseResourceImpl<ArticleDto> implements
 		final ArticleResult result = getWebResource().get(ArticleResult.class);
 		return result;
 	}
+
+    @Override
+    public ArticleResult find(String textToFind, int maxItems, int page) {
+        setWebResourceBasicAuthFilter();
+		final ArticleResult result = findWR(textToFind, maxItems, page).get(
+				ArticleResult.class);
+		return result;
+    }
 }

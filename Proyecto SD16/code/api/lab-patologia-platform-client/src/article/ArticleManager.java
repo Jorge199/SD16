@@ -13,7 +13,7 @@ public class ArticleManager extends AbstractBaseManager{
 		ArticleDto article = new ArticleDto();
 		article.setName(name);
 		article.setDescription(description);
-		article.setQuantity(0);
+		//article.setQuantity(0);
 		article.setUnits(units);
 		getJerseyClient().resource(getBaseUrl() + "/article").entity(article).post(ArticleDto.class);
 

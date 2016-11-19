@@ -34,8 +34,11 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	@CacheEvict(value = "lab-patologia-platform-cache", key = "'articles'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'article_' + #dto.id", condition = "#dto.id!=null")
 	public ArticleDto save(ArticleDto dto) {
-		final ArticleDomain ArticleDomain = convertDtoToDomain(dto);
-		final ArticleDomain article = _articleDao.save(ArticleDomain);
+		final ArticleDomain articleDomain = convertDtoToDomain(dto);
+		if(null == articleDomain.getQuantity()){
+			articleDomain.setQuantity(0);
+		}
+		final ArticleDomain article = _articleDao.save(articleDomain);
 		final ArticleDto newDto = convertDomainToDto(article);
 		if (null == dto.getId()) {
 			getCacheManager().getCache("lab-patologia-platform-cache").put("article_" + article.getId(), newDto);

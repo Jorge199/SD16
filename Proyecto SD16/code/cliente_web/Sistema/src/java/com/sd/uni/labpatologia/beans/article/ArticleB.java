@@ -19,9 +19,8 @@ public class ArticleB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _description;
-	private Integer _count_stock;
-	private Integer _units;
-	//private RequestB _request;
+	private Integer _quantity;
+	private String _units;
 
 	public ArticleB(Map<String, String> params) {
 		super(params);
@@ -33,9 +32,11 @@ public class ArticleB extends BaseBean {
 			setId(Integer.valueOf(params.get("id")));
 		}
 		setName(params.get("name"));
-		setDescription(params.get("description"));	
-        setCount_stock(Integer.parseInt(params.get("count_stock")));
-        setUnits(Integer.parseInt(params.get("units")));        
+		setDescription(params.get("description"));
+                if(null != params.get("quantity")){
+                    setQuantity(Integer.parseInt(params.get("quantity")));
+                }
+                setUnits(params.get("units"));        
 	}
 
 	public String getName() {
@@ -54,16 +55,16 @@ public class ArticleB extends BaseBean {
 		_description = des;
 	}
 	
-	public Integer getCount_stock() {
-		return _count_stock;
+	public Integer getQuantity() {
+		return _quantity;
 	}
-	public void setCount_stock(Integer cs) {
-		_count_stock = cs;
+	public void setQuantity(Integer cs) {
+		_quantity = cs;
 	}
-	public Integer getUnits() {
+	public String getUnits() {
 		return _units;
 	}
-	public void setUnits(Integer unit) {
+	public void setUnits(String unit) {
 		_units = unit;
 	}
 	
