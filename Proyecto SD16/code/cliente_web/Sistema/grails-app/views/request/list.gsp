@@ -164,7 +164,14 @@
 																${}<i class="fa fa-list-alt"></i> Informar</g:link>
 															</g:if> 
 															<g:if test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
-																<g:link action="edit" class="btn btn-default"
+																<g:link action="edit" class="btn btn-default" params="[reportEdit: 'request']"
+																controller="report"  id="${requestInstance.getId()}">
+																${}<i class="fa fa-list-alt"></i> Informe</g:link>
+															</g:if>
+														</sec:ifAnyGranted>
+														<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
+														<g:if test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
+																<g:link action="show" class="btn btn-default" params="[reportShow: 'request']"
 																controller="report" id="${requestInstance.getId()}">
 																${}<i class="fa fa-list-alt"></i> Informe</g:link>
 															</g:if>

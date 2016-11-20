@@ -144,9 +144,16 @@
 												</td>
 
 												<%--  <td>${fieldValue(bean: reportInstance, field: "request.id")}</td>		--%>
-												<td class="center"><g:link action="edit"
-														class="btn btn-success" id="${reportInstance.getId()}">
-														${}<i class="fa fa-pencil"></i> Editar</g:link></td>
+												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+													<td class="center"><g:link action="edit"
+															class="btn btn-success" id="${reportInstance.getId()}">
+															${}<i class="fa fa-pencil"></i> Editar</g:link>
+												</sec:ifAnyGranted>
+												<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
+														<td class="center"><g:link action="show"
+															class="btn btn-default" id="${reportInstance.getId()}">
+															${}<i class="fa fa-list-alt"></i> Informe</g:link>
+														</sec:ifAnyGranted>
 											</tr>
 
 										</g:each>

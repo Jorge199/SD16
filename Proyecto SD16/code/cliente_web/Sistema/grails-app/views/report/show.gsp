@@ -32,23 +32,29 @@
 							<br>
 							<div class="col-xs-8">
 								<div class="text-right">
-									<button type="submit" class="btn btn-primary" name="create"
-										value="${reportInstance?.request?.id}">
-										<i class="fa fa-floppy-o"></i> Guardar
-									</button>
-									<a class="btn btn-default" href="/Sistema/request/list"
-											role="button"><i class="fa fa-times"></i> Cancelar</a>
+									<g:if test="${reportShow.equals("request")}">
+										<a class="btn btn-default" href="/Sistema/request/list"
+											role="button"><i class="fa fa-times"></i> Atrás</a>
+									</g:if>
+									<g:else>
+										<a class="btn btn-default" href="/Sistema/report/list"
+											role="button"><i class="fa fa-times"></i> Atrás</a>
+									</g:else>
+									
+									
 								</div>
 							</div>
-
-
-
 						</fieldset>
 					</g:form>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+	<script>
+	$('#observations').prop('readonly', true);
+	</script>
+	<script>
+	document.getElementById("diagnostic").disabled = true;
+	</script>
 </body>
 </html>

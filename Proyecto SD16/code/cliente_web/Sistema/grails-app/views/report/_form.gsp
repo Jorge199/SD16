@@ -1,6 +1,7 @@
 <%@ page import="com.sd.uni.labpatologia.util.DiagnosticEnum"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <head>
- <ckeditor:resources/>
+<ckeditor:resources />
 </head>
 <div class="row">
 	<div class="panel panel-default">
@@ -103,17 +104,112 @@
 					<g:select name="diagnostic" class="form-control selectpicker"
 						from="${DiagnosticEnum.values()}"
 						value="${reportInstance?.diagnostic}" optionKey="key" required=""
-						noSelection="${['':'Seleccione un diagnostico..']}"
-						></g:select>
+						noSelection="${['':'Seleccione un diagnostico..']}"></g:select>
 				</div>
 			</div>
 			<div class="col-md-12">
-		<label> Observaciones <span class="required-indicator">*</span>
-		</label>
-			<ckeditor:editor name="observations" height="400px" width="100%" >
-				${reportInstance?.observations} 
-			</ckeditor:editor>
-	</div>
+				<label> Observaciones <span class="required-indicator">*</span>
+				</label>
+				<ckeditor:editor name="observations" height="400px" width="100%">
+					<g:if test="${null!=reportInstance?.observations}">
+						${reportInstance?.observations}
+					</g:if>
+					<g:else>
+						<p style="text-align: center">
+							<u>LABORATORIO DE ANATOMIA PATOLOGICA</u>
+						</p>
+
+						<p style="text-align: center">Facultad de Medicina U.N.I / VII
+							Regi&oacute;n Sanitaria</p>
+
+						<p style="text-align: center">&nbsp;</p>
+
+						<p style="text-align: center">INFORME DE ANATOMIA PATOLOGICA</p>
+
+						<table border="1" cellpadding="1" cellspacing="1"
+							style="width: 100%">
+							<tbody>
+								<tr>
+									<td>
+										<p>
+											&nbsp; &nbsp;Nombre:
+											${reportInstance?.request?.patient?.name +" "+ reportInstance?.request?.patient?.lastName}
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; Edad:
+											${age}
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+										</p>
+
+										<p>
+											&nbsp; &nbsp;N&ordm; de Informe: &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Sexo:&nbsp;${reportInstance?.request?.patient?.sex}
+										</p>
+
+										<p>
+											&nbsp; &nbsp;M&eacute;dico:&nbsp;${reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName}
+										</p>
+
+										<p>&nbsp; &nbsp;Material:</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<p>&nbsp;</p>
+
+						<p>&nbsp;</p>
+
+						<p>&nbsp;</p>
+
+						<p>
+							${reportInstance?.request?.studyType?.name.toUpperCase()}
+						</p>
+
+						<p>&nbsp;</p>
+
+						<p>&nbsp;</p>
+
+						<p>&nbsp;</p>
+
+						<p>DIAGN&Oacute;STICO</p>
+
+						<p>LEC, BIOPSIA:</p>
+
+						<p>&nbsp;</p>
+
+						<p>&nbsp;</p>
+
+						<p>
+							ENCARNACI&Oacute;N,
+							${new Date().getDate()}
+							de
+							${(new SimpleDateFormat("MMMM", new Locale("es", "ES"))).format(new Date())}
+							de
+							${(new SimpleDateFormat("yyyy", new Locale("es", "ES"))).format(new Date())}
+						</p>
+						<p style="text-align: center">&nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp;___________________________</p>
+						<p style="text-align: center">&nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; Dr. SERGIO ARIEL MEDINA S.</p>
+					</g:else>
+				</ckeditor:editor>
+			</div>
 
 		</div>
 	</div>

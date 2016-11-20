@@ -46,8 +46,14 @@
 					</sec:ifAnyGranted>
 				</g:elseif>
 				<g:else>
-					<g:textField  class="form-control" required=""  max="20" name="code" 
-					placeholder="Ingrese un codigo" value="${requestInstance?.code}"/>
+					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+						<g:textField class="form-control" required="" max="20" name="code"
+							placeholder="Ingrese un codigo" value="${requestInstance?.code}" />
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
+						<g:textField class="form-control" required="" max="20" name="code" readonly="readonly"
+							placeholder="Ingrese un codigo" value="${requestInstance?.code}" />
+					</sec:ifAnyGranted>
 				</g:else>
 			</div>
 		</div>

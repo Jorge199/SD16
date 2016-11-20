@@ -142,7 +142,8 @@ class RequestController {
 
 	@Secured([
 		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR'
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
 	])
 	def update(Integer id) {
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("edit")))

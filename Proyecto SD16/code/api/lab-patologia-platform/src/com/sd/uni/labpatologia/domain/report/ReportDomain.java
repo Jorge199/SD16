@@ -29,7 +29,7 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "date", nullable = false)
 	private Date _date;
 
-	@Column(name = "observations")
+	@Column(name = "observations", length=10000)
 	private String _observations;
 
 	@Enumerated(EnumType.STRING)

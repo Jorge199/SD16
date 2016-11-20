@@ -44,7 +44,7 @@ class ReportController {
 	def show() {
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
 		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll(),
-			user:authService.getName(), reportEdit:params.get("reportEdit")]
+			user:authService.getName(), reportShow:params.get("reportShow")]
 	}
 
 	@Secured([
