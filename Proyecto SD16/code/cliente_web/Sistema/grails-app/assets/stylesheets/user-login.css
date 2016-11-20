@@ -21,7 +21,7 @@ body {
 }
 
 form[role=login] {
-	height: 430px;
+	height: 350px;
 	width: 450px;
     color: #5d5d5d;
     background: #f2f2f2;
