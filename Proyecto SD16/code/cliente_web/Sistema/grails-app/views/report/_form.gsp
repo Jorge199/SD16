@@ -100,7 +100,7 @@
 					<label for="diagnostic"> <g:message code="Diagnostico" />
 						<span class="required-indicator">*</span>
 					</label>
-					<g:select name="diagnostic" class="form-control"
+					<g:select name="diagnostic" class="form-control selectpicker"
 						from="${DiagnosticEnum.values()}"
 						value="${reportInstance?.diagnostic}" optionKey="key" required=""
 						noSelection="${['':'Seleccione un diagnostico..']}"
