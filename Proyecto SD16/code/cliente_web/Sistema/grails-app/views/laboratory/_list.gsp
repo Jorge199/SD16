@@ -16,13 +16,13 @@
 		<h1><strong>${fieldValue(bean: laboratoryInstance, field: "name")}</strong></h1>
 		</g:if>
 		<g:if test="${laboratoryInstance?.address}">
-		<h4><strong>Direcciòn:</strong>${fieldValue(bean: laboratoryInstance, field: "address")}</h4>
+		<h4><strong>Dirección: </strong>${fieldValue(bean: laboratoryInstance, field: "address")}</h4>
 		</g:if>
 		<g:if test="${laboratoryInstance?.phone}">
-		<h4><strong>Telèfono:</strong>${fieldValue(bean: laboratoryInstance, field: "phone")}</h4>
+		<h4><strong>Teléfono: </strong>${fieldValue(bean: laboratoryInstance, field: "phone")}</h4>
 		</g:if>
 		<g:if test="${laboratoryInstance?.email}">
-		<h4><strong>Correo:</strong>${fieldValue(bean: laboratoryInstance, field: "email")}</h4>
+		<h4><strong>Correo: </strong>${fieldValue(bean: laboratoryInstance, field: "email")}</h4>
 		</g:if>									
 	</g:each>
 

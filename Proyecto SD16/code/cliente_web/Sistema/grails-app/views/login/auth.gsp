@@ -41,9 +41,9 @@ html {
 					
 						<input type="text" class="form-control input-lg" required=""
 							name='j_username' id="username"
-							placeholder="Ingrese su Nombre de Usuario"> <input
-							type="password" class="form-control input-lg" name='j_password'
-							id="pass" placeholder=" Ingrese su Contraseña">
+							placeholder="Nombre de Usuario"> <input
+							type="password" class="form-control input-lg" name='j_password' required=""
+							id="pass" placeholder="Contraseña">
 						<button type="submit" id="submit"
 							class="btn btn-lg btn-primary btn-block">Ingresar</button>
 						<div></div>
