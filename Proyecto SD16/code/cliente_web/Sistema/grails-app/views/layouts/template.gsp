@@ -1,3 +1,6 @@
+<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
+<%@ page import="com.sd.uni.labpatologia.service.auth.IAuthService" %>
+<%@ page import="com.sd.uni.labpatologia.service.user.IUserService" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +71,7 @@
 
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><i class="fa fa-user"></i> Usuario <b
+					data-toggle="dropdown"><i class="fa fa-user"></i> Hola, ${user}<b
 						class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="Sistema/j_spring_security_logout"><i
@@ -92,7 +95,7 @@
 								class="fa fa-fw fa-user-md"></i>Doctores</a></li>
 					</sec:ifNotGranted>
 					
-					<sec:ifNotGranted roles='ROLE_TECNICO, ROLE_SECRETARIA'>
+					<sec:ifNotGranted roles='ROLE_TECNICO'>
 						<li><a href="/Sistema/report/list/"><i
 								class="fa fa-fw fa-file-text-o"></i>Informes</a></li>
 					</sec:ifNotGranted>

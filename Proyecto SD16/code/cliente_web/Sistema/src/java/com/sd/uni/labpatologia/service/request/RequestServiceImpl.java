@@ -15,6 +15,7 @@ import com.sd.uni.labpatologia.rest.request.IRequestResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 import com.sd.uni.labpatologia.service.doctor.IDoctorService;
 import com.sd.uni.labpatologia.service.patient.IPatientService;
+import com.sd.uni.labpatologia.service.report.IReportService;
 import com.sd.uni.labpatologia.service.study_type.IStudyTypeService;
 
 @Service("requestService")
@@ -29,6 +30,8 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 	private IStudyTypeService studyTypeService;
 	@Autowired
 	private IDoctorService doctorService;
+	@Autowired
+	private IReportService reportService;
 	//@Autowired
 	//private IUserService userService;
 

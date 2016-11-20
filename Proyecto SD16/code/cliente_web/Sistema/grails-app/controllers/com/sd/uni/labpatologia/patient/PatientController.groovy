@@ -36,7 +36,8 @@ class PatientController {
 		'ROLE_SECRETARIA'
 	])
 	def create(){
-		[patientInstance: new PatientB(params),laboratoryInstanceList: laboratoryService.getAll()]
+		[patientInstance: new PatientB(params),laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
 	@Secured([
 		'ROLE_DOCTOR',
@@ -58,7 +59,8 @@ class PatientController {
 			patients = patientService.find(null,10,page)
 			siguiente = patientService.find(null,10,page+1)
 		}
-		[patientInstanceList: patients, patientInstanceTotal: patients?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll()]
+		[patientInstanceList: patients, patientInstanceTotal: patients?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
 
 	@Secured([
@@ -102,7 +104,8 @@ class PatientController {
 	def edit(Long id) {
 		def patientInstance = patientService.getById((Integer.parseInt(params.get("id"))))
 
-		[patientInstance: patientInstance,laboratoryInstanceList: laboratoryService.getAll()]
+		[patientInstance: patientInstance,laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
 
 	@Secured([

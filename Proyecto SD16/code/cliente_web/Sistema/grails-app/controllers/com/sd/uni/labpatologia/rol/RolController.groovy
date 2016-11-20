@@ -42,7 +42,7 @@ class RolController {
 		}
 
 
-		[rolInstanceList: rols, rolInstanceTotal:rols.size(),laboratoryInstanceList: laboratoryService.getAll()]
+		[rolInstanceList: rols, rolInstanceTotal:rols.size(),laboratoryInstanceList: laboratoryService.getAll(),user:authService.getName()]
 	}
 	@Secured(['ROLE_ADMINISTRADOR'])
 
@@ -59,7 +59,7 @@ class RolController {
 		}
 
 
-		[rolInstanceList: rols, rolInstanceTotal:rols.size(),laboratoryInstanceList: laboratoryService.getAll()]
+		[rolInstanceList: rols, rolInstanceTotal:rols.size(),laboratoryInstanceList: laboratoryService.getAll(),user:authService.getName()]
 	}
 
 
@@ -85,7 +85,7 @@ class RolController {
 
 	@Secured(['ROLE_ADMINISTRADOR'])
 	def create() {
-		[rolInstance: new RolB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
+		[rolInstance: new RolB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll(),user:authService.getName()]
 	}
 
 	@Secured(['ROLE_ADMINISTRADOR'])

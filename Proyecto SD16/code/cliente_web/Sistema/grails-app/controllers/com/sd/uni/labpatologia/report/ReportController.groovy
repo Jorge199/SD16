@@ -18,7 +18,7 @@ import grails.plugin.springsecurity.annotation.Secured
 
 class ReportController {
 	static allowedMethods = [save: "POST", update: "POST"]
-	
+
 	//service
 	def IReportService reportService;
 	def IRequestService requestService;
@@ -26,13 +26,32 @@ class ReportController {
 	def IPatientService patientService;
 	def ILaboratoryService laboratoryService;
 	@Autowired def IAuthService authService
-	
-	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR','ROLE_SECRETARIA'])
+
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def index() {
 		redirect(action: "list", params: params)
 	}
 	
-	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR','ROLE_SECRETARIA'])
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
+	def show() {
+		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
+		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName(), reportEdit:params.get("reportEdit")]
+	}
+
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
 	def list() {
 		def page = 0
 		def siguiente
@@ -44,12 +63,12 @@ class ReportController {
 		if (params.containsKey("text")){
 			textToFind= params.get("text");
 		}else{
-		
+
 			if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
 				textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
 			}
 			if((!"".equals(params.get("startSearch")) && !"".equals(params.get("endSearch"))) &&
-				(null!=(params.get("startSearch")) && null!=params.get("endSearch"))){
+			(null!=(params.get("startSearch")) && null!=params.get("endSearch"))){
 				textToFind+="start="+params.get("startSearch")+'&'
 				textToFind+="end="+params.get("endSearch")
 			}else{
@@ -66,17 +85,25 @@ class ReportController {
 			siguiente = reportService.find(null,10,page+1);
 		}
 		System.out.println("Cantidad Reportes----------------------------->"+reports.size())
-		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind]
+		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind,
+			user:authService.getName()]
 	}
-	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR'
+	])
 	def create(Integer id) {
 		def reportInstance = new ReportB(params)
 		reportInstance.setRequest(requestService.getById(id))
-		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll()] //, requests:requestService.getAll()]
+		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()] //, requests:requestService.getAll()]
 	}
-	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR'
+	])
 	def save() {
-		
+
 		def reportInstance = new ReportB(params)
 		//request
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -88,28 +115,26 @@ class ReportController {
 		requestInstance.setStatus(StatusEnum.TERMINADO)
 		def newReport= reportService.save(reportInstance)
 		requestService.save(requestInstance)
-		
+
 		if (!newReport?.getId()) {
 			//redirect(action: "list", id: newReport.getId())
 			//return
 		}
 		redirect(action: "list", controller: "request")
 	}
-	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR'
+	])
 	def edit(Integer id) {
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
-				//si no existe esa id
-				if (!reportInstance) {
-					flash.message = message(code: 'default.not.found.message', args: [
-						message(code: 'report.label', default: 'Report'),
-						id
-					])
-					redirect(action: "list")
-					return
-				}
-		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll()]
+		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName(), reportEdit:params.get("reportEdit")]
 	}
-	@Secured(['ROLE_DOCTOR','ROLE_ADMINISTRADOR'])
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR'
+	])
 	def update(Integer id) {
 		def reportInstance = new ReportB(params)
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -118,6 +143,13 @@ class ReportController {
 		reportInstance.setId(Integer.parseInt(params.get("edit")))
 		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
 		reportService.save(reportInstance)
-		redirect(action: "list")
+		System.out.println("wqe")
+		System.out.println(params)
+		System.out.println("qwe")
+		if(params.get("reportEdit").equals("request")){
+			redirect(action: "list", controller: "request")
+		}else{
+			redirect(action: "list")
+		}
 	}
 }

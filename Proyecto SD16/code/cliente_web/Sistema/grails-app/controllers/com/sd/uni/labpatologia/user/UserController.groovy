@@ -3,9 +3,11 @@ package com.sd.uni.labpatologia.user
 
 import grails.plugin.springsecurity.annotation.Secured;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException
 
 import com.sd.uni.labpatologia.beans.user.UserB
+import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.rol.*
 import com.sd.uni.labpatologia.service.user.*
@@ -18,12 +20,17 @@ class UserController {
 	def IUserService userService =new UserServiceImpl()
 	def IRolService rolService=new RolServiceImpl()
 	def ILaboratoryService laboratoryService
+	@Autowired def IAuthService authService
+
 	def index() {
 		redirect(action: "list", params: params)
 	}
 
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
-	
+	@Secured([
+		'ROLE_ADMINISTRADOR',
+		'ROLE_DOCTOR'
+	])
+
 	def list(Integer max) {
 		def page = 0
 		def siguiente
@@ -33,7 +40,7 @@ class UserController {
 		def text = params.text
 		userService=new UserServiceImpl()
 		def users = userService.getAll()
-		
+
 		if(null != text && !"".equals(text)){
 			users = userService.find(text,10,page)
 			siguiente = userService.find(text,10,page+1)
@@ -41,39 +48,42 @@ class UserController {
 			users = userService.find(null,10,page)
 			siguiente = userService.find(null,10,page+1)
 		}
-		
+
 		[userInstanceList: users, userInstanceTotal:users.size(), page: page, siguiente: siguiente?.size(),
-			text:text, laboratoryInstanceList: laboratoryService.getAll()]
+			text:text, laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
 	}
-	
-	
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
-	
+
+
+	@Secured([
+		'ROLE_ADMINISTRADOR',
+		'ROLE_DOCTOR'
+	])
+
 	def showResult(Integer max) {
 		def text = params.text
 		userService=new UserServiceImpl()
 		def users = userService.getAll()
-		
+
 		if(null != text && !"".equals(text)){
 			users = userService.find(text)
-			
+
 		}else{
 			users = userService.getAll()
 		}
-		
+
 		render (template:"showResult", model:[userInstanceList: users, userInstanceTotal:users.size()])
 	}
 
-	
-	
+
+
 	@Secured(['ROLE_ADMINISTRADOR'])
-	
+
 	def create() {
-		[userInstance: new UserB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
+		[userInstance: new UserB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
 	}
-	
+
 	@Secured(['ROLE_ADMINISTRADOR'])
-	
+
 	def save() {
 		def newUser = new UserB(params)
 		newUser.setRol(rolService.getById(Integer.valueOf(params.rolId)))
@@ -89,10 +99,13 @@ class UserController {
 		])
 		redirect(action: "list")
 	}
-	
 
-	
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])	
+
+
+	@Secured([
+		'ROLE_ADMINISTRADOR',
+		'ROLE_DOCTOR'
+	])
 	def show(Long id) {
 		def userInstance = userService.getById(id.intValue())
 		if (!userInstance) {
@@ -106,9 +119,12 @@ class UserController {
 
 		[userInstance: userInstance]
 	}
-	
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
-	
+
+	@Secured([
+		'ROLE_ADMINISTRADOR',
+		'ROLE_DOCTOR'
+	])
+
 	def edit(Long id) {
 		def userInstance = userService.getById(id.intValue())
 		if (!userInstance) {
@@ -120,12 +136,15 @@ class UserController {
 			return
 		}
 
-		[userInstance: userInstance, rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
+		[userInstance: userInstance, rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
 	}
 
-	
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR'])
-	
+
+	@Secured([
+		'ROLE_ADMINISTRADOR',
+		'ROLE_DOCTOR'
+	])
+
 	def update(Integer id) {
 		def userInstance = new UserB(params)
 		userInstance.setId(Integer.parseInt(params.get("edit")))

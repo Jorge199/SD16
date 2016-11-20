@@ -35,9 +35,10 @@ class ArticleController {
 		'ROLE_SECRETARIA'
 	])
 	def create(){
-		[articleInstance: new ArticleB(params),laboratoryInstanceList: laboratoryService.getAll()]
+		[articleInstance: new ArticleB(params),laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
-        
+
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
@@ -58,7 +59,8 @@ class ArticleController {
 			articles = articleService.find(null,10,page)
 			siguiente = articleService.find(null,10,page+1)
 		}
-		[articleInstanceList: articles, articleInstanceTotal: articles?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll()]
+		[articleInstanceList: articles, articleInstanceTotal: articles?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
 
 	@Secured([
@@ -88,7 +90,8 @@ class ArticleController {
 	def edit(Long id) {
 		def articleInstance = articleService.getById((Integer.parseInt(params.get("id"))))
 
-		[articleInstance: articleInstance,laboratoryInstanceList: laboratoryService.getAll()]
+		[articleInstance: articleInstance,laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
 
 	@Secured([
@@ -101,7 +104,7 @@ class ArticleController {
 		System.out.println(articleInstance.getId())
 		articleInstance.setName(params.get("name"))
 		articleInstance.setDescription(params.get("description"))
-                articleInstance.setUnits(params.get("units"))
+		articleInstance.setUnits(params.get("units"))
 		articleService.save(articleInstance)
 		redirect(action: "list")
 	}

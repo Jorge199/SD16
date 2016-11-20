@@ -21,7 +21,8 @@ class DoctorController {
 
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def create(){
-		[doctorInstance: new DoctorB(params),laboratoryInstanceList: laboratoryService.getAll()]
+		[doctorInstance: new DoctorB(params),laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def list(Integer max) {
@@ -40,7 +41,8 @@ class DoctorController {
 			siguiente = doctorService.find(null,10,page+1)
 		}
 
-		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: text]
+		[doctorInstanceList: doctors, doctorInstanceTotal: doctors?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: text,
+			user:authService.getName()]
 	}
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def save() {
@@ -62,7 +64,7 @@ class DoctorController {
 		flash.message = message(code: 'default.created.message', args: [message(code: 'doctor.label', default: 'Doctor'), newDoctor.getId()])
 		redirect(action: "list", id: newDoctor.getId())
 	}
-	
+
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def edit(Integer id) {
 		def doctorInstance = doctorService.getById(Integer.parseInt(params.get("id")))
@@ -72,7 +74,8 @@ class DoctorController {
 			redirect(action: "list")
 			return
 		}
-		[doctorInstance: doctorInstance,laboratoryInstanceList: laboratoryService.getAll()]
+		[doctorInstance: doctorInstance,laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def update(Integer id) {

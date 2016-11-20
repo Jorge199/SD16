@@ -4,10 +4,14 @@ import grails.plugin.springsecurity.annotation.Secured
 
 import java.text.SimpleDateFormat
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.sd.uni.labpatologia.beans.request.RequestB
+import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.doctor.IDoctorService
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.patient.IPatientService
+import com.sd.uni.labpatologia.service.report.IReportService;
 import com.sd.uni.labpatologia.service.request.IRequestService
 import com.sd.uni.labpatologia.service.study_type.IStudyTypeService
 import com.sd.uni.labpatologia.service.user.IUserService
@@ -24,6 +28,9 @@ class RequestController {
 	def IStudyTypeService studyTypeService
 	def IUserService userService
 	def ILaboratoryService laboratoryService
+	def IReportService reportService
+	@Autowired def IAuthService authService
+
 
 	@Secured([
 		'ROLE_DOCTOR',
@@ -74,7 +81,8 @@ class RequestController {
 			siguiente = requestService.find(null,10,page+1)
 		}
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
-		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind]
+		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind,
+			user:authService.getName(), reports:reportService.getAll()]
 	}
 
 	@Secured([
@@ -84,7 +92,8 @@ class RequestController {
 	])
 	def create() {
 		def requestInstance = new RequestB(params)
-		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
+		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
 
 	@Secured([
@@ -111,7 +120,7 @@ class RequestController {
 		redirect(action: "list", id: newRequest.getId())
 	}
 
-		@Secured([
+	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
 		'ROLE_SECRETARIA'
@@ -127,7 +136,8 @@ class RequestController {
 			redirect(action: "list")
 			return
 		}
-		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll()]
+		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll(),
+			user:authService.getName()]
 	}
 
 	@Secured([
@@ -148,11 +158,11 @@ class RequestController {
 			if (!"".equals(params.get("code_laminas")) && params.containsKey("code_laminas")){
 				requestInstance.setCode(params.get("code")+"/"+params.get("code_cortes")+"/"+params.get("code_laminas"))
 				requestInstance.setStatus(StatusEnum.PROCESADO)
-			}else{	
+			}else{
 				requestInstance.setCode(params.get("code")+"/"+params.get("code_cortes"))
 				requestInstance.setStatus(StatusEnum.PROCESO)
-			}	
-		}else if (requestInstance.getStatus() == StatusEnum.PROCESO && !"".equals(params.get("code_laminas")) && params.containsKey("code_laminas")){	
+			}
+		}else if (requestInstance.getStatus() == StatusEnum.PROCESO && !"".equals(params.get("code_laminas")) && params.containsKey("code_laminas")){
 			requestInstance.setCode(params.get("code")+"/"+params.get("code_laminas"))
 			requestInstance.setStatus(StatusEnum.PROCESADO)
 		}

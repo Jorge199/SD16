@@ -35,4 +35,10 @@ public class AuthServiceImpl implements IAuthService {
 		UserB user = _userService.getByUsername(getUsername());
 		return user.getRol();
 	}
+
+	@Override
+	public String getName() {
+		UserB user = _userService.getByUsername(getUsername());
+		return user.getName();
+	}
 }
