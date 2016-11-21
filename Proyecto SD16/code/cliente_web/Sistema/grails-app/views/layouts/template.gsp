@@ -106,7 +106,7 @@
 					</sec:ifNotGranted>
 					
 					<sec:ifNotGranted roles='ROLE_SECRETARIA'>
-						<li><a href="#"><i class="fa fa-fw fa-medkit"></i>Insumos</a></li>
+						<li><a href="/Sistema/article/list/"><i class="fa fa-fw fa-medkit"></i>Insumos</a></li>
 					</sec:ifNotGranted>
 					
 					<sec:ifNotGranted roles='ROLE_TECNICO, ROLE_SECRETARIA'>
