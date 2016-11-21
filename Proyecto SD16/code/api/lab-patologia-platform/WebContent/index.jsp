@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -55,75 +53,81 @@ table#t01 th {
 			<td>Article</td>
 			<td>path=<a
 				href="http://localhost:8080/lab-patologia-platform/rest/article">lab-patologia-platform/rest/article</a></td>
-				<td>path/{id}]</td>
-				<td>path/edit/{id}</td>
-				<td>path/search/{max}/{page}/{textToFind}</td>
-				
-				
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/{textToFind}</td>
+		</tr>
+		<tr>
+			<td>Article Movement</td>
+			<td>path=<a
+				href="http://localhost:8080/lab-patologia-platform/rest/article_movement">lab-patologia-platform/rest/article_movement</a></td>
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/{textToFind}</td>
 		</tr>
 		<tr>
 			<td>Doctor</td>
 			<td>path=<a
 				href="http://localhost:8080/lab-patologia-platform/rest/doctor">lab-patologia-platform/rest/doctor</a></td>
-				<td>path/{id}]</td>
-				<td>path/edit/{id}</td>
-				<td>path/search/{max}/{page}/{textToFind}</td>
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/{textToFind}</td>
 		</tr>
 		<tr>
 			<td>Laboratory</td>
 			<td>path=<a
 				href="http://localhost:8080/lab-patologia-platform/rest/laboratory">lab-patologia-platform/rest/laboratory</a></td>
-				<td>path/{id}]</td>
-				<td>path/edit/{id}</td>
-				<td>path/search/{max}/{page}/{textToFind}</td>
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/{textToFind}</td>
 		</tr>
 		<tr>
 			<td>Patient</td>
 			<td>path=<a
 				href="http://localhost:8080/lab-patologia-platform/rest/patient">lab-patologia-platform/rest/patient</a></td>
-				<td>path/{id}]</td>
-				<td>path/edit/{id}</td>
-				<td>path/search/{max}/{page}/{textToFind}</td>
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/{textToFind}</td>
 		</tr>
 		<tr>
 			<td>Report</td>
 			<td>path=<a
 				href="http://localhost:8080/lab-patologia-platform/rest/report">lab-patologia-platform/rest/report</a></td>
-				<td>path/{id}]</td>
-				<td>path/edit/{id}</td>
-				<td>path/search/{max}/{page}/diagnostic={diagnostic}&start={dd-mm-aa}&end={dd-mm-aa}</td>
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/diagnostic={diagnostic}&start={dd-mm-aa}&end={dd-mm-aa}</td>
 		</tr>
 		<tr>
 			<td>Request</td>
 			<td>path=<a
 				href="http://localhost:8080/lab-patologia-platform/rest/request">lab-patologia-platform/rest/request</a></td>
-				<td>path/{id}]</td>
-				<td>path/edit/{id}</td>
-				<td>path/search/{max}/{page}/note={note}&code={code}&status{status}&start={dd-mm-aa}&end={dd-mm-aa}</td>
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/note={note}&code={code}&status{status}&start={dd-mm-aa}&end={dd-mm-aa}</td>
 		</tr>
 		<tr>
 			<td>Rol</td>
 			<td>path=<a
 				href="http://localhost:8080/lab-patologia-platform/rest/rol">lab-patologia-platform/rest/rol</a></td>
-				<td>path/{id}]</td>
-				<td>path/edit/{id}</td>
-				<td>path/search/{max}/{page}/{textToFind}</td>
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/{textToFind}</td>
 		</tr>
 		<tr>
 			<td>Study Type</td>
 			<td>path=<a
 				href="http://localhost:8080/lab-patologia-platform/rest/study_type">lab-patologia-platform/rest/study_type</a></td>
-				<td>path/{id}]</td>
-				<td>path/edit/{id}</td>
-				<td>path/search/{max}/{page}/{textToFind}</td>
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/{textToFind}</td>
 		</tr>
 		<tr>
 			<td>User</td>
 			<td>path=<a
 				href="http://localhost:8080/lab-patologia-platform/rest/user">lab-patologia-platform/rest/user</a></td>
-				<td>path/{id}]</td>
-				<td>path/edit/{id}</td>
-				<td>path/search/{max}/{page}/{textToFind}</td>
+			<td>path/{id}]</td>
+			<td>path/edit/{id}</td>
+			<td>path/search/{max}/{page}/{textToFind}</td>
 		</tr>
 	</table>
 </body>
