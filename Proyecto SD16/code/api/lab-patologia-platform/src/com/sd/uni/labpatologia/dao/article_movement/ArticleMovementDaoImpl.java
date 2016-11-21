@@ -1,7 +1,9 @@
 package com.sd.uni.labpatologia.dao.article_movement;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Repository;
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.article_movement.ArticleMovementDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
+import com.sd.uni.labpatologia.util.MovementTypeEnum;
 @Repository
 public class ArticleMovementDaoImpl  extends BaseDaoImpl<ArticleMovementDomain> implements IArticleMovementDao {
 	@Autowired
@@ -45,7 +49,11 @@ public class ArticleMovementDaoImpl  extends BaseDaoImpl<ArticleMovementDomain> 
 	public List<ArticleMovementDomain> find(String textToFind, int page, int maxItems) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ArticleMovementDomain.class);
-		Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"));
+		
+		Criterion propertyCriterion = Restrictions.disjunction();
+		if(EnumUtils.isValidEnum(MovementTypeEnum.class, textToFind)){
+			criteria.add(Restrictions.disjunction().add(Restrictions.eq("_movement_type", MovementTypeEnum.valueOf(textToFind))));
+		}
 		if (textToFind != null){
 			Criterion idCriterion = null;
 			if (StringUtils.isNumeric(textToFind)) {
