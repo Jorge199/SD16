@@ -19,18 +19,13 @@ html {
 	 background-repeat: no-repeat;
 	 background-size: cover;
 	  background-position: center center;
-	  
-	  
 	 
 }
 </style>
 </head>
 <body>
+<br/><br/>
 	<div class="container">
-		<br> <br>
-		<br> <br>
-		<br> <br>
-		<br> <br>
 		<div class="row" id="pwd-container">
 			<div class="col-md-4">
 				<section class="login-form">
@@ -54,6 +49,19 @@ html {
 		</div>
 
 	</div>
+	<br/><br/><br/>
+	<div class="pag-footer" align="center" style="background-color: #f2f2f2;opacity: 0.8;position:fixed">
+			<strong>Desarrolladores:</strong> 
+			Jorge Esquivel<a href="mailto:jorgeesquivelfernandez@gmail.com?Subject=Laboratorio%20SD2016">(jorgeesquivelfernandez@gmail.com)</a> 
+			- Alex Jiñes<a href="mailto:abel.oalex@gmail.com?Subject=Laboratorio%20SD2016">(abel.oalex@gmail.com)</a> 
+			- Tania Monges<a href="mailto:taniamonges@gmail.com?Subject=Laboratorio%20SD2016">(taniamonges@gmail.com)</a> 
+			- Jerson Paniagua<a href="mailto:diazpany@gmail.com?Subject=Laboratorio%20SD2016">(diazpany@gmail.com)</a> 
+			- Fátima Talavera<a href="mailto:fa.talavera95@gmail.com?Subject=Laboratorio%20SD2016">(fa.talavera95@gmail.com)</a> 
+			<br> Líder del Proyecto: 
+			Ing. Aldo Medina
+			<a href="mailto:medinaldo@gmail.com?Subject=Laboratorio%20SD2016">(medinaldo@gmail.com)</a> 
+			<br> <strong>Copyright © 2016 - Sistemas Distribuídos - F.I.U.N.I</strong>
+		</div>
 	<!-- jQuery -->
 
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
