@@ -103,7 +103,7 @@
 			</div>
 		</div>
 	</div>
-	<br/><br/><br/>
+	<br/><br/><br/><br/>
 	<script>
 		$(document).ready(function() {
 			$('#searching').on('propertychange input', function(e) {

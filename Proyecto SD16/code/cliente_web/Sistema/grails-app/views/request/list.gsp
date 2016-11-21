@@ -192,7 +192,7 @@
 			</div>
 		</div>
 	</div>
-	<br/><br/><br/>
+	<br/><br/><br/><br/>
 	<!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 
