@@ -104,6 +104,7 @@
 			</div>
 		</div>
 	</div>
+	<br/><br/><br/>
 	<!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 

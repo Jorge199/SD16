@@ -33,7 +33,11 @@ html{
 body {
     background-color: #fff !important;
 }
-
+.pag-footer{
+	bottom: 0;
+	height: 15%;
+	position: fixed;
+}
 
 
 

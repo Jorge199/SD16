@@ -145,6 +145,7 @@
 			</sec:ifAnyGranted>
 
 		</div>
+		</div>
 		<!-- /.row -->
 
 
