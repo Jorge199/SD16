@@ -110,6 +110,7 @@
 						</a>
 					</div>
 				</div>
+				
 			</sec:ifAnyGranted>
 
 			<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR,ROLE_TECNICO'>
@@ -143,7 +144,38 @@
 					</div>
 				</div>
 			</sec:ifAnyGranted>
-
+			
+			<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR,ROLE_SECRETARIA'>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-blue-dark">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-3">
+								<i class="fa fa-user-md fa-5x"></i>
+							</div>
+							<div class="col-xs-9 text-right">
+								<g:if test="${doctorInstanceList?.size()}">
+										<div class="huge">
+											${doctorInstanceList.size()}
+										</div>
+									</g:if>
+									<g:else>
+										<div class="huge">0</div>
+								</g:else>
+								<div>Doctores</div>
+							</div>
+						</div>
+					</div>
+					<a href="/Sistema/doctor/list">
+						<div class="panel-footer">
+							<span class="pull-left">Ver detalle</span> <span class="pull-right"><i
+								class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+				</div>
+			</sec:ifAnyGranted>
 		</div>
 		</div>
 		<!-- /.row -->

@@ -38,6 +38,22 @@ body {
 	height: 15%;
 	position: fixed;
 }
+.panel-blue-dark {
+    border-color: #4B8587;
+}
 
+.panel-blue-dark > .panel-heading {
+    border-color: #4B8587;
+    color: #fff;
+    background-color: #4B8587;
+}
+
+.panel-blue-dark > a {
+    color: #4B8587;
+}
+
+.panel-blue-dark > a:hover {
+    color: #4B8587;
+}
 
 
