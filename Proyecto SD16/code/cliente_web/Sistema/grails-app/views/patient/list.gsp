@@ -24,10 +24,10 @@
 						<a class="btn btn-success" href="/Sistema/patient/create"
 							role="button"><i class="fa fa-plus"></i> Agregar Paciente</a>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-8" align="right">
 						<g:form action="list" class="form-search">
 
-							<div class="input-group col-md-10">
+							<div class="input-group col-md-6">
 								<input type="text" name="text" class="form-control"
 									placeholder="Ingrese un texto para buscar" /> <span
 									class="input-group-btn">
@@ -38,7 +38,7 @@
 							</div>
 						</g:form>
 					</div>
-					<br> <br> <br>
+					<br> <br> 
 					<div class="dataTable_wrapper">
 						<div class="row">
 							<div class="col-sm-12">
