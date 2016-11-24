@@ -104,13 +104,13 @@
 					<g:select name="diagnostic" class="form-control selectpicker"
 						from="${DiagnosticEnum.values()}"
 						value="${reportInstance?.diagnostic}" optionKey="key" required=""
-						noSelection="${['':'Seleccione un diagnostico..']}"></g:select>
+						noSelection="${['SIN_INDICIOS':'Seleccione un diagnostico..']}"></g:select>
 				</div>
 			</div>
 			<div class="col-md-12">
-				<label> Observaciones <span class="required-indicator">*</span>
+				<label> Informe <span class="required-indicator">*</span>
 				</label>
-				<ckeditor:editor name="observations" height="400px" width="100%">
+				<ckeditor:editor name="observations" height="600px" width="100%">
 					<g:if test="${null!=reportInstance?.observations}">
 						${reportInstance?.observations}
 					</g:if>
