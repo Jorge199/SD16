@@ -27,8 +27,7 @@
 						</fieldset>
 						<fieldset class="buttons">
 							<br>
-							<div class="col-xs-8">
-								<div class="text-right">
+							<div class="col-xs-12" align="center">
 									<g:hiddenField name="reportEdit" value="${reportEdit}" />
 									<button type="submit" class="btn btn-primary" name="edit"
 										value="${reportInstance?.id}">
@@ -43,7 +42,7 @@
 											role="button"><i class="fa fa-times"></i> Cancelar</a>
 									</g:else>
 
-								</div>
+								
 							</div>
 
 						</fieldset>
@@ -52,6 +51,7 @@
 			</div>
 		</div>
 	</div>
+	<br><br><br><br>
 	<!-- Bootstrap Core JavaScript -->
 	<script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
 

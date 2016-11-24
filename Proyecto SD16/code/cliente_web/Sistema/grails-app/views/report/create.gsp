@@ -30,8 +30,7 @@
 						</fieldset>
 						<fieldset class="buttons">
 							<br>
-							<div class="col-xs-8">
-								<div class="text-right">
+							<div class="col-xs-12" align="center">
 									<button type="submit" class="btn btn-primary" name="create"
 										value="${reportInstance?.request?.id}">
 										<i class="fa fa-floppy-o"></i> Guardar
@@ -39,9 +38,7 @@
 									<a class="btn btn-default" href="/Sistema/request/list"
 											role="button"><i class="fa fa-times"></i> Cancelar</a>
 								</div>
-							</div>
-
-
+						
 
 						</fieldset>
 					</g:form>
@@ -49,6 +46,6 @@
 			</div>
 		</div>
 	</div>
-	
+	<br><br><br><br>
 </body>
 </html>

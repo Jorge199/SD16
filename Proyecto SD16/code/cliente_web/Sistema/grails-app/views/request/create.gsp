@@ -6,6 +6,10 @@
 	value="${message(code: 'request.label', default: 'Request')}" />
 <title><g:message code="default.create.label"
 		args="[entityName]" /></title>
+<g:set var="entityName"
+	value="${message(code: 'doctor.label', default: 'Doctor')}" />
+<title><g:message code="default.create.label"
+		args="[entityName]" /></title>
 <asset:stylesheet src="application.css" />
 <asset:javascript src="application.js" />
 </head>
@@ -25,14 +29,15 @@
 							<g:render template="form" />
 						</fieldset>
 						<fieldset class="buttons">
-							<br><br><div class="col-xs-10">
-									<div class="text-right">
+						
+							<br><br><div class="col-xs-12" align="center">
+									
 							<button type="submit" class="btn btn-primary" name="create" value="${message(code: 'default.button.create.label', default: 'Create')}">
-  									<i class="fa fa-floppy-o"></i> Guardar  
-								</button>
+  									<i class="fa fa-floppy-o"></i> Guardar  </button>
+								
 							<a class="btn btn-default" href="/Sistema/request/list"
 										role="button"><i class="fa fa-times"></i> Cancelar</a>
-										</div></div>
+							</div>
 						</fieldset>
 					</g:form>
 				</div>
