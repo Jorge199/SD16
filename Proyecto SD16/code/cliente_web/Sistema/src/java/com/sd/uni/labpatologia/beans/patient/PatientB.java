@@ -18,6 +18,7 @@ public class PatientB extends BaseBean {
 	private Date _birthDate;
 	private String _address;
 	private String _phone;
+	private String _mail;
 	private String _fullName;
 
 	public String getFullName() {
@@ -87,6 +88,14 @@ public class PatientB extends BaseBean {
 		_phone = phone;
 	}
 	
+	public String getMail() {
+		return _mail;
+	}
+
+	public void setMail(String mail) {
+		_mail = mail;
+	}
+
 	@Override
 	protected void create(Map<String, String> params) {
 		if (!StringUtils.isBlank(params.get("id"))) {
@@ -97,6 +106,7 @@ public class PatientB extends BaseBean {
         setDocument(params.get("document"));
         setAddress(params.get("address"));
         setPhone(params.get("phone"));
+        setMail(params.get("mail"));
         setFullName(params.get("name") + " " + params.get("lastName"));
 	}
 }

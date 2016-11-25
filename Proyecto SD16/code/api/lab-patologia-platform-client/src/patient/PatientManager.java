@@ -13,7 +13,7 @@ public class PatientManager extends AbstractBaseManager {
 		super();
 	}
 	
-	public void addPatient(String nombre, String lastName, String document,SexEnum sex, Date birthDate,String address, String phone) {
+	public void addPatient(String nombre, String lastName, String document,SexEnum sex, Date birthDate,String address, String phone, String mail) {
 		PatientDTO patientDTO = new PatientDTO();
 		patientDTO.setName(nombre);
 		patientDTO.setLastName(lastName);
@@ -22,6 +22,7 @@ public class PatientManager extends AbstractBaseManager {
 		patientDTO.setBirthDate(birthDate);
 		patientDTO.setAddress(address);
 		patientDTO.setPhone(phone);
+		patientDTO.setMail(mail);
 		setAdminAut();
 		getJerseyClient().resource(getBaseUrl() + "/patient").entity(patientDTO).post(PatientDTO.class);
 	}
@@ -36,6 +37,7 @@ public class PatientManager extends AbstractBaseManager {
 			System.out.println("Fecha de Nac.: "+p.getBirthDate());
 			System.out.println("Direccion: "+p.getAddress());
 			System.out.println("Telefono: "+p.getPhone());
+			System.out.println("Correo: "+p.getMail());
 		}
 	}
 	
@@ -48,6 +50,7 @@ public class PatientManager extends AbstractBaseManager {
 		System.out.println("Fecha de Nac. : "+patientResult.getBirthDate());
 		System.out.println("Direccion: "+patientResult.getAddress());
 		System.out.println("Telefono: "+patientResult.getPhone());
+		System.out.println("Correo: "+patientResult.getMail());
 		
 	}
 	public void getByPropertyPatient(String textToFind){
@@ -60,6 +63,7 @@ public class PatientManager extends AbstractBaseManager {
 			System.out.println("Fecha de Nac.: "+c.getBirthDate());
 			System.out.println("Direccion: "+c.getAddress());
 			System.out.println("Telefono: "+c.getPhone());
+			System.out.println("Correo: "+c.getMail());
 		}
 		
 	}

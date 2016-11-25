@@ -1,25 +1,21 @@
 package com.sd.uni.labpatologia.domain.message;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.Type;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 
 public class MessageDomain extends BaseDomain {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 	
 	@Column(name = "email")
 	private String _email;
-	
-	@Column(name = "phone")
-	private String _phone;
 	
 	//fecha creacion
 	@Column(name = "creationDate")
@@ -30,8 +26,10 @@ public class MessageDomain extends BaseDomain {
 	private Date _shippingDate;
 	
 	//estado enviado
-	@Column(name = "sent")
+	@Type(type = "true_false")
+	@Column(name = "sent", columnDefinition="boolean default false")
 	private boolean _sent;
+	
 	
 	public Integer getId(){
 		return _id;
@@ -47,14 +45,6 @@ public class MessageDomain extends BaseDomain {
 	
 	public void setEmail(String email){
 		_email = email;
-	}
-	
-	public String getPhone(){
-		return _phone;
-	}
-	
-	public void setPhone(String phone){
-		_phone = phone;
 	}
 	
 	public Date getCreationDate(){
@@ -80,6 +70,7 @@ public class MessageDomain extends BaseDomain {
 	public void setSent(boolean sent){
 		_sent = sent;
 	}
+	
 	
 	
 }

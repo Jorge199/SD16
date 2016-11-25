@@ -1,7 +1,6 @@
 package com.sd.uni.labpatologia.service.doctor;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,13 +11,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sd.uni.labpatologia.dao.doctor.IDoctorDao;
 import com.sd.uni.labpatologia.dao.doctor.DoctorDaoImpl;
+import com.sd.uni.labpatologia.dao.doctor.IDoctorDao;
 import com.sd.uni.labpatologia.domain.doctor.DoctorDomain;
-import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.dto.doctor.DoctorDto;
 import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
-import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 import com.sd.uni.labpatologia.service.patient.PatientServiceImpl;

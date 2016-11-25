@@ -19,6 +19,7 @@ public class PatientDTO extends BaseDTO {
 	private Date _birthDate;
 	private String _address;
 	private String _phone;
+	private String _mail;
 
 	@XmlElement
 	public String getName() {
@@ -81,5 +82,14 @@ public class PatientDTO extends BaseDTO {
 
 	public void setPhone(String phone) {
 		_phone = phone;
+	}
+	
+	@XmlElement
+	public String getMail() {
+		return _mail;
+	}
+
+	public void setMail(String mail) {
+		_mail = mail;
 	}
 }

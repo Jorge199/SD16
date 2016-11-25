@@ -47,6 +47,13 @@
 		</div>
 	</div>
 	
+	<div class="col-md-6">
+		<label>Correo</label> 
+		<div class="form-group">
+		<g:field type="email" class="form-control" placeholder="ejemplo999@correo.com" 
+		maxlength="50" name="mail" value="${patientInstance?.mail }"/>
+	</div>
+	
 	<div class="col-md-3">
 		<label class="col-md-4 form-label">Sexo</label>
 		<div class="col-md-9">

@@ -54,7 +54,9 @@ public class PatientDomain extends BaseDomain {
 	@Column(name = "phone")
 	private String _phone;
 	
-
+	@Column(name = "mail")
+	private String _mail;
+	
 	public Integer getId() {
 		return _id;
 	}
@@ -115,6 +117,14 @@ public class PatientDomain extends BaseDomain {
 
 	public void setPhone(String phone) {
 		_phone = phone;
+	}
+	
+	public String getMail() {
+		return _mail;
+	}
+
+	public void setMail(String mail) {
+		_mail = mail;
 	}
 	
 	public Set<RequestDomain> getRequests() {

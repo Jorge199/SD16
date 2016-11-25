@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.service.request;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,20 +13,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.doctor.IDoctorDao;
+import com.sd.uni.labpatologia.dao.message.IMessageDao;
 import com.sd.uni.labpatologia.dao.patient.IPatientDao;
 import com.sd.uni.labpatologia.dao.report.IReportDao;
 import com.sd.uni.labpatologia.dao.request.IRequestDao;
 import com.sd.uni.labpatologia.dao.request.RequestDaoImpl;
 import com.sd.uni.labpatologia.dao.study_type.IStudyTypeDao;
 import com.sd.uni.labpatologia.dao.user.IUserDao;
-import com.sd.uni.labpatologia.domain.report.ReportDomain;
+import com.sd.uni.labpatologia.domain.message.MessageDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
-import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
-import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
 import com.sd.uni.labpatologia.util.StatusEnum;
 
 @Service
@@ -48,6 +48,9 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	
 	@Autowired
 	private IReportDao reportDao;
+	
+	@Autowired
+	private IMessageDao messageDao;
 
 	private static Logger logger = Logger.getLogger(RequestServiceImpl.class);
 	
@@ -123,6 +126,17 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		domain.setDate(dto.getDate());
 		domain.setCode(dto.getCode());
 		domain.setStatus(dto.getStatus());
+		
+		// Si el estado es TERMINADO le agraga a la tabla de pendientes para notificacion
+		if (dto.getStatus().equals(StatusEnum.TERMINADO)){
+			String mail = patientDao.getById(dto.getPatientId()).getMail();
+			if (null != mail && !"".equals(mail)){
+				final MessageDomain messageDomain = new MessageDomain();
+				messageDomain.setId(dto.getId());
+				messageDomain.setCreationDate(new Date());
+				messageDomain.setEmail(mail);
+			}
+		}
 		return domain;
 	}
 

@@ -132,6 +132,8 @@ class PatientController {
 		patientInstance.setDocument(params.get("document"))
 		patientInstance.setAddress(params.get("address"))
 		patientInstance.setPhone(params.get("phone"))
+		patientInstance.setAddress(params.get("address"))
+		patientInstance.setMail(params.get("mail"))
 		patientService.save(patientInstance)
 		redirect(action: "list")
 

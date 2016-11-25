@@ -63,33 +63,33 @@ public class WsPathologyLaboratory {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		try {
 			patientManager.addPatient("Karina Belen", "Sanabria Rios", "4763428", SexEnum.FEMENINO,
-					formatter.parse("18-3-1993"), "Cap Miranda", "0985641789");
+					formatter.parse("18-3-1993"), "Cap Miranda", "(0985)641-789", "taniamonges@gmail.com");
 			patientManager.addPatient("Eliana", "Duarte Sanabria", "4893558", SexEnum.FEMENINO,
-					formatter.parse("1-2-1984"), "Barrio Mosquito", "0985237233");
+					formatter.parse("1-2-1984"), "Barrio Mosquito", "(0985)237-233", "taniamonges@gmail.com");
 			patientManager.addPatient("Juan Carlos", "Perez Diaz", "2363438", SexEnum.MASCULINO,
-					formatter.parse("12-06-1995"), "Barrio Obrero", "0985681789");
+					formatter.parse("12-06-1995"), "Barrio Obrero", "(0985)681-789", "diazpany@gmail.com");
 			patientManager.addPatient("Pablo Daniel", "Aquino allasi", "17823758", SexEnum.MASCULINO,
-					formatter.parse("11-08-1990"), "Encarnacion", "0986245779");
+					formatter.parse("11-08-1990"), "Encarnacion", "(0986)245-779", "diazpany@gmail.com");
 			patientManager.addPatient("Pedro Emilio", "Gonzalez Mendieta", "3765478", SexEnum.MASCULINO,
-					formatter.parse("17-6-1953"), "CDE", "0985241749");
+					formatter.parse("17-6-1953"), "CDE", "(0985)241-749", "diazpany@gmail.com");
 			patientManager.addPatient("Carla Luisa", "Fernandez Acuña", "23893659", SexEnum.FEMENINO,
-					formatter.parse("15-7-1968"), "Asuncion", "0985233533");
+					formatter.parse("15-7-1968"), "Asuncion", "(0985)233-533", "fa.talavera95@gmail.com");
 			patientManager.addPatient("Luis Nicolas", "Bado Amarilla", "3423428", SexEnum.MASCULINO,
-					formatter.parse("2-04-1949"), "Chaco", "0985444779");
+					formatter.parse("2-04-1949"), "Chaco", "(0985)447-679", "abel.oalex@gmail.com");
 			patientManager.addPatient("Cesar", "Portillo Centurion", "15297418", SexEnum.MASCULINO,
-					formatter.parse("30-08-1988"), "Quiteria", "0985585479");
+					formatter.parse("30-08-1988"), "Quiteria", "(0985)585-479", "abel.oalex@gmail.com");
 
 			for (int i = 0; i < 30; i++) {
 				if (i % 2 == 0) {
 					patientManager.addPatient("paciente" + i, "apellido" + i,
 							Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.MASCULINO,
 							new Date(), "direccion" + i,
-							Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));
+							Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)), "paciente"+i+"@gmail.com");
 				} else {
 					patientManager.addPatient("paciente" + i, "apellido" + i,
 							Integer.toString(ThreadLocalRandom.current().nextInt(0, 6763428)), SexEnum.FEMENINO,
 							new Date(), "direccion" + i,
-							Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)));
+							Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)), "paciente"+i+"@gmail.com");
 
 				}
 
@@ -111,15 +111,15 @@ public class WsPathologyLaboratory {
 
 		DoctorManager doctortManager = new DoctorManager();
 		doctortManager.addDoctor("Direccion1........", 928163, "paciente1@email.com", "Ortiz", "Alejandro Ruben",
-				"0985441759", "urologo");
+				"(0985)441-759", "urologo");
 		doctortManager.addDoctor("Direccion2........", 294276, "paciente2@email.com", "Amarilla", "Mario Jose",
-				"0985741739", "traumatologo");
+				"(0985)741-739", "traumatologo");
 		doctortManager.addDoctor("Direccion3........", 392467, "paciente3@email.com", "Quiroga", "Celeste Pelmaza",
-				"0985344539", "odontologo");
+				"(0985)344-539", "odontologo");
 		doctortManager.addDoctor("Direccion4........", 198769, "paciente4email.com", "Laoz", "Dalila Maria",
-				"0985423686", "neumologo");
+				"(0985)423-686", "neumologo");
 		doctortManager.addDoctor("Direccion5........", 498464, "paciente5@email.com", "Queen", "Leila Daniela",
-				"0985495683", "ginecologo");
+				"(0985)495-683", "ginecologo");
 		doctortManager.addDoctor("Direccion6........", 368763, "paciente6@email.com", "Fariña", "Luis", "0985462759",
 				"pediatra");
 		for (int i = 0; i < 30; i++) {
@@ -134,8 +134,8 @@ public class WsPathologyLaboratory {
 
 		LaboratoryManager laboratoryManager = new LaboratoryManager();
 		// System.out.println("##### Agregar datos #####");
-		laboratoryManager.addLaboratory("Análisis Patológico", "Tte. Honorio González", "patologia@email.com",
-				"(071) 202-596");
+		laboratoryManager.addLaboratory("Analisis Patologico", "Tte. Honorio Gonzalez", "lpatologico@gmail.com",
+				"(071)202-596");
 		// laboratoryManager.addLaboratory("clinica", "alborada",
 		// "clinica@email.com", "192030");
 

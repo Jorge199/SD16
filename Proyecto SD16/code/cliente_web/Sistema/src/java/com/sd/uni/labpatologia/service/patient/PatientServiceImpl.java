@@ -63,6 +63,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>imp
 		params.put("document", dto.getDocument());
 		params.put("address", dto.getAddress());
         params.put("phone", dto.getPhone());
+        params.put("mail", dto.getMail());
         final PatientB patientB = new PatientB(params);
 		patientB.setSex(dto.getSex());
 		patientB.setBirthDate(dto.getBirthDate());    
@@ -79,6 +80,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>imp
 		dto.setSex(bean.getSex());
 		dto.setBirthDate(bean.getBirthDate());
 		dto.setAddress(bean.getAddress());
+		dto.setMail(bean.getMail());
         dto.setPhone(bean.getPhone());
 		return dto;
 	}

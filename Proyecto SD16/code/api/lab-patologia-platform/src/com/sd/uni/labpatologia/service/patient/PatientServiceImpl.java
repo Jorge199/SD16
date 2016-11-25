@@ -87,6 +87,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 		patient.setBirthDate(domain.getBirthDate());
 		patient.setAddress(domain.getAddress());
 		patient.setPhone(domain.getPhone());
+		patient.setMail(domain.getMail());
 		return patient;
 	}
 
@@ -101,6 +102,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 		patient.setBirthDate(dto.getBirthDate());
 		patient.setAddress(dto.getAddress());
 		patient.setPhone(dto.getPhone());
+		patient.setMail(dto.getMail());
 		return patient;
 	}
 	
