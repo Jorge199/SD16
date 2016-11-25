@@ -15,6 +15,7 @@ public class ReportB extends BaseBean {
 	private DiagnosticEnum _diagnostic;
 	private String _observations;
 	private RequestB _request;
+	private Integer _age;
 
 	public ReportB(Map<String, String> params) {
 		super(params);
@@ -57,5 +58,13 @@ public class ReportB extends BaseBean {
 
 	public void setRequest(RequestB request) {
 		_request = request;
+	}
+
+	public Integer getAge() {
+		return _age;
+	}
+
+	public void setAge(Integer age) {
+		_age = age;
 	}
 }

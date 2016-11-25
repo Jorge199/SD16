@@ -17,8 +17,11 @@ public class ReportDTO extends BaseDTO {
 	private DiagnosticEnum _diagnostic;
 	private Date _date;
 	private String _observations;
+	private Integer _age;
 
 	
+	
+
 	@XmlElement
 	public Integer getRequestId() {
 		return _requestId;
@@ -55,4 +58,12 @@ public class ReportDTO extends BaseDTO {
 		_observations = observations;
 	}
 
+	@XmlElement
+	public Integer getAge() {
+		return _age;
+	}
+
+	public void setAge(Integer age) {
+		_age = age;
+	}
 }

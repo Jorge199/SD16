@@ -50,5 +50,12 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO> implements
 				ReportResult.class);
 		return result;
 	}
+	
+
+	public ReportResult find(String textToFind) {
+		setWebResourceBasicAuthFilter();
+		final ReportResult result = getWebResource().path("/search/" + textToFind).get(ReportResult.class);
+		return result;
+	}
 
 }

@@ -14,6 +14,7 @@ import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
 import com.sd.uni.labpatologia.service.request.IRequestService;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
 import com.sd.uni.labpatologia.util.StatusEnum;
+
 import grails.plugin.springsecurity.annotation.Secured
 
 class ReportController {
@@ -35,7 +36,7 @@ class ReportController {
 	def index() {
 		redirect(action: "list", params: params)
 	}
-	
+
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
@@ -95,6 +96,9 @@ class ReportController {
 	def create(Integer id) {
 		def reportInstance = new ReportB(params)
 		reportInstance.setRequest(requestService.getById(id))
+		if((null!=reportInstance.request.patient._birthDate)){
+			reportInstance.setAge(calculateAge(reportInstance.request.patient._birthDate));
+		}
 		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll(),
 			user:authService.getName()] //, requests:requestService.getAll()]
 	}
@@ -111,8 +115,12 @@ class ReportController {
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
 		reportInstance.setRequest(requestService.getById(Integer.parseInt(params.get("requestId"))))
 		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+		if((null!=params.get("age"))){
+			reportInstance.setAge(Integer.parseInt(params.get("age")));
+		}
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("requestId")))
 		requestInstance.setStatus(StatusEnum.TERMINADO)
+		//reportInstance.setAge(calculateAge(requestInstance.getPatient().getBirthDate()));
 		def newReport= reportService.save(reportInstance)
 		requestService.save(requestInstance)
 
@@ -139,17 +147,34 @@ class ReportController {
 		def reportInstance = new ReportB(params)
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
-		reportInstance.setRequest(requestService.getById(Integer.parseInt(params.get("requestId"))))
+		def requestInstance = requestService.getById(Integer.parseInt(params.get("requestId")))
+		reportInstance.setRequest(requestInstance)
 		reportInstance.setId(Integer.parseInt(params.get("edit")))
 		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+		if((null!=params.get("age"))){
+			reportInstance.setAge(Integer.parseInt(params.get("age")))
+		}
 		reportService.save(reportInstance)
-		System.out.println("wqe")
-		System.out.println(params)
-		System.out.println("qwe")
 		if(params.get("reportEdit").equals("request")){
 			redirect(action: "list", controller: "request")
 		}else{
 			redirect(action: "list")
 		}
+	}
+
+
+	private int calculateAge(Date birthDay) {
+		Calendar fechaNac = Calendar.getInstance();
+		fechaNac.setTime(birthDay);
+		Calendar today = Calendar.getInstance();
+
+		int diff_year = today.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR);
+		int diff_month = today.get(Calendar.MONTH) - fechaNac.get(Calendar.MONTH);
+		int diff_day = today.get(Calendar.DAY_OF_MONTH) - fechaNac.get(Calendar.DAY_OF_MONTH);
+
+		if (diff_month < 0 || (diff_month == 0 && diff_day < 0)) {
+			diff_year--;
+		}
+		return diff_year;
 	}
 }

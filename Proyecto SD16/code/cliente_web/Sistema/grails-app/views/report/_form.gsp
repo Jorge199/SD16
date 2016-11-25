@@ -60,6 +60,7 @@
 				<div class="col-md-2">
 					<label> Sexo:</label>
 					${reportInstance?.request?.patient?.sex}
+
 				</div>
 			</g:if>
 
@@ -67,13 +68,10 @@
 			<g:if test="${reportInstance?.request?.patient?.birthDate}">
 				<div class="col-md-2">
 					<label> Edad:</label>
-					<g:if
-						test="${reportInstance?.request?.patient?.birthDate.getMonth() <= new Date().getMonth()}">
-						${(new Date().getYear() - reportInstance?.request?.patient?.birthDate.getYear())}
-					</g:if>
-					<g:else>
-						${(new Date().getYear() - reportInstance?.request?.patient?.birthDate.getYear())-1  }
-					</g:else>
+					${reportInstance?.age}
+					<g:hiddenField class="form-control" name="age" required=""
+						value="${reportInstance?.age}" />
+
 				</div>
 			</g:if>
 			<g:if test="${reportInstance?.request?.patient?.phone}">
@@ -101,7 +99,7 @@
 					<label for="diagnostic"> <g:message code="Diagnostico" />
 						<span class="required-indicator">*</span>
 					</label>
-					<g:select name="diagnostic" class="form-control selectpicker"
+					<g:select name="diagnostic" class="form-control"
 						from="${DiagnosticEnum.values()}"
 						value="${reportInstance?.diagnostic}" optionKey="key" required=""
 						noSelection="${['SIN_INDICIOS':'Seleccione un diagnostico..']}"></g:select>
@@ -139,7 +137,7 @@
 											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 											&nbsp; &nbsp; Edad:
-											${age}
+											${reportInstance?.age}
 											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 										</p>
 

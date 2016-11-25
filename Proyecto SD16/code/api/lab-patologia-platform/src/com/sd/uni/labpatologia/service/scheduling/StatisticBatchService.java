@@ -1,6 +1,5 @@
 package com.sd.uni.labpatologia.service.scheduling;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,6 +18,7 @@ import com.sd.uni.labpatologia.service.patient.IPatientService;
 import com.sd.uni.labpatologia.service.report.IReportService;
 import com.sd.uni.labpatologia.service.request.IRequestService;
 import com.sd.uni.labpatologia.service.statistic.IStatisticService;
+import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 @Service
 @Transactional
@@ -46,15 +46,16 @@ public class StatisticBatchService {
 			c.add(Calendar.DATE, -1);
 			minDate = formatter.format(c.getTime());
 			maxDate = formatter.format(new Date());
-			for (ReportDTO report : _reportService.find("start=" + minDate + "&end=" + maxDate).getReports()) {
-				final StatisticDTO statistic = new StatisticDTO();
-				statistic.setDate(report.getDate());
-				statistic.setDiagnostic(report.getDiagnostic());
-				RequestDTO request = _requestService.getById(report.getRequestId());
-				statistic.setSex(_patientService.getById(request.getPatientId()).getSex());
-				Integer age = getAge(_patientService.getById(request.getPatientId()).getBirthDate());
-				statistic.setPatientAge(age);
-				_statisticService.save(statistic);
+			for (DiagnosticEnum diagnostico : DiagnosticEnum.values()) {
+				for (ReportDTO report : _reportService.find("start=" + minDate + "&end=" + maxDate+"&diagnostic="+diagnostico).getReports()) {
+					final StatisticDTO statistic = new StatisticDTO();
+					statistic.setDate(report.getDate());
+					statistic.setDiagnostic(report.getDiagnostic());
+					RequestDTO request = _requestService.getById(report.getRequestId());
+					statistic.setSex(_patientService.getById(request.getPatientId()).getSex());
+					statistic.setPatientAge(report.getAge());
+					_statisticService.save(statistic);
+				}
 			}
 		} catch (PatologyException e) {
 			throw new PatologyException("Formato de ruta invalido", e);

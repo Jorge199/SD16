@@ -69,6 +69,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		reportB.setDiagnostic(dto.getDiagnostic());
 		reportB.setDate(dto.getDate());
 		reportB.setRequest(_requestService.getById(dto.getRequestId()));
+		reportB.setAge(dto.getAge());
 		return reportB;
 	}
 
@@ -80,11 +81,26 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		dto.setDiagnostic(bean.getDiagnostic());
 		dto.setObservations(bean.getObservations());
 		dto.setRequestId(bean.getRequest().getId());
+		dto.setAge(bean.getAge());
 		return dto;
 	}
 	@Override
 	public List<ReportB> find (String textToFind, int maxItems, int page) {
 		final ReportResult result = _reportResource.find(textToFind, maxItems, page);
+		final List<ReportDTO> rList = null == result.getReports() ? new ArrayList<ReportDTO>()
+				: result.getReports();
+
+		final List<ReportB> reports = new ArrayList<ReportB>();
+		for (ReportDTO dto : rList) {
+			final ReportB bean = convertDtoToBean(dto);
+			reports.add(bean);
+		}
+		return reports;
+	}
+
+	@Override
+	public List<ReportB> find (String textToFind) {
+		final ReportResult result = _reportResource.find(textToFind);
 		final List<ReportDTO> rList = null == result.getReports() ? new ArrayList<ReportDTO>()
 				: result.getReports();
 

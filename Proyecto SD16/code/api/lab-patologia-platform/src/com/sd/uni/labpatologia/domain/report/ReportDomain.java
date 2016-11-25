@@ -29,12 +29,15 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "date", nullable = false)
 	private Date _date;
 
-	@Column(name = "observations", length=10000)
+	@Column(name = "observations", length = 10000)
 	private String _observations;
 
 	@Enumerated(EnumType.STRING)
 	private DiagnosticEnum _diagnostic;
-	
+
+	@Column(name = "age")
+	private Integer _age;
+
 	public Integer getId() {
 		return _id;
 	}
@@ -59,7 +62,6 @@ public class ReportDomain extends BaseDomain {
 		_date = date;
 	}
 
-
 	public String getObservations() {
 		return _observations;
 	}
@@ -67,7 +69,7 @@ public class ReportDomain extends BaseDomain {
 	public void setObservations(String observations) {
 		_observations = observations;
 	}
-	
+
 	public DiagnosticEnum getDiagnostic() {
 		return _diagnostic;
 	}
@@ -76,4 +78,11 @@ public class ReportDomain extends BaseDomain {
 		_diagnostic = diagnostic;
 	}
 
+	public Integer getAge() {
+		return _age;
+	}
+
+	public void setAge(Integer age) {
+		_age = age;
+	}
 }

@@ -83,6 +83,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		dto.setDiagnostic(domain.getDiagnostic());
 		dto.setDate(domain.getDate());
 		dto.setObservations(domain.getObservations());
+		dto.setAge(domain.getAge());
 		return dto;
 	}
 
@@ -94,6 +95,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		domain.setDiagnostic(dto.getDiagnostic());
 		domain.setDate(dto.getDate());
 		domain.setObservations(dto.getObservations());
+		domain.setAge(dto.getAge());
 		return domain;
 	}
 

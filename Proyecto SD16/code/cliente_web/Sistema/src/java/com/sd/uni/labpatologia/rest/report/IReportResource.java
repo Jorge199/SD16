@@ -8,4 +8,5 @@ public interface IReportResource extends IBaseResource<ReportDTO> {
 
 	public ReportResult getAll();
 	public ReportResult find(String textToFind, int maxItems, int page);
+	public ReportResult find(String textToFind);
 }
