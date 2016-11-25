@@ -1,18 +1,14 @@
 package com.sd.uni.labpatologia.dao.request;
 
 import java.text.ParseException;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.sd.uni.labpatologia.util.StatusEnum;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -22,10 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
-import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
-import com.sd.uni.labpatologia.util.DiagnosticEnum;
+import com.sd.uni.labpatologia.util.StatusEnum;
 
 @Repository
 public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IRequestDao {

@@ -110,4 +110,16 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		return reportResult;
 	}
 
+	@Override
+	public ReportResult find(String textToFind) throws PatologyException{
+		final List<ReportDTO> reports = new ArrayList<>();
+		for (ReportDomain domain : reportDao.find(textToFind)) {
+			final ReportDTO dto = convertDomainToDto(domain);
+			reports.add(dto);
+		}
+		final ReportResult reportResult = new ReportResult();
+		reportResult.setReports(reports);
+		return reportResult;
+	}
+
 }

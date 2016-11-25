@@ -42,14 +42,14 @@
 	window.onload=function() {
 		var element = document.getElementById('updater')
 		 var selectedValue =  element.options[element.selectedIndex].text; 
-		 if (selectedValue == "Doctor") { 
+		 if (selectedValue == "ROLE_DOCTOR") { 
 	    	    document.getElementById('update').style.display = '';
 	    }
 	};
     
     document.getElementById('updater').onchange = function () {
     	  var selectedValue = this.options[this.selectedIndex].text; 
-    	  if (selectedValue == "Doctor") { 
+    	  if (selectedValue == "ROLE_DOCTOR") { 
     	    document.getElementById('update').style.display = '';
     	  }else{
     		  document.getElementById('update').style.display = 'none'; 

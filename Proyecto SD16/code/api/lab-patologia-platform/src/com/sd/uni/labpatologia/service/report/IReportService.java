@@ -8,5 +8,5 @@ import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.IBaseService;
 
 public interface IReportService extends IBaseService<ReportDTO, ReportDomain, ReportDaoImpl, ReportResult> {
-	
+	public ReportResult find(String textToFind) throws PatologyException;
 }
