@@ -55,10 +55,11 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorDomain> implements IDoctorD
 					.add(Restrictions.ilike("_address", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_phone", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_speciality", "%"+textToFind+"%"))
-					.add(Restrictions.ilike("_email", "%"+textToFind+"%"));				
+					.add(Restrictions.ilike("_email", "%"+textToFind+"%"))
+					.add(Restrictions.ilike("_ci", "%"+textToFind+"%"));	
 			Criterion idCriterion = null;
 			if (StringUtils.isNumeric(textToFind)) {
-				idCriterion = Restrictions.eq("_ci", Integer.valueOf(textToFind));
+				idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
 			}
 			if (idCriterion != null) {
 				criteria.add(Restrictions.or(propertyCriterion, idCriterion));

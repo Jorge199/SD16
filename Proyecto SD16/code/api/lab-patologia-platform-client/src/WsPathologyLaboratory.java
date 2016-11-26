@@ -110,20 +110,20 @@ public class WsPathologyLaboratory {
 		System.out.println("###### DOCTORES #####");
 
 		DoctorManager doctortManager = new DoctorManager();
-		doctortManager.addDoctor("Direccion1........", 928163, "paciente1@email.com", "Ortiz", "Alejandro Ruben",
+		doctortManager.addDoctor("Direccion1........", "928163", "paciente1@email.com", "Ortiz", "Alejandro Ruben",
 				"(0985)441-759", "urologo");
-		doctortManager.addDoctor("Direccion2........", 294276, "paciente2@email.com", "Amarilla", "Mario Jose",
+		doctortManager.addDoctor("Direccion2........", "294276", "paciente2@email.com", "Amarilla", "Mario Jose",
 				"(0985)741-739", "traumatologo");
-		doctortManager.addDoctor("Direccion3........", 392467, "paciente3@email.com", "Quiroga", "Celeste Pelmaza",
+		doctortManager.addDoctor("Direccion3........", "392467", "paciente3@email.com", "Quiroga", "Celeste Pelmaza",
 				"(0985)344-539", "odontologo");
-		doctortManager.addDoctor("Direccion4........", 198769, "paciente4email.com", "Laoz", "Dalila Maria",
+		doctortManager.addDoctor("Direccion4........", "198769", "paciente4email.com", "Laoz", "Dalila Maria",
 				"(0985)423-686", "neumologo");
-		doctortManager.addDoctor("Direccion5........", 498464, "paciente5@email.com", "Queen", "Leila Daniela",
+		doctortManager.addDoctor("Direccion5........", "498464", "paciente5@email.com", "Queen", "Leila Daniela",
 				"(0985)495-683", "ginecologo");
-		doctortManager.addDoctor("Direccion6........", 368763, "paciente6@email.com", "Fariña", "Luis", "0985462759",
+		doctortManager.addDoctor("Direccion6........", "368763", "paciente6@email.com", "Fariña", "Luis", "0985462759",
 				"pediatra");
 		for (int i = 0; i < 30; i++) {
-			doctortManager.addDoctor("Direccion" + i + "........", ThreadLocalRandom.current().nextInt(1000, 7000000),
+			doctortManager.addDoctor("Direccion" + i + "........", Integer.toString(ThreadLocalRandom.current().nextInt(1000, 7000000)),
 					"paciente" + i + "@email.com", "apellido" + i, "nombre" + i,
 					Integer.toString(ThreadLocalRandom.current().nextInt(1111111111, 1999999999)), "");
 		}

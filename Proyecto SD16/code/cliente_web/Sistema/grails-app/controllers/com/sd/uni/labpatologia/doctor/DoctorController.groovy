@@ -47,14 +47,6 @@ class DoctorController {
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def save() {
 		def doctorInstance = new DoctorB(params)
-
-		try{
-			if(null!=params.get("ci")){
-				doctorInstance.setCi(Integer.parseInt(params.get("ci")))
-			}
-		}catch (NumberFormatException e){
-			e.stackTrace
-		}
 		def newDoctor = doctorService.save(doctorInstance)
 		if (!newDoctor?.getId()) {
 			render(view: "create", model: [doctorInstance: doctorInstance])
@@ -84,14 +76,8 @@ class DoctorController {
 		doctorInstance.setAddress(params.get("address"))
 		doctorInstance.setEmail(params.get("email"))
 		doctorInstance.setName(params.get("name"))
+		doctorInstance.setCi(params.get("ci"))
 		doctorInstance.setLastName(params.get("last_name"))
-		try{
-			if(null!=params.get("ci")){
-				doctorInstance.setCi(Integer.parseInt(params.get("ci")))
-			}
-		}catch (NumberFormatException e){
-			e.stackTrace
-		}
 		doctorInstance.setPhone(params.get("phone"))
 		doctorInstance.setSpeciality(params.get("speciality"))
 		doctorService.save(doctorInstance)

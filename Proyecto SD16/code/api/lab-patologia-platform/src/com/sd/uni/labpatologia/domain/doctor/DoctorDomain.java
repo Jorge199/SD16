@@ -24,7 +24,7 @@ public class DoctorDomain extends BaseDomain{
 	private String _last_name;
 	
 	@Column(name = "ci")
-	private Integer _ci;
+	private String _ci;
 	
 	@Column(name = "address")
 	private String _address;
@@ -59,10 +59,10 @@ public class DoctorDomain extends BaseDomain{
 		_last_name = name;
 	}
 	
-	public Integer getCi() {
+	public String getCi() {
 		return _ci;
 	}
-	public void setCi(Integer ci) {
+	public void setCi(String ci) {
 		_ci = ci;
 	}
 	

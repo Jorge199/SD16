@@ -19,7 +19,7 @@ public class DoctorB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _last_name;
-	private Integer _ci;
+	private String _ci;
 	private String _address;
 	private String _phone;
 	private String _email;
@@ -55,10 +55,10 @@ public class DoctorB extends BaseBean {
 		_last_name = last_name;
 	}
 	
-	public Integer getCi() {
+	public String getCi() {
 		return _ci;
 	}
-	public void setCi(Integer ci) {
+	public void setCi(String ci) {
 		_ci = ci;
 	}
 	
@@ -107,7 +107,8 @@ public class DoctorB extends BaseBean {
 			setId(Integer.valueOf(params.get("id")));
 		}
 		setName(params.get("name"));
-		setLastName(params.get("last_name"));	
+		setLastName(params.get("last_name"));
+		setCi(params.get("ci"));
         setAddress(params.get("address"));
         setPhone(params.get("phone"));
         setEmail(params.get("email"));

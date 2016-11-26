@@ -10,7 +10,7 @@ public class DoctorDto extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _last_name;
-	private Integer _ci;
+	private String _ci;
 	private String _address;
 	private String _phone;
 	private String _email;
@@ -36,10 +36,10 @@ public class DoctorDto extends BaseDTO{
 	}
 	
 	@XmlElement
-	public Integer getCi() {
+	public String getCi() {
 		return _ci;
 	}
-	public void setCi(Integer ci) {
+	public void setCi(String ci) {
 		_ci = ci;
 	}
 	

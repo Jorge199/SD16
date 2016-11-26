@@ -9,7 +9,7 @@ public class DoctorManager extends AbstractBaseManager {
 		super();
 	}
 
-	public void addDoctor(String address, int ci, String email, String lastName, String name, String phone, String speciality) {
+	public void addDoctor(String address, String ci, String email, String lastName, String name, String phone, String speciality) {
 		DoctorDto doctorDto = new DoctorDto();
 		doctorDto.setAddress(address);
 		doctorDto.setCi(ci);

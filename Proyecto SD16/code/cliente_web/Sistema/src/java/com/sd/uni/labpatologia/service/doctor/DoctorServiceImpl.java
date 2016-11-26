@@ -68,14 +68,13 @@ implements IDoctorService {
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("name", dto.getName());
 		params.put("last_name", dto.getLastName());
-		params.put("ci", String.valueOf(dto.getCi()));
+		params.put("ci", dto.getCi());
 		params.put("address", dto.getAddress());
 		params.put("phone", dto.getPhone());
 		params.put("email", dto.getEmail());
 		params.put("speciality", dto.getSpeciality());
 
 		final DoctorB doctorB = new DoctorB(params);
-		doctorB.setCi(dto.getCi());
 		return doctorB;
 	}
 

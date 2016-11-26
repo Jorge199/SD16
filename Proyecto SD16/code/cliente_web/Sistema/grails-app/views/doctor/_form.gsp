@@ -26,7 +26,7 @@
 	<div class="col-md-6">
 		<label>C.I</label>
 		<div class="form-group">
-		<g:field type="number" class="form-control" name="ci" placeholder="Ingrese un número de Cédula"
+		<g:field type="text" class="form-control" name="ci" placeholder="Ingrese un número de Cédula"
 			value="${doctorInstance?.ci}" />
 		</div>
 	</div>
