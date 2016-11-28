@@ -21,9 +21,9 @@
 	<div class="col-md-6">
 		<label>C.I</label>
 		<div class="form-group">
-		<g:field type="number" class="form-control" 
-                        min="100000" max="100000000"  name="document"
-			placeholder="Ingrese un Número de Cédula"
+		<g:field type="text" class="form-control" 
+                        min="100000" max="100000000"  name="document" 
+			placeholder="Ingrese un Número de Cédula" data-mask="**.999.999"
 			value="${patientInstance?.document}" />
 		</div>
 	</div>
@@ -54,9 +54,9 @@
 		maxlength="50" name="mail" value="${patientInstance?.mail }"/>
 	</div>
 	
-	<div class="col-md-3">
+	<div class="col-md-6">
 		<label class="col-md-4 form-label">Sexo</label>
-		<div class="col-md-9">
+		<div class="col-md-4">
 			<div class="form-group">
 				<label class="radio-inline"> 
 					<g:radio name="sex" value="${SexEnum.MASCULINO}" checked="${patientInstance?.sex == SexEnum.MASCULINO }"/>
@@ -69,7 +69,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-6">
 		<label>Fecha de Nacimiento</label>
 			<div class="form-group">
 			<div class='input-group date' id='datetimepicker1'>
@@ -81,4 +81,6 @@
 			</div>
 		</div>
 	</div>
+</div>
+
 </div>
