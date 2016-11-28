@@ -22,7 +22,7 @@
 		<label>C.I</label>
 		<div class="form-group">
 		<g:field type="text" class="form-control" 
-                        min="100000" max="100000000"  name="document" 
+            name="document" 
 			placeholder="Ingrese un Número de Cédula" data-mask="**.999.999"
 			value="${patientInstance?.document}" />
 		</div>

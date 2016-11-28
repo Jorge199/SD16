@@ -1,5 +1,9 @@
 package com.sd.uni.labpatologia.statistic
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.sd.uni.labpatologia.service.auth.IAuthService;
+import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService;
 import com.sd.uni.labpatologia.service.request.IRequestService;
 import com.sd.uni.labpatologia.service.statistic.IStatisticService;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
@@ -8,7 +12,9 @@ import grails.plugin.springsecurity.annotation.Secured;
 
 class StatisticController {
 
+	def ILaboratoryService laboratoryService
 	def IStatisticService statisticService
+	@Autowired def IAuthService authService
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
@@ -108,6 +114,6 @@ class StatisticController {
 			}
 			data.put("totalDiagnostic", totalDiagnostic)
 		}
-		[dataMap: data]
+		[user:authService.getName(), laboratoryInstanceList: laboratoryService.getAll(), dataMap: data]
 	}
 }

@@ -51,7 +51,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<input type="text" name="startAge" class="form-control"
+										<input type="number" min ="0" name="startAge" class="form-control"
 											placeholder="Edad Inicial" />
 									</div>
 								</div>
@@ -61,7 +61,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<input type="text" name="endAge" class="form-control"
+										<input type="number" min="0" name="endAge" class="form-control"
 											placeholder="Edad Final" />
 									</div>
 								</div>
@@ -94,7 +94,7 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker1'>
-												<input type='text' class="form-control input-sm"
+												<input type='text' class="form-control"
 													name="startSearch" /> <span class="input-group-addon">
 													<span class="glyphicon glyphicon-calendar"> </span>
 												</span>
@@ -108,7 +108,7 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker2'>
-												<input type='text' class="form-control input-sm"
+												<input type='text' class="form-control"
 													name="endSearch" /> <span class="input-group-addon">
 													<span class="glyphicon glyphicon-calendar"> </span>
 												</span>
