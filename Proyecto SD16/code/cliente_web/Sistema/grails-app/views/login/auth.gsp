@@ -49,8 +49,8 @@ html {
 		</div>
 
 	</div>
-	<br/><br/><br/>
-	<div class="pag-footer" align="center" style="background-color: #f2f2f2;opacity: 0.8;position:fixed">
+	<br/><br/>
+	<div class="pag-footer" align="center" style="background-color: #f2f2f2;opacity: 0.8;position:fixed;width:100%;">
 			<strong>Desarrolladores:</strong> 
 			Jorge Esquivel<a href="mailto:jorgeesquivelfernandez@gmail.com?Subject=Laboratorio%20SD2016">(jorgeesquivelfernandez@gmail.com)</a> 
 			- Alex Jiñes<a href="mailto:abel.oalex@gmail.com?Subject=Laboratorio%20SD2016">(abel.oalex@gmail.com)</a> 

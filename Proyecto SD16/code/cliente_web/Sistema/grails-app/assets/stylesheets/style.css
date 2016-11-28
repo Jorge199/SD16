@@ -37,7 +37,9 @@ body {
 	bottom: 0;
 	height: 15%;
 	position: fixed;
+	background-color: white;
 }
+
 .panel-blue-dark {
     border-color: #4B8587;
 }
