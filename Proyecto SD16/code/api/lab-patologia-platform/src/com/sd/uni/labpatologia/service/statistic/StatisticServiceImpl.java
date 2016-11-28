@@ -17,8 +17,7 @@ import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 @Service
-public class StatisticServiceImpl extends
-		BaseServiceImpl<StatisticDTO, StatisticDomain, StatisticDaoImpl, StatisticResult> implements IStatisticService {
+public class StatisticServiceImpl extends BaseServiceImpl<StatisticDTO, StatisticDomain, StatisticDaoImpl, StatisticResult> implements IStatisticService {
 	@Autowired
 	private IStatisticDao _statisticDao;
 
@@ -26,9 +25,6 @@ public class StatisticServiceImpl extends
 
 	@Override
 	@Transactional
-	// @CacheEvict(value= "lab-patologia-platform-cache",key = "'requests'")
-	// @CachePut(value = "lab-patologia-platform-cache", key = "'request_' +
-	// #dto.id", condition="#dto.id!=null")
 	public StatisticDTO save(StatisticDTO dto) {
 		try {
 			// Lanzo exepcion de tipo runtime para realizar rollback
@@ -49,8 +45,6 @@ public class StatisticServiceImpl extends
 
 	@Override
 	@Transactional(readOnly = true)
-	// @Cacheable(value = "lab-patologia-platform-cache", key = "'request_' +
-	// #id")
 	public StatisticDTO getById(Integer id) throws PatologyException {
 		final StatisticDomain domain = _statisticDao.getById(id);
 		final StatisticDTO dto = convertDomainToDto(domain);
@@ -59,7 +53,6 @@ public class StatisticServiceImpl extends
 
 	@Override
 	@Transactional(readOnly = true)
-	// @Cacheable(value = "lab-patologia-platform-cache", key = "'requests'")
 	public StatisticResult getAll() {
 		final List<StatisticDTO> statistics = new ArrayList<>();
 		for (StatisticDomain domain : _statisticDao.findAll()) {
@@ -74,6 +67,7 @@ public class StatisticServiceImpl extends
 	@Override
 	protected StatisticDTO convertDomainToDto(StatisticDomain domain) {
 		final StatisticDTO dto = new StatisticDTO();
+		dto.setId(domain.getId());
 		dto.setDate(domain.getDate());
 		dto.setSex(domain.getSex());
 		dto.setDiagnostic(domain.getDiagnostic());
@@ -84,6 +78,7 @@ public class StatisticServiceImpl extends
 	@Override
 	protected StatisticDomain convertDtoToDomain(StatisticDTO dto) throws PatologyException {
 		final StatisticDomain domain = new StatisticDomain();
+		domain.setId(dto.getId());
 		domain.setDate(dto.getDate());
 		domain.setDiagnostic(dto.getDiagnostic());
 		domain.setPatientAge(dto.getPatientAge());
@@ -96,6 +91,19 @@ public class StatisticServiceImpl extends
 	public StatisticResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<StatisticDTO> statistics = new ArrayList<>();
 		for (StatisticDomain domain : _statisticDao.find(textToFind, page, maxItems)) {
+			final StatisticDTO dto = convertDomainToDto(domain);
+			statistics.add(dto);
+		}
+		final StatisticResult statisticResult = new StatisticResult();
+		statisticResult.setStatistics(statistics);
+		return statisticResult;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public StatisticResult find(String textToFind) throws PatologyException {
+		final List<StatisticDTO> statistics = new ArrayList<>();
+		for (StatisticDomain domain : _statisticDao.find(textToFind)) {
 			final StatisticDTO dto = convertDomainToDto(domain);
 			statistics.add(dto);
 		}

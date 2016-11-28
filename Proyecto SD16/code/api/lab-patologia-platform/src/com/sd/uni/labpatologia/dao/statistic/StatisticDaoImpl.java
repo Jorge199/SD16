@@ -66,10 +66,10 @@ public class StatisticDaoImpl extends BaseDaoImpl<StatisticDomain> implements IS
 			}
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por
 													// diagnostico
-				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic"))));
+				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic").toUpperCase())));
 			}
 			if (map.containsKey("sex")) {
-				criteria.add(Restrictions.eq("_sex", SexEnum.valueOf(map.get("sex"))));
+				criteria.add(Restrictions.eq("_sex", SexEnum.valueOf(map.get("sex").toUpperCase())));
 			}
 
 			if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
@@ -111,13 +111,13 @@ public class StatisticDaoImpl extends BaseDaoImpl<StatisticDomain> implements IS
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 			if (map.containsKey("startAge") && map.containsKey("endAge")) {
-				criteria.add(Restrictions.between("_patientAge", map.get("startAge"), map.get("endAge")));
+				criteria.add(Restrictions.between("_patientAge", Integer.parseInt(map.get("startAge")), Integer.parseInt(map.get("endAge"))));
 			}
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por diagnostico
-				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic"))));
+				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic").toUpperCase())));
 			}
 			if (map.containsKey("sex")) {
-				criteria.add(Restrictions.eq("_sex", SexEnum.valueOf(map.get("sex"))));
+				criteria.add(Restrictions.eq("_sex", SexEnum.valueOf(map.get("sex").toUpperCase())));
 			}
 			if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
 				try {

@@ -35,6 +35,14 @@ public class StatisticDomain extends BaseDomain {
 	
 	@Column(name = "date", nullable = false)
 	private Date _date;
+	
+	public Integer getId() {
+		return _id;
+	}
+
+	public void setId(Integer id) {
+		_id = id;
+	}
 
 	public Integer getPatientAge() {
 		return _patientAge;

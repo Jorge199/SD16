@@ -59,4 +59,12 @@ public class StatisticResource {
 	public StatisticDTO save(StatisticDTO statistic) {
 		return _statisticService.save(statistic);
 	}
+	
+	@GET
+	@Path("/search/{textToFind}")
+	@Produces("application/xml")
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
+	public StatisticResult search(@PathParam("textToFind") String textToFind ) throws PatologyException {
+		return _statisticService.find(textToFind);
+	}
 }
