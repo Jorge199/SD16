@@ -1,14 +1,20 @@
 package com.sd.uni.labpatologia.domain.article;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 
 @Entity
@@ -32,6 +38,8 @@ public class ArticleDomain extends BaseDomain{
 	@Column(name = "quantity")
 	private Integer _quantity;
 	
+	/*@OneToMany(cascade = CascadeType.REMOVE, mappedBy="_article")
+	private List<ArticleLotDomain> _articleLots = new ArrayList<ArticleLotDomain>();*/
 	
 	public Integer getId() {
 		return _id;
@@ -72,4 +80,12 @@ public class ArticleDomain extends BaseDomain{
 	public void setQuantity(Integer c) {
 		_quantity = c;
 	}
+
+	/*public List<ArticleLotDomain> get_articleLots() {
+		return _articleLots;
+	}
+
+	public void set_articleLots(List<ArticleLotDomain> _articleLots) {
+		this._articleLots = _articleLots;
+	}*/
 }

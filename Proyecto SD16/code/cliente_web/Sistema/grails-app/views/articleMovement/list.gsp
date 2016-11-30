@@ -38,6 +38,40 @@
                             </div>
                         </g:form>
                     </div>
+                    <!--<div class="col-md-6">
+									<div class="fieldcontain ${hasErrors(bean: reportInstance, field: 'start', 'error')} required">
+										<div class="col-md-4">
+											<label for="start"> <g:message
+													code="Desde (Fecha de Informe)" />
+											</label>
+										</div>
+										<div class="col-md-5">
+											<div class="form-group">
+												<div class='input-group date' id='datetimepicker1'>
+													<input type='text' class="form-control input-sm"
+														name="startSearch" /> <span class="input-group-addon">
+														<span class="glyphicon glyphicon-calendar"> </span>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<label for="start"> <g:message
+													code="Hasta (Fecha de Informe)" />
+											</label>
+										</div>
+										<div class="col-md-5">
+											<div class="form-group">
+												<div class='input-group date' id='datetimepicker2'>
+													<input type='text' class="form-control input-sm"
+														name="endSearch" /> <span class="input-group-addon">
+														<span class="glyphicon glyphicon-calendar"> </span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>-->
                     <br> <br> <br>
                     <div class="dataTable_wrapper">
                         <div class="row">

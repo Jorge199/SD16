@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.article.ArticleDaoImpl;
 import com.sd.uni.labpatologia.dao.article.IArticleDao;
+import com.sd.uni.labpatologia.dao.article_lot.IArticleLotDao;
 import com.sd.uni.labpatologia.domain.article.ArticleDomain;
+import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -26,6 +28,9 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 
 	@Autowired
 	private IArticleDao _articleDao;
+	
+	@Autowired
+	private IArticleLotDao _articleLotDao;
 
 	
 
@@ -38,6 +43,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		if(null == articleDomain.getQuantity()){
 			articleDomain.setQuantity(0);
 		}
+		//articleDomain.set_articleLots(new ArrayList<ArticleLotDomain>());
 		final ArticleDomain article = _articleDao.save(articleDomain);
 		final ArticleDto newDto = convertDomainToDto(article);
 		if (null == dto.getId()) {
@@ -72,24 +78,38 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 
 	@Override
 	protected ArticleDto convertDomainToDto(ArticleDomain domain) {
-		final ArticleDto Article = new ArticleDto();
-		Article.setId(domain.getId());
-		Article.setName(domain.getName());
-		Article.setDescription(domain.getDescription());
-		Article.setUnits(domain.getUnits());
-		Article.setQuantity(domain.getQuantity());
-		return Article;
+		final ArticleDto article = new ArticleDto();
+		article.setId(domain.getId());
+		article.setName(domain.getName());
+		article.setDescription(domain.getDescription());
+		article.setUnits(domain.getUnits());
+		article.setQuantity(domain.getQuantity());
+		/*ArrayList<Integer> articleLots = new ArrayList<>();
+		for(ArticleLotDomain a: domain.get_articleLots()){
+			articleLots.add(a.getId());
+		}
+		article.setArticleLots(articleLots);*/
+		return article;
 	}
 
 	@Override
 	protected ArticleDomain convertDtoToDomain(ArticleDto dto) {
-		final ArticleDomain Article = new ArticleDomain();
-		Article.setId(dto.getId());
-		Article.setName(dto.getName());
-		Article.setDescription(dto.getDescription());
-		Article.setUnits(dto.getUnits());
-		Article.setQuantity(dto.getQuantity());
-		return Article;
+		final ArticleDomain article = new ArticleDomain();
+		article.setId(dto.getId());
+		article.setName(dto.getName());
+		article.setDescription(dto.getDescription());
+		article.setUnits(dto.getUnits());
+		article.setQuantity(dto.getQuantity());
+		/*ArrayList<ArticleLotDomain> articleLots = new ArrayList<>();
+		for(int id: dto.getArticleLots()){
+			try {
+				articleLots.add(_articleLotDao.getById(id));
+			} catch (PatologyException e) {
+				e.printStackTrace();
+			}
+		}
+		article.set_articleLots(articleLots);*/
+		return article;
 	}
 
 	@Override
