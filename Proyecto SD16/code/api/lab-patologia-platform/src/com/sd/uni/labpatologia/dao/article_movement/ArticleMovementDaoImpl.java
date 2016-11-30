@@ -54,11 +54,13 @@ public class ArticleMovementDaoImpl  extends BaseDaoImpl<ArticleMovementDomain> 
 	@Override
 	public List<ArticleMovementDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(ArticleMovementDomain.class);
+		Criteria criteria = session.createCriteria(ArticleMovementDomain.class, "articleMovement").createAlias("articleMovement._article", "article");
 		Date minDate, maxDate;
 		Criterion propertyCriterion = Restrictions.disjunction();
 		
+		
 		if (textToFind != null){
+			Criterion articleCriterion = Restrictions.disjunction().add(Restrictions.ilike("article._name", "%" + textToFind + "%"));
 			if(EnumUtils.isValidEnum(MovementTypeEnum.class, textToFind.toUpperCase())){
 				criteria.add(Restrictions.disjunction().add(Restrictions.eq("_movement_type", MovementTypeEnum.valueOf(textToFind.toUpperCase()))));
 			}
@@ -88,9 +90,9 @@ public class ArticleMovementDaoImpl  extends BaseDaoImpl<ArticleMovementDomain> 
 				}
 			}*/
 			if (null != idCriterion) {
-				criteria.add(Restrictions.or(propertyCriterion, idCriterion));
+				criteria.add(Restrictions.or(propertyCriterion, idCriterion, articleCriterion));
 			} else {
-				criteria.add(propertyCriterion);
+				criteria.add(propertyCriterion).add(articleCriterion);
 			}
 		}
 		criteria.setFirstResult(page*maxItems);
