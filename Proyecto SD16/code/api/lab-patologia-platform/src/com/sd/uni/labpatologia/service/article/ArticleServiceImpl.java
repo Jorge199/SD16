@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.article.ArticleDaoImpl;
 import com.sd.uni.labpatologia.dao.article.IArticleDao;
-import com.sd.uni.labpatologia.dao.article_lot.IArticleLotDao;
+//import com.sd.uni.labpatologia.dao.article_lot.IArticleLotDao;
 import com.sd.uni.labpatologia.domain.article.ArticleDomain;
-import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
+//import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -29,8 +29,8 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	@Autowired
 	private IArticleDao _articleDao;
 	
-	@Autowired
-	private IArticleLotDao _articleLotDao;
+	//@Autowired
+	//private IArticleLotDao _articleLotDao;
 
 	
 

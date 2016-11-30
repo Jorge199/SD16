@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
+//import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 
 @Entity

@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
+//import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
 import com.sd.uni.labpatologia.dto.base.BaseDTO;
 
 @XmlRootElement(name = "article")
