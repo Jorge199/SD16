@@ -91,9 +91,10 @@ class RequestController {
 		'ROLE_SECRETARIA'
 	])
 	def create() {
+		def action = "save"
 		def requestInstance = new RequestB(params)
 		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll(),
-			user:authService.getName()]
+			user:authService.getName(), action:action]
 	}
 
 	@Secured([
