@@ -76,10 +76,15 @@
 		<div class="col-md-4">
 				<label>Paciente <span class="required-indicator">*</span></label>
 				<div class="form-group">
+				<div class="input-group">
 				<g:select  class="form-control selectpicker many-to-one" data-live-search="true" name="patientId" from="${patients}" value="${requestInstance?.patient?.id}"
 				optionKey="id" optionValue="fullName" required=""
 				noSelection="${['':'Seleccione un paciente..']}"/>
-				
+				<label type="button" class="btn btn-primary input-group-addon" data-toggle="modal"
+							data-target="#createPatient">
+							<i class="fa fa-plus"></i>
+				</label>
+				</div>
 				</div>
 				</div>
 		
@@ -122,16 +127,19 @@
 		</div>
 	</div>
 </div>
-<g:if test="${action == 'save'}">
-   <button type="submit" class="btn btn-primary" onclick="callAjax1()"><i class="fa fa-save"></i> Guardar </button>
-</g:if><g:else>
-   <button type="submit" class="btn btn-primary" name="edit" value="${requestInstance?.id}" onclick="callAjax1()">
-	<i class="fa fa-save"></i> Guardar </button>
-</g:else>
-
-
-								
-								
+<div class="col-xs-12" align="center">
+	<g:if test="${action == 'save'}">
+	   <button type="submit" class="btn btn-primary" onclick="callAjax1()"><i class="fa fa-save"></i> Guardar </button>
+	</g:if><g:else>
+	   <button type="submit" class="btn btn-primary" name="edit" value="${requestInstance?.id}" onclick="callAjax1()">
+		<i class="fa fa-save"></i> Guardar </button>
+	</g:else>
+	
+	<a class="btn btn-default" href="/Sistema/request/list"
+	role="button"><i class="fa fa-times"></i> Cancelar</a>
+							
+</div>
+							
 </form>
 <!-- Modal doctor -->
 <div class="modal fade" id="createDoctor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -159,10 +167,35 @@
 	</div>
 </div>
 
+<!-- Modal paciente -->
+<div class="modal fade" id="createPatient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Registrar Paciente</h4>
+			</div>
+			<div class="modal-body">
+			<form id="myFormPatient">
+				<g:render template="/patient/form"/>
+			
+					<fieldset class="buttons">
+						<br><br><div class="col-xs-10">
+							<div class="text-right">
+							<button  type="submit"  class="btn btn-primary" onclick="callAjax2()"><i class="fa fa-save"></i> Guardar</button>
+							</div></div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 <head>
     <g:javascript plugin="jquery" library="jquery" src="jquery/jquery-1.7.2.js"/>
+    <!-- Para boton guardar de doctor -->
     <script>
- 
         function callAjax(){
         	    $.ajax({
                 	type:"POST",
@@ -177,8 +210,8 @@
                 });
         }
     </script>
+    <!-- Para boton guardar de ficha -->
      <script>
- 
         function callAjax1(){
             if(action = 'save'){
         	    $.ajax({
@@ -205,9 +238,24 @@
                      },
                  });
 
-                }
-            
+                }     
         }
+    </script>
+    <!-- Para boton guardar de paciente -->
+    <script type="text/javascript">
+    function callAjax2(){
+	    $.ajax({
+        	type:"POST",
+            url : "${createLink(controller: 'patient', action: 'save')}",
+            data :   $("#myFormPatient").serialize() , // do I need to pass data if im GET ting?
+            dataType: 'json',
+            success : function(data){
+               //doing stuff
+               //end success
+            	 $("#myFormPatient").submit();
+            },
+        });
+	}
     </script>
 </head>
 

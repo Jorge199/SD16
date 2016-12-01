@@ -74,7 +74,7 @@
 			<div class="form-group">
 			<div class='input-group date' id='datetimepicker1'>
 			<input type='text' class="form-control" name="birthDate"
-				value="${formatDate(format: 'dd-MM-yyyy', date:patientInstance.getBirthDate())}" /> <span
+				value="${formatDate(format: 'dd-MM-yyyy', date:patientInstance?.getBirthDate())}" /> <span
 				class="input-group-addon"> <span
 				class="glyphicon glyphicon-calendar"> </span>
 			</span>

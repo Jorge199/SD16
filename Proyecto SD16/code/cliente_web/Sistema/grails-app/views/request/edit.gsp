@@ -20,14 +20,6 @@
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
-							<fieldset class="buttons">
-								<br> <br>
-								<div class="col-xs-12" align="center">
-										<a class="btn btn-default" href="/Sistema/request/list"
-										role="button"><i class="fa fa-times"></i> Cancelar</a>
-								
-								</div>
-							</fieldset>
 						</g:form>						
 					</div>
 				</div>
