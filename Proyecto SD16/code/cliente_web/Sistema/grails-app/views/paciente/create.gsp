@@ -27,7 +27,7 @@
 						<fieldset class="buttons">
 							<br>
 							<button type="submit" class="btn btn-primary" name="create"
-								value="${}}">
+								value="">
 								<i class="fa fa-floppy-o"></i> Guardar
 							</button>
 						</fieldset>

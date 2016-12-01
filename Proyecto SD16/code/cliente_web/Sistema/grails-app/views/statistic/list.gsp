@@ -37,7 +37,7 @@
 									</label>
 									<div class="col-md-9">
 										<g:select name="diagnostic" class="form-control selectpicker"
-											from="${DiagnosticEnum.values()}" value="${}"
+											from="${DiagnosticEnum.values()}" value=""
 											name="diagnosticSearch" optionKey="key"
 											noSelection="${['null':'Seleccione un diagnostico..']}"
 											required=""></g:select>

@@ -87,7 +87,7 @@
 												<%--  <td>${fieldValue(bean: patientInstance, field: "patient.id")}</td>		--%>
 												<td width="80" class="center"><g:link action="edit"
 														class="btn btn-success" id="${patientInstance.getId()}">
-														${}<i class="fa fa-pencil"></i> Editar</g:link></td>
+														<i class="fa fa-pencil"></i> Editar</g:link></td>
 											</tr>
 
 										</g:each>

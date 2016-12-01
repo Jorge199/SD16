@@ -39,7 +39,7 @@
                         </g:form>
                     </div>
                     <br> <br> <br>
-                    <div class="dataTable_wrapper">
+                    <div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="list-report"
@@ -70,10 +70,9 @@
                                             <td class="numbers">
                                                 ${fieldValue(bean: articleInstance, field: "quantity")}
                                             </td>
-                                            <%--  <td>${fieldValue(bean: laboratoryInstance, field: "laboratory.id")}</td>		--%>
                                             <td width="80" class="center"><g:link action="edit"
                                                 class="btn btn-success" id="${articleInstance.getId()}">
-                                                    ${}<i class="fa fa-pencil"></i>Editar</g:link></td>
+                                                    <i class="fa fa-pencil"></i>Editar</g:link></td>
                                             </tr>
 
                                     </g:each>

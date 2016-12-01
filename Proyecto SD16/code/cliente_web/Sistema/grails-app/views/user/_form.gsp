@@ -22,14 +22,14 @@
 	<div class="col-md-6">
 		<label>Constraseña<span class="required-indicator">*</span></label>
 		<div class="form-group">
-		<g:passwordField class="form-control" required="" name="password" id="pass1" value="${}"
+		<g:passwordField class="form-control" required="" name="password" id="pass1" value=""
 			placeholder="Ingrese la contraseña" />
 		</div>
 	</div>
 	<div class="col-md-6">
 		<label>Repita la Constraseña<span class="required-indicator">*</span></label>
 		<div class="form-group">
-		<g:passwordField class="form-control" required="" name="password2" oninput="check(this)" value="${}"
+		<g:passwordField class="form-control" required="" name="password2" oninput="check(this)" value=""
 			placeholder="Vuelva a ingresar la contraseña" />
 		</div>
 	</div>
