@@ -3,12 +3,16 @@ package com.sd.uni.labpatologia.domain.message;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 
+@Entity
+@Table(name = "message")
 public class MessageDomain extends BaseDomain {
 	@Id
 	@Column(name = "id", nullable = false, unique = true)
@@ -26,10 +30,12 @@ public class MessageDomain extends BaseDomain {
 	private Date _shippingDate;
 	
 	//estado enviado
-	@Type(type = "true_false")
-	@Column(name = "sent", columnDefinition="boolean default false")
-	private boolean _sent;
-	
+	//@Type(type = "true_false")
+	//@Column(name = "sent", columnDefinition="boolean default false")
+	//private boolean _sent;
+	@Column(columnDefinition = "TINYINT")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	public boolean _sent = false;
 	
 	public Integer getId(){
 		return _id;

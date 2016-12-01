@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.dao.message.IMessageDao;
-import com.sd.uni.labpatologia.domain.doctor.DoctorDomain;
 import com.sd.uni.labpatologia.domain.message.MessageDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
 
@@ -41,8 +40,8 @@ public class MessageDaoImpl extends BaseDaoImpl<MessageDomain> implements IMessa
 		@Override
 		public List<MessageDomain> findAll() {
 			Session session = _sessionFactory.getCurrentSession();
-			Criteria criteria = session.createCriteria(DoctorDomain.class);
-			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.eq("_sent", "false")); 
+			Criteria criteria = session.createCriteria(MessageDomain.class);
+			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.eq("_sent", 0)); 
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 			List<MessageDomain> messages = criteria.list();
 			return messages;

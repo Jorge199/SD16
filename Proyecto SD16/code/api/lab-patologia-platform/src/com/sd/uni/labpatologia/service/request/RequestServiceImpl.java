@@ -128,13 +128,15 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		domain.setStatus(dto.getStatus());
 		
 		// Si el estado es TERMINADO le agraga a la tabla de pendientes para notificacion
-		if (dto.getStatus().equals(StatusEnum.TERMINADO)){
+		if (dto.getStatus() == StatusEnum.TERMINADO){
 			String mail = patientDao.getById(dto.getPatientId()).getMail();
-			if (null != mail && !"".equals(mail)){
+			if (!"".equals(mail)){
+				System.out.println("pidiendo notificacion para: "+ mail);
 				final MessageDomain messageDomain = new MessageDomain();
 				messageDomain.setId(dto.getId());
 				messageDomain.setCreationDate(new Date());
 				messageDomain.setEmail(mail);
+				messageDao.save(messageDomain);
 			}
 		}
 		return domain;

@@ -13,62 +13,81 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.message.IMessageDao;
 import com.sd.uni.labpatologia.domain.message.MessageDomain;
+import com.sd.uni.labpatologia.exception.PatologyException;
 
 @Service
+@Transactional
 public class MessageServiceImpl implements IMessageService{
 	@Autowired
 	private IMessageDao messageDao;
 	
-    private boolean send(String toAddress) throws Exception{
-    	final String username = "lpatologico@gmail.com";
-		final String password = "lpatologico";
+	@Value("${mail.username:lpatologico@gmail.com}")
+	private String username;
+	
+	@Value("${mail.password:lpatologico}")
+	private String password;
+	
+	@Value("${mail.smtp.auth:true}")
+	private String auth;
+	
+	@Value("${mail.smtp.starttls.enable:true}")
+	private String enable;
+	
+	@Value("${mail.host:smtp.gmail.com}")
+	private String host;
+	
+	@Value("${mail.port:465}")
+	private String port;
 
+	public boolean send(String toAddress) throws PatologyException{
+		
 		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", Boolean.valueOf(auth));
+		props.put("mail.smtp.starttls.enable", Boolean.valueOf(enable));
+		props.put("mail.smtp.host", host);
+		//props.put("mail.smtp.ssl.trust", host);
+		props.put("mail.smtp.port", Integer.parseInt(port));
 
 		Session session = Session.getInstance(props,
-		  new javax.mail.Authenticator() {
+				new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
 			}
-		  });
+		});
 
 		try {
-
+			System.out.println("Enviando un mensaje al: "+ toAddress);
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
-			message.setSubject("Notificacion de Analisis Patologico");
-			message.setContent("<h2>Hola a todos</h2>", "text/html; charset=utf-8");
+			message.setSubject("Notificacion de Informe");
+			message.setText("hola");
 			Transport.send(message);
 			return true;
 
 		} catch (MessagingException e) {
-			return false;
-		} 
-    }
-    
-    public void sendNotifications(){
-    	System.out.println("Enviando notificaciones...");
-    	try {
-    		List<MessageDomain> messages = messageDao.findAll();
-    		for (MessageDomain msg : messages){
-    			if (send(msg.getEmail())){
-    				msg.setShippingDate(new Date());
-    				msg.setSent(true);
-    			}
-    		}
-			System.out.println("Todas las notificaciones fueron enviadas...");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    }
+			throw new PatologyException("envio mail fallo", e);
 
+		} 
+	}
+
+	public void sendNotifications() throws PatologyException{
+
+		List<MessageDomain> messages = messageDao.findAll();
+		for (MessageDomain msg : messages){
+			if (send(msg.getEmail())){
+				msg.setShippingDate(new Date());
+				msg.setSent(true);
+				messageDao.save(msg);
+			}
+		}
+
+	}
+	
 }
