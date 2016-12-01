@@ -15,12 +15,17 @@ import com.sd.uni.labpatologia.dto.statistic.StatisticDTO;
 import com.sd.uni.labpatologia.dto.statistic.StatisticResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
+import com.sd.uni.labpatologia.service.scheduling.StatisticBatchService;
 
 @Service
-public class StatisticServiceImpl extends BaseServiceImpl<StatisticDTO, StatisticDomain, StatisticDaoImpl, StatisticResult> implements IStatisticService {
+public class StatisticServiceImpl extends
+		BaseServiceImpl<StatisticDTO, StatisticDomain, StatisticDaoImpl, StatisticResult> implements IStatisticService {
 	@Autowired
 	private IStatisticDao _statisticDao;
-
+	
+	@Autowired
+	private StatisticBatchService _statisticBatchService;
+	
 	private static Logger logger = Logger.getLogger(StatisticServiceImpl.class);
 
 	@Override
@@ -44,7 +49,7 @@ public class StatisticServiceImpl extends BaseServiceImpl<StatisticDTO, Statisti
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public StatisticDTO getById(Integer id) throws PatologyException {
 		final StatisticDomain domain = _statisticDao.getById(id);
 		final StatisticDTO dto = convertDomainToDto(domain);
@@ -52,8 +57,10 @@ public class StatisticServiceImpl extends BaseServiceImpl<StatisticDTO, Statisti
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public StatisticResult getAll() {
+	@Transactional
+	public StatisticResult getAll() throws PatologyException {
+		_statisticBatchService.calculateStatistics();
+
 		final List<StatisticDTO> statistics = new ArrayList<>();
 		for (StatisticDomain domain : _statisticDao.findAll()) {
 			final StatisticDTO dto = convertDomainToDto(domain);
@@ -87,8 +94,9 @@ public class StatisticServiceImpl extends BaseServiceImpl<StatisticDTO, Statisti
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public StatisticResult find(String textToFind, int page, int maxItems) throws PatologyException {
+		_statisticBatchService.calculateStatistics();
 		final List<StatisticDTO> statistics = new ArrayList<>();
 		for (StatisticDomain domain : _statisticDao.find(textToFind, page, maxItems)) {
 			final StatisticDTO dto = convertDomainToDto(domain);
@@ -98,10 +106,11 @@ public class StatisticServiceImpl extends BaseServiceImpl<StatisticDTO, Statisti
 		statisticResult.setStatistics(statistics);
 		return statisticResult;
 	}
-	
+
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public StatisticResult find(String textToFind) throws PatologyException {
+		_statisticBatchService.calculateStatistics();
 		final List<StatisticDTO> statistics = new ArrayList<>();
 		for (StatisticDomain domain : _statisticDao.find(textToFind)) {
 			final StatisticDTO dto = convertDomainToDto(domain);

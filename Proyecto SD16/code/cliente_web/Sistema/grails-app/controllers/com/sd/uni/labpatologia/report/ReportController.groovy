@@ -120,6 +120,7 @@ class ReportController {
 		}
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("requestId")))
 		requestInstance.setStatus(StatusEnum.TERMINADO)
+		reportInstance.setIsProcessed(false);
 		//reportInstance.setAge(calculateAge(requestInstance.getPatient().getBirthDate()));
 		def newReport= reportService.save(reportInstance)
 		requestService.save(requestInstance)

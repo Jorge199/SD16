@@ -16,6 +16,7 @@ public class ReportB extends BaseBean {
 	private String _observations;
 	private RequestB _request;
 	private Integer _age;
+	private Boolean _isProcessed;
 
 	public ReportB(Map<String, String> params) {
 		super(params);
@@ -26,7 +27,7 @@ public class ReportB extends BaseBean {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
-		setObservations(params.get("observations"));	
+		setObservations(params.get("observations"));
 	}
 
 	public Date getDate() {
@@ -52,6 +53,7 @@ public class ReportB extends BaseBean {
 	public void setObservations(String observations) {
 		_observations = observations;
 	}
+
 	public RequestB getRequest() {
 		return _request;
 	}
@@ -66,5 +68,13 @@ public class ReportB extends BaseBean {
 
 	public void setAge(Integer age) {
 		_age = age;
+	}
+
+	public Boolean getIsProcessed() {
+		return _isProcessed;
+	}
+
+	public void setIsProcessed(Boolean isProcessed) {
+		_isProcessed = isProcessed;
 	}
 }

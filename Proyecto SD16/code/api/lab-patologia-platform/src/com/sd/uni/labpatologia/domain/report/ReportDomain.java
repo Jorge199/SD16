@@ -37,6 +37,9 @@ public class ReportDomain extends BaseDomain {
 
 	@Column(name = "age")
 	private Integer _age;
+	
+	@Column(name = "isProcessed")
+	private Boolean _isProcessed;
 
 	public Integer getId() {
 		return _id;
@@ -84,5 +87,13 @@ public class ReportDomain extends BaseDomain {
 
 	public void setAge(Integer age) {
 		_age = age;
+	}
+
+	public Boolean getIsProcessed() {
+		return _isProcessed;
+	}
+
+	public void setIsProcessed(Boolean isProcessed) {
+		_isProcessed = isProcessed;
 	}
 }

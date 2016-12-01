@@ -70,6 +70,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		reportB.setDate(dto.getDate());
 		reportB.setRequest(_requestService.getById(dto.getRequestId()));
 		reportB.setAge(dto.getAge());
+		reportB.setIsProcessed(dto.getIsProcessed());
 		return reportB;
 	}
 
@@ -82,6 +83,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		dto.setObservations(bean.getObservations());
 		dto.setRequestId(bean.getRequest().getId());
 		dto.setAge(bean.getAge());
+		dto.setIsProcessed(bean.getIsProcessed());
 		return dto;
 	}
 	@Override

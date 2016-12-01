@@ -18,9 +18,7 @@ public class ReportDTO extends BaseDTO {
 	private Date _date;
 	private String _observations;
 	private Integer _age;
-
-	
-	
+	private Boolean _isProcessed;
 
 	@XmlElement
 	public Integer getRequestId() {
@@ -65,5 +63,14 @@ public class ReportDTO extends BaseDTO {
 
 	public void setAge(Integer age) {
 		_age = age;
+	}
+
+	@XmlElement
+	public Boolean getIsProcessed() {
+		return _isProcessed;
+	}
+
+	public void setIsProcessed(Boolean isProcessed) {
+		_isProcessed = isProcessed;
 	}
 }

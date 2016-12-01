@@ -35,10 +35,10 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	@Override
 	public ReportDomain getById(Integer domainId) throws PatologyException {
 		if (null != domainId) {
-			try{
-			return (ReportDomain) sessionFactory.getCurrentSession().get(ReportDomain.class, domainId);
-			}catch(Exception e){
-				throw new PatologyException( "No existe el reporte con id "+domainId,e);
+			try {
+				return (ReportDomain) sessionFactory.getCurrentSession().get(ReportDomain.class, domainId);
+			} catch (Exception e) {
+				throw new PatologyException("No existe el reporte con id " + domainId, e);
 			}
 		} else {
 			throw new PatologyException("El ID no puede ser null");
@@ -56,28 +56,37 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ReportDomain.class);
-		if (textToFind != null){
+		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por
 													// diagnostico
-				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf( map.get("diagnostic"))));
+				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic"))));
+			}
+			if (map.containsKey("isProcessed")) { //si quiere filtrar por procesado
+				criteria.add(Restrictions.eq("_isProcessed", map.get("isProcessed")));
 			}
 
-			if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
+			if (map.containsKey("start") && map.containsKey("end")) { // si
+																		// quiere
+																		// buscar
+																		// entre
+																		// fechas
 				try {
 					minDate = formatter.parse(map.get("start"));
 					Calendar c = Calendar.getInstance();
 					c.setTime(formatter.parse(map.get("end")));
 					c.add(Calendar.DATE, 1);
 					maxDate = c.getTime();
-					// System.out.println("desde" + minDate + "hasta " + maxDate);
+					// System.out.println("desde" + minDate + "hasta " +
+					// maxDate);
 					criteria.add(Restrictions.between("_date", minDate, maxDate));
 				} catch (ParseException e) {
 					throw new PatologyException("Formato de ruta invalido", e);
 				}
-			} else if (map.containsKey("date")) { // si quiere filtrar por una fecha
+			} else if (map.containsKey("date")) { // si quiere filtrar por una
+													// fecha
 													// especifica
 				try {
 					criteria.add(Restrictions.eq("_date", formatter.parse(map.get("date"))));
@@ -86,42 +95,51 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 				}
 			}
 		}
-		
-		criteria.setFirstResult(page*maxItems);
+
+		criteria.setFirstResult(page * maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<ReportDomain> reports = criteria.list();
 		return reports;
 
 	}
-	
+
 	@Override
 	public List<ReportDomain> find(String textToFind) throws PatologyException {
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ReportDomain.class);
-		if (textToFind != null){
+		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por
 													// diagnostico
-				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf( map.get("diagnostic"))));
+				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic"))));
+			}
+			if (map.containsKey("isProcessed")) { //si quiere filtrar por procesado
+				criteria.add(Restrictions.eq("_isProcessed", Boolean.parseBoolean(map.get("isProcessed"))));
 			}
 
-			if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
+			if (map.containsKey("start") && map.containsKey("end")) { // si
+																		// quiere
+																		// buscar
+																		// entre
+																		// fechas
 				try {
 					minDate = formatter.parse(map.get("start"));
 					Calendar c = Calendar.getInstance();
 					c.setTime(formatter.parse(map.get("end")));
 					c.add(Calendar.DATE, 1);
 					maxDate = c.getTime();
-					// System.out.println("desde" + minDate + "hasta " + maxDate);
+					// System.out.println("desde" + minDate + "hasta " +
+					// maxDate);
 					criteria.add(Restrictions.between("_date", minDate, maxDate));
 				} catch (ParseException e) {
 					throw new PatologyException("Formato de ruta invalido", e);
 				}
-			} else if (map.containsKey("date")) { // si quiere filtrar por una fecha especifica
+			} else if (map.containsKey("date")) { // si quiere filtrar por una
+													// fecha especifica
 				try {
 					criteria.add(Restrictions.eq("_date", formatter.parse(map.get("date"))));
 				} catch (ParseException e) {
