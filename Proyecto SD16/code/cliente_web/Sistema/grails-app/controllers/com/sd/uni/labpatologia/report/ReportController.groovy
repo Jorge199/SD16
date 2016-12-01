@@ -12,6 +12,7 @@ import com.sd.uni.labpatologia.service.patient.IPatientService;
 import com.sd.uni.labpatologia.service.report.IReportService;
 import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
 import com.sd.uni.labpatologia.service.request.IRequestService;
+import com.sd.uni.labpatologia.service.statistic.IStatisticService
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
 import com.sd.uni.labpatologia.util.StatusEnum;
 
@@ -26,6 +27,7 @@ class ReportController {
 	def IDoctorService doctorService;
 	def IPatientService patientService;
 	def ILaboratoryService laboratoryService;
+	def IStatisticService statisticService;
 	@Autowired def IAuthService authService
 
 	@Secured([
@@ -137,8 +139,17 @@ class ReportController {
 	])
 	def edit(Integer id) {
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
+		def statisticId = ""
+		System.out.println(params);
+		System.out.println(reportInstance)
+		System.out.println("isprocessed "+reportInstance._isProcessed)
+		System.out.println("isprocessed "+reportInstance.getId())
+		
+		if(null!= reportInstance.getStatistic()){
+			statisticId = reportInstance.getStatistic().getId()
+		}
 		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll(),
-			user:authService.getName(), reportEdit:params.get("reportEdit")]
+			user:authService.getName(), reportEdit:params.get("reportEdit"), statisticId:statisticId, isProcessed:reportInstance._isProcessed]
 	}
 	@Secured([
 		'ROLE_DOCTOR',
@@ -152,9 +163,20 @@ class ReportController {
 		reportInstance.setRequest(requestInstance)
 		reportInstance.setId(Integer.parseInt(params.get("edit")))
 		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+		System.out.println(params.get("isProcessed"))
+		if(params.get("isProcessed")=="true"){
+			def statisticInstance = statisticService.getById(Integer.parseInt(params.get("statisticId")))
+			statisticInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+			reportInstance.setStatistic(statisticService.save(statisticInstance))
+			reportInstance.setIsProcessed(true)
+		}else{
+			reportInstance.setIsProcessed(false)
+		}
+		
 		if((null!=params.get("age"))){
 			reportInstance.setAge(Integer.parseInt(params.get("age")))
 		}
+
 		reportService.save(reportInstance)
 		if(params.get("reportEdit").equals("request")){
 			redirect(action: "list", controller: "request")

@@ -19,6 +19,7 @@ public class ReportDTO extends BaseDTO {
 	private String _observations;
 	private Integer _age;
 	private Boolean _isProcessed;
+	private Integer _statisticId;
 
 	@XmlElement
 	public Integer getRequestId() {
@@ -72,5 +73,14 @@ public class ReportDTO extends BaseDTO {
 
 	public void setIsProcessed(Boolean isProcessed) {
 		_isProcessed = isProcessed;
+	}
+	
+	@XmlElement
+	public Integer getStatisticId() {
+		return _statisticId;
+	}
+
+	public void setStatisticId(Integer statisticId) {
+		_statisticId = statisticId;
 	}
 }

@@ -36,6 +36,9 @@ public class StatisticDomain extends BaseDomain {
 	@Column(name = "date", nullable = false)
 	private Date _date;
 	
+	//@OneToOne
+	//private ReportDomain _report;
+	
 	public Integer getId() {
 		return _id;
 	}
@@ -75,4 +78,14 @@ public class StatisticDomain extends BaseDomain {
 	public void setDate(Date date) {
 		_date = date;
 	}
+	/*
+    public ReportDomain getReport() {
+        return _report;
+    }
+    
+    public void setReport(ReportDomain report){
+    	_report=report;
+    }
+	*/
+	
 }

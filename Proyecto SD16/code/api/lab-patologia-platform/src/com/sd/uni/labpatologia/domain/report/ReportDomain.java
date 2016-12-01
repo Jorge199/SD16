@@ -10,10 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
+import com.sd.uni.labpatologia.domain.statistic.StatisticDomain;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 @Entity
@@ -41,6 +43,9 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "isProcessed")
 	private Boolean _isProcessed;
 
+	@OneToOne
+	private StatisticDomain _statistic;
+	
 	public Integer getId() {
 		return _id;
 	}
@@ -95,5 +100,13 @@ public class ReportDomain extends BaseDomain {
 
 	public void setIsProcessed(Boolean isProcessed) {
 		_isProcessed = isProcessed;
+	}
+
+	public StatisticDomain getStatistic() {
+		return _statistic;
+	}
+
+	public void setStatistic(StatisticDomain statistic) {
+		_statistic = statistic;
 	}
 }

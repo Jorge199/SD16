@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.sd.uni.labpatologia.beans.base.BaseBean;
 import com.sd.uni.labpatologia.beans.request.RequestB;
+import com.sd.uni.labpatologia.beans.statistic.StatisticB;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 public class ReportB extends BaseBean {
@@ -17,6 +18,8 @@ public class ReportB extends BaseBean {
 	private RequestB _request;
 	private Integer _age;
 	private Boolean _isProcessed;
+	private StatisticB _statistic;
+
 
 	public ReportB(Map<String, String> params) {
 		super(params);
@@ -76,5 +79,13 @@ public class ReportB extends BaseBean {
 
 	public void setIsProcessed(Boolean isProcessed) {
 		_isProcessed = isProcessed;
+	}
+
+	public StatisticB getStatistic() {
+		return _statistic;
+	}
+
+	public void setStatistic(StatisticB statistic) {
+		_statistic = statistic;
 	}
 }

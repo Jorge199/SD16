@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.uni.labpatologia.dao.report.IReportDao;
 import com.sd.uni.labpatologia.dao.report.ReportDaoImpl;
 import com.sd.uni.labpatologia.dao.request.IRequestDao;
+import com.sd.uni.labpatologia.dao.statistic.IStatisticDao;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
@@ -26,18 +27,22 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		implements IReportService {
 	@Autowired
 	private IReportDao reportDao;
-	
+
 	@Autowired
 	private IRequestDao requestDao;
-	
+
+	@Autowired
+	private IStatisticDao statisticDao;
+
 	private static Logger logger = Logger.getLogger(ReportServiceImpl.class);
+
 	@Override
 	@Transactional
-	@CacheEvict(value= "lab-patologia-platform-cache",key = "'reports'")
-	@CachePut(value = "lab-patologia-platform-cache", key = "'report_' + #dto.id", condition="#dto.id!=null")
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'reports'")
+	@CachePut(value = "lab-patologia-platform-cache", key = "'report_' + #dto.id", condition = "#dto.id!=null")
 	public ReportDTO save(ReportDTO dto) {
-		try { 
-		    // Lanzo exepcion de tipo runtime para realizar rollback
+		try {
+			// Lanzo exepcion de tipo runtime para realizar rollback
 			final ReportDomain domain = convertDtoToDomain(dto);
 			final ReportDomain report = reportDao.save(domain);
 			final ReportDTO newDto = convertDomainToDto(report);
@@ -45,9 +50,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 				getCacheManager().getCache("lab-patologia-platform-cache").put("report_" + report.getId(), newDto);
 			}
 			return newDto;
-		} catch(PatologyException ex) { 
-			 logger.error(ex);
-			 throw new RuntimeException("Error"+ReportServiceImpl.class+"" + ex.getMessage(), ex); 
+		} catch (PatologyException ex) {
+			logger.error(ex);
+			throw new RuntimeException("Error" + ReportServiceImpl.class + "" + ex.getMessage(), ex);
 		}
 
 	}
@@ -76,7 +81,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 
 	@Override
-	protected ReportDTO convertDomainToDto(ReportDomain domain)throws PatologyException {
+	protected ReportDTO convertDomainToDto(ReportDomain domain) throws PatologyException {
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
 		dto.setRequestId(domain.getRequest().getId());
@@ -85,11 +90,14 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		dto.setObservations(domain.getObservations());
 		dto.setAge(domain.getAge());
 		dto.setIsProcessed(domain.getIsProcessed());
+		if (null != domain.getStatistic()) {
+			dto.setStatisticId(domain.getStatistic().getId());
+		}
 		return dto;
 	}
 
 	@Override
-	protected ReportDomain convertDtoToDomain(ReportDTO dto) throws PatologyException{
+	protected ReportDomain convertDtoToDomain(ReportDTO dto) throws PatologyException {
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
 		domain.setRequest(requestDao.getById(dto.getRequestId()));
@@ -98,6 +106,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		domain.setObservations(dto.getObservations());
 		domain.setAge(dto.getAge());
 		domain.setIsProcessed(dto.getIsProcessed());
+		if(null!=dto.getStatisticId()){
+			domain.setStatistic(statisticDao.getById(dto.getStatisticId()));	
+		}
 		return domain;
 	}
 
@@ -115,7 +126,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 
 	@Override
-	public ReportResult find(String textToFind) throws PatologyException{
+	public ReportResult find(String textToFind) throws PatologyException {
 		final List<ReportDTO> reports = new ArrayList<>();
 		for (ReportDomain domain : reportDao.find(textToFind)) {
 			final ReportDTO dto = convertDomainToDto(domain);

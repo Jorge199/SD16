@@ -14,6 +14,7 @@ import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.rest.report.IReportResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 import com.sd.uni.labpatologia.service.request.IRequestService;
+import com.sd.uni.labpatologia.service.statistic.IStatisticService;
 
 @Service("reportService")
 public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
@@ -27,6 +28,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	private IRequestService _patienService;
 	@Autowired
 	private IRequestService _doctorService;
+	@Autowired
+	private IStatisticService _statisticService;
 
 	public ReportServiceImpl() {
 	}
@@ -71,6 +74,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		reportB.setRequest(_requestService.getById(dto.getRequestId()));
 		reportB.setAge(dto.getAge());
 		reportB.setIsProcessed(dto.getIsProcessed());
+		if(null!=dto.getStatisticId()){
+			reportB.setStatistic(_statisticService.getById(dto.getStatisticId()));
+		}
 		return reportB;
 	}
 
@@ -84,6 +90,10 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		dto.setRequestId(bean.getRequest().getId());
 		dto.setAge(bean.getAge());
 		dto.setIsProcessed(bean.getIsProcessed());
+		if(null!=bean.getStatistic()){
+			dto.setStatisticId(bean.getStatistic().getId());
+		}
+		
 		return dto;
 	}
 	@Override

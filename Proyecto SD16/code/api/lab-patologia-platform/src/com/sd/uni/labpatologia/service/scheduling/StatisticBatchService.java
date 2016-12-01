@@ -14,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.uni.labpatologia.dao.patient.IPatientDao;
 import com.sd.uni.labpatologia.dao.report.IReportDao;
 import com.sd.uni.labpatologia.dao.request.IRequestDao;
+import com.sd.uni.labpatologia.dao.statistic.IStatisticDao;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
+import com.sd.uni.labpatologia.domain.statistic.StatisticDomain;
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
@@ -35,7 +37,9 @@ public class StatisticBatchService {
 	@Autowired
 	private IReportDao _reportDao;
 	@Autowired
-	private IStatisticService _statisticService;
+	private IStatisticDao _statisticDao;
+//	@Autowired
+//	private IStatisticService _statisticService;
 
 	@Scheduled(cron = "${statistics.batch}")
 	//@Scheduled(fixedRate=10000)
@@ -55,14 +59,17 @@ public class StatisticBatchService {
 				//List <ReportDTO> reports = _reportService.find("start=" + minDate + "&end=" + maxDate+"&diagnostic="+diagnostico.getKey()+"&isProcessed=false").getReports();
 				List <ReportDomain> reports = _reportDao.find("diagnostic="+diagnostico.getKey()+"&isProcessed=false");
 				for (ReportDomain report : reports) {
-					final StatisticDTO statistic = new StatisticDTO();
+					//final StatisticDTO statistic = new StatisticDTO();
+					StatisticDomain statistic = new StatisticDomain();
 					statistic.setDate(report.getDate());
 					statistic.setDiagnostic(report.getDiagnostic());
 					RequestDomain request = report.getRequest();
 					statistic.setSex(request.getPatient().getSex());
 					statistic.setPatientAge(report.getAge());
-					_statisticService.save(statistic);
+					//StatisticDTO dto = _statisticService.save(statistic);
+					_statisticDao.save(statistic);
 					report.setIsProcessed(true);
+					report.setStatistic(_statisticDao.save(statistic));
 					_reportDao.save(report);
 				}
 			}
