@@ -21,15 +21,13 @@
 						</fieldset>
 						<fieldset class="buttons">
 							<br>
-							<div class="col-xs-12">
-								<div class="text-right">
+							<div class="col-xs-12" align="center">
 									<button type="submit" class="btn btn-primary " name="edit"
 										value="${articleInstance?.id}">
 										<i class="fa fa-primary"></i> Guardar
 									</button>
 									<a class="btn btn-default" href="/Sistema/article/list"
 										role="button"><i class="fa fa-times"></i> Cancelar</a>
-								</div>
 							</div>
 						</fieldset>
 					</g:form>

@@ -25,7 +25,7 @@
                         <a class="btn btn-success" href="/Sistema/articleMovement/create"
                         role="button"><i class="fa fa-plus"></i> Agregar Movimiento</a>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-8" align="right">
                         <g:form action="list" class="form-search">
                             <div class="input-group col-md-10">
                                 <input type="text" name="text" class="form-control"
@@ -72,7 +72,7 @@
 										</div>
 									</div>
 								</div>-->
-                    <br> <br> <br>
+                    <br> <br> 
                     <div class="dataTable_wrapper">
                         <div class="row">
                             <div class="col-sm-12">

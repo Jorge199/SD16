@@ -26,8 +26,7 @@
                         </fieldset>
                         <fieldset class="buttons">
                             <br> <br>
-                            <div class="col-xs-12">
-                                <div class="text-right">
+                            <div class="col-xs-12" align="center">
                                     <button type="submit" class="btn btn-primary " name="create"
                                     value="${message(code: 'default.button.create.label', default: 'Create')}">
                                     <i class="fa fa-floppy-o"></i> Guardar
@@ -35,7 +34,7 @@
                                     <a class="btn btn-default" href="/Sistema/articleMovement/list"
                                     role="button"><i class="fa fa-times"></i> Cancelar</a>
                                 </div>
-                            </div>
+                          
                         </fieldset>
                     </g:form>
                 </div>
