@@ -42,32 +42,35 @@ public class MessageServiceImpl implements IMessageService{
 	@Value("${mail.host:smtp.gmail.com}")
 	private String host;
 	
-	@Value("${mail.port:465}")
+	@Value("${mail.port:587}")
 	private String port;
 
 	public boolean send(String toAddress) throws PatologyException{
 		
 		Properties props = new Properties();
-		props.put("mail.smtp.auth", Boolean.valueOf(auth));
-		props.put("mail.smtp.starttls.enable", Boolean.valueOf(enable));
-		props.put("mail.smtp.host", host);
-		//props.put("mail.smtp.ssl.trust", host);
-		props.put("mail.smtp.port", Integer.parseInt(port));
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
 
 		Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
+				return new PasswordAuthentication("lpatologico@gmail.com", "lpatologico");
 			}
 		});
 
 		try {
+			String text = "<h3>Estimado/a paciente: </h3>"
+					+ "<p>Cumplimos en informarle que su análisis se encuentra realizado</p>"
+					+ "<p>Atentamente</p>";
 			System.out.println("Enviando un mensaje al: "+ toAddress);
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(username));
+			message.setFrom(new InternetAddress("lpatologico@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
 			message.setSubject("Notificacion de Informe");
-			message.setText("hola");
+			message.setContent(text, "text/html; charset=utf-8");
 			Transport.send(message);
 			return true;
 
@@ -81,7 +84,7 @@ public class MessageServiceImpl implements IMessageService{
 
 		List<MessageDomain> messages = messageDao.findAll();
 		for (MessageDomain msg : messages){
-			if (send(msg.getEmail())){
+			if (!msg.getSent() && send(msg.getEmail())){
 				msg.setShippingDate(new Date());
 				msg.setSent(true);
 				messageDao.save(msg);
