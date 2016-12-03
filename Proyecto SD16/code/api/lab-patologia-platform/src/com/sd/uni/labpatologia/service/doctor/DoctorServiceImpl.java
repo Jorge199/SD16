@@ -30,7 +30,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 	
 	@Override
 	@Transactional
-	@CacheEvict(value= "lab-patologia-platform-cache",key = "'doctors'")
+	//@CacheEvict(value= "lab-patologia-platform-cache",key = "'doctors'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'doctor_' + #dto.id", condition="#dto.id!=null")
 	public DoctorDto save(DoctorDto dto) {
 		try { 
@@ -60,7 +60,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'doctors'")
+	//@Cacheable(value = "lab-patologia-platform-cache", key = "'doctors'")
 	public DoctorResult getAll() {
 		final List<DoctorDto> doctors = new ArrayList<>();
 		for (DoctorDomain domain : _doctorDao.findAll()) {

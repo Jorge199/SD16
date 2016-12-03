@@ -38,7 +38,7 @@ public class ArticleMovementServiceImpl extends BaseServiceImpl<ArticleMovementD
 	@Override
 	@Transactional
 
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'stocks'")
+	//@CacheEvict(value = "lab-patologia-platform-cache", key = "'stocks'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'stock_' + #dto.id", condition = "#dto.id!=null")
 	public ArticleMovementDTO save(ArticleMovementDTO dto) {
 		try {
@@ -78,7 +78,7 @@ public class ArticleMovementServiceImpl extends BaseServiceImpl<ArticleMovementD
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'stocks'")
+	//@Cacheable(value = "lab-patologia-platform-cache", key = "'stocks'")
 	public ArticleMovementResult getAll() {
 		final List<ArticleMovementDTO> movements = new ArrayList<>();
 		for (ArticleMovementDomain domain : articleMovementDao.findAll()) {

@@ -36,7 +36,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'articles'")
+	//@CacheEvict(value = "lab-patologia-platform-cache", key = "'articles'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'article_' + #dto.id", condition = "#dto.id!=null")
 	public ArticleDto save(ArticleDto dto) {
 		final ArticleDomain articleDomain = convertDtoToDomain(dto);
@@ -63,7 +63,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'articles'")
+	//@Cacheable(value = "lab-patologia-platform-cache", key = "'articles'")
 	public ArticleResult getAll() {
 		final List<ArticleDto> articles = new ArrayList<>();
 		for (ArticleDomain domain : _articleDao.findAll()) {
