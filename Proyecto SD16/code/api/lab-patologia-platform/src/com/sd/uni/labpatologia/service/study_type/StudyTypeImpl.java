@@ -28,7 +28,7 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 	@Override
 	@Transactional
 
-	@CacheEvict(value = "lab-patologia-platform-cache", key = "'studiestypes'")
+	//@CacheEvict(value = "lab-patologia-platform-cache", key = "'studiestypes'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'studytype_' + #dto.id", condition = "#dto.id!=null")
 	public StudyTypeDTO save(StudyTypeDTO dto) {
 		final StudyTypeDomain domain = convertDtoToDomain(dto);
@@ -51,7 +51,7 @@ public class StudyTypeImpl extends BaseServiceImpl<StudyTypeDTO, StudyTypeDomain
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'studiestypes'")
+	//@Cacheable(value = "lab-patologia-platform-cache", key = "'studiestypes'")
 	public StudyTypeResult getAll() {
 		final List<StudyTypeDTO> estudios = new ArrayList<>();
 		for (StudyTypeDomain domain : _studyTypeDao.findAll()) {

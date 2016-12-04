@@ -63,7 +63,7 @@ public class MessageServiceImpl implements IMessageService{
 
 		try {
 			String text = "<h3>Estimado/a paciente: </h3>"
-					+ "<p>Cumplimos en informarle que su an·lisis se encuentra realizado</p>"
+					+ "<p>Cumplimos en informarle que su an√°lisis se encuentra realizado</p>"
 					+ "<p>Atentamente</p>";
 			System.out.println("Enviando un mensaje al: "+ toAddress);
 			Message message = new MimeMessage(session);

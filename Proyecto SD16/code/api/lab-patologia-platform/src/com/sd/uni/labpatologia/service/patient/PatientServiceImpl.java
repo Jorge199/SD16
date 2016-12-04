@@ -33,7 +33,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 	private static Logger logger = Logger.getLogger(PatientServiceImpl.class);
 	@Override
 	@Transactional
-	@CacheEvict(value= "lab-patologia-platform-cache",key = "'patients'")
+	//@CacheEvict(value= "lab-patologia-platform-cache",key = "'patients'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'patient_' + #dto.id", condition="#dto.id!=null")
 	public PatientDTO save(PatientDTO dto) {
 		try { 
@@ -63,7 +63,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'patients'")
+	//@Cacheable(value = "lab-patologia-platform-cache", key = "'patients'")
 	public PatientResult getAll() {
 		final List<PatientDTO> patients = new ArrayList<>();
 		for (PatientDomain domain : patientDao.findAll()) {

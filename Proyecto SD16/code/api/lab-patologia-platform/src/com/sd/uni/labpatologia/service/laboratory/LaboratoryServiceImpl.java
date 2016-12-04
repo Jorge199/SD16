@@ -28,7 +28,7 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 	
 	@Override
 	@Transactional
-	@CacheEvict(value= "lab-patologia-platform-cache",key = "'laboratories'")
+	//@CacheEvict(value= "lab-patologia-platform-cache",key = "'laboratories'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'laboratory_' + #dto.id", condition="#dto.id!=null")
 	public LaboratoryDto save(LaboratoryDto dto) {
 		final LaboratoryDomain laboratoryDomain = convertDtoToDomain(dto);
@@ -51,7 +51,7 @@ public class LaboratoryServiceImpl extends BaseServiceImpl<LaboratoryDto, Labora
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'laboratories'")
+	//@Cacheable(value = "lab-patologia-platform-cache", key = "'laboratories'")
 	public LaboratoryResult getAll() {
 		final List<LaboratoryDto> laboratories = new ArrayList<>();
 		for (LaboratoryDomain domain : _laboratoryDao.findAll()) {
