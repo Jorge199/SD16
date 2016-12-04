@@ -77,9 +77,9 @@
 				<label>Paciente <span class="required-indicator">*</span></label>
 				<div class="form-group">
 				<div class="input-group">
-				<g:select  class="form-control selectpicker many-to-one" data-live-search="true" name="patientId" from="${patients}" value="${requestInstance?.patient?.id}"
-				optionKey="id" optionValue="fullName" required=""
-				noSelection="${['':'Seleccione un paciente..']}"/>
+				<select class="select-patient form-control" name="patientId" required="">
+					<option>Selecciona un paciente</option>
+				</select>
 				<label type="button" class="btn btn-primary input-group-addon" data-toggle="modal"
 							data-target="#createPatient">
 							<i class="fa fa-plus"></i>
@@ -92,10 +92,9 @@
 			<label>Doctor <span class="required-indicator">*</span></label>
 			<div class="form-group">
 			<div class="input-group">
-				<g:select class="form-control selectpicker many-to-one" data-live-search="true" name="doctorId" from="${doctors}"  value="${requestInstance?.doctor?.id}"
-				optionKey="id" optionValue="fullName" required=""
-				noSelection="${['':'Seleccione un doctor..']}"
-				/>
+				<select class="select-doctor form-control" name="doctorId" required="">
+					<option>Selecciona un doctor</option>
+				</select>
 				
 				<label type="button" class="btn btn-primary input-group-addon" data-toggle="modal"
 							data-target="#createDoctor">
@@ -108,7 +107,7 @@
 		<div class="col-md-4">
 			<label>Tipo de Estudio <span class="required-indicator">*</span></label>
 			<div class="form-group">
-			<g:select  class="form-control selectpicker many-to-one" name="studyTypeId" from="${studies}" value="${requestInstance?.studyType?.id}"
+			<g:select  class="form-control many-to-one" name="studyTypeId" from="${studies}" value="${requestInstance?.studyType?.id}"
 			optionKey="id" optionValue="name" required=""
 			noSelection="${['':'Seleccione un estudio..']}" />
 			</div>
@@ -192,8 +191,9 @@
 		</div>
 	</div>
 </div>
+
 <head>
-    <g:javascript plugin="jquery" library="jquery" src="jquery/jquery-1.7.2.js"/>
+   
     <!-- Para boton guardar de doctor -->
     <script>
         function callAjax(){
@@ -241,6 +241,7 @@
                 }     
         }
     </script>
+    
     <!-- Para boton guardar de paciente -->
     <script type="text/javascript">
     function callAjax2(){
@@ -256,6 +257,63 @@
             },
         });
 	}
+    </script>
+    
+    <!-- Para selector de doctor -->
+    <script type="text/javascript">
+	    	$(".select-doctor").select2({
+				language: 'es',
+	    		  ajax: {
+	    		    url: "${createLink(controller: 'doctor', action: 'selectDoctor')}",
+	    		    dataType: 'json',
+	    		    delay: 250,
+	    		    data: function (params) {
+	    		      return {
+	    		        q: params.term, // search term
+	    		        page: 0
+	    		      };
+	    		    },
+	    		    processResults: function (data) {
+	    		        return {
+	    		            results: $.map(data, function(obj) {
+	    		                return { id: obj.id, text: obj.name + ' ' + obj.lastName };
+	    		            })
+	    		        };
+	    		    },
+	    		    cache: true
+	    		  },
+	    		  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+	    		  minimumInputLength: 1,
+	    	});
+	   
+    </script>
+     <!-- Para selector de paciente -->
+    <script type="text/javascript">
+	    	$(".select-patient").select2({
+		    	language: 'es',
+	    		  ajax: {
+	    		    url: "${createLink(controller: 'patient', action: 'selectPatient')}",
+	    		    dataType: 'json',
+	    		    delay: 250,
+	    		    data: function (params) {
+	    		      return {
+	    		        q: params.term, // search term
+	    		        page: 0
+	    		      };
+	    		    },
+	    		    processResults: function (data) {
+	    		        return {
+	    		            results: $.map(data, function(obj) {
+	    		                return { id: obj.id, text: obj.name + ' ' + obj.lastName };
+	    		            })
+	    		        };
+	    		    },
+	    		    cache: true
+	    		  },
+	    		  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+	    		  minimumInputLength: 1,
+	    	});
+	   
     </script>
 </head>
 

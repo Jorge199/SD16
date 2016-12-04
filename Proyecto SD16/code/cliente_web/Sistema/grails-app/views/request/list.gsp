@@ -44,7 +44,7 @@
 										</label>
 										<div class="col-md-9">
 											<div class="form-group">
-												<g:select name="status" class="form-control selectpicker"
+												<g:select name="status" class="form-control"
 													from="${StatusEnum.values()}" name="statusSearch"
 													optionKey="key"
 													noSelection="${['null':'Seleccione un estado..']}"

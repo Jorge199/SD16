@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,24 +24,25 @@ public class StatisticServiceImpl extends
 		BaseServiceImpl<StatisticDTO, StatisticDomain, StatisticDaoImpl, StatisticResult> implements IStatisticService {
 	@Autowired
 	private IStatisticDao _statisticDao;
-	
+
 	@Autowired
 	private StatisticBatchService _statisticBatchService;
-	
+
 	private static Logger logger = Logger.getLogger(StatisticServiceImpl.class);
 
 	@Override
 	@Transactional
+	@CachePut(value = "lab-patologia-platform-cache", key = "'statistic_' + #dto.id", condition = "#dto.id!=null")
 	public StatisticDTO save(StatisticDTO dto) {
 		try {
 			// Lanzo exepcion de tipo runtime para realizar rollback
 			final StatisticDomain domain = convertDtoToDomain(dto);
 			final StatisticDomain statistic = _statisticDao.save(domain);
 			final StatisticDTO newDto = convertDomainToDto(statistic);
-			// if (dto.getId() == null) {
-			// getCacheManager().getCache("lab-patologia-platform-cache").put("request_"
-			// + request.getId(), newDto);
-			// }
+			if (dto.getId() == null) {
+				getCacheManager().getCache("lab-patologia-platform-cache").put("statistic_" + statistic.getId(),
+						newDto);
+			}
 			return newDto;
 		} catch (PatologyException ex) {
 			logger.error(ex);
@@ -50,6 +53,7 @@ public class StatisticServiceImpl extends
 
 	@Override
 	@Transactional
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'statistic_' + #id")
 	public StatisticDTO getById(Integer id) throws PatologyException {
 		final StatisticDomain domain = _statisticDao.getById(id);
 		final StatisticDTO dto = convertDomainToDto(domain);

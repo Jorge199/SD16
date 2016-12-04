@@ -1,8 +1,11 @@
 package com.sd.uni.labpatologia.doctor
 
+import grails.converters.JSON
+import grails.converters.XML
 import grails.plugin.springsecurity.annotation.Secured;
 
 import com.sd.uni.labpatologia.beans.doctor.DoctorB
+import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.doctor.DoctorServiceImpl
 import com.sd.uni.labpatologia.service.doctor.IDoctorService
@@ -83,7 +86,11 @@ class DoctorController {
 		doctorService.save(doctorInstance)
 		redirect(action: "list")
 	}
-
-
+	
+	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
+	def selectDoctor() {
+		def doctors = doctorService.find(params.get("q"), 0, 0)
+		render doctors as JSON
+	}
 
 }
