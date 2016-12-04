@@ -276,7 +276,7 @@
 	    		    processResults: function (data) {
 	    		        return {
 	    		            results: $.map(data, function(obj) {
-	    		                return { id: obj.id, text: obj.name };
+	    		                return { id: obj.id, text: obj.name + ' ' + obj.lastName };
 	    		            })
 	    		        };
 	    		    },
@@ -304,7 +304,7 @@
 	    		    processResults: function (data) {
 	    		        return {
 	    		            results: $.map(data, function(obj) {
-	    		                return { id: obj.id, text: obj.name };
+	    		                return { id: obj.id, text: obj.name + ' ' + obj.lastName };
 	    		            })
 	    		        };
 	    		    },
