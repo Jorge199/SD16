@@ -9,15 +9,16 @@ import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import com.sd.uni.labpatologia.utils.Config;
 
 public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseResource<DTO> {
 	private final String _resourcePath;
 	private final Class<DTO> _dtoClass;
 	private final WebResource _webResource;
 
-
+	
 	protected static final String CACHE_REGION = "labpatologia-client-web-cache";
-	private static final String BASE_URL = "http://localhost:8080/lab-patologia-platform/rest";
+	private static final String BASE_URL = Config.getUrl();
 	
 	@Autowired
 	@Qualifier("grailsCacheManager")
