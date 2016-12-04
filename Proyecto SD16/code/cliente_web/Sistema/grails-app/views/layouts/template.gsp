@@ -15,11 +15,10 @@
 <asset:javascript src="application.js" />
 <title>Sistema</title>
 
-<!-- Select -->
- <link rel="stylesheet" href="${request.contextPath}/dist/css/bootstrap-select.css">
-   <script src="${request.contextPath}/dist/js/bootstrap-select.js"></script>
-  <script src="${request.contextPath}/dist/js/i18n/defaults-es_ES.js"></script>
-  
+<!-- Select2 -->
+	<link rel="stylesheet" href="${request.contextPath}/dist/css/select2.min.css">
+    <script src="${request.contextPath}/dist/js/select2.js"></script>
+    <script src="${request.contextPath}/dist/js/i18n/es.js"></script>
 <!-- Bootstrap Core CSS -->
 <link href="${request.contextPath}/template/css/bootstrap.min.css?v=1"
 	rel="stylesheet">

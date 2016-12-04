@@ -5,6 +5,7 @@ import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
 import com.sd.uni.labpatologia.service.patient.*
 import com.sd.uni.labpatologia.util.SexEnum;
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured;
 
 import java.text.SimpleDateFormat
@@ -139,7 +140,10 @@ class PatientController {
 
 	}
 
-
-
+	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
+	def selectPatient() {
+		def doctors = patientService.find(params.get("q"), 0, 0)
+		render doctors as JSON
+	}
 }
 
