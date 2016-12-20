@@ -10,6 +10,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sd.uni.labpatologia.utils.Config;
+import javax.swing.JOptionPane;
 
 public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseResource<DTO> {
 	private final String _resourcePath;
@@ -19,6 +20,13 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 	
 	protected static final String CACHE_REGION = "labpatologia-client-web-cache";
 	private static final String BASE_URL = Config.getUrl();
+        
+        // Usar esto cuando se necesite mientras no haya un configuration como la gente
+        /*static{
+            System.out.println("Ingrese URL del api: ");
+            String url = JOptionPane.showInputDialog(null, "ingrese la url");
+            BASE_URL = url;
+        }*/
 	
 	@Autowired
 	@Qualifier("grailsCacheManager")
