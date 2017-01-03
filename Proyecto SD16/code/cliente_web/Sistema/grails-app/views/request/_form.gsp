@@ -77,9 +77,16 @@
 				<label>Paciente <span class="required-indicator">*</span></label>
 				<div class="form-group">
 				<div class="input-group">
-				<select class="select-patient form-control" name="patientId" required="">
-					<option>Selecciona un paciente</option>
-				</select>
+				<g:if test="${action == 'save'}">
+					<select class="select-patient form-control" name="patientId" required="">
+						<option value="${requestInstance?.patient?.id}">Selecciona un paciente</option>
+					</select>
+				</g:if>
+				<g:else>
+					<select class="select-patient form-control" name="patientId" required="">
+						<option value="${requestInstance?.patient?.id}">${requestInstance?.patient?.name} ${requestInstance?.patient?.lastName}</option>
+					</select>
+				</g:else>
 				<label type="button" class="btn btn-primary input-group-addon" data-toggle="modal"
 							data-target="#createPatient">
 							<i class="fa fa-plus"></i>
@@ -92,10 +99,16 @@
 			<label>Doctor <span class="required-indicator">*</span></label>
 			<div class="form-group">
 			<div class="input-group">
-				<select class="select-doctor form-control" name="doctorId" required="">
-					<option>Selecciona un doctor</option>
-				</select>
-				
+				<g:if test="${action == 'save'}">
+					<select id="valor" class="select-doctor form-control" name="doctorId" required="">
+						<option value="${requestInstance?.doctor?.id}">Selecciona un doctor</option>
+					</select>
+				</g:if>
+				<g:else>
+					<select class="select-doctor form-control" name="doctorId" required="">
+						<option value="${requestInstance?.doctor?.id}">${requestInstance?.doctor?.name} ${requestInstance?.doctor?.lastName}</option>
+					</select>
+				</g:else>
 				<label type="button" class="btn btn-primary input-group-addon" data-toggle="modal"
 							data-target="#createDoctor">
 							<i class="fa fa-plus"></i>
@@ -200,11 +213,9 @@
         	    $.ajax({
                 	type:"POST",
                     url : "${createLink(controller: 'doctor', action: 'save')}",
-                    data :   $("#myFormDoctor").serialize() , // do I need to pass data if im GET ting?
+                    data :   $("#myFormDoctor").serialize() , 
                     dataType: 'json',
                     success : function(data){
-                       //doing stuff
-                       //end success
                     	 $("#myFormDoctor").submit();
                     },
                 });
@@ -217,11 +228,9 @@
         	    $.ajax({
                 	type:"POST",
                     url : "${createLink(controller: 'request', action: 'save')}",
-                    data :   $("#myFormRequest").serialize() , // do I need to pass data if im GET ting?
+                    data :   $("#myFormRequest").serialize() , 
                     dataType: 'json',
                     success : function(data){
-                       //doing stuff
-                       //end success
                     	 $("#myFormRequest").submit();
                     },
                 });
@@ -229,11 +238,9 @@
             	 $.ajax({
                  	type:"POST",
                      url : "${createLink(controller: 'request', action: 'update')}",
-                     data :   $("#myFormRequest").serialize() , // do I need to pass data if im GET ting?
+                     data :   $("#myFormRequest").serialize() , 
                      dataType: 'json',
                      success : function(data){
-                        //doing stuff
-                        //end success
                      	 $("#myFormRequest").submit();
                      },
                  });
@@ -248,11 +255,9 @@
 	    $.ajax({
         	type:"POST",
             url : "${createLink(controller: 'patient', action: 'save')}",
-            data :   $("#myFormPatient").serialize() , // do I need to pass data if im GET ting?
+            data :   $("#myFormPatient").serialize() , 
             dataType: 'json',
             success : function(data){
-               //doing stuff
-               //end success
             	 $("#myFormPatient").submit();
             },
         });
@@ -269,7 +274,7 @@
 	    		    delay: 250,
 	    		    data: function (params) {
 	    		      return {
-	    		        q: params.term, // search term
+	    		        q: params.term, 
 	    		        page: 0
 	    		      };
 	    		    },
@@ -282,9 +287,10 @@
 	    		    },
 	    		    cache: true
 	    		  },
-	    		  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+	    		  escapeMarkup: function (markup) { return markup; }, 
 	    		  minimumInputLength: 1,
 	    	});
+   
 	   
     </script>
      <!-- Para selector de paciente -->
@@ -297,7 +303,7 @@
 	    		    delay: 250,
 	    		    data: function (params) {
 	    		      return {
-	    		        q: params.term, // search term
+	    		        q: params.term, 
 	    		        page: 0
 	    		      };
 	    		    },
@@ -310,7 +316,7 @@
 	    		    },
 	    		    cache: true
 	    		  },
-	    		  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+	    		  escapeMarkup: function (markup) { return markup; }, 
 	    		  minimumInputLength: 1,
 	    	});
 	   
