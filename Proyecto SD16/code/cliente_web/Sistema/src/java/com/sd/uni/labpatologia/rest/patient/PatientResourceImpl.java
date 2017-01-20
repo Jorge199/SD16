@@ -18,7 +18,7 @@ public class PatientResourceImpl extends BaseResourceImpl<PatientDTO> implements
 	}
 
 	@Override
-	@CacheEvict(value = CACHE_REGION, key = "'patients'")
+	//@CacheEvict(value = CACHE_REGION, key = "'patients'")
 	@CachePut(value = CACHE_REGION, key = "'patient_' + #patient.id", condition = "#patient.id!=null")
 	public PatientDTO save(PatientDTO patient) {
 		PatientDTO newDto = super.save(patient);
@@ -36,7 +36,7 @@ public class PatientResourceImpl extends BaseResourceImpl<PatientDTO> implements
 	}
 
 	@Override
-	@Cacheable(value = CACHE_REGION, key = "'patients'")
+	//@Cacheable(value = CACHE_REGION, key = "'patients'")
 	public PatientResult getAll() {
 		setWebResourceBasicAuthFilter();
 		final PatientResult result = getWebResource().get(PatientResult.class);

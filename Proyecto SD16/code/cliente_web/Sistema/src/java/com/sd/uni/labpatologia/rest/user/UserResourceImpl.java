@@ -2,7 +2,7 @@ package com.sd.uni.labpatologia.rest.user;
 
 
 //import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dto.user.UserDTO;
@@ -31,7 +31,7 @@ public class UserResourceImpl extends BaseResourceImpl<UserDTO> implements
 	
 	
 	@Override
-	//@Cacheable(value = CACHE_REGION, key = "'user_' + #id")
+	@Cacheable(value = CACHE_REGION, key = "'user_' + #id")
 	public UserDTO getById(Integer id) {
 		return getWebResource().path("/" + id).get(UserDTO.class);
 	}

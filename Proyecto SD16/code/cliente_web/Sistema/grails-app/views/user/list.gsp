@@ -29,7 +29,7 @@
 					<div class="col-sm-8" align="right">
 						<g:form action="list" class="form-search">
 
-							<div class="input-group col-md-6">
+							<div class="input-group col-md-10">
 								<input type="text" name="text" class="form-control"
 									placeholder="Ingrese un texto para buscar" /> <span
 									class="input-group-btn">

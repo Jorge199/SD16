@@ -11,8 +11,12 @@
 				<label> Código:</label>
 
 				${reportInstance?.request?.code}
-				<g:hiddenField class="form-control" name="requestId" required=""
+				<g:hiddenField class="form-control" name="requestId" 
 					value="${reportInstance?.request?.id}" />
+				<g:hiddenField class="form-control" name="statisticId" 
+					value="${reportInstance?.statistic?.id}" />
+				<g:hiddenField class="form-control" name="isProcessed" 
+					value="${reportInstance?.isProcessed}" />
 			</div>
 			<div class="col-md-4">
 				<label>Fecha de Solicitud:</label>
