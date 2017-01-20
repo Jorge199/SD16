@@ -108,39 +108,44 @@
 							</g:form>
 						</div>
 					</div>
-
-
+<div class="col-md-1"><strong>Referencia:</strong></div>
+<div class="col-md-2 bg-danger">Recibido</div>
+<div class="col-md-2 bg-warning">Proceso</div>
+<div class="col-md-2 bg-info">Procesado</div>
+<div class="col-md-2 bg-success">Terminado</div>
+<div class="col-md-2">Retirado</div>
+<br><br>
 					<div class="dataTable_wrapper">
 						<div class="row">
 							<div class="col-sm-12">
 								<table id="list-request"
-									class="table table-striped table-bordered" cellspacing="0"
+									class="table table-bordered" cellspacing="0"
 									width="100%">
 									<thead>
-										<tr>
+										<tr >
 											<g:sortableColumn property="id" title="Codigo" />
 											<g:sortableColumn property="date" title="Fecha" />
-											<g:sortableColumn property="status" title="Estado" />
 											<g:sortableColumn property="doctor" title="Doctor" />
 											<g:sortableColumn property="patient" title="Paciente" />
 											<g:sortableColumn property="studyType"
 												title="Tipo de estudio" />
-											<td></td>
+											<td>Acciones</td>
 										</tr>
 									</thead>
 									<tbody>
 										<g:each in="${requestInstanceList}" status="i"
 											var="requestInstance">
 
-											<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+											<tr class="${requestInstance?.status == StatusEnum.PROCESADO ? 'info' :
+												 requestInstance?.status == StatusEnum.PROCESO ?'warning' :
+												 requestInstance?.status == StatusEnum.RECIBIDO ?'danger' :
+												 requestInstance?.status == StatusEnum.TERMINADO ?'success' :
+												 'default'}">
 												<td>
 													${requestInstance?.code }
 												</td>
 												<td>
 													${formatDate(format: 'dd/MM/yyyy', date:requestInstance.getDate())}
-												</td>
-												<td>
-													${requestInstance?.status}
 												</td>
 												<td>
 													${requestInstance?.doctor?.name} ${requestInstance?.doctor?.lastName}
