@@ -91,10 +91,13 @@ public class UserDomain extends BaseDomain {
 	}
 
 	public void setPassword(String password, Integer id) {
+		if(id==null){
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String hashedPassword = passwordEncoder.encode(password);
 			_password = hashedPassword;
-
+		}else{
+			_password = password;
+		}		
 	}
 
 	public RolDomain getRol() {

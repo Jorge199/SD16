@@ -79,7 +79,11 @@ class UserController {
 	@Secured(['ROLE_ADMINISTRADOR'])
 
 	def create() {
-		[userInstance: new UserB(params), rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
+		def rols = rolService.getAll();
+		for(roles in rols){
+			roles._name=roles._name.charAt(5).toString()+roles._name.substring(6,roles.name.length()).toLowerCase()
+		}
+		[userInstance: new UserB(params), rols:rols,laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
 	}
 
 	@Secured(['ROLE_ADMINISTRADOR'])
@@ -87,6 +91,7 @@ class UserController {
 	def save() {
 		def newUser = new UserB(params)
 		newUser.setRol(rolService.getById(Integer.valueOf(params.rolId)))
+		newUser.setPassword(params.get("password"))
 		def userInstance = userService.save(newUser)
 		if (!userInstance.getId()) {
 			render(view: "create", model: [userInstance: userInstance])
@@ -127,6 +132,10 @@ class UserController {
 
 	def edit(Long id) {
 		def userInstance = userService.getById(id.intValue())
+		def rols = rolService.getAll()
+		for(roles in rols){
+			roles._name=roles._name.charAt(5).toString()+roles._name.substring(6,roles.name.length()).toLowerCase()
+		}
 		if (!userInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [
 				message(code: 'user.label', default: 'User'),
@@ -136,7 +145,7 @@ class UserController {
 			return
 		}
 
-		[userInstance: userInstance, rols:rolService.getAll(),laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
+		[userInstance: userInstance, rols:rols,laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
 	}
 
 
@@ -148,9 +157,10 @@ class UserController {
 	def update(Integer id) {
 		def userInstance = new UserB(params)
 		userInstance.setId(Integer.parseInt(params.get("edit")))
-		userInstance.setName(params.get("name"))
-		userInstance.setPassword(params.get("password"))
-		userInstance.setRegistrationNumber(params.get("registrationNumber"))
+		//userInstance.setName(params.get("name"))
+		//userInstance.setUserName(params.get("userName"))
+		//userInstance.setPassword(params.get("password"))
+		//userInstance.setRegistrationNumber(params.get("registrationNumber"))
 		userInstance.setRol(rolService.getById(Integer.valueOf(params.rolId)))
 		userService.save(userInstance)
 		redirect(action: "list")

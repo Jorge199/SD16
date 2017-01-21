@@ -39,10 +39,16 @@
 		<!-- Bootstrap Core JavaScript -->
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+	window.onload=function() {
+		document.getElementById('updatePass').style.display = '';
+		document.getElementById('confirmPass').style.display = '';
+	};
+	  </script>
+    <script type="text/javascript">
     document.getElementById('update').style.display = 'none'; 
     document.getElementById('updater').onchange = function () {
     	  var selectedValue = this.options[this.selectedIndex].text; 
-    	  if (selectedValue == "ROLE_DOCTOR") { 
+    	  if (selectedValue == "Doctor") { 
     	    document.getElementById('update').style.display = '';
     	  }else{
     		  document.getElementById('update').style.display = 'none'; 

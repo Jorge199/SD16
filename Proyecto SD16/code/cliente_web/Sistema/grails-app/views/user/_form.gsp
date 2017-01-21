@@ -19,17 +19,17 @@
 		</div>
 	</div>
 	
-	<div class="col-md-6">
+	<div class="col-md-6" id="updatePass" style="display: none">
 		<label>Constraseña<span class="required-indicator">*</span></label>
 		<div class="form-group">
-		<g:passwordField class="form-control" required="" name="password" id="pass1" value=""
+		<g:passwordField class="form-control" required="" name="password" id="pass1" value="${userInstance?.password}"
 			placeholder="Ingrese la contraseña" />
 		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-6" id="confirmPass" style="display: none">
 		<label>Repita la Constraseña<span class="required-indicator">*</span></label>
 		<div class="form-group">
-		<g:passwordField class="form-control" required="" name="password2" oninput="check(this)" value=""
+		<g:passwordField class="form-control" required="" name="password2" oninput="check(this)" value="${userInstance?.password}"
 			placeholder="Vuelva a ingresar la contraseña" />
 		</div>
 	</div>

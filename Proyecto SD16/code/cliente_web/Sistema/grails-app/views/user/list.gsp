@@ -75,7 +75,8 @@
 													${fieldValue(bean: userInstance, field: "userName")}
 												</td>
 												<td>
-													${fieldValue(bean: userInstance, field: "rol.name")}
+													<g:set var="roleName" value="${userInstance.getRol().getName()}"/>
+													${roleName.getAt(5).toString() +  roleName.substring(6,roleName.length()).toLowerCase()}
 												</td>
 												<td>
 													${fieldValue(bean: userInstance, field: "registrationNumber")}
