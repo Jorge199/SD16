@@ -24,14 +24,14 @@ public class StatisticResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR"})
 	public StatisticDTO getById(@PathParam("id") Integer statisticId) throws PatologyException {
 		return _statisticService.getById(statisticId);
 	}
 
 	@GET
 	@Produces("application/xml")
-	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR"})
 	public StatisticResult getAll() throws PatologyException {
 		return _statisticService.getAll();
 	}
@@ -39,7 +39,7 @@ public class StatisticResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR"})
 	public StatisticResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page,
 			@PathParam("max") Integer maxItems) throws PatologyException {
 		return _statisticService.find(textToFind, page, maxItems);
@@ -48,7 +48,7 @@ public class StatisticResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR"})
 	public StatisticResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems)
 			throws PatologyException {
 		return _statisticService.find(null, page, maxItems);
@@ -63,7 +63,7 @@ public class StatisticResource {
 	@GET
 	@Path("/search/{textToFind}")
 	@Produces("application/xml")
-	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR" })
 	public StatisticResult search(@PathParam("textToFind") String textToFind ) throws PatologyException {
 		return _statisticService.find(textToFind);
 	}

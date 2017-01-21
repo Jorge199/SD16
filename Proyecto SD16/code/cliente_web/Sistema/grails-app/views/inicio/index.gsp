@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<fieldset class="form">
-					<g:render contextPath="/laboratory" template="list" />
+					<g:render contextPath="/laboratory" template="show" />
 				</fieldset>
 			</div>
 		</div>
@@ -27,6 +27,7 @@
 		<!-- /.row -->
 
 		<div class="row">
+		<!-- Laboratory Info
 			<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 			<div class="col-lg-3 col-md-6">
 				<div class="panel panel-primary">
@@ -51,6 +52,7 @@
 				</div>
 			</div>
 			</sec:ifAnyGranted>
+			 -->
 			<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR,ROLE_SECRETARIA'>
 				<div class="col-lg-3 col-md-6">
 					<div class="panel panel-green">

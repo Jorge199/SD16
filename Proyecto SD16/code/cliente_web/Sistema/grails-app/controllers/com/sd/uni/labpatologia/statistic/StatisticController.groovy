@@ -17,8 +17,7 @@ class StatisticController {
 	@Autowired def IAuthService authService
 	@Secured([
 		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_ADMINISTRADOR'
 	])
 	def index() {
 		redirect(action: "list",params: params)
@@ -26,8 +25,7 @@ class StatisticController {
 
 	@Secured([
 		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_ADMINISTRADOR'
 	])
 	def list() {
 		def statistics = null

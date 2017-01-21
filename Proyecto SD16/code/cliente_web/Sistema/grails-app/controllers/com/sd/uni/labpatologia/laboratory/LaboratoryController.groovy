@@ -28,7 +28,7 @@ class LaboratoryController {
 	@Secured([
 		'ROLE_ADMINISTRADOR'
 	])
-	def _list() {
+	def _show() {
 		def text = params.text
 		def laboratories = null
 		if(null != text && !"".equals(text)){

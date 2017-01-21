@@ -116,7 +116,7 @@
 						<li><a href="/Sistema/user/list/"><i
 							class="fa fa-fw fa-user"></i>Usuarios</a></li>
 					</sec:ifNotGranted>
-					<sec:ifNotGranted roles='ROLE_TECNICO'>
+					<sec:ifNotGranted roles='ROLE_TECNICO, ROLE_SECRETARIA'>
 						<li><a href="/Sistema/statistic/list/"><i
 							class="fa fa-pie-chart"></i> Estadísticas</a></li>
 					</sec:ifNotGranted>
