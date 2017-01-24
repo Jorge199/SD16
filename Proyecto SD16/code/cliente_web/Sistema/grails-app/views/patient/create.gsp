@@ -12,7 +12,8 @@
 	<!-- jQuery -->	
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src="jquery.validate.js"></script>
-	<script src="validationFormPatient.js"></script>	
+	<script src="validationFormPatient.js"></script>
+	<script src="jquery.number.js"></script>
 </head>
 
 <body>
@@ -40,7 +41,8 @@
 			</div>
 		</div>
 	</div>
-
+	
+	<!-- estilo a la validacion -->
   	<style>
 		input.error{
 		    border: 2px dotted #FF0000; 
@@ -52,7 +54,27 @@
 		    display: inline-table;
 		}
   	</style>
-  
+  	
+  	<!-- formato a telefono y documento -->
+  	<script type="text/javascript">	
+		$(function(){
+			$('#phone').number(true, 0 ,',','-');
+		});
+		
+	</script>
+	<script type="text/javascript">
+		$('#document').on('input', function() {
+			if(!isNaN($("#document").val())){
+			    var doc = $(this).val().replace(/[^\d]/g, '')
+			    if (doc.length == 7) {
+			      doc = doc.replace(/(\d{1})(\d{3})(\d{3})/, "$1.$2.$3");
+			    } else if (doc.length == 6) {
+			      doc = doc.replace(/(\d{3})(\d{3})/, "$1.$2");
+			    }
+			    $(this).val(doc)
+			}
+		 });
+	</script>
 	<!-- Jasny-Bootstrap JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
