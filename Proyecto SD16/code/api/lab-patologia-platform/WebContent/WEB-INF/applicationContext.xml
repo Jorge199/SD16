@@ -27,7 +27,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/laboratoriodb?UseUnicode=true&amp;characterEncoding=utf8" />
+		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
 	</bean>
@@ -61,7 +61,7 @@
 					<constructor-arg name="expiration" index="1" value="${cache.expiration}" />
 					<!-- @CacheEvict(..., "allEntries" = true) won't work because allowClear 
 						is false, so we won't flush accidentally all entries from memcached instance -->
-					<constructor-arg name="allowClear" index="2" value="false" />
+					<constructor-arg name="allowClear" index="2" value="${cache.allowClear}" />
 				</bean>
 			</set>
 		</property>
@@ -80,7 +80,7 @@
 		</property>
 		<property name="configuration">
 			<bean class="com.google.code.ssm.providers.CacheConfiguration">
-				<property name="consistentHashing" value="true" />
+				<property name="consistentHashing" value="${cache.consistentHashing}" />
 			</bean>
 		</property>
 	</bean>
