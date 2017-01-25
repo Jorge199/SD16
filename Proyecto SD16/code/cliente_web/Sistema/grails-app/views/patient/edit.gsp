@@ -40,17 +40,6 @@
 		</div>
 	</div>
 
-	<style>
-		input.error{
-		    border: 2px dotted #FF0000; 
-		}
-		form label.error{
-		    font-size: 1em;
-		    color: #FF0000;
-		    font-weight: bold;
-		    display: inline-table;
-		}
-  	</style>
 	<!-- Jasny-Bootstrap JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>

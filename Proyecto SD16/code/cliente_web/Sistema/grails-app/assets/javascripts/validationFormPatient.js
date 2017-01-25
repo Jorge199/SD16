@@ -13,13 +13,13 @@ $(document).ready(function(e){
 						rangelength:[3,50]
 					},
 					document:{
-						rangelength:[3,30]
+						rangelength:[6,10]
 					},
 					address:{
 						rangelength:[3,50]
 					},
 					phone:{
-						rangelength:[6,15]
+						rangelength:[9,15]
 					},
 					mail:{
 						email:true
@@ -42,14 +42,14 @@ $(document).ready(function(e){
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					document:{
-						rangelength:"Cantidad de caracteres de 3 a 30"
+						rangelength:"Cantidad de caracteres de 6 a 10"
 					},
 					address:{
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					phone:{
 						number:"Debe ser numerico",
-						rangelength:"Debe tener entre 6 a 15 numeros"
+						rangelength:"Debe tener entre 9 a 15 numeros",
 					},
 					mail:{
 						email:"Formato de correo incorrecto"
@@ -84,7 +84,7 @@ function saveData(){
 		$("lastName").focus();
 		return false;
 	}
-	if($("#document").val().length < 3 || $("#document").val().length > 30){
+	if($("#document").val().length < 6 || $("#document").val().length > 10){
 		if(!($("#document").val() == "")){
 			$("#document").focus();
 			return false;
@@ -101,7 +101,7 @@ function saveData(){
 		return false;
 	}
 	if(!($("#phone").val() == "")){
-		if($("#phone").val().length < 6 || $("#phone").val().length > 15){
+		if($("#phone").val().length < 9 || $("#phone").val().length > 15){
 			$("#phone").focus();
 			return false;
 		}
