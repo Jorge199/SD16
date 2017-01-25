@@ -30,23 +30,32 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		UsernamePasswordAuthenticationToken authentic = (UsernamePasswordAuthenticationToken) authentication;
 		String username = String.valueOf(authentic.getPrincipal());
 		String password = String.valueOf(authentic.getCredentials());
-		UserB user = _userService.getByUsername(username);
-		System.out.println("buscar"+user.getRol().getName());
+		UserB user;
+		try{
+			user = _userService.getByUsername(username);
+		}catch(Exception exc){
+			throw new BadCredentialsException("userError");
+		}
+		System.out.println("buscar" + user.getRol().getName());
 
-		if (null != user) {
+		if (user != null) {
 			if (_passwordEncoder.matches(password, user.getPassword())) {
 				List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 				authorities.add(new GrantedAuthorityImpl(user.getRol().getName()));
-				Boolean enabled = Boolean.valueOf(user.getAccountLocked());
-				GrailsUser userDetails = new GrailsUser(username, password,
-						enabled, true, true, true, authorities, 1);
-				UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-						userDetails, password, userDetails.getAuthorities());
-				token.setDetails(authentic.getDetails());
-				return token;
+				if (authorities != null) {
+					Boolean enabled = Boolean.valueOf(user.getAccountLocked());
+					GrailsUser userDetails = new GrailsUser(username, password,
+							enabled, true, true, true, authorities, 1);
+					UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+							userDetails, password, userDetails.getAuthorities());
+					token.setDetails(authentic.getDetails());
+					return token;
+				} else{
+					throw new BadCredentialsException("Log in failed: El usuario no tiene ningun rol");
+				}
 			} else {
 				throw new BadCredentialsException(
-						"Log in failed: Contraseña incorrecta");
+						"passError");
 			}
 		}
 		return authentic;
