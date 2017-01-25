@@ -2,13 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="template">
-<g:set var="entityName"
-	value="${message(code: 'doctor.label', default: 'Doctor')}" />
-<title><g:message code="default.create.label"
-		args="[entityName]" /></title>
-<asset:stylesheet src="application.css" />
-<asset:javascript src="application.js" />
+	<meta name="layout" content="template">
+	<g:set var="entityName"
+		value="${message(code: 'doctor.label', default: 'Doctor')}" />
+	<title><g:message code="default.create.label"
+			args="[entityName]" /></title>
+	<asset:stylesheet src="application.css" />
+	<asset:javascript src="application.js" />
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src="jquery.validate.js"></script>
+	<script src="validationFormDoctor.js"></script>
+	<script src="jquery.number.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -20,7 +24,7 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<g:form action="save">
+					<g:form action="save" onsubmit="return saveData();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
@@ -39,13 +43,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	
-	<!-- Jasny-Bootstrap JavaScript -->
-	<script src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
-	<script type="text/javascript">
-		$("#phoneNum").mask("(999) 999-9999");
-	</script>
-	
+	</div>	
 </body>
 </html>
