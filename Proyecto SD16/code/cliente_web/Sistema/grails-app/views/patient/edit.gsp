@@ -2,20 +2,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="template">
-<title><g:message code="default.edit.label" args="[entityName]" /></title>
+	<meta name="layout" content="template">
+	<title><g:message code="default.edit.label" args="[entityName]" /></title>
+	<script src="validationFormPatient.js"></script>
+	<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src="jquery.validate.js"></script>
+	<script src="validationFormPatient.js"></script>
 </head>
+
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4>
-						<strong>Editar Informacion</strong>
-					</h4>
+					<h4><strong>Editar Información del Paciente</strong></h4>
 				</div>
 				<div class="panel-body">
-					<g:form action="update">
+					<g:form action="update" onsubmit="return saveData();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
@@ -28,7 +32,6 @@
 									</button>
 									<a class="btn btn-default" href="/Sistema/patient/list"
 										role="button"><i class="fa fa-times"></i> Cancelar</a>
-							
 							</div>
 						</fieldset>
 					</g:form>
@@ -36,12 +39,21 @@
 			</div>
 		</div>
 	</div>
+
+	<style>
+		input.error{
+		    border: 2px dotted #FF0000; 
+		}
+		form label.error{
+		    font-size: 1em;
+		    color: #FF0000;
+		    font-weight: bold;
+		    display: inline-table;
+		}
+  	</style>
 	<!-- Jasny-Bootstrap JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
-
-	<!-- jQuery -->
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
