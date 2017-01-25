@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function(e){
-			$("form").validate({
+			$("#doctor").validate({
 				rules: {
 					name:{
 						required:true,
@@ -76,7 +76,7 @@ function saveData(){
 		return false;
 	}
 	if($("#last_name").val().length < 3 || $("#last_name").val().length > 50){
-		$("last_name").focus();
+		$("#last_name").focus();
 		return false;
 	}
 	if($("#ci").val().length < 6 || $("#ci").val().length > 10){

@@ -24,7 +24,7 @@
 					<h4><strong>Registrar Paciente</strong></h4>
 				</div>
 				<div class="panel-body">
-					<g:form action="save" onsubmit="return saveData();">
+					<form action="/Sistema/patient/save" method="post" id="patient" onsubmit="return saveData();">
 							<g:render template="form" />
 						<fieldset class="buttons">
 							<br> <br>
@@ -36,7 +36,7 @@
 										role="button"><i class="fa fa-times"></i> Cancelar</a>	
 							</div>
 						</fieldset>
-					</g:form>
+					</form>
 				</div>
 			</div>
 		</div>

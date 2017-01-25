@@ -19,7 +19,7 @@
 					<h4><strong>Editar Información del Paciente</strong></h4>
 				</div>
 				<div class="panel-body">
-					<g:form action="update" onsubmit="return saveData();">
+					<form action="/Sistema/patient/update" method="post" id="patient" onsubmit="return saveData();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
@@ -34,7 +34,7 @@
 										role="button"><i class="fa fa-times"></i> Cancelar</a>
 							</div>
 						</fieldset>
-					</g:form>
+					</form>
 				</div>
 			</div>
 		</div>

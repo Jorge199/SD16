@@ -1,8 +1,9 @@
 /**
  * Validaciones para formulario paciente
  */
+
 $(document).ready(function(e){
-			$("form").validate({
+	$("#patient").validate({
 				rules: {
 					name:{
 						required:true,
@@ -81,7 +82,7 @@ function saveData(){
 		return false;
 	}
 	if($("#lastName").val().length < 3 || $("#lastName").val().length > 50){
-		$("lastName").focus();
+		$("#lastName").focus();
 		return false;
 	}
 	if($("#document").val().length < 6 || $("#document").val().length > 10){
