@@ -7,6 +7,9 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 		<asset:stylesheet src="application.css"/>
 		<asset:javascript src="application.js"/>
+		<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+		<script src="jquery.validate.js"></script>
+		<script src="validationFormUser.js"></script>
 	</head>
 	<body>
         <div class="container-fluid">
@@ -16,7 +19,7 @@
 						<h4><strong>Registrarse</strong></h4>
 					</div>
 					<div class="panel-body">
-						<g:form action="save" >
+						<form action="/Sistema/user/save" method="post" id="user"  onsubmit="return saveData();" >
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
@@ -30,7 +33,7 @@
 									
 								</div>
 							</fieldset>
-						</g:form>						
+						</form>						
 					</div>
 				</div>
 			</div>
@@ -64,6 +67,7 @@
         }
     }
 </script>
-	</body>
+
+</body>
 	
 </html>
