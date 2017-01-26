@@ -8,6 +8,9 @@
                 args="[entityName]" /></title>
     <asset:stylesheet src="application.css" />
     <asset:javascript src="application.js" />
+    <script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src="jquery.validate.js"></script>
+	<script src="validationFormArticleMovement.js"></script>
 </head>
 <body>
 
@@ -20,7 +23,7 @@
                     </h4>
                 </div>
                 <div class="panel-body">
-                    <g:form action="save">
+                    <form action="/Sistema/articleMovement/save" method="post" id="articleMovement" onsubmit="return saveData();">
                         <fieldset class="form">
                             <g:render template="form" />
                         </fieldset>
@@ -36,7 +39,7 @@
                                 </div>
                           
                         </fieldset>
-                    </g:form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -45,9 +48,6 @@
 <!-- Jasny-Bootstrap JavaScript -->
     <script
     src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
-
-        <!-- jQuery -->
-<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 
         <!-- Moment -->
 <script src=" ${request.contextPath}/template/js/moment.js"></script>
@@ -78,9 +78,6 @@ href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
     });
 
     });
-</script>
-<script type="text/javascript">
-    $("#phoneNum").mask("(999) 999-9999");
 </script>
 </body>
 </html>

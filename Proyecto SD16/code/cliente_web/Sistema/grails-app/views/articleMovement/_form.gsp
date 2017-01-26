@@ -5,10 +5,10 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Articulo <span class="required-indicator">*</span></label>
-            <g:select class="form-control selectpicker many-to-one"
+            <g:select class="form-control selectpicker many-to-one" 
+            id="articleId" type="text"
             data-live-search="true" name="articleId" from="${articles}"
-            value="${ArticleMovementInstance?.article?.id}" optionKey="id"
-                optionValue="name" required=""
+            value="${ArticleMovementInstance?.article?.id}" optionKey="id" optionValue="name" 
             noSelection="${['':'Seleccione un articulo..']}" />
         </div>
     </div>
@@ -24,6 +24,7 @@
                     code="Tipo de movimiento" /> <span class="required-indicator">*</span>
                 </label>
                 <g:select name="movementType" class="form-control selectpicker"
+                id="movementType" type="text"
                 from="${MovementTypeEnum.values()}"
                 value="${articleMovementInstance?.movementType}" optionKey="key"
                     required=""
@@ -43,9 +44,22 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Cantidad</label> <input type="number" class="form-control"
-                min="1" max="2147483646" title='IngreseCantidad' required=""
-                placeholder="Ingrese la cantidad" name="quantity"
+                min="1" max="2147483646" title='IngreseCantidad' 
+                placeholder="Ingrese la cantidad" name="quantity" id="quantity"
                 value="${articleMovementInstance?.quantity}" />
             </div>
         </div>
     </div>
+    
+    <!-- estilo a la validacion -->
+  	<style>
+		input.error{
+		    border: 2px dotted #FF0000; 
+		}
+		form label.error{
+		    font-size: 1em;
+		    color: #FF0000;
+		    font-weight: bold;
+		    display: inline-table;
+		}
+  	</style>
