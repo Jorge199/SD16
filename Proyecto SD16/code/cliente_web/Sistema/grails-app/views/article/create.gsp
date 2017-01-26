@@ -2,13 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="template">
-<g:set var="entityName"
-	value="${message(code: 'article.label', default: 'Article')}" />
-<title><g:message code="default.create.label"
-		args="[entityName]" /></title>
-<asset:stylesheet src="application.css" />
-<asset:javascript src="application.js" />
+	<meta name="layout" content="template">
+	<g:set var="entityName"
+		value="${message(code: 'article.label', default: 'Article')}" />
+	<title><g:message code="default.create.label"
+			args="[entityName]" /></title>
+	<asset:stylesheet src="application.css" />
+	<asset:javascript src="application.js" />
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src="jquery.validate.js"></script>
+	<script src="validationFormArticle.js"></script>
+	<script src="jquery.number.js"></script>
 </head>
 <body>
 
@@ -21,7 +25,7 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<g:form action="save">
+					<form action="/Sistema/article/save" method="post" id="article" onsubmit="return saveData();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
@@ -37,7 +41,7 @@
 				
 							</div>
 						</fieldset>
-					</g:form>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -46,9 +50,6 @@
 	<!-- Jasny-Bootstrap JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
-
-	<!-- jQuery -->
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>

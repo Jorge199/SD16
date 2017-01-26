@@ -2,8 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="template">
-<title><g:message code="default.edit.label" args="[entityName]" /></title>
+	<meta name="layout" content="template">
+	<title><g:message code="default.edit.label" args="[entityName]" /></title>
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src="jquery.validate.js"></script>
+	<script src="validationFormArticle.js"></script>
+	<script src="jquery.number.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -11,11 +15,11 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4>
-						<strong>Editar Informacion</strong>
+						<strong>Editar Informacion del Articulo</strong>
 					</h4>
 				</div>
 				<div class="panel-body">
-					<g:form action="update">
+					<form action="/Sistema/article/update" method="post" id="article" onsubmit="return saveData();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
@@ -30,7 +34,7 @@
 										role="button"><i class="fa fa-times"></i> Cancelar</a>
 							</div>
 						</fieldset>
-					</g:form>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -38,9 +42,6 @@
 	<!-- Jasny-Bootstrap JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
-
-	<!-- jQuery -->
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
