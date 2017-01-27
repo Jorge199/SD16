@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="template">
-<g:set var="entityName"
-	value="${message(code: 'request.label', default: 'Request')}" />
-<title><g:message code="default.create.label"
-		args="[entityName]" /></title>
-<g:set var="entityName"
-	value="${message(code: 'doctor.label', default: 'Doctor')}" />
-<title><g:message code="default.create.label"
-		args="[entityName]" /></title>
-<asset:stylesheet src="application.css" />
-<asset:javascript src="application.js" />
+	<meta name="layout" content="template">
+	<g:set var="entityName"
+		value="${message(code: 'request.label', default: 'Request')}" />
+	<title><g:message code="default.create.label"
+			args="[entityName]" /></title>
+	<g:set var="entityName"
+		value="${message(code: 'doctor.label', default: 'Doctor')}" />
+	<title><g:message code="default.create.label"
+			args="[entityName]" /></title>
+	<asset:stylesheet src="application.css" />
+	<asset:javascript src="application.js" />
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src="jquery.validate.js"></script>
+	<script src="validationModalPatient.js"></script>
+	<script src="validationModalDoctor.js"></script>
+	<script src="jquery.number.js"></script>
 </head>
 <body>
 
@@ -36,8 +41,7 @@
 	<br><br><br><br>
 	
 	
-	<!-- jQuery -->
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
 	<script src=" ${request.contextPath}/template/js/es.js"></script>

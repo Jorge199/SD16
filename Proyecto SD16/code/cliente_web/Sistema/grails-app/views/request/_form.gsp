@@ -164,13 +164,13 @@
 				<h4 class="modal-title" id="myModalLabel">Registrar Doctor</h4>
 			</div>
 			<div class="modal-body">
-			<form id="myFormDoctor">
+			<form id="myFormDoctor" onsubmit="return saveDataDoctor();">
 				<g:render template="/doctor/form"/>
 			
 					<fieldset class="buttons">
 						<br><br><div class="col-xs-10">
 							<div class="text-right">
-							<button  type="submit"  class="btn btn-primary" onclick="callAjax()"><i class="fa fa-save"></i> Guardar</button>
+							<button  type="submit"  class="btn btn-primary" onclick="callDoctor()"><i class="fa fa-save"></i> Guardar</button>
 							</div></div>
 					</fieldset>
 				</form>
@@ -190,13 +190,13 @@
 				<h4 class="modal-title" id="myModalLabel">Registrar Paciente</h4>
 			</div>
 			<div class="modal-body">
-			<form id="myFormPatient">
+			<form id="myFormPatient" onsubmit="return saveData();">
 				<g:render template="/patient/form"/>
 			
 					<fieldset class="buttons">
 						<br><br><div class="col-xs-10">
 							<div class="text-right">
-							<button  type="submit"  class="btn btn-primary" onclick="callAjax2()"><i class="fa fa-save"></i> Guardar</button>
+							<button  type="submit"  class="btn btn-primary" onclick="callPatient()"><i class="fa fa-save"></i> Guardar</button>
 							</div></div>
 					</fieldset>
 				</form>
@@ -206,10 +206,26 @@
 </div>
 
 <head>
-   
+    <!-- Para boton guardar de paciente -->
+    <script>
+        function callPatient(){
+            if($("#myFormPatient").valid()){
+        	    $.ajax({
+                	type:"POST",
+                    url : "${createLink(controller: 'patient', action: 'save')}",
+                    data :   $("#myFormPatient").serialize() , 
+                    dataType: 'json',
+                    success : function(data){
+                    	 $("#myFormPatient").submit();
+                    },
+                });
+            }
+        }
+    </script>
     <!-- Para boton guardar de doctor -->
     <script>
-        function callAjax(){
+        function callDoctor(){
+        	if($("#myFormDoctor").valid()){
         	    $.ajax({
                 	type:"POST",
                     url : "${createLink(controller: 'doctor', action: 'save')}",
@@ -219,6 +235,7 @@
                     	 $("#myFormDoctor").submit();
                     },
                 });
+        	}
         }
     </script>
     <!-- Para boton guardar de ficha -->
@@ -251,17 +268,7 @@
     
     <!-- Para boton guardar de paciente -->
     <script type="text/javascript">
-    function callAjax2(){
-	    $.ajax({
-        	type:"POST",
-            url : "${createLink(controller: 'patient', action: 'save')}",
-            data :   $("#myFormPatient").serialize() , 
-            dataType: 'json',
-            success : function(data){
-            	 $("#myFormPatient").submit();
-            },
-        });
-	}
+   
     </script>
     
     <!-- Para selector de doctor -->
