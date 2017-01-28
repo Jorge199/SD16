@@ -10,16 +10,23 @@
 	rel="stylesheet">
 <asset:stylesheet src="user-login.css" />
 <style>
-body {
-	background-color: transparent;
-}
-
-html {
-	background-image: url(${request.contextPath}/images/mic.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
+	body{
+		background-color: transparent;
+		background-image: url(${request.contextPath}/images/mic.jpg);
+		background-size: cover;
+		background-position: center center;
+	}
+	
+	.footer{
+	  position: absolute;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  padding: 1rem;
+	  background-color: #efefef;
+	  text-align: center;
+	  opacity: 0.8;
+	}
 </style>
 </head>
 <body>
@@ -55,8 +62,7 @@ html {
 	</div>
 	<br />
 	<br />
-	<div class="pag-footer" align="center"
-		style="background-color: #f2f2f2; opacity: 0.8; position: fixed; width: 100%;">
+	<div class="footer">
 		<strong>Desarrolladores:</strong> Jorge Esquivel<a
 			href="mailto:jorgeesquivelfernandez@gmail.com?Subject=Laboratorio%20SD2016">(jorgeesquivelfernandez@gmail.com)</a>
 		- Alex Jiñes<a

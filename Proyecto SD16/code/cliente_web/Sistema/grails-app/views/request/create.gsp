@@ -16,6 +16,7 @@
 	<script src="jquery.validate.js"></script>
 	<script src="validationModalPatient.js"></script>
 	<script src="validationModalDoctor.js"></script>
+	<script src="validationFormRequest.js"></script>
 	<script src="jquery.number.js"></script>
 </head>
 <body>
@@ -29,11 +30,9 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<g:form action="save">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
-					</g:form>
 				</div>
 			</div>
 		</div>
