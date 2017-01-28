@@ -1,13 +1,14 @@
 <%@ page import="java.lang.System"%>
 <%@ page import="com.sd.uni.labpatologia.util.StatusEnum" %>
-<form id="myFormRequest">
+
+<form id="myFormRequest" onsubmit="return saveDataRequest();">
 <div class="row">
 	<div class=col-md-12>
 		<div class="col-md-4">
 			<label>Fecha de Ingreso <span class="required-indicator">*</span></label>
 			<div class="form-group">
 			<div class='input-group date' id='datetimepicker1'>
-				<input type='text' class="form-control" name="date" required=""
+				<input type='text' class="form-control" name="date" id="date" placeholder="Selecciona una fecha"
 					value="${formatDate(format: 'dd-MM-yyyy', date:requestInstance.getDate())}" /> <span
 					class="input-group-addon"> <span
 					class="glyphicon glyphicon-calendar"> </span>
@@ -22,19 +23,19 @@
 				<g:if test="${requestInstance?.status == StatusEnum.RECIBIDO }">
 					<div class="col-sm-4">
 					<div class="form-group">
-						<g:field type="text" name="code" readonly="readonly" class="form-control" value="${requestInstance?.code}" required=""/>
+						<input type="text" name="code" id="code" readonly="readonly" class="form-control" value="${requestInstance?.code}"/>
 					</div>
 					</div>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<g:textField type="number" class="form-control"  max="20" name="code_cortes" required=""
+							<input type="number" class="form-control"  max="20" name="code_cortes" id="code_cortes"
 							placeholder="Nro de cortes" />
 							</div>
 						</div>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<g:textField type="number" class="form-control"  max="20" name="code_laminas" 
+							<input type="number" class="form-control"  max="20" name="code_laminas" id="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
@@ -44,13 +45,13 @@
 				<g:elseif test="${requestInstance?.status==StatusEnum.PROCESO }">
 					<div class="col-sm-4">
 					<div class="form-group">
-						<g:field type="text" name="code" readonly="readonly" required="" class="form-control" value="${requestInstance?.code}"/>
+						<input type="text" name="code" id="code" readonly="readonly" class="form-control" value="${requestInstance?.code}"/>
 					</div>
 					</div>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<g:textField type="number" class="form-control"  max="20" name="code_laminas" required=""
+							<input type="number" class="form-control"  max="20" name="code_laminas" id="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
@@ -58,12 +59,12 @@
 				</g:elseif>
 				<g:else>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
-						<g:textField class="form-control"  max="20" name="code"
-							placeholder="Ingrese un codigo" value="${requestInstance?.code}" required=""/>
+						<input class="form-control"  max="20" name="code" id="code"
+							placeholder="Ingrese un codigo" value="${requestInstance?.code}"/>
 					</sec:ifAnyGranted>
 					<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
-						<g:textField class="form-control"  max="20" name="code" readonly="readonly"
-							placeholder="Ingrese un codigo" value="${requestInstance?.code}" required="" />
+						<input class="form-control"  max="20" name="code" readonly="readonly" id="code"
+							placeholder="Ingrese un codigo" value="${requestInstance?.code}" />
 					</sec:ifAnyGranted>
 				</g:else>
 			</div>
@@ -78,12 +79,12 @@
 				<div class="form-group">
 				<div class="input-group">
 				<g:if test="${action == 'save'}">
-					<select class="select-patient form-control" name="patientId" required="">
+					<select class="select-patient form-control" name="patientId" id="patientId">
 						<option value="${requestInstance?.patient?.id}">Selecciona un paciente</option>
 					</select>
 				</g:if>
 				<g:else>
-					<select class="select-patient form-control" name="patientId" required="">
+					<select class="select-patient form-control" name="patientId" id="patientId">
 						<option value="${requestInstance?.patient?.id}">${requestInstance?.patient?.name} ${requestInstance?.patient?.lastName}</option>
 					</select>
 				</g:else>
@@ -100,12 +101,12 @@
 			<div class="form-group">
 			<div class="input-group">
 				<g:if test="${action == 'save'}">
-					<select id="valor" class="select-doctor form-control" name="doctorId" required="">
+					<select id="doctorId" class="select-doctor form-control" name="doctorId" >
 						<option value="${requestInstance?.doctor?.id}">Selecciona un doctor</option>
 					</select>
 				</g:if>
 				<g:else>
-					<select class="select-doctor form-control" name="doctorId" required="">
+					<select class="select-doctor form-control" name="doctorId" id="doctorId">
 						<option value="${requestInstance?.doctor?.id}">${requestInstance?.doctor?.name} ${requestInstance?.doctor?.lastName}</option>
 					</select>
 				</g:else>
@@ -121,7 +122,7 @@
 			<label>Tipo de Estudio <span class="required-indicator">*</span></label>
 			<div class="form-group">
 			<g:select  class="form-control many-to-one" name="studyTypeId" from="${studies}" value="${requestInstance?.studyType?.id}"
-			optionKey="id" optionValue="name" required=""
+			optionKey="id" optionValue="name" id="studyTypeId"
 			noSelection="${['':'Seleccione un estudio..']}" />
 			</div>
 		</div>
@@ -129,10 +130,10 @@
 	
 	<div class="col-md-12">
 		<div class="col-md-6">
-			<label>Observaciones <span class="required-indicator">*</span></label>
+			<label>Observaciones <span class="required-indicator"></span></label>
 			<div class="form-group">
 			<g:textArea class="form-control" rows="5" cols="40" class="form-control"
-				name="note" maxlength="250" required=""
+				name="note" maxlength="250" id="note"
 				placeholder="Ingrese sus observaciones"
 				value="${requestInstance?.note}" />
 				</div>
@@ -141,9 +142,9 @@
 </div>
 <div class="col-xs-12" align="center">
 	<g:if test="${action == 'save'}">
-	   <button type="submit" class="btn btn-primary" onclick="callAjax1()"><i class="fa fa-save"></i> Guardar </button>
+	   <button type="submit" class="btn btn-primary" onclick="callRequest()"><i class="fa fa-save"></i> Guardar </button>
 	</g:if><g:else>
-	   <button type="submit" class="btn btn-primary" name="edit" value="${requestInstance?.id}" onclick="callAjax1()">
+	   <button type="submit" class="btn btn-primary" name="edit" value="${requestInstance?.id}" onclick="callRequest()">
 		<i class="fa fa-save"></i> Guardar </button>
 	</g:else>
 	
@@ -190,7 +191,7 @@
 				<h4 class="modal-title" id="myModalLabel">Registrar Paciente</h4>
 			</div>
 			<div class="modal-body">
-			<form id="myFormPatient" onsubmit="return saveData();">
+			<form id="myFormPatient" onsubmit="return saveDataPatient();">
 				<g:render template="/patient/form"/>
 			
 					<fieldset class="buttons">
@@ -240,7 +241,7 @@
     </script>
     <!-- Para boton guardar de ficha -->
      <script>
-        function callAjax1(){
+        function callRequest(){
             if(action = 'save'){
         	    $.ajax({
                 	type:"POST",

@@ -70,7 +70,7 @@ $(document).ready(function(e){
 			});
 });
 
-function saveData(){
+function saveDataPatient(){
 	var expresion = /\w+@\w+\.+[a-z]/;
 
 	if($("#myFormPatient input[id=name]").val() == "" || $("#myFormPatient input[id=lastName]").val() == ""){
