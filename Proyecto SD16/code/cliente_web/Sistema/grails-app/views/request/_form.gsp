@@ -7,7 +7,7 @@
 		<div class="col-md-4">
 			<label>Fecha de Ingreso <span class="required-indicator">*</span></label>
 			<div class="form-group">
-			<div class='input-group date' id='datepicker'>
+			<div class='input-group date' id='datetimepicker2'>
 				<input type='text' class="form-control" name="date" id="date" placeholder="Selecciona una fecha"
 					value="${formatDate(format: 'dd-MM-yyyy', date:requestInstance.getDate())}" /> <span
 					class="input-group-addon"> <span
@@ -207,16 +207,6 @@
 </div>
 
 <head>
-	<script>
-	$( ".datepicker" ).datepicker({
-		 dateFormat: 'dd/mm/yy',
-		 defaultDate: new Date(),
-		 changeMonth: true,
-		 changeYear: true
-		});
-
-		$('.datepicker').css("z-index","0");
-	</script>
     <!-- Para boton guardar de paciente -->
     <script>
         function callPatient(){
