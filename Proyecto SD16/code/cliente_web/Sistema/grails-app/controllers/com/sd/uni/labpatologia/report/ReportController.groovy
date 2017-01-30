@@ -140,11 +140,6 @@ class ReportController {
 	def edit(Integer id) {
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
 		def statisticId = ""
-		System.out.println(params);
-		System.out.println(reportInstance)
-		System.out.println("isprocessed "+reportInstance._isProcessed)
-		System.out.println("isprocessed "+reportInstance.getId())
-		
 		if(null!= reportInstance.getStatistic()){
 			statisticId = reportInstance.getStatistic().getId()
 		}
@@ -163,10 +158,10 @@ class ReportController {
 		reportInstance.setRequest(requestInstance)
 		reportInstance.setId(Integer.parseInt(params.get("edit")))
 		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
-		System.out.println(params.get("isProcessed"))
 		if(params.get("isProcessed")=="true"){
 			def statisticInstance = statisticService.getById(Integer.parseInt(params.get("statisticId")))
 			statisticInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+			statisticInstance.setId(Integer.parseInt(params.get("statisticId")))
 			reportInstance.setStatistic(statisticService.save(statisticInstance))
 			reportInstance.setIsProcessed(true)
 		}else{

@@ -51,8 +51,8 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<input type="number" min ="0" name="startAge" class="form-control"
-											placeholder="Edad Inicial" />
+										<input type="number" min="0" name="startAge"
+											class="form-control" placeholder="Edad Inicial" />
 									</div>
 								</div>
 								<div class="col-md-1">
@@ -61,8 +61,8 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<input type="number" min="0" name="endAge" class="form-control"
-											placeholder="Edad Final" />
+										<input type="number" min="0" name="endAge"
+											class="form-control" placeholder="Edad Final" />
 									</div>
 								</div>
 							</div>
@@ -94,9 +94,9 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker1'>
-												<input type='text' class="form-control"
-													name="startSearch" /> <span class="input-group-addon">
-													<span class="glyphicon glyphicon-calendar"> </span>
+												<input type='text' class="form-control" name="startSearch" />
+												<span class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"> </span>
 												</span>
 											</div>
 										</div>
@@ -108,9 +108,9 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker2'>
-												<input type='text' class="form-control"
-													name="endSearch" /> <span class="input-group-addon">
-													<span class="glyphicon glyphicon-calendar"> </span>
+												<input type='text' class="form-control" name="endSearch" />
+												<span class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"> </span>
 												</span>
 											</div>
 										</div>
@@ -230,7 +230,7 @@
 
 	<link rel="stylesheet"
 		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
-		<link rel="stylesheet"
+	<link rel="stylesheet"
 		href="${request.contextPath}/template/css/plugins/morris.css" />
 	<script type="text/javascript">
 		$(function() {
@@ -248,8 +248,8 @@
 			});
 		});
 	</script>
-	
-	
+
+
 	<!-- Morris Charts JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/plugins/morris/raphael.min.js"></script>
@@ -271,8 +271,8 @@
 		src=" ${request.contextPath}/template/js/plugins/flot/jquery.flot.pie.js"></script>
 	<script
 		src=" ${request.contextPath}/template/js/plugins/flot/flot-data.js"></script>
-		
-	
+
+
 	<script>
 	if (${dataMap.getBySex}==false){
 		//show sex statistic
@@ -293,6 +293,7 @@
 	<script>
 	//show diagnostic statistic
 	var totalDiagnostic = ${dataMap.totalDiagnostic}
+	if(totalDiagnostic>0){
 	if(${dataMap.getByDiagnostic=="false"}){
 		Morris.Bar({
 			  element: 'bar-diagnostic',
@@ -371,6 +372,18 @@
 					}
 				}
 		
+		}
+	}else{
+		Morris.Bar({
+			  element: 'bar-diagnostic',
+			  data: [
+				{label: "Diagnósticos", noData: "0" }
+			  ],
+			  
+			  xkey: 'label',
+			  ykeys: [''],
+			  labels: ['No hay Datos'],
+			});
 		}
 	</script>
 
