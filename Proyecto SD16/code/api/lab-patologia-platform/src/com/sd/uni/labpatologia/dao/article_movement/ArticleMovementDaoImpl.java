@@ -66,17 +66,14 @@ public class ArticleMovementDaoImpl  extends BaseDaoImpl<ArticleMovementDomain> 
 			}
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
-			Criterion idCriterion = null;
-			if (StringUtils.isNumeric(textToFind)) {
-				idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
-			}
+			
 			if (!map.containsKey("start")){
 				minDate = new Date(0L);
 			}
 			if (!map.containsKey("end")){
 				minDate = new Date(Long.MAX_VALUE);
 			}
-			if (map.containsKey("start") || map.containsKey("end")) {
+			if (map.containsKey("start") && map.containsKey("end")) {
 				try {
 					minDate = formatter.parse(map.get("start"));
 					Calendar c = Calendar.getInstance();
@@ -89,11 +86,10 @@ public class ArticleMovementDaoImpl  extends BaseDaoImpl<ArticleMovementDomain> 
 					throw new PatologyException("Formato de ruta invalido", e);
 				}
 			}
-			if (null != idCriterion) {
-				criteria.add(Restrictions.or(propertyCriterion, idCriterion, articleCriterion));
-			} else {
-				criteria.add(propertyCriterion).add(articleCriterion);
-			}
+			
+				criteria.add(Restrictions.or(propertyCriterion,articleCriterion));
+				
+			
 		}
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
