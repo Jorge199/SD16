@@ -52,14 +52,32 @@ class ArticleMovementController {
 		}
 		def text = params.text
 		def articleMovements = null
-		if(null != text && !"".equals(text)){
-			articleMovements = articleMovementService.find(text,10,page)
-			siguiente = articleMovementService.find(text,10,page+1)
+                String textToFind=""
+                if (params.containsKey("text")){
+			textToFind= params.get("text");
+		}else{
+                        if(!"".equals(params.get("type") && null != params.get("type"))){
+                            textToFind+="type="+params.get("type")+'&'
+                        }else{
+                            textToFind+="type=null"+'&'
+                        }
+			if((!"".equals(params.get("startSearch"))) && !"".equals(params.get("endSearch")) && (null != params.get("startSearch")) && (null != params.get("endSearch"))){
+				textToFind+="start="+params.get("startSearch")+'&'
+				textToFind+="end="+params.get("endSearch")
+			}else{
+				if((null != params.get("startSearch")) && !"".equals(params.get("startSearch"))){
+					textToFind+="date="+params.get("startSearch")
+				}
+			}
+		}
+		if(null != textToFind && !"".equals(textToFind)){
+			articleMovements = articleMovementService.find(textToFind,10,page)
+			siguiente = articleMovementService.find(textToFind,10,page+1)
 		}else{
 			articleMovements = articleMovementService.find(null,10,page)
 			siguiente = articleMovementService.find(null,10,page+1)
 		}
-		[articleMovementInstanceList: articleMovements, articles: articleService.getAll(), articleMovementInstanceTotal: articleMovements?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll(),
+		[articleMovementInstanceList: articleMovements, articles: articleService.getAll(), articleMovementInstanceTotal: articleMovements?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll(), textToFind: textToFind,
 			user:authService.getName()]
 	}
 
