@@ -54,12 +54,14 @@ class StatisticController {
 			textToFind+="sex="+params.get("sex")
 			data.put("getBySex", params.get("sex"))
 		}
+		
+		//Si la consulta no esta vacia
 		if(!textToFind.equals("")){
 			System.out.println(textToFind)
 			System.out.println(data)
 			System.out.println(params)
 			
-
+			//Si no especifica el sexo entonces busca todos los sexos
 			if(data.get("getBySex")=='false'){
 				int totalSex=0
 				statistics = statisticService.find("sex=MASCULINO&"+textToFind)
@@ -72,6 +74,7 @@ class StatisticController {
 
 				data.put("totalSex",totalSex)
 			}
+			//Si no especifica un diagnostico entonces busca todos los diagnosticos
 			if(data.get("getByDiagnostic")=='false'){
 				int totalDiagnostic=0
 				for(DiagnosticEnum diagnostic in DiagnosticEnum.values()){
@@ -81,13 +84,21 @@ class StatisticController {
 				data.put("totalDiagnostic", totalDiagnostic)
 			}else{
 				int totalDiagnostic=0
+				String diagnosticTextToFind = ""
+				if(textToFind.indexOf('&')+1==textToFind.length()){
+					diagnosticTextToFind=""
+				}else{
+					diagnosticTextToFind=textToFind.substring(textToFind.indexOf('&')+1,textToFind.length())
+				}
 				for(DiagnosticEnum diagnostic in DiagnosticEnum.values()){
 					if(data.get("getByDiagnostic")==diagnostic.getKey()){
-						data.put(diagnostic.getKey(), statisticService.find("diagnostic="+diagnostic.getKey()+'&'+textToFind).size())
+						data.put(diagnostic.getKey(), statisticService.find("diagnostic="+diagnostic.getKey()+'&'+diagnosticTextToFind).size())
+						System.out.println(diagnostic.getKey() + " " + data.get(diagnostic.getKey()))
 					}
-					totalDiagnostic+=statisticService.find("diagnostic="+diagnostic.getKey()+'&'+textToFind).size()
+					totalDiagnostic+=statisticService.find("diagnostic="+diagnostic.getKey()+'&'+diagnosticTextToFind).size()
 				}
 				data.put("totalDiagnostic", totalDiagnostic)
+				
 			}
 			statistics = statisticService.find(textToFind)
 		}else{

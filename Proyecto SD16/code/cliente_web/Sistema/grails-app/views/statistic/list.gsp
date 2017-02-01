@@ -39,7 +39,7 @@
 										<g:select name="diagnostic" class="form-control"
 											from="${DiagnosticEnum.values()}" value=""
 											name="diagnosticSearch" optionKey="key"
-											noSelection="${['null':'Seleccione un diagnostico..']}"
+											noSelection="${['null':'Todos los diagnósticos..']}"
 											required=""></g:select>
 									</div>
 								</div>
@@ -51,8 +51,8 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<input type="number" min ="0" name="startAge" class="form-control"
-											placeholder="Edad Inicial" />
+										<input type="number" min="0" name="startAge"
+											class="form-control" placeholder="Edad Inicial" />
 									</div>
 								</div>
 								<div class="col-md-1">
@@ -61,8 +61,8 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<input type="number" min="0" name="endAge" class="form-control"
-											placeholder="Edad Final" />
+										<input type="number" min="0" name="endAge"
+											class="form-control" placeholder="Edad Final" />
 									</div>
 								</div>
 							</div>
@@ -94,9 +94,9 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker1'>
-												<input type='text' class="form-control"
-													name="startSearch" /> <span class="input-group-addon">
-													<span class="glyphicon glyphicon-calendar"> </span>
+												<input type='text' class="form-control" name="startSearch" />
+												<span class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"> </span>
 												</span>
 											</div>
 										</div>
@@ -108,9 +108,9 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker2'>
-												<input type='text' class="form-control"
-													name="endSearch" /> <span class="input-group-addon">
-													<span class="glyphicon glyphicon-calendar"> </span>
+												<input type='text' class="form-control" name="endSearch" />
+												<span class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"> </span>
 												</span>
 											</div>
 										</div>
@@ -185,7 +185,7 @@
 					Diagnósticos</div>
 				<div class="panel-body">
 
-					<div id="donut-diagnostic"></div>
+					<div id="bar-diagnostic"></div>
 				</div>
 			</div>
 		</div>
@@ -197,7 +197,7 @@
 					<div class="panel-heading text-center">Estadísticas de
 						Hombres y Mujeres</div>
 					<div class="panel-body">
-						<div id="donut-sex"></div>
+						<div id="bar-sex"></div>
 					</div>
 				</div>
 			</div>
@@ -230,6 +230,8 @@
 
 	<link rel="stylesheet"
 		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet"
+		href="${request.contextPath}/template/css/plugins/morris.css" />
 	<script type="text/javascript">
 		$(function() {
 			$('#datetimepicker1').datetimepicker({
@@ -246,8 +248,8 @@
 			});
 		});
 	</script>
-	
-	
+
+
 	<!-- Morris Charts JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/plugins/morris/raphael.min.js"></script>
@@ -269,85 +271,100 @@
 		src=" ${request.contextPath}/template/js/plugins/flot/jquery.flot.pie.js"></script>
 	<script
 		src=" ${request.contextPath}/template/js/plugins/flot/flot-data.js"></script>
-	
+
+
 	<script>
 	if (${dataMap.getBySex}==false){
 		//show sex statistic
 		var totalSex = ${dataMap.totalSex}
-		Morris.Donut({
-			  element: 'donut-sex',
-			  formatter: function (value, data) { return "Cantidad  " + value +"\n" + (value/totalSex *100).toFixed(2) + '%'; },
+		Morris.Bar({
+			  element: 'bar-sex',
 			  data: [
-				{label: "Masculino", value: "${dataMap.masculino}"},
-			    {label: "Femenino", value: "${dataMap.femenino}"}
-			  ]
+			         { y: 'Sexos', masc: "${dataMap.masculino}", fem: "${dataMap.femenino}" }
+			       ],
+			xkey: 'y',
+	       	ykeys: ['masc', 'fem'],
+	       labels: ['Masculino', 'Femenino'],
+	       yLabelFormat: function(y){return y != Math.round(y)?'':y;},
+			       
 			});
 	}
 	</script>
 	<script>
 	//show diagnostic statistic
 	var totalDiagnostic = ${dataMap.totalDiagnostic}
+	if(totalDiagnostic>0){
 	if(${dataMap.getByDiagnostic=="false"}){
-		Morris.Donut({
-			  element: 'donut-diagnostic',
-			  formatter: function (value, data) { return  "Cantidad  " + value +"\n" + (value/totalDiagnostic *100).toFixed(2) + '%'; },
+		Morris.Bar({
+			  element: 'bar-diagnostic',
+			  yLabelFormat: function (value, data) { return  (value/totalDiagnostic *100).toFixed(2) + '%'; },
 			  data: [
-				{label: "Carcinoma", value: "${dataMap.CARCINOMA}"},
-				{label: "Leucemia", value: "${dataMap.LEUCEMIA}"},
-				{label: "Linfoma", value: "${dataMap.LINFOMA}"},
-				{label: "Sarcoma", value: "${dataMap.SARCOMA}"},
-				{label: "Sin Indicios", value: "${dataMap.SIN_INDICIOS}"}
-			  ]
+				{label: "Diagnósticos", carcinoma: "${dataMap.CARCINOMA}", leucemia:"${dataMap.LEUCEMIA}",linfoma:"${dataMap.LINFOMA}", sarcoma:"${dataMap.SARCOMA}", sinIndicios:"${dataMap.SIN_INDICIOS}"}
+			  ],
+			  barColors: ['#428bca', '#5cb85c','#5bc0de','#d9534f','#eea236'],
+			  xkey: 'label',
+			  ykeys: ['carcinoma','leucemia', 'linfoma', 'sarcoma', 'sinIndicios'],
+			  labels: ['Carcinoma ('+"${dataMap.CARCINOMA})",'Leucemia ('+"${dataMap.LEUCEMIA})", 'Linfoma ('+"${dataMap.LINFOMA})", 'Sarcoma ('+"${dataMap.SARCOMA})", 'Sin Indicios ('+"${dataMap.SIN_INDICIOS})"],
 			});
 		}
 	else{
 	if(${dataMap.getByDiagnostic=="CARCINOMA"}){
-	Morris.Donut({
-		  element: 'donut-diagnostic',
-		  formatter: function (value, data) { return  "Cantidad  " + value +"\n" + (value/totalDiagnostic *100).toFixed(2) + '%'; },
+	Morris.Bar({
+		  element: 'bar-diagnostic',
+		  yLabelFormat: function (value, data) { return   (value/totalDiagnostic *100).toFixed(2) + '%'; },
 		  data: [
-			{label: "Carcinoma", value: "${dataMap.CARCINOMA}"},
-			{label: "Otros" , value: totalDiagnostic - "${dataMap.CARCINOMA}"}
-		  ]
+			{label: "Diagnósticos", carcinoma: "${dataMap.CARCINOMA}", otros: "${dataMap.totalDiagnostic}" - "${dataMap.CARCINOMA}"},
+		  ],
+		  xkey: 'label',
+		  ykeys: ['carcinoma','otros'],
+		  labels: ['Carcinoma ('+"${dataMap.CARCINOMA}"+')', 'Otros ('+("${dataMap.totalDiagnostic}"-"${dataMap.CARCINOMA}")+")"],
 		});
 	}else{
 		if(${dataMap.getByDiagnostic=="LEUCEMIA"}){
-			Morris.Donut({
-				  element: 'donut-diagnostic',
-				  formatter: function (value, data) { return  "Cantidad  " + value +"\n" + (value/totalDiagnostic *100).toFixed(2) + '%'; },
+			Morris.Bar({
+				  element: 'bar-diagnostic',
+				  yLabelFormat: function (value, data) { return   (value/totalDiagnostic *100).toFixed(2) + '%'; },
 				  data: [
-					{label: "Leucemia", value: "${dataMap.LEUCEMIA}"},
-					{label: "Otros" , value: totalDiagnostic - "${dataMap.LEUCEMIA}"}
-				  ]
+					{label: "Diagnósticos", leucemia: "${dataMap.LEUCEMIA}", otros: "${dataMap.totalDiagnostic}" - "${dataMap.LEUCEMIA}"},
+				  ],
+				  xkey: 'label',
+				  ykeys: ['leucemia','otros'],
+				  labels: ['Leucemia ('+"${dataMap.LEUCEMIA}"+')', 'Otros ('+("${dataMap.totalDiagnostic}"-"${dataMap.LEUCEMIA}")+")"],
 				});
 			}else{
 				if(${dataMap.getByDiagnostic=="LINFOMA"}){
-					Morris.Donut({
-						  element: 'donut-diagnostic',
-						  formatter: function (value, data) { return  "Cantidad  " + value +"\n" + (value/totalDiagnostic *100).toFixed(2) + '%'; },
+					Morris.Bar({
+						  element: 'bar-diagnostic',
+						  yLabelFormat: function (value, data) { return   (value/totalDiagnostic *100).toFixed(2) + '%'; },
 						  data: [
-							{label: "Linfoma", value: "${dataMap.LINFOMA}"},
-							{label: "Otros" , value: totalDiagnostic - "${dataMap.LINFOMA}"}
-						  ]
+							{label: "Diagnósticos", linfoma: "${dataMap.LINFOMA}", otros: "${dataMap.totalDiagnostic}" - "${dataMap.LINFOMA}"},
+						  ],
+						  xkey: 'label',
+						  ykeys: ['linfoma','otros'],
+						  labels: ['Linfoma ('+"${dataMap.LINFOMA}"+')', 'Otros ('+("${dataMap.totalDiagnostic}"-"${dataMap.LINFOMA}")+")"],
 						});
 					}else{
 						if(${dataMap.getByDiagnostic=="SARCOMA"}){
-							Morris.Donut({
-								  element: 'donut-diagnostic',
-								  formatter: function (value, data) { return  "Cantidad  " + value +"\n" + (value/totalDiagnostic *100).toFixed(2) + '%'; },
+							Morris.Bar({
+								  element: 'bar-diagnostic',
+								  yLabelFormat: function (value, data) { return   (value/totalDiagnostic *100).toFixed(2) + '%'; },
 								  data: [
-									{label: "Sarcoma", value: "${dataMap.SARCOMA}"},
-									{label: "Otros" , value: totalDiagnostic - "${dataMap.SARCOMA}"}
-								  ]
+									{label: "Diagnósticos", sarcoma: "${dataMap.SARCOMA}", otros: "${dataMap.totalDiagnostic}" - "${dataMap.SARCOMA}"},
+								  ],
+								  xkey: 'label',
+								  ykeys: ['sarcoma','otros'],
+								  labels: ['Sarcoma ('+"${dataMap.SARCOMA}"+')', 'Otros ('+("${dataMap.totalDiagnostic}"-"${dataMap.SARCOMA}")+")"],
 								});
 							}else{
-								Morris.Donut({
-									  element: 'donut-diagnostic',
-									  formatter: function (value, data) { return  "Cantidad  " + value +"\n" + (value/totalDiagnostic *100).toFixed(2) + '%'; },
+								Morris.Bar({
+									element: 'bar-diagnostic',
+									  yLabelFormat: function (value, data) { return   (value/totalDiagnostic *100).toFixed(2) + '%'; },
 									  data: [
-										{label: "Sin Indicios", value: "${dataMap.SIN_INDICIOS}"},
-										{label: "Otros" , value: totalDiagnostic - "${dataMap.SIN_INDICIOS}"}
-									  ]
+										{label: "Diagnósticos", sinIndicios: "${dataMap.SIN_INDICIOS}", otros: "${dataMap.totalDiagnostic}" - "${dataMap.SIN_INDICIOS}"},
+									  ],
+									  xkey: 'label',
+									  ykeys: ['sinIndicios','otros'],
+									  labels: ['Sin Indicios ('+"${dataMap.SIN_INDICIOS}"+')', 'Otros ('+("${dataMap.totalDiagnostic}"-"${dataMap.SIN_INDICIOS}")+")"],
 									});
 
 								}
@@ -355,6 +372,18 @@
 					}
 				}
 		
+		}
+	}else{
+		Morris.Bar({
+			  element: 'bar-diagnostic',
+			  data: [
+				{label: "Diagnósticos", noData: "0" }
+			  ],
+			  
+			  xkey: 'label',
+			  ykeys: [''],
+			  labels: ['No hay Datos'],
+			});
 		}
 	</script>
 
