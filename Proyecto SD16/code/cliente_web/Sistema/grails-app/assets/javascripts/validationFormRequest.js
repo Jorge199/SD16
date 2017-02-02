@@ -6,7 +6,6 @@ $(document).ready(function(e){
 				rules: {
 					date:{
 						required:true,
-						dateBR: true,
 					},
 					code:{
 						required:true,
@@ -36,8 +35,7 @@ $(document).ready(function(e){
 
 				messages:{
 					date:{
-						required:"El campo fecha es obligatorio",
-						dateBR:"El formato de la fecha es incorrecta"
+						required:"El campo fecha es obligatorio"
 					},
 					code:{
 						required:"El campo codigo es obligatorio",
@@ -66,8 +64,24 @@ $(document).ready(function(e){
 					
 				},
 				errorPlacement: function(error, element){
-					if(element.is(":text") || element.is("select") || element.is("number")){
-						error.insertAfter(element);
+					if(element.is("select")){
+						if(element.attr("name") == "patientId"){
+						 error.insertAfter("#data-patient");
+						}
+						if(element.attr("name") == "doctorId"){
+							error.insertAfter("#data-doctor");
+						}
+						if(element.attr("name") == "studyTypeId"){
+							error.insertAfter("#studyTypeId");
+						}
+					}
+					
+					if(element.is(":text")){
+						if(element.attr("name") == "date"){
+							 error.insertAfter("#datetimepicker2");
+						}else{
+							error.insertAfter(element);
+						}
 					}
 				}
 			
@@ -79,8 +93,8 @@ function saveDataRequest(){
 
 	if($("#myFormRequest input[id=date]").val() == "" || $("#myFormRequest input[id=code]").val() == ""
 		|| $("#myFormRequest input[id=code_cortes]").val() == "" || $("#myFormRequest input[id=code_laminas]").val() == "" 
-			|| $("#myFormRequest input[id=patientId]").val() == "" || $("#myFormRequest input[id=doctorId]").val() == ""
-				|| $("#myFormRequest input[id=studyTypeId]").val() == ""){
+			|| $("#myFormRequest select[id=patientId]").val() == "" || $("#myFormRequest select[id=doctorId]").val() == ""
+				|| $("#myFormRequest select[id=studyTypeId]").val() == ""){
 		alert("Complete los campos obligatorios (*)");
 		return false;
 	}
