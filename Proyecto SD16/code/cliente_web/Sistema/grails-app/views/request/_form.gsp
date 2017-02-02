@@ -207,6 +207,12 @@
 </div>
 
 <head>
+	<style>
+		.select2-container--default .select2-selection--single{
+		    height: 33px;
+		    width: 297px; 
+		}	
+	</style>
     <!-- Para boton guardar de paciente -->
     <script>
         function callPatient(){
