@@ -94,9 +94,7 @@
 			type="date" value="${reportInstance?.date}" />
 	</div>
 	<div class="col-md-4">
-
-		<div
-			class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
+		<div class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
 			<label for="diagnostic"> <g:message code="Diagnostico" /> <span
 				class="required-indicator">*</span>
 			</label>
@@ -104,6 +102,13 @@
 				from="${DiagnosticEnum.values()}"
 				value="${reportInstance?.diagnostic}" optionKey="key" required=""
 				noSelection="${['SIN_INDICIOS':'Seleccione un diagnostico..']}"></g:select>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<label>Descripción</label>
+		<div class="form-group">
+			<input class="form-control" type="text" maxlength="25"
+			id="diagnosticDetail" name="diagnosticDetail" placeholder="Descripción del Diagnóstico" value="${reportInstance?.diagnosticDetail}" />
 		</div>
 	</div>
 	<div class="col-md-12">

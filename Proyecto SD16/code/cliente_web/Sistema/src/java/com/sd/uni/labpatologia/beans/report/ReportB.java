@@ -14,11 +14,13 @@ public class ReportB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private Date _date;
 	private DiagnosticEnum _diagnostic;
+	private String _diagnosticDetail;
 	private String _observations;
 	private RequestB _request;
 	private Integer _age;
 	private Boolean _isProcessed;
 	private StatisticB _statistic;
+	
 
 
 	public ReportB(Map<String, String> params) {
@@ -47,6 +49,14 @@ public class ReportB extends BaseBean {
 
 	public void setDiagnostic(DiagnosticEnum diagnostic) {
 		_diagnostic = diagnostic;
+	}
+	
+	public String getDiagnosticDetail(){
+		return _diagnosticDetail;
+	}
+	
+	public void setDiagnosticDetail(String diagnosticDetail){
+		_diagnosticDetail = diagnosticDetail;
 	}
 
 	public String getObservations() {

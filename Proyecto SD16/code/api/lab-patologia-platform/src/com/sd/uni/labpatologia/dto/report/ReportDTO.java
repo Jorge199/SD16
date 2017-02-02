@@ -20,6 +20,7 @@ public class ReportDTO extends BaseDTO {
 	private Integer _age;
 	private Boolean _isProcessed;
 	private Integer _statisticId;
+	private String _diagnosticDetail;
 
 	@XmlElement
 	public Integer getRequestId() {
@@ -37,6 +38,15 @@ public class ReportDTO extends BaseDTO {
 
 	public void setDiagnostic(DiagnosticEnum diagnostic) {
 		_diagnostic = diagnostic;
+	}
+	
+	@XmlElement
+	public String getDiagnosticDetail() {
+		return _diagnosticDetail;
+	}
+
+	public void setDiagnosticDetail(String diagnosticDetail) {
+		_diagnosticDetail = diagnosticDetail;
 	}
 	
 	@XmlElement

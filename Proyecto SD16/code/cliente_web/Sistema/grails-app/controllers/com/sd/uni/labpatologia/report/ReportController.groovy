@@ -117,6 +117,7 @@ class ReportController {
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
 		reportInstance.setRequest(requestService.getById(Integer.parseInt(params.get("requestId"))))
 		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+		reportInstance.setDiagnosticDetail((params.get("diagnosticDetail")))
 		if((null!=params.get("age"))){
 			reportInstance.setAge(Integer.parseInt(params.get("age")));
 		}
@@ -158,6 +159,7 @@ class ReportController {
 		reportInstance.setRequest(requestInstance)
 		reportInstance.setId(Integer.parseInt(params.get("edit")))
 		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+		reportInstance.setDiagnosticDetail(params.get("diagnosticDetail"))
 		if(params.get("isProcessed")=="true"){
 			def statisticInstance = statisticService.getById(Integer.parseInt(params.get("statisticId")))
 			statisticInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))

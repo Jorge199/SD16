@@ -90,6 +90,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		dto.setObservations(domain.getObservations());
 		dto.setAge(domain.getAge());
 		dto.setIsProcessed(domain.getIsProcessed());
+		dto.setDiagnosticDetail(domain.getDiagnosticDetail());
 		if (null != domain.getStatistic()) {
 			dto.setStatisticId(domain.getStatistic().getId());
 		}
@@ -106,6 +107,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		domain.setObservations(dto.getObservations());
 		domain.setAge(dto.getAge());
 		domain.setIsProcessed(dto.getIsProcessed());
+		domain.setDiagnosticDetail(dto.getDiagnosticDetail());
 		if(null!=dto.getStatisticId()){
 			domain.setStatistic(statisticDao.getById(dto.getStatisticId()));	
 		}

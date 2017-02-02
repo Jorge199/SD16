@@ -37,6 +37,9 @@ public class ReportDomain extends BaseDomain {
 	@Enumerated(EnumType.STRING)
 	private DiagnosticEnum _diagnostic;
 
+	@Column(name = "diagnosticDetail")
+	private String _diagnosticDetail;
+
 	@Column(name = "age")
 	private Integer _age;
 	
@@ -109,4 +112,13 @@ public class ReportDomain extends BaseDomain {
 	public void setStatistic(StatisticDomain statistic) {
 		_statistic = statistic;
 	}
+	
+	public String getDiagnosticDetail(){
+		return _diagnosticDetail;
+	}
+	
+	public void setDiagnosticDetail(String diagnosticDetail){
+		_diagnosticDetail = diagnosticDetail;
+	}
+	
 }
