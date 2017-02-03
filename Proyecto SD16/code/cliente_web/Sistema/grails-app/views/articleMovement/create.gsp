@@ -30,12 +30,10 @@
                         <fieldset class="buttons">
                             <br> <br>
                             <div class="col-xs-12" align="center">
-                                    <button type="submit" class="btn btn-primary " name="create"
-                                    value="${message(code: 'default.button.create.label', default: 'Create')}">
+                                    <button type="submit" class="btn btn-primary " name="create" value="${message(code: 'default.button.create.label', default: 'Create')}">
                                     <i class="fa fa-floppy-o"></i> Guardar
                                     </button>
-                                    <a class="btn btn-default" href="/Sistema/articleMovement/list"
-                                    role="button"><i class="fa fa-times"></i> Cancelar</a>
+                                    <a class="btn btn-default" href="/Sistema/articleMovement/list" role="button"><i class="fa fa-times"></i> Cancelar</a>
                                 </div>
                           
                         </fieldset>
@@ -46,8 +44,7 @@
     </div>
 
 <!-- Jasny-Bootstrap JavaScript -->
-    <script
-    src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
+    <script src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
 
         <!-- Moment -->
 <script src=" ${request.contextPath}/template/js/moment.js"></script>
@@ -63,13 +60,10 @@
 <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
 
         <!-- Bootstrap datetimepicker -->
-<script
-src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.min.js"></script>
-<script
-src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.es.js"></script>
+<script src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.min.js"></script>
+<script src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.es.js"></script>
 
-<link rel="stylesheet"
-href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
 <script type="text/javascript">
     $(function() {
     $('#datetimepicker1').datetimepicker({

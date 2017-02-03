@@ -29,7 +29,7 @@
                     </g:if>
                     <div class="row">
                         <div class="col-md-4">
-                            <a class="btn btn-success" href="/Sistema/request/create" role="button"><i class="fa fa-plus"></i> Agregar Ficha</a>
+                            <a class="btn btn-success" href="/Sistema/ArticleMovement/create" role="button"><i class="fa fa-plus"></i> Agregar Movimiento</a>
                         </div>
                         <br> <br>
                         <div class="panel-body">
@@ -42,7 +42,7 @@
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <g:select name="type" class="form-control"
-                                                from="${MovementTypeEnum.values()}" name="statusSearch"
+                                                from="${MovementTypeEnum.values()}" name="movementType"
                                                     optionKey="key"
                                                 noSelection="${['null':'Entrada y Salida']}"
                                                     required="">
@@ -204,5 +204,22 @@
 
         <!-- Bootstrap Core JavaScript -->
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+		$(function() {
+			$('#datetimepicker1').datetimepicker({
+				format : 'DD-MM-YYYY',
+				locale : 'es',
+			});
+		});
+    </script>
+    <script type="text/javascript">
+		$(function() {
+			$('#datetimepicker2').datetimepicker({
+				format : 'DD-MM-YYYY',
+				locale : 'es'
+			});
+		});
+    </script>
 </body>
 </html>

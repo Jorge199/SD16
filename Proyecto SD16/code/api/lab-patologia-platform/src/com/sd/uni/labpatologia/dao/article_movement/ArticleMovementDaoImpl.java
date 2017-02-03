@@ -61,31 +61,47 @@ public class ArticleMovementDaoImpl  extends BaseDaoImpl<ArticleMovementDomain> 
 		
 		if (textToFind != null){
 			Criterion articleCriterion = Restrictions.disjunction().add(Restrictions.ilike("article._name", "%" + textToFind + "%"));
-			if(EnumUtils.isValidEnum(MovementTypeEnum.class, textToFind.toUpperCase())){
+			/*if(EnumUtils.isValidEnum(MovementTypeEnum.class, textToFind.toUpperCase())){
 				criteria.add(Restrictions.disjunction().add(Restrictions.eq("_movement_type", MovementTypeEnum.valueOf(textToFind.toUpperCase()))));
-			}
+			}*/
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
-			
-			if (!map.containsKey("start")){
-				minDate = new Date(0L);
+			// Agrego o quito alrededor de 150 anhos al min y max date
+			minDate = new Date(Calendar.getInstance().getTime().getTime()-5000000000000l);
+			maxDate = new Date(Calendar.getInstance().getTime().getTime()+5000000000000l);
+			if (map.containsKey("type")) { 
+				criteria.add(Restrictions.eq("_movement_type", MovementTypeEnum.valueOf(map.get("type"))));
 			}
-			if (!map.containsKey("end")){
-				minDate = new Date(Long.MAX_VALUE);
-			}
-			if (map.containsKey("start") && map.containsKey("end")) {
+			if (map.containsKey("start")){
 				try {
 					minDate = formatter.parse(map.get("start"));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			if (map.containsKey("end")){
+				Calendar c = Calendar.getInstance();
+				try {
+					c.setTime(formatter.parse(map.get("end")));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				c.add(Calendar.DATE, 1);
+				maxDate = c.getTime();
+			}
+			//if (map.containsKey("start") && map.containsKey("end")) {
+				//try {
+					/*minDate = formatter.parse(map.get("start"));
 					Calendar c = Calendar.getInstance();
 					c.setTime(formatter.parse(map.get("end")));
 					c.add(Calendar.DATE, 1);
-					maxDate = c.getTime();
+					maxDate = c.getTime();*/
 					System.out.println("desde" + minDate + "hasta " + maxDate);
 					criteria.add(Restrictions.between("_date", minDate, maxDate));
-				} catch (ParseException e) {
+				/*} catch (ParseException e) {
 					throw new PatologyException("Formato de ruta invalido", e);
-				}
-			}
+				}*/
+			//}
 			
 				criteria.add(Restrictions.or(propertyCriterion,articleCriterion));
 				

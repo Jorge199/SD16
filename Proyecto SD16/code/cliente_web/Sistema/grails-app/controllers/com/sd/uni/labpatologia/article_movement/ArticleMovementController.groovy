@@ -56,18 +56,15 @@ class ArticleMovementController {
                 if (params.containsKey("text")){
 			textToFind= params.get("text");
 		}else{
-                        if(!"".equals(params.get("type") && null != params.get("type"))){
-                            textToFind+="type="+params.get("type")+'&'
-                        }else{
-                            textToFind+="type=null"+'&'
+                    String tipo = params.get("movementType")
+                        if(!"".equals(params.get("movementType")) && null != params.get("movementType") && !"null".equals(params.get("movementType"))){
+                            textToFind+="type="+params.get("movementType")
                         }
-			if((!"".equals(params.get("startSearch"))) && !"".equals(params.get("endSearch")) && (null != params.get("startSearch")) && (null != params.get("endSearch"))){
-				textToFind+="start="+params.get("startSearch")+'&'
-				textToFind+="end="+params.get("endSearch")
-			}else{
-				if((null != params.get("startSearch")) && !"".equals(params.get("startSearch"))){
-					textToFind+="date="+params.get("startSearch")
-				}
+			if(!"".equals(params.get("startSearch")) && null != params.get("startSearch")){
+				textToFind+='&'+"start="+params.get("startSearch")
+			}
+                        if(!"".equals(params.get("endSearch")) && null != params.get("endSearch")){
+				textToFind+='&'+"end="+params.get("endSearch")
 			}
 		}
 		if(null != textToFind && !"".equals(textToFind)){
