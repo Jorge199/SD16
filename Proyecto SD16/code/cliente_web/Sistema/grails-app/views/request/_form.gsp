@@ -29,13 +29,13 @@
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<input type="number" class="form-control"  max="20" name="code_cortes" id="code_cortes"
+							<input type="number" class="form-control"  maxlength="20" name="code_cortes" id="code_cortes"
 							placeholder="Nro de cortes" />
 							</div>
 						</div>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<input type="number" class="form-control"  max="20" name="code_laminas" id="code_laminas"
+							<input type="number" class="form-control"  maxlength="20" name="code_laminas" id="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
@@ -45,13 +45,13 @@
 				<g:elseif test="${requestInstance?.status==StatusEnum.PROCESO }">
 					<div class="col-sm-4">
 					<div class="form-group">
-						<input type="text" name="code" id="code" readonly="readonly" class="form-control" value="${requestInstance?.code}"/>
+						<input type="text" name="code" id="code" maxlength="20" readonly="readonly" class="form-control" value="${requestInstance?.code}"/>
 					</div>
 					</div>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<input type="number" class="form-control"  max="20" name="code_laminas" id="code_laminas"
+							<input type="number" class="form-control"  maxlength="20" name="code_laminas" id="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
@@ -59,11 +59,11 @@
 				</g:elseif>
 				<g:else>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
-						<input class="form-control"  max="20" name="code" id="code"
+						<input class="form-control"  maxlength="20" name="code" id="code"
 							placeholder="Ingrese un codigo" value="${requestInstance?.code}"/>
 					</sec:ifAnyGranted>
 					<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
-						<input class="form-control"  max="20" name="code" readonly="readonly" id="code"
+						<input class="form-control"  maxlength="20" name="code" readonly="readonly" id="code"
 							placeholder="Ingrese un codigo" value="${requestInstance?.code}" />
 					</sec:ifAnyGranted>
 				</g:else>
@@ -77,7 +77,7 @@
 		<div class="col-md-4">
 				<label>Paciente <span class="required-indicator">*</span></label>
 				<div class="form-group">
-				<div class="input-group">
+				<div class="input-group" id="data-patient">
 				<g:if test="${action == 'save'}">
 					<select class="select-patient form-control" name="patientId" id="patientId">
 						<option value="${requestInstance?.patient?.id}">Selecciona un paciente</option>
@@ -88,7 +88,7 @@
 						<option value="${requestInstance?.patient?.id}">${requestInstance?.patient?.name} ${requestInstance?.patient?.lastName}</option>
 					</select>
 				</g:else>
-				<label type="button" class="btn btn-primary input-group-addon" data-toggle="modal"
+				<label  type="button" class="btn btn-primary input-group-addon" data-toggle="modal"
 							data-target="#createPatient">
 							<i class="fa fa-plus"></i>
 				</label>
@@ -99,7 +99,7 @@
 		<div class="col-md-4">
 			<label>Doctor <span class="required-indicator">*</span></label>
 			<div class="form-group">
-			<div class="input-group">
+			<div class="input-group" id="data-doctor">
 				<g:if test="${action == 'save'}">
 					<select id="doctorId" class="select-doctor form-control" name="doctorId" >
 						<option value="${requestInstance?.doctor?.id}">Selecciona un doctor</option>
@@ -207,6 +207,12 @@
 </div>
 
 <head>
+	<style>
+		.select2-container--default .select2-selection--single{
+		    height: 32px;
+		    width: 297px; 
+		}	
+	</style>
     <!-- Para boton guardar de paciente -->
     <script>
         function callPatient(){
@@ -242,6 +248,7 @@
     <!-- Para boton guardar de ficha -->
      <script>
         function callRequest(){
+        	if($("#myFormRequest").valid()){
             if(action = 'save'){
         	    $.ajax({
                 	type:"POST",
@@ -264,6 +271,7 @@
                  });
 
                 }     
+        }
         }
     </script>
     
