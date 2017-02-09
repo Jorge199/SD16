@@ -1,7 +1,6 @@
 /**
  * Validacion para el movimiento de stock
  */
-
 $(document).ready(function(e){
 	$("#articleMovement").validate({
 				rules: {
@@ -12,7 +11,9 @@ $(document).ready(function(e){
 						required:true
 					},
 					quantity:{
-						number:true
+						number:true,
+						min: 1,
+						max: 2147483647	
 					}	
 				},
 
@@ -24,11 +25,13 @@ $(document).ready(function(e){
 						required:"El campo tipo de movimiento es obligatorio"
 					},
 					quantity:{
-						number:"Debe estar en formato numerico"
+						number:"Debe estar en formato numerico",
+						min:"El valor minimo permitido es 1",
+						max:"Supera el valor maximo permitido"
 					}	
 				},
 				errorPlacement: function(error, element){
-					if(element.is(":text") || element.is("select") || element.is("number")){
+					if(element.is("select") || element.attr("name") == "quantity"){
 						error.insertAfter(element);
 					}
 				}
@@ -36,14 +39,22 @@ $(document).ready(function(e){
 			});
 });
 
-function saveData(){
+function saveDataArticleMovement(){
+
 	if($("#articleId").val() == "" || $("#movementType").val() == ""){
 		alert("Complete los campos obligatorios (*)");
 		return false;
 	}
+	if($("#quantity").val() == ""){
+		$("#quantity").val(1);
+	}
 	if(isNaN($("#quantity").val())){
 		$("#quantity").focus();
 		return false;
+	}
+	if($("#quantity").val() < 1 || $("#quantity").val() > 2147483647){
+		$("#quantity").focus();
+		return false;	
 	}
 	
 }

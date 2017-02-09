@@ -14,7 +14,7 @@ $(document).ready(function(e){
 						rangelength:[3,50]
 					},
 					units:{
-						number:true
+						rangelength:[3,10]
 					}
 				},
 
@@ -28,7 +28,7 @@ $(document).ready(function(e){
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					units:{
-						number:"Debe ser un numero"
+						rangelength:"Cantidad de caracteres entre 3 a 10"
 					}
 				},
 				errorPlacement: function(error, element){
@@ -40,9 +40,9 @@ $(document).ready(function(e){
 			});
 });
 
-function saveData(){
+function saveDataArticle(){
 	if($("#name").val() == "" || $("#description").val() == ""){
-		alert("Complete los campos obligatorios (*)")
+		alert("Complete los campos obligatorios (*)");
 		return false;
 	}
 	if($("#name").val().length < 3 || $("#name").val().length > 50){
@@ -53,5 +53,6 @@ function saveData(){
 		$("#description").focus();
 		return false;
 	}
+	
 	
 }

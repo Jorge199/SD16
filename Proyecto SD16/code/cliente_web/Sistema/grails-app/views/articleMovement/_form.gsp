@@ -12,39 +12,25 @@
             noSelection="${['':'Seleccione un articulo..']}" />
         </div>
     </div>
-    <!--<div class="col-md-6">
-    <label>Tipo de movimiento<span class="required-indicator">*</span></label> <input
-    type="text" class="form-control" required="" placeholder="Ingrese el tipo de movimiento"
-    maxlength="50"
-    name="movementType" value="${articleMovementInstance?.movementType }" />
-</div>-->
     <div class="col-md-6">
         <div class="form-group">
             <label for="movementType"> <g:message
                     code="Tipo de movimiento" /> <span class="required-indicator">*</span>
-                </label>
-                <g:select name="movementType" class="form-control selectpicker"
+            </label>
+                <g:select name="movementType" class="form-control"
                 id="movementType" type="text"
                 from="${MovementTypeEnum.values()}"
                 value="${articleMovementInstance?.movementType}" optionKey="key"
-                    required=""
-                noSelection="${['':'Seleccione un tipo de movimiento..']}">
-                </g:select>
-
-                        <!--<label class="radio-inline"> 
-            <g:radio name="movementType" value="${MovementTypeEnum.ENTRADA}" checked="${ArticleMovementInstance?.movementType == MovementTypeEnum.ENTRADA }"/>
-            ${MovementTypeEnum.ENTRADA}
-        </label>
-        <label class="radio-inline"> 
-            <g:radio name="movementType" value="${MovementTypeEnum.SALIDA}" checked="${ArticleMovementInstance?.movementType == MovementTypeEnum.SALIDA }"/>
-            ${MovementTypeEnum.SALIDA}
-        </label>-->
-            </div>
-        </div>
+                noSelection="${['':'Seleccione un tipo de movimiento..']}"/>
+           </div>
+    </div>
+</div>
+	<div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label>Cantidad</label> <input type="number" class="form-control"
-                min="1" max="2147483646" title='IngreseCantidad' 
+                <label>Cantidad</label> 
+                <input type="number" class="form-control"
+                min="1" max="2147483646"  
                 placeholder="Ingrese la cantidad" name="quantity" id="quantity"
                 value="${articleMovementInstance?.quantity}" />
             </div>
