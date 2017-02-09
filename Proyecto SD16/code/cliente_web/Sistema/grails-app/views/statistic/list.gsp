@@ -28,7 +28,7 @@
 				</div>
 				<div class="row">
 					<div class="panel-body">
-						<g:form action="list">
+						<g:form action="download" action="list">
 							<div class="col-md-5">
 								<div
 									class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
@@ -119,9 +119,20 @@
 							</div>
 							<div class="col-xs-12" align="center">
 								<fieldset class="buttons">
-									<button type="submit" class="btn btn-primary" name="list">
+									<!--<button type="submit" action="list" class="btn btn-primary" name="list">
 										<i class="fa fa-pie-chart"></i> Generar
 									</button>
+                                                                        <g:actionSubmit action="list" controller="Statistic" value="list"/>-->
+                                                                        <button type="submit" action="download" class="btn btn-primary" name="download">
+										<i class="fa fa-pie-chart"></i> listar
+                                                                        </button>
+                                                                        <g:actionSubmit action="download" class="btn btn-primary" value="Descargar"/>
+                                                                        <!--<g:link action="download" type="submit">
+                                                                            generar
+                                                                        </g:link>
+                                                                        <g:link action="list" controller="Statistic" type="submit">
+                                                                            listar
+                                                                        </g:link>-->
 								</fieldset>
 							</div>
 						</g:form>
