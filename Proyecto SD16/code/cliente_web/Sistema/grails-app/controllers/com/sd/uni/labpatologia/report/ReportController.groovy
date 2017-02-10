@@ -181,7 +181,34 @@ class ReportController {
 			redirect(action: "list")
 		}
 	}
+	
+	def generateReport(Integer id) {
 
+		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
+		
+		params.title = "Hello World !"
+		params.reportId = "220/B, Baker Street, London"
+		params.operationTime = new Date()
+		
+		params.patient = reportInstance?.request?.patient?.name +" "+ reportInstance?.request?.patient?.lastName
+		params.age = reportInstance.getAge()
+		params.date = "ENCARNACION, "+ new Date().getDate() + " de " + (new SimpleDateFormat("MMMM", new Locale("es", "ES"))).format(new Date())+ " del "+(new SimpleDateFormat("yyyy", new Locale("es", "ES"))).format(new Date())
+		params.code = reportInstance?.request?.code
+		params.sex = reportInstance?.request?.patient?.sex
+		params.doctor = reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName
+		params.specimen = "specimen"//reportInstance?.request?.specimen
+		params.signature = "DR. SERGIO ARIEL MEDINA S."
+		
+		params.diagnostic = reportInstance.getDiagnostic()
+		params.diagnosticDetail = reportInstance.getDiagnosticDetail()
+		
+		params.observations = reportInstance.getObservations()
+		
+		chain(controller:'jasper', action:'index',
+								  model:[data:reportService.getAll()],
+								  params:params)
+		return false
+	}
 
 	private int calculateAge(Date birthDay) {
 		Calendar fechaNac = Calendar.getInstance();

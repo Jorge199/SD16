@@ -33,7 +33,6 @@
 					</g:if>
 					<div class="row">
 						<div class="panel-body">
-							<g:form action="list">
 								<div class="col-md-5">
 									<div
 										class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
@@ -90,7 +89,7 @@
 										<i class="fa fa-search"></i> Buscar
 									</button>
 								</fieldset>
-							</g:form>
+
 						</div>
 					</div>
 
@@ -112,7 +111,7 @@
 											<g:sortableColumn property="patient" title="Paciente" />
 											<g:sortableColumn property="doctor" title="Doctor" />
 											<g:sortableColumn property="diagnostic" title="Diagnostico" />
-											<td></td>
+											<td colspan="2" align="center">Acciones</td>
 										</tr>
 									</thead>
 									<tbody>
@@ -142,9 +141,14 @@
 												<td>
 													${fieldValue(bean: reportInstance, field: "diagnostic")}
 												</td>
-
+												
 												<%--  <td>${fieldValue(bean: reportInstance, field: "request.id")}</td>		--%>
 												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+												<td align="center">
+												<g:jasperReport action="generateReport" controller="report" format="PDF,DOCX" jasper="report" id="${reportInstance.getId()}">
+												<input type="hidden" name="id" value="${reportInstance.getId()}" />Descargar
+												</g:jasperReport>
+												</td>
 													<td class="center"><g:link action="edit"
 															class="btn btn-success" id="${reportInstance.getId()}">
 															<i class="fa fa-pencil"></i> Editar</g:link>
@@ -161,7 +165,10 @@
 
 									</tbody>
 								</table>
+								
 								<g:render template="/layouts/paginate"/>
+								
+								
 							</div>
 						</div>
 					</div>

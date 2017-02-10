@@ -3,6 +3,9 @@
 <head>
 <ckeditor:resources />
 </head>
+
+				<h4><p style="text-align: center">INFORME DE ANATOMIA PATOLOGICA</p></h4>
+
 <fieldset>
 	<legend>Datos de la Solicitud</legend>
 
@@ -114,111 +117,20 @@
 	<div class="col-md-12">
 		<label> Informe <span class="required-indicator">*</span>
 		</label>
-		<ckeditor:editor id="editor" name="observations" height="600px" width="100%">
+		<div class="form-group">
+		<textarea class="form-control" rows="10" id="observations" name="observations" placeholder="Ingrese el Informe">
 			<g:if test="${null!=reportInstance?.observations}">
 				${reportInstance?.observations}
 			</g:if>
 			<g:else>
-				<p style="text-align: center">
-					<u>LABORATORIO DE ANATOMIA PATOLOGICA</u>
-				</p>
-
-				<p style="text-align: center">Facultad de Medicina U.N.I / VII
-					Regi&oacute;n Sanitaria</p>
-
-				<p style="text-align: center">&nbsp;</p>
-
-				<p style="text-align: center">INFORME DE ANATOMIA PATOLOGICA</p>
-
-				<table border="1" cellpadding="1" cellspacing="1"
-					style="width: 100%">
-					<tbody>
-						<tr>
-							<td>
-								<p>
-									&nbsp; &nbsp;Nombre:
-									${reportInstance?.request?.patient?.name +" "+ reportInstance?.request?.patient?.lastName}
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									<g:if test="${reportInstance?.age}">
-										Edad:&nbsp;${reportInstance?.age }
-									</g:if>
-									
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-								</p>
-
-								<p>
-									&nbsp; &nbsp;N&ordm; de Informe: &nbsp; &nbsp; &nbsp; &nbsp;
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-									&nbsp; &nbsp; 
-									<g:if test="${reportInstance?.request?.patient?.sex}">
-										Sexo:&nbsp;${reportInstance?.request?.patient?.sex}
-										
-									</g:if>
-								</p>
-
-								<p>
-									&nbsp; &nbsp;M&eacute;dico:&nbsp;${reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName}
-								</p>
-
-								<p>&nbsp; &nbsp;Material:</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<p>&nbsp;</p>
-
-				<p>&nbsp;</p>
-
-				<p>&nbsp;</p>
-
-				<p>
-					${reportInstance?.request?.studyType?.name.toUpperCase()}
-				</p>
-
-				<p>&nbsp;</p>
-
-				<p>&nbsp;</p>
-
-				<p>&nbsp;</p>
-
-				<p>DIAGN&Oacute;STICO</p>
-
-				<p>LEC, BIOPSIA:</p>
-
-				<p>&nbsp;</p>
-
-				<p>&nbsp;</p>
-
-				<p>
-					ENCARNACI&Oacute;N,
-					${new Date().getDate()}
-					de
-					${(new SimpleDateFormat("MMMM", new Locale("es", "ES"))).format(new Date())}
-					de
-					${(new SimpleDateFormat("yyyy", new Locale("es", "ES"))).format(new Date())}
-				</p>
-				<p style="text-align: center">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp;___________________________</p>
-				<p style="text-align: center">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; Dr. SERGIO ARIEL MEDINA S.</p>
+	${reportInstance?.request?.studyType?.name.toUpperCase()}
+	
+	DIAGNÓSTICO
+	
+	LEC, BIOPSIA:
 			</g:else>
-		</ckeditor:editor>
+			</textarea>
+		</div>
 	</div>
 
 </fieldset>
