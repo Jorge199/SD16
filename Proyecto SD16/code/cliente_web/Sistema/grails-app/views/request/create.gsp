@@ -12,7 +12,6 @@
 			args="[entityName]" /></title>
 	<asset:stylesheet src="application.css" />
 	<asset:javascript src="application.js" />
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src="jquery.validate.js"></script>
 	<script src="validationModalPatient.js"></script>
 	<script src="validationModalDoctor.js"></script>
@@ -39,7 +38,8 @@
 	</div>
 	<br><br><br><br>
 	
-	
+			<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
@@ -65,12 +65,6 @@
 	<link rel="stylesheet"
 		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
 	<script type="text/javascript">
-		$(function() {
-			$('#datetimepicker2').datetimepicker({
-				format : 'DD-MM-YYYY',
-				locale : 'es',
-			});
-		});
 		$(function() {
 			$('#datetimepicker1').datetimepicker({
 				format : 'DD-MM-YYYY',

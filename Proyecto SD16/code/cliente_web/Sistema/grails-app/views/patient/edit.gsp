@@ -40,6 +40,8 @@
 		</div>
 	</div>
 
+	<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<!-- Jasny-Bootstrap JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>

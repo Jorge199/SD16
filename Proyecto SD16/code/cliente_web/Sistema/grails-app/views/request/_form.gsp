@@ -7,7 +7,7 @@
 		<div class="col-md-4">
 			<label>Fecha de Ingreso <span class="required-indicator">*</span></label>
 			<div class="form-group">
-			<div class='input-group date' id='datetimepicker2'>
+			<div class='input-group date' id='datetimepicker1'>
 				<input type='text' class="form-control" name="date" id="date" placeholder="Selecciona una fecha"
 					value="${formatDate(format: 'dd-MM-yyyy', date:requestInstance.getDate())}" /> <span
 					class="input-group-addon"> <span
