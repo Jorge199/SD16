@@ -17,7 +17,7 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<form action="/Sistema/doctor/save" method="post" id="doctor" onsubmit="return saveData();">
+					<form action="/Sistema/doctor/update" method="post" id="doctor" onsubmit="return saveData();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>

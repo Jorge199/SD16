@@ -15,6 +15,8 @@
 <asset:javascript src="application.js" />
 <title>Sistema</title>
 
+<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 <!-- Select2 -->
 	<link rel="stylesheet" href="${request.contextPath}/dist/css/select2.min.css">
     <script src="${request.contextPath}/dist/js/select2.js"></script>
