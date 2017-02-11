@@ -10,6 +10,7 @@ import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.doctor.DoctorServiceImpl
 import com.sd.uni.labpatologia.service.doctor.IDoctorService
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
+import com.sd.uni.labpatologia.util.SexEnum
 
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,11 @@ class DoctorController {
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def save() {
 		def doctorInstance = new DoctorB(params)
+		try{
+			doctorInstance.setSex(SexEnum.valueOf(params.get("sex").toUpperCase()))
+		}catch(NullPointerException n){
+			n.printStackTrace()
+		}
 		def newDoctor = doctorService.save(doctorInstance)
 		if (!newDoctor?.getId()) {
 			render(view: "create", model: [doctorInstance: doctorInstance])
@@ -74,7 +80,12 @@ class DoctorController {
 	}
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def update(Integer id) {
-		def doctorInstance = new DoctorB(params)
+		def doctorInstance = doctorService.getById(Integer.parseInt(params.get("edit")))
+		try{
+			doctorInstance.setSex(SexEnum.valueOf(params.get("sex").toUpperCase()))
+		}catch(NullPointerException n){
+			n.printStackTrace()
+		}
 		doctorInstance.setId(Integer.parseInt(params.get("edit")))
 		doctorInstance.setAddress(params.get("address"))
 		doctorInstance.setEmail(params.get("email"))

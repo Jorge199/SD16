@@ -1,5 +1,5 @@
 
-
+<%@ page import="com.sd.uni.labpatologia.util.SexEnum"%>
 <div class="row">
 	<div class="col-md-6">
 		<label>Nombre<span class="required-indicator">*</span></label>
@@ -30,15 +30,29 @@
 	</div>
 	
 	<div class="col-md-6">
+		<label>Sexo<span class="required-indicator">*</span></label>
+			<div class="form-group">
+				<label class="radio-inline"> 
+					<g:radio id="sex" name="sex" value="${SexEnum.MASCULINO}" checked="${doctorInstance?.sex == SexEnum.MASCULINO }"/>
+				 	${SexEnum.MASCULINO}
+				</label>
+				<label class="radio-inline"> 
+					<g:radio id="sex" name="sex" value="${SexEnum.FEMENINO}" checked="${doctorInstance?.sex == SexEnum.FEMENINO }"/>
+				 	${SexEnum.FEMENINO}
+				</label>
+			</div>
+	</div>
+	
+</div>
+
+<div class="row">
+<div class="col-md-6">
 		<label>Especialidad</label> 
 		<div class="form-group">
 			<input class="form-control" type="text" maxlength="20"
 			id="speciality" name="speciality" placeholder="Ingrese una Especialidad" value="${doctorInstance?.speciality}"/>
 		</div>
 	</div>
-</div>
-
-<div class="row">
 	<div class="col-md-6">
 		<label>Teléfono</label> 
 		<div class="form-group">
@@ -47,16 +61,17 @@
 		</div>
 	</div>
 	
-	<div class="col-md-6">
+	
+</div>
+
+<div class="row">
+<div class="col-md-6">
 		<label>Correo</label>
 		<div class="form-group">
 			<input class="form-control" type="text" maxlength="50" 
 			id="email" name="email" placeholder="Ingrese un correo" value="${doctorInstance?.email}" />
 		</div>
 	</div>
-</div>
-
-<div class="row">
 	<div class="col-md-6">
 		<label>Dirección</label>
 		<div class="form-group">

@@ -14,6 +14,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.sd.uni.labpatologia.beans.base.BaseBean;
+import com.sd.uni.labpatologia.util.SexEnum;
 
 public class DoctorB extends BaseBean {
 	private static final long serialVersionUID = 1L;
@@ -24,15 +25,10 @@ public class DoctorB extends BaseBean {
 	private String _phone;
 	private String _email;
 	private String _speciality;
-	private DoctorB _doctor;
-	private String _fullName;
-
+	private SexEnum _sex;
+	
 	public String getFullName() {
 		return _name + " " + _last_name;
-	}
-	
-	public void setFullName(String name) {
-		_fullName = name;
 	}
 	
 	public DoctorB(Map<String, String> params) {
@@ -86,13 +82,6 @@ public class DoctorB extends BaseBean {
 		_email = email;
 	}
         
-        public DoctorB getDoctor() {
-		return _doctor;
-	}
-	public void setDoctor(DoctorB doctor) {
-		_doctor = doctor;
-	}
-        
 	public String getSpeciality() {
 		return _speciality;
 	}
@@ -101,6 +90,14 @@ public class DoctorB extends BaseBean {
 		_speciality = speciality;
 	}
 
+	public SexEnum getSex() {
+		return _sex;
+	}
+
+	public void setSex(SexEnum sex) {
+		_sex = sex;
+	}
+	
 	@Override
 	protected void create(Map<String, String> params) {
 		if (!StringUtils.isBlank(params.get("id"))) {
@@ -113,7 +110,6 @@ public class DoctorB extends BaseBean {
         setPhone(params.get("phone"));
         setEmail(params.get("email"));
         setSpeciality(params.get("speciality"));
-        setFullName(params.get("name") + " " + params.get("lastName"));
 	}
 
 }
