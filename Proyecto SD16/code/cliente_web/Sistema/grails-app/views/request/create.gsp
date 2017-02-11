@@ -66,7 +66,7 @@
 		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
 	<script type="text/javascript">
 		$(function() {
-			$('#datetimepicker1').datetimepicker({
+			$('#datetimepicker2').datetimepicker({
 				format : 'DD-MM-YYYY',
 				locale : 'es',
 			});

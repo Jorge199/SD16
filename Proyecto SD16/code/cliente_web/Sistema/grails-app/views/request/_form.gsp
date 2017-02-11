@@ -1,13 +1,18 @@
 <%@ page import="java.lang.System"%>
 <%@ page import="com.sd.uni.labpatologia.util.StatusEnum" %>
 
-<form id="myFormRequest" onsubmit="return saveDataRequest();">
+<g:if test="${action == 'save'}">
+	   <form id="myFormRequest" action="/Sistema/request/save" method="post" id="request" onsubmit="return saveDataRequest();">
+	</g:if><g:else>
+	   <form id="myFormRequest" action="/Sistema/request/update" method="post" id="request" onsubmit="return saveDataRequest();">
+	</g:else>
+
 <div class="row">
 	<div class=col-md-12>
 		<div class="col-md-4">
 			<label>Fecha de Ingreso <span class="required-indicator">*</span></label>
 			<div class="form-group">
-			<div class='input-group date' id='datetimepicker1'>
+			<div class='input-group date' id='datetimepicker2'>
 				<input type='text' class="form-control" name="date" id="date" placeholder="Selecciona una fecha"
 					value="${formatDate(format: 'dd-MM-yyyy', date:requestInstance.getDate())}" /> <span
 					class="input-group-addon"> <span
@@ -210,7 +215,6 @@
 	<style>
 		.select2-container--default .select2-selection--single{
 		    height: 32px;
-		    width: 297px; 
 		}	
 	</style>
     <!-- Para boton guardar de paciente -->
