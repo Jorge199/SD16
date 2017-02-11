@@ -3,6 +3,7 @@ package com.sd.uni.labpatologia.utils;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
@@ -15,9 +16,9 @@ public class Config {
 	static {
 		try {
 			final Properties config = new Properties();
-			final FileInputStream in = new FileInputStream(
-					"src/java/conf.properties");
-			config.load(in);
+			
+			InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("conf.properties");
+			config.load(input);
 
 			for (Object o : config.keySet()) {
 				final String key = o.toString();
@@ -30,7 +31,7 @@ public class Config {
 				}
 			}
 
-			in.close();
+			input.close();
 		} catch (FileNotFoundException e) {
 			System.err.println(e);
 		} catch (IOException e) {
