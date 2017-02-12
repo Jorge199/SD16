@@ -1,12 +1,12 @@
 package com.sd.uni.labpatologia.service.request;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -103,13 +103,32 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		final RequestDTO dto = new RequestDTO();
 		dto.setId(domain.getId());
 		dto.setNote(domain.getNote());
-		dto.setCode(domain.getCode());
 		dto.setPatientId(domain.getPatient().getId());
 		dto.setStudyId(domain.getStudyType().getId());
 		dto.setDoctorId(domain.getDoctor().getId());
-		dto.setDate(domain.getDate());
-		//dto.setUserId(domain.getUser().getId());
-		dto.setStatus(domain.getStatus());
+		dto.setSpecimen(domain.getSpecimen());
+		if (null != domain.getCode()){
+			dto.setCode(domain.getCode());
+			dto.setDate(domain.getDate());
+		}else {
+			Calendar today = Calendar.getInstance();        
+			dto.setCode(today.get(Calendar.DATE) + today.get(Calendar.MONTH) + today.get(Calendar.YEAR) + "-" + dto.getId());
+			dto.setDate(today.getTime());
+			domain.setDate(today.getTime());
+		}
+		if (null != domain.getCodeCassette()){
+			dto.setCodeCassette(domain.getCodeCassette());
+		}
+		if (null != domain.getCodeSheet()){
+			dto.setCodeSheet(domain.getCodeSheet());
+		}
+		if (null != domain.getStatus()){
+			dto.setStatus(domain.getStatus());
+			
+		}else {
+			dto.setStatus(StatusEnum.RECIBIDO);
+		}
+		
 		return dto;
 	}
 
@@ -123,9 +142,11 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		//domain.setUser(userDao.getById(dto.getUserId()));
 		
 		domain.setNote(dto.getNote());
-		domain.setDate(dto.getDate());
-		domain.setCode(dto.getCode());
+		domain.setCodeCassette(dto.getCodeCassette());
+		domain.setCodeSheet(dto.getCodeSheet());
 		domain.setStatus(dto.getStatus());
+		domain.setSpecimen(dto.getSpecimen());
+		domain.setCode(dto.getCode());
 		
 		// Si el estado es TERMINADO le agraga a la tabla de pendientes para notificacion
 		if (dto.getStatus() == StatusEnum.TERMINADO){

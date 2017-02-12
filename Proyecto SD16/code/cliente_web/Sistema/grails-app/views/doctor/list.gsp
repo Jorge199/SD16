@@ -51,6 +51,7 @@
 										<tr>
 											<g:sortableColumn property="name" title="Nombre" />
 											<g:sortableColumn property="last_name" title="Apellido" />
+											<g:sortableColumn property="sex" title="Sexo" />
 											<g:sortableColumn property="ci" title="C.I" />
 											<g:sortableColumn property="speciality" title="Especialidad" />
 											<g:sortableColumn property="phone" title="Telefono" />
@@ -69,6 +70,9 @@
 												</td>
 												<td>
 													${fieldValue(bean: doctorInstance, field: "lastName")}
+												</td>
+												<td>
+													${fieldValue(bean: doctorInstance, field: "sex")}
 												</td>
 												<td class="numbers">
 													${fieldValue(bean: doctorInstance, field: "ci")}

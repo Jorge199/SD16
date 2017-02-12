@@ -84,6 +84,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 		doctor.setEmail(domain.getEmail());
 		doctor.setPhone(domain.getPhone());
 		doctor.setSpeciality(domain.getSpeciality());
+		doctor.setSex(domain.getSex());
 		return doctor;
 	}
 
@@ -98,6 +99,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 		doctor.setEmail(dto.getEmail());
 		doctor.setPhone(dto.getPhone());
 		doctor.setSpeciality(dto.getSpeciality());
+		doctor.setSex(dto.getSex());
 		return doctor;
 	}
 

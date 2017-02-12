@@ -50,7 +50,7 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorDomain> implements IDoctorD
 		Session session = _sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(DoctorDomain.class);
 		if (textToFind != null){
-			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", textToFind))
+			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_last_name", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_address", "%"+textToFind+"%"))
 					.add(Restrictions.ilike("_phone", "%"+textToFind+"%"))

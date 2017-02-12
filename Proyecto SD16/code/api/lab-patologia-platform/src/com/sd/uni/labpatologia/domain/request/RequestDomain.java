@@ -1,8 +1,6 @@
 package com.sd.uni.labpatologia.domain.request;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -57,8 +54,17 @@ public class RequestDomain extends BaseDomain {
 	@Column(name = "code")
 	private String _code;
 	
+	@Column(name = "codeCassette")
+	private Integer _codeCassette;
+	
+	@Column(name = "codeSheet")
+	private Integer _codeSheet;
+	
 	@Enumerated(EnumType.STRING)
 	private StatusEnum _status;
+	
+	@Column(name = "specimen")
+	private String _specimen;
 
 	public Integer getId() {
 		return _id;
@@ -131,6 +137,22 @@ public class RequestDomain extends BaseDomain {
 	public void setCode(String code) {
 		_code = code;
 	}
+	
+	public Integer getCodeCassette() {
+		return _codeCassette;
+	}
+
+	public void setCodeCassette(Integer code) {
+		_codeCassette = code;
+	}
+	
+	public Integer getCodeSheet() {
+		return _codeSheet;
+	}
+
+	public void setCodeSheet(Integer code) {
+		_codeSheet = code;
+	}
 
 	public StatusEnum getStatus() {
 		return _status;
@@ -140,6 +162,13 @@ public class RequestDomain extends BaseDomain {
 		_status = status;
 	}
 
-	
+	public String getSpecimen() {
+		return _specimen;
+	}
+
+	public void setSpecimen(String specimen) {
+		_specimen = specimen;
+	}
+
 }
 

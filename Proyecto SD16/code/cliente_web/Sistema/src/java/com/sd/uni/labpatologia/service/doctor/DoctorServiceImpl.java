@@ -75,6 +75,7 @@ implements IDoctorService {
 		params.put("speciality", dto.getSpeciality());
 
 		final DoctorB doctorB = new DoctorB(params);
+		doctorB.setSex(dto.getSex());
 		return doctorB;
 	}
 
@@ -89,6 +90,7 @@ implements IDoctorService {
 		dto.setPhone(bean.getPhone());
 		dto.setEmail(bean.getEmail());
 		dto.setSpeciality(bean.getSpeciality());
+		dto.setSex(bean.getSex());
 		return dto;
 	}
 

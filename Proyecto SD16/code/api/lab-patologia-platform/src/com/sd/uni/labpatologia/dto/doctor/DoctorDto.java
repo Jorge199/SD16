@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.sd.uni.labpatologia.dto.base.BaseDTO;
+import com.sd.uni.labpatologia.util.SexEnum;
 
 @XmlRootElement(name = "doctor")
 public class DoctorDto extends BaseDTO{
@@ -15,7 +16,7 @@ public class DoctorDto extends BaseDTO{
 	private String _phone;
 	private String _email;
 	private String _speciality;
-
+	private SexEnum _sex;
 
 	@XmlElement
 	public String getName() {
@@ -77,5 +78,14 @@ public class DoctorDto extends BaseDTO{
 	
 	public void setSpeciality(String speciality) {
 		_speciality = speciality;
+	}
+	
+	@XmlElement
+	public SexEnum getSex() {
+		return _sex;
+	}
+
+	public void setSex(SexEnum sex) {
+		_sex = sex;
 	}
 }

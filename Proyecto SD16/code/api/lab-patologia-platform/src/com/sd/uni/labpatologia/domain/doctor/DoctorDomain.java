@@ -2,12 +2,15 @@ package com.sd.uni.labpatologia.domain.doctor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
+import com.sd.uni.labpatologia.util.SexEnum;
 
 @Entity
 @Table(name = "doctor")
@@ -37,6 +40,9 @@ public class DoctorDomain extends BaseDomain{
 	
 	@Column(name = "speciality")
 	private String _speciality;
+	
+	@Enumerated(EnumType.STRING)
+	private SexEnum _sex;
 	
 	public Integer getId() {
 		return _id;
@@ -94,5 +100,12 @@ public class DoctorDomain extends BaseDomain{
 		_speciality = speciality;
 	}
 	
+	public SexEnum getSex() {
+		return _sex;
+	}
+
+	public void setSex(SexEnum sex) {
+		_sex = sex;
+	}
 	
 }

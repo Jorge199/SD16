@@ -21,7 +21,10 @@ public class RequestDTO extends BaseDTO {
 	private Integer _userId;
 	private Integer _reportId;
 	private String _code;
+	private Integer _codeCassette;
+	private Integer _codeSheet;
 	private StatusEnum _status;
+	private String _specimen;
 	
 	@XmlElement
 	public Integer getPatientId() {
@@ -94,6 +97,24 @@ public class RequestDTO extends BaseDTO {
 	public void setCode(String code) {
 		_code = code;
 	}
+	
+	@XmlElement
+	public Integer getCodeCassette() {
+		return _codeCassette;
+	}
+
+	public void setCodeCassette(Integer code) {
+		_codeCassette = code;
+	}
+	
+	@XmlElement
+	public Integer getCodeSheet() {
+		return _codeSheet;
+	}
+
+	public void setCodeSheet(Integer code) {
+		_codeSheet = code;
+	}
 
 	@XmlElement
 	public StatusEnum getStatus() {
@@ -104,5 +125,13 @@ public class RequestDTO extends BaseDTO {
 		_status = status;
 	}
 
+	@XmlElement
+	public String getSpecimen() {
+		return _specimen;
+	}
+
+	public void setSpecimen(String specimen) {
+		_specimen = specimen;
+	}
 	
 }
