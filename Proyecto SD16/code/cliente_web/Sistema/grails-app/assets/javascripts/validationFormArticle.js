@@ -7,14 +7,14 @@ $(document).ready(function(e){
 				rules: {
 					name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[3,50],
+						lettersonly:true
 					},
 					description:{
-						required:true,
-						rangelength:[3,50]
+						maxlength:100
 					},
 					units:{
-						rangelength:[3,10]
+						maxlength:40
 					}
 				},
 
@@ -24,11 +24,10 @@ $(document).ready(function(e){
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					description:{
-						required:"El campo descripcion es obligatorio",
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						maxlength:"Cantidad de caracteres hasta 100"
 					},
 					units:{
-						rangelength:"Cantidad de caracteres entre 3 a 10"
+						maxlength:"Cantidad de caracteres hasta 40"
 					}
 				},
 				errorPlacement: function(error, element){
@@ -39,18 +38,34 @@ $(document).ready(function(e){
 			
 			});
 });
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+	return this.optional(element) || /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/i.test(value);
+	}, "No se admiten números");
 
 function saveDataArticle(){
-	if($("#name").val() == "" || $("#description").val() == ""){
+	var name = $("#name").val();
+	var description = $("#description").val();
+	var units = $("#units").val();
+	var letter = /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/;
+	
+	if( name == "" ){
 		alert("Complete los campos obligatorios (*)");
 		return false;
 	}
-	if($("#name").val().length < 3 || $("#name").val().length > 50){
-		$("#name").focus();
+	if(name.length < 3 || name.length > 50){
+		alert("Verifique el nombre del artículo");
 		return false;
 	}
-	if($("#description").val().length < 3 || $("#description").val().length > 50){
-		$("#description").focus();
+	if(description.length > 100){
+		alert("Verifique la descripción del artículo");
+		return false;
+	}
+	if(units.length > 40){
+		alert("Verifique la unidades del artículo");
+		return false;
+	}
+	if(!(letter.test(name))){
+		alert("El nombre debe tener solo letras");
 		return false;
 	}
 	

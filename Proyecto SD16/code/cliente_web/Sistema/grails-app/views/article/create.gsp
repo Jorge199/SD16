@@ -3,13 +3,6 @@
 <html>
 <head>
 	<meta name="layout" content="template">
-	<g:set var="entityName"
-		value="${message(code: 'article.label', default: 'Article')}" />
-	<title><g:message code="default.create.label"
-			args="[entityName]" /></title>
-	<asset:stylesheet src="application.css" />
-	<asset:javascript src="application.js" />
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src="jquery.validate.js"></script>
 	<script src="validationFormArticle.js"></script>
 	<script src="jquery.number.js"></script>
@@ -21,7 +14,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4>
-						<strong>Registrar Articulo</strong>
+						<strong>Registrar Artículo</strong>
 					</h4>
 				</div>
 				<div class="panel-body">
@@ -72,17 +65,6 @@
 
 	<link rel="stylesheet"
 		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
-	<script type="text/javascript">
-		$(function() {
-			$('#datetimepicker1').datetimepicker({
-				format : 'DD-MM-YYYY',
-				locale : 'es'
-			});
-			
-		});
-	</script>
-	<script type="text/javascript">
-		$("#phoneNum").mask("(999) 999-9999");
-	</script>
+	
 </body>
 </html>

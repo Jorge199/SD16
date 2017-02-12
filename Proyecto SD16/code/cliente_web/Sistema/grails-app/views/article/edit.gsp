@@ -3,8 +3,6 @@
 <html>
 <head>
 	<meta name="layout" content="template">
-	<title><g:message code="default.edit.label" args="[entityName]" /></title>
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src="jquery.validate.js"></script>
 	<script src="validationFormArticle.js"></script>
 	<script src="jquery.number.js"></script>
@@ -15,11 +13,11 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4>
-						<strong>Editar Informacion del Articulo</strong>
+						<strong>Editar Información del Artículo</strong>
 					</h4>
 				</div>
 				<div class="panel-body">
-					<form action="/Sistema/article/update" method="post" id="article" onsubmit="return saveData();">
+					<form action="/Sistema/article/update" method="post" id="article" onsubmit="return saveDataArticle();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
@@ -55,10 +53,6 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script type="text/javascript">
-		$("#phoneNum").mask("(999) 999-9999");
-	</script>
 
 	<!-- Bootstrap datetimepicker -->
 	<script
@@ -68,17 +62,7 @@
 
 	<link rel="stylesheet"
 		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
-	<script type="text/javascript">
-		$(function() {
-			$('#datetimepicker1').datetimepicker({
-				format : 'DD-MM-YYYY',
-				locale : 'es',
-			});
-		});
-	</script>
-	<script type="text/javascript">
-		$("#phoneNum").mask("(999) 999-9999");
-	</script>
+	
 
 </body>
 </html>
