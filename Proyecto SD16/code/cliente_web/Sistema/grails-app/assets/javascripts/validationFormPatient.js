@@ -7,20 +7,22 @@ $(document).ready(function(e){
 				rules: {
 					name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[3,50],
+						lettersonly:true
 					},
 					lastName:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[3,50],
+						lettersonly:true
 					},
 					document:{
-						rangelength:[6,10]
+						maxlength:10
 					},
 					address:{
 						rangelength:[3,50]
 					},
 					phone:{
-						rangelength:[9,15]
+						maxlength:15
 					},
 					mail:{
 						email:true
@@ -43,14 +45,14 @@ $(document).ready(function(e){
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					document:{
-						rangelength:"Cantidad de caracteres de 6 a 10"
+						maxlength:"Cantidad de caracteres hasta 10"
 					},
 					address:{
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					phone:{
 						number:"Debe ser numerico",
-						rangelength:"Debe tener entre 9 a 15 numeros",
+						maxlength:"Debe tener hasta 15 numeros",
 					},
 					mail:{
 						email:"Formato de correo incorrecto"
@@ -70,48 +72,70 @@ $(document).ready(function(e){
 			
 			});
 });
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+	return this.optional(element) || /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/i.test(value);
+	}, "Solo letras");
 
 function saveDataPa(){
 	var expresion = /\w+@\w+\.+[a-z]/;
-	if($("#patient input[id=name]").val() == "" || $("#patient input[id=lastName]").val() == "" || $("#patient :radio[id=sex]:checked").val() === undefined){
+	var letter = /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/;
+	var name = $("#patient input[id=name]").val();
+	var lastName = $("#patient input[id=lastName]").val();
+	var sex = $("#patient :radio[id=sex]:checked").val();
+	var doc = $("#patient input[id=document]").val();
+	var address = $("#patient input[id=address]").val();
+	var phone = $("#patient input[id=phone]").val();
+	var mail = $("#patient input[id=mail]").val();
+	
+	if( name == "" || lastName == "" || sex === undefined){
 		alert("Complete los campos obligatorios(*)");
 		return false;
 	}
-	if($("#patient input[id=name]").val().length < 3 || $("#patient input[id=name]").val().length > 50){
-		$("#patient input[id=name]").focus();
+
+	if(name.length < 3 || name.length > 50){
+		alert("Verifique en nombre");
 		return false;
 	}
-	if($("#patient input[id=lastName]").val().length < 3 || $("#patient input[id=lastName]").val().length > 50){
-		$("#patient input[id=lastName]").focus();
+	if(lastName.length < 3 || lastName.length > 50){
+		alert("Verifique el apellido");
 		return false;
 	}
-	if($("#patient input[id=document]").val().length < 6 || $("#patient input[id=document]").val().length > 10){
-		if(!($("#patient input[id=document]").val() == "")){
-			$("#patient input[id=document]").focus();
+	if(doc.length > 10){
+		if(!(doc == "")){
+			alert("Verifique su documento de identidad");
 			return false;
 		}	
 	}
-	if($("#patient input[id=address]").val().length < 3 || $("#patient input[id=address]").val().length > 50){
-		if(!($("#patient input[id=address]").val() == "")){
-			$("#patient input[id=address]").focus();
+	if(address.length < 3 || address.length > 50){
+		if(!(address == "")){
+			alert("Verifique su dirección");
 			return false;	
 		}	
 	}
-	if(isNaN($("#patient input[id=phone]").val())){
-		$("#patient input[id=phone]").focus();
+	if(isNaN(phone)){
+		alert("Verifique su número de teléfono");
 		return false;
 	}
-	if(!($("#patient input[id=phone]").val() == "")){
-		if($("#patient input[id=phone]").val().length < 9 || $("#patient input[id=phone]").val().length > 15){
-			$("#patient input[id=phone]").focus();
-			return false;
-		}
-	}
-	if($("#patient input[id=mail]").val != ""){
-		if(!expresion.test($("#patient input[id=mail]").val())){
-			$("#patient input[id=mail]").focus();
+	if(!(phone == "")){
+		if(phone.length > 15){
+			alert("Verifique su número de teléfono");
 			return false;
 		}
 	}
 	
+	if(!expresion.test(mail)){
+		if(mail != ""){
+			alert("Verifique su correo");
+			return false;
+		}	
+	}
+	
+	if(!(letter.test(name))){
+		alert("El nombre debe tener solo letras");
+		return false;
+	}
+	if(!(letter.test(lastName))){
+		alert("El apellido debe tener solo letras");
+		return false;
+	}
 }
