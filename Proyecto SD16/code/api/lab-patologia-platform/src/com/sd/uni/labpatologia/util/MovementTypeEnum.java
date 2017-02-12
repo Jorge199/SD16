@@ -2,7 +2,7 @@ package com.sd.uni.labpatologia.util;
 
 public enum MovementTypeEnum {
 	
-	ENTRADA("entrada"), SALIDA("salida");
+	ENTRADA("Entrada"), SALIDA("Salida");
 	
 	final String _value;
 

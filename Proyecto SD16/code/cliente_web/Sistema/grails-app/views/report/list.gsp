@@ -33,10 +33,10 @@
 					</g:if>
 					<div class="row">
 						<div class="panel-body">
-								<div class="col-md-5">
+								<div class="col-md-4">
 									<div
 										class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
-										<label class="col-sm-4" for="diagnostic"> <g:message
+										<label class="col-sm-3" for="diagnostic"> <g:message
 												code="Diagnostico" />
 										</label>
 										<div class="col-md-9">

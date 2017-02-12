@@ -36,10 +36,10 @@
                             <g:form action="list">
                                 <div class="col-md-4">
                                     <div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'movementType', 'error')} required">
-                                        <label class="col-md-3" for="movementType"> <g:message
+                                        <label class="col-md-4" for="movementType"> <g:message
                                                 code="Tipo de movimiento" />
                                         </label>
-                                        <div class="col-md-9">
+                                        <div class="col-md-8">
                                             <div class="form-group">
                                                 <g:select name="type" class="form-control"
                                                 from="${MovementTypeEnum.values()}" name="movementType"
@@ -51,13 +51,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'start', 'error')} required">
                                         <div class="col-md-3">
                                             <label for="start"> <g:message code="Desde Fecha" />
                                             </label>
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-9">
                                             <div class="form-group">
                                                 <div class='input-group date' id='datetimepicker1'>
                                                     <input type='text' class="form-control "
@@ -68,14 +68,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
                                     <div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'end', 'error')} required">
                                         <div class="col-md-3">
                                             <label for="start"> <g:message code="Hasta Fecha" />
                                             </label>
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-9">
                                             <div class="form-group">
                                                 <div class='input-group date' id='datetimepicker2'>
                                                     <input type='text' class="form-control"
@@ -87,6 +85,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-1"></div>
                                 <fieldset class="buttons">
                                     <button type="submit" class="btn btn-primary" name="list">
                                         <i class="fa fa-search"></i> Buscar
