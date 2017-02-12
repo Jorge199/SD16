@@ -3,13 +3,6 @@
 <html>
 <head>
 	<meta name="layout" content="template">
-	<g:set var="entityName"
-		value="${message(code: 'doctor.label', default: 'Doctor')}" />
-	<title><g:message code="default.create.label"
-			args="[entityName]" /></title>
-	<asset:stylesheet src="application.css" />
-	<asset:javascript src="application.js" />
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src="jquery.validate.js"></script>
 	<script src="validationFormDoctor.js"></script>
 	<script src="jquery.number.js"></script>
@@ -24,7 +17,7 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<form action="/Sistema/doctor/save" method="post" id="doctor" onsubmit="return saveData();">
+					<form action="/Sistema/doctor/save" method="post" id="doctor" onsubmit="return saveDataDoc();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>

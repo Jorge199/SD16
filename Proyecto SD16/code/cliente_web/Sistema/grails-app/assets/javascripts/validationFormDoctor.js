@@ -16,6 +16,9 @@ $(document).ready(function(e){
 					ci:{
 						rangelength:[6,10]
 					},
+					sex:{
+						required:true
+					},
 					speciality:{
 						rangelength:[3,20]
 					},
@@ -42,6 +45,9 @@ $(document).ready(function(e){
 					ci:{
 						rangelength:"Cantidad de caracteres de 6 a 10"
 					},
+					sex:{
+						required:"Este campo es obligatorio"
+					},
 					speciality:{
 						rangelength:"Cantidad de caracteres de 3 a 20"
 					},
@@ -65,45 +71,60 @@ $(document).ready(function(e){
 			});
 });
 
-function saveData(){
+function saveDataDoc(){
 	var expresion = /\w+@\w+\.+[a-z]/;
-	if($("#name").val() == "" || $("#lastName").val() == ""){
+	var name = $("#doctor input[id=name]").val();
+	var lastName =  $("#doctor input[id=last_name]").val();
+	var doc = $("#doctor input[id=ci]").val();
+	var address = $("#doctor input[id=address]").val();
+	var phone = $("#doctor input[id=phone]").val();
+	var email = $("#doctor input[id=email]").val();
+	var sex = $("#doctor :radio[id=sex]:checked").val();
+	var speciality =  $("#doctor input[id=speciality]").val();
+	
+	if(name == "" || lastName == "" || sex === undefined){
 		alert("Complete los campos obligatorios (*)")
 		return false;
 	}
-	if($("#name").val().length < 3 || $("#name").val().length > 50){
-		$("#name").focus();
+	if(name.length < 3 || name.length > 50){
+		name.focus();
 		return false;
 	}
-	if($("#last_name").val().length < 3 || $("#last_name").val().length > 50){
-		$("#last_name").focus();
+	if(lastName.length < 3 || lastName.length > 50){
+		lastName.focus();
 		return false;
 	}
-	if($("#ci").val().length < 6 || $("#ci").val().length > 10){
-		if(!($("#ci").val() == "")){
-			$("#ci").focus();
+	if(doc.length < 6 || doc.length > 10){
+		if(!(doc == "")){
+			doc.focus();
 			return false;
 		}	
 	}
-	if($("#address").val().length < 3 || $("#address").val().length > 50){
-		if(!($("#address").val() == "")){
-			$("#address").focus();
+	if(address.length < 3 || address.length > 50){
+		if(!(address == "")){
+			address.focus();
 			return false;	
 		}	
 	}
-	if(isNaN($("#phone").val())){
-		$("#phone").focus();
+	if(isNaN(phone)){
+		phone.focus();
 		return false;
 	}
-	if(!($("#phone").val() == "")){
-		if($("#phone").val().length < 9 || $("#phone").val().length > 15){
-			$("#phone").focus();
+	if(!(phone == "")){
+		if(phone.length < 9 || phone.length > 15){
+			phone.focus();
 			return false;
 		}
 	}
-	if($("#email").val == ""){
-		if(!expresion.test($("#email").val())){
-			$("#email").focus();
+	if(email == ""){
+		if(!expresion.test(email)){
+			email.focus();
+			return false;
+		}
+	}
+	if(!(speciality == "")){
+		if(speciality.length < 3 || speciality.length > 20){
+			speciality.focus();
 			return false;
 		}
 	}

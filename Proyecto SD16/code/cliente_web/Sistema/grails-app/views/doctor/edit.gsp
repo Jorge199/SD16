@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="template">
-<g:set var="entityName"
-	value="${message(code: 'doctor.label', default: 'Doctor')}" />
-<title><g:message code="default.edit.label" args="[entityName]" /></title>
+	<meta name="layout" content="template">
+	<script src="jquery.validate.js"></script>
+	<script src="validationFormDoctor.js"></script>
+	<script src="jquery.number.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
