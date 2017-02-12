@@ -7,14 +7,16 @@ $(document).ready(function(e){
 				rules: {
 					name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[3,50],
+						lettersonly:true
 					},
 					last_name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[3,50],
+						lettersonly:true
 					},
 					ci:{
-						rangelength:[6,10]
+						maxlength:10
 					},
 					sex:{
 						required:true
@@ -23,7 +25,7 @@ $(document).ready(function(e){
 						rangelength:[3,20]
 					},
 					phone:{
-						rangelength:[9,15]
+						maxlength:15
 					},
 					email:{
 						email:true
@@ -43,7 +45,7 @@ $(document).ready(function(e){
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					ci:{
-						rangelength:"Cantidad de caracteres de 6 a 10"
+						maxlength:"Cantidad de caracteres hasta 10"
 					},
 					sex:{
 						required:"Este campo es obligatorio"
@@ -53,7 +55,7 @@ $(document).ready(function(e){
 					},
 					phone:{
 						number:"Debe ser numerico",
-						rangelength:"Debe tener entre 9 a 15 numeros",
+						maxlength:"Debe tener hasta 15 numeros"
 					},
 					email:{
 						email:"Formato de correo incorrecto"
@@ -70,9 +72,12 @@ $(document).ready(function(e){
 			
 			});
 });
-
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+	return this.optional(element) || /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/i.test(value);
+	}, "Solo letras");
 function saveDataDoc(){
 	var expresion = /\w+@\w+\.+[a-z]/;
+	var letter = /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/;
 	var name = $("#doctor input[id=name]").val();
 	var lastName =  $("#doctor input[id=last_name]").val();
 	var doc = $("#doctor input[id=ci]").val();
@@ -83,50 +88,58 @@ function saveDataDoc(){
 	var speciality =  $("#doctor input[id=speciality]").val();
 	
 	if(name == "" || lastName == "" || sex === undefined){
-		alert("Complete los campos obligatorios (*)")
+		alert("Complete los campos obligatorios (*)");
 		return false;
 	}
 	if(name.length < 3 || name.length > 50){
-		name.focus();
+		alert("Verifique su nombre");
 		return false;
 	}
 	if(lastName.length < 3 || lastName.length > 50){
-		lastName.focus();
+		alert("Verifique su apellido");
 		return false;
 	}
-	if(doc.length < 6 || doc.length > 10){
+	if(doc.length > 10){
 		if(!(doc == "")){
-			doc.focus();
+			alert("Verifique su documento de identidad");
 			return false;
 		}	
 	}
 	if(address.length < 3 || address.length > 50){
 		if(!(address == "")){
-			address.focus();
+			alert("Verifique su dirección");
 			return false;	
 		}	
 	}
 	if(isNaN(phone)){
-		phone.focus();
+		alert("Verifique su número de teléfono");
 		return false;
 	}
 	if(!(phone == "")){
-		if(phone.length < 9 || phone.length > 15){
-			phone.focus();
+		if(phone.length > 15){
+			alert("Verifique su número de teléfono");
 			return false;
 		}
 	}
-	if(email == ""){
+	if(email != ""){
 		if(!expresion.test(email)){
-			email.focus();
+			alert("Verifique su correo");
 			return false;
 		}
 	}
 	if(!(speciality == "")){
 		if(speciality.length < 3 || speciality.length > 20){
-			speciality.focus();
+			alert("Verifique su especialidad");
 			return false;
 		}
+	}
+	if(!(letter.test(name))){
+		alert("El nombre debe tener solo letras");
+		return false;
+	}
+	if(!(letter.test(lastName))){
+		alert("El apellido debe tener solo letras");
+		return false;
 	}
 	
 }
