@@ -23,7 +23,7 @@ $(document).ready(function(e){
 						equalTo:"#pass1",
 						rangelength:[8,16]
 					},
-					updater:{
+					rolId:{
 						required:true
 					},
 					registrationNumber:{
@@ -51,7 +51,7 @@ $(document).ready(function(e){
 						equalTo:"Debe ser igual al campo contraseña",
 						rangelength:"Debe tener entre 8 a 16 caracteres"
 					},
-					updater:{
+					rolId:{
 						required:"El campo rol es obligatorio"
 					},
 					registrationNumber:{
@@ -62,7 +62,7 @@ $(document).ready(function(e){
 					}
 				},
 				errorPlacement: function(error, element){
-					if(element.is(":text") || element.is(":password")){
+					if(element.is(":text") || element.is(":password") || element.is("select")){
 						error.insertAfter(element);
 					}
 				}
