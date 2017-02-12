@@ -59,8 +59,9 @@
 									</div>
 									<div class="col-md-9">
 										<div class="form-group">
-											<input type="text" name="patient" class="form-control
-									placeholder="Ingrese dato del paciente" />
+											<input type="text" name="patient"
+												class="form-control
+									placeholder=" Ingrese dato del paciente" />
 										</div>
 									</div>
 								</div>
@@ -74,9 +75,9 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker1'>
-													<input type='text' class="form-control "
-														name="startSearch" /> <span class="input-group-addon">
-														<span class="glyphicon glyphicon-calendar"> </span>
+													<input type='text' class="form-control " name="startSearch" />
+													<span class="input-group-addon"> <span
+														class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
 											</div>
@@ -88,9 +89,9 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker2'>
-													<input type='text' class="form-control"
-														name="endSearch" /> <span class="input-group-addon">
-														<span class="glyphicon glyphicon-calendar"> </span>
+													<input type='text' class="form-control" name="endSearch" />
+													<span class="input-group-addon"> <span
+														class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
 											</div>
@@ -108,35 +109,38 @@
 							</g:form>
 						</div>
 					</div>
-<div class="col-md-1"><strong>Referencia:</strong></div>
-<div class="col-md-2 bg-danger">Recibido</div>
-<div class="col-md-2 bg-warning">Proceso</div>
-<div class="col-md-2 bg-info">Procesado</div>
-<div class="col-md-2 bg-success">Terminado</div>
-<div class="col-md-2">Retirado</div>
-<br><br>
+					<div class="col-md-1">
+						<strong>Referencia:</strong>
+					</div>
+					<div class="col-md-2 bg-danger">Recibido</div>
+					<div class="col-md-2 bg-warning">Proceso</div>
+					<div class="col-md-2 bg-info">Procesado</div>
+					<div class="col-md-2 bg-success">Terminado</div>
+					<div class="col-md-2">Retirado</div>
+					<br>
+					<br>
 					<div class="dataTable_wrapper">
 						<div class="row">
 							<div class="col-sm-12">
-								<table id="list-request"
-									class="table table-bordered" cellspacing="0"
-									width="100%">
+								<table id="list-request" class="table table-bordered"
+									cellspacing="0" width="100%">
 									<thead>
-										<tr >
+										<tr>
 											<g:sortableColumn property="id" title="Codigo" />
 											<g:sortableColumn property="date" title="Fecha" />
 											<g:sortableColumn property="doctor" title="Doctor" />
 											<g:sortableColumn property="patient" title="Paciente" />
 											<g:sortableColumn property="studyType"
 												title="Tipo de estudio" />
-											<td>Acciones</td>
+											<td colspan="2" align="center">Acciones</td>
 										</tr>
 									</thead>
 									<tbody>
 										<g:each in="${requestInstanceList}" status="i"
 											var="requestInstance">
 
-											<tr class="${requestInstance?.status == StatusEnum.PROCESADO ? 'info' :
+											<tr
+												class="${requestInstance?.status == StatusEnum.PROCESADO ? 'info' :
 												 requestInstance?.status == StatusEnum.PROCESO ?'warning' :
 												 requestInstance?.status == StatusEnum.RECIBIDO ?'danger' :
 												 requestInstance?.status == StatusEnum.TERMINADO ?'success' :
@@ -159,29 +163,39 @@
 													${requestInstance?.studyType?.name}
 												</td>
 
-												<td class="center"><g:link action="edit"
+
+												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+													<g:if
+														test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
+														<td align="center"><g:jasperReport
+																action="generateReport" controller="report"
+																format="PDF,DOCX" jasper="report"
+																id="${requestInstance.getId()}">
+																<input type="hidden" name="id"
+																	value="${requestInstance.getId()}" />Descargar
+																</g:jasperReport></td>
+													</g:if>
+													<g:else><td></td></g:else>
+												</sec:ifAnyGranted>
+												<td align="center"><g:link action="edit"
 														class="btn btn-success" id="${requestInstance.getId()}">
 														<i class="fa fa-pencil"></i> Editar</g:link> 
-														<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
-															<g:if test="${requestInstance?.status==StatusEnum.PROCESADO}">
-																<g:link action="create" class="btn btn-default"
+													<sec:ifAnyGranted
+														roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+														<g:if test="${requestInstance?.status==StatusEnum.PROCESADO}">
+															<g:link action="create" class="btn btn-default"
 																controller="report" id="${requestInstance.getId()}">
 																<i class="fa fa-list-alt"></i> Informar</g:link>
-															</g:if> 
-															<g:if test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
-																<g:link action="edit" class="btn btn-default" params="[reportEdit: 'request']"
-																controller="report"  id="${requestInstance.getId()}">
-																<i class="fa fa-list-alt"></i> Informe</g:link>
-															</g:if>
-														</sec:ifAnyGranted>
-														<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
+														</g:if>
 														<g:if test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
-																<g:link action="show" class="btn btn-default" params="[reportShow: 'request']"
-																controller="report" id="${requestInstance.getId()}">
+
+															<g:link action="edit" class="btn btn-default"
+																params="[reportEdit: 'request']" controller="report"
+																id="${requestInstance.getId()}">
 																<i class="fa fa-list-alt"></i> Informe</g:link>
-															</g:if>
-														</sec:ifAnyGranted>
-												</td>
+														</g:if>
+													</sec:ifAnyGranted> 
+													</td>
 											</tr>
 
 										</g:each>
@@ -197,7 +211,10 @@
 			</div>
 		</div>
 	</div>
-	<br/><br/><br/><br/>
+	<br />
+	<br />
+	<br />
+	<br />
 	<!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 
