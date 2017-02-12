@@ -1,11 +1,8 @@
 <%@ page import="java.lang.System"%>
 <%@ page import="com.sd.uni.labpatologia.util.StatusEnum" %>
 
-<g:if test="${action == 'save'}">
-	   <form id="myFormRequest" action="/Sistema/request/save" method="post" id="request" onsubmit="return saveDataRequest();">
-	</g:if><g:else>
-	   <form id="myFormRequest" action="/Sistema/request/update" method="post" id="request" onsubmit="return saveDataRequest();">
-	</g:else>
+<form id="myFormRequest" action="/Sistema/request/save" method="post" onsubmit="return saveDataRequest();">
+	
 
 <div class="row">
 	<div class=col-md-12>
@@ -159,9 +156,9 @@
 </div>
 <div class="col-xs-12" align="center">
 	<g:if test="${action == 'save'}">
-	   <button type="submit" class="btn btn-primary" onclick="callRequest()"><i class="fa fa-save"></i> Guardar </button>
+	   <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar </button>
 	</g:if><g:else>
-	   <button type="submit" class="btn btn-primary" name="edit" value="${requestInstance?.id}" onclick="callRequest()">
+	   <button type="submit" class="btn btn-primary" name="edit" value="${requestInstance?.id}">
 		<i class="fa fa-save"></i> Guardar </button>
 	</g:else>
 	
@@ -263,35 +260,6 @@
         	}else{
 				return false;
             }
-        }
-    </script>
-    <!-- Para boton guardar de ficha -->
-     <script>
-        function callRequest(){
-        	if($("#myFormRequest").valid()){
-            if(action = 'save'){
-        	    $.ajax({
-                	type:"POST",
-                    url : "${createLink(controller: 'request', action: 'save')}",
-                    data :   $("#myFormRequest").serialize() , 
-                    dataType: 'json',
-                    success : function(data){
-                    	 $("#myFormRequest").submit();
-                    },
-                });
-            }else{
-            	 $.ajax({
-                 	type:"POST",
-                     url : "${createLink(controller: 'request', action: 'update')}",
-                     data :   $("#myFormRequest").serialize() , 
-                     dataType: 'json',
-                     success : function(data){
-                     	 $("#myFormRequest").submit();
-                     },
-                 });
-
-                }     
-        }
         }
     </script>
     
