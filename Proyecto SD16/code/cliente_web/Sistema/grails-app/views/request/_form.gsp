@@ -263,10 +263,7 @@
         }
     </script>
     
-    <!-- Para boton guardar de paciente -->
-    <script type="text/javascript">
-   
-    </script>
+  
     
     <!-- Para selector de doctor -->
     <script type="text/javascript">

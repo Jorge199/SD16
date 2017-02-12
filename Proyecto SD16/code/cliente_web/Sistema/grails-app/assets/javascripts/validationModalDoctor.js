@@ -24,6 +24,7 @@ $(document).ready(function(e){
 						rangelength:[3,20]
 					},
 					phone:{
+						number:true,
 						maxlength:15
 					},
 					email:{
@@ -115,7 +116,7 @@ function saveDataDoctor(){
 	}
 	
 	if(!expresion.test($("#myFormDoctor input[id=email]").val())){
-		if(mail != ""){
+		if($("#myFormDoctor input[id=email]").val() != ""){
 			alert("Verifique su correo");
 			return false;
 		}	

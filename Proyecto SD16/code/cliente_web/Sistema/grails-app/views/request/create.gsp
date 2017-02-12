@@ -6,7 +6,6 @@
 	<script src="validationModalPatient.js"></script>
 	<script src="validationModalDoctor.js"></script>
 	<script src="validationFormRequest.js"></script>
-	<script src="jquery.number.js"></script>
 </head>
 <body>
 
@@ -55,7 +54,7 @@
 		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
 	<script type="text/javascript">
 		$(function() {
-			$('#datetimepicker2').datetimepicker({
+			$('#datetimepicker1').datetimepicker({
 				format : 'DD-MM-YYYY',
 				locale : 'es',
 			});

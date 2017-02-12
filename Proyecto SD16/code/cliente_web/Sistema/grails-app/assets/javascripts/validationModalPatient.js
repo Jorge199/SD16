@@ -21,6 +21,7 @@ $(document).ready(function(e){
 						rangelength:[3,50]
 					},
 					phone:{
+						number:true,
 						maxlength:15
 					},
 					mail:{
@@ -114,8 +115,8 @@ function saveDataPatient(){
 		}
 	}
 	if(!expresion.test($("#myFormPatient input[id=mail]").val())){
-		if(mail != ""){
-			alert("Verifique su correo");
+		if($("#myFormPatient input[id=mail]").val() != ""){
+			alert($("#myFormPatient input[id=mail]").val());
 			return false;
 		}	
 	}
@@ -130,6 +131,11 @@ function saveDataPatient(){
 	return true;
 }
 
+
+
+$(function(){
+	$("#myFormPatient input[id=phone]").number(true, 0 ,',','-');
+});
 
 
 
