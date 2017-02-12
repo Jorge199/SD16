@@ -7,13 +7,13 @@ $(document).ready(function(e){
 				rules: {
 					name:{
 						required:true,
-						rangelength:[3,50],
-						lettersonly:true
+						rangelength:[3,50]
 					},
 					description:{
 						maxlength:100
 					},
 					units:{
+						required:true,
 						maxlength:40
 					}
 				},
@@ -27,6 +27,7 @@ $(document).ready(function(e){
 						maxlength:"Cantidad de caracteres hasta 100"
 					},
 					units:{
+						required:"El campo unidad es obligatorio",
 						maxlength:"Cantidad de caracteres hasta 40"
 					}
 				},
@@ -38,17 +39,13 @@ $(document).ready(function(e){
 			
 			});
 });
-jQuery.validator.addMethod("lettersonly", function(value, element) {
-	return this.optional(element) || /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/i.test(value);
-	}, "No se admiten números");
 
 function saveDataArticle(){
 	var name = $("#name").val();
 	var description = $("#description").val();
 	var units = $("#units").val();
-	var letter = /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/;
 	
-	if( name == "" ){
+	if( name == "" || units  == ""){
 		alert("Complete los campos obligatorios (*)");
 		return false;
 	}
@@ -64,10 +61,5 @@ function saveDataArticle(){
 		alert("Verifique la unidades del artículo");
 		return false;
 	}
-	if(!(letter.test(name))){
-		alert("El nombre debe tener solo letras");
-		return false;
-	}
-	
-	
+
 }

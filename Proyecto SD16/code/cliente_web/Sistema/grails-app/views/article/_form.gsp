@@ -10,7 +10,7 @@
 	</div>
 	<div class="col-md-6">
 		<div class="form-group">
-			<label>Unidades</label> 
+			<label>Unidades*</label> 
 				<input class="form-control" type="text" maxlength="40" 
 				id="units" name="units" placeholder="Ingrese las unidades" value="${articleInstance?.units}" />
 		</div>
