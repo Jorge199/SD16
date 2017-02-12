@@ -137,5 +137,18 @@ public class ArticleMovementServiceImpl extends BaseServiceImpl<ArticleMovementD
 		stockResult.setArticleMovements(stocks);
 		return stockResult;
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public ArticleMovementResult find(String textToFind) throws PatologyException {
+		final List<ArticleMovementDTO> stocks = new ArrayList<>();
+		for (ArticleMovementDomain domain : articleMovementDao.find(textToFind)) {
+			final ArticleMovementDTO dto = convertDomainToDto(domain);
+			stocks.add(dto);
+		}
+		final ArticleMovementResult stockResult = new ArticleMovementResult();
+		stockResult.setArticleMovements(stocks);
+		return stockResult;
+	}
 
 }

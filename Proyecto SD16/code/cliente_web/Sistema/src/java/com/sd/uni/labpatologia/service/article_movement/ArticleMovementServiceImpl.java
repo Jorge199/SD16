@@ -92,4 +92,17 @@ public class ArticleMovementServiceImpl extends BaseServiceImpl<ArticleMovementB
 		}
 		return articles;
 	}
+        
+        @Override
+	public List<ArticleMovementB> find(String textToFind) {
+		final ArticleMovementResult result = _articleMovementResource.find(textToFind,0,0);
+		final List<ArticleMovementDTO> rList = null == result.getArticleMovements() ? new ArrayList<ArticleMovementDTO>()
+				: result.getArticleMovements();
+		final List<ArticleMovementB> articles = new ArrayList<ArticleMovementB>();
+		for (ArticleMovementDTO dto : rList) {
+			final ArticleMovementB bean = convertDtoToBean(dto);
+			articles.add(bean);
+		}
+		return articles;
+	}
 }

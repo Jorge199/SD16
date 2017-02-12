@@ -34,7 +34,7 @@
                         <br> <br>
                         <div class="panel-body">
                             <g:form action="list">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'movementType', 'error')} required">
                                         <label class="col-md-3" for="movementType"> <g:message
                                                 code="Tipo de movimiento" />
@@ -51,7 +51,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'start', 'error')} required">
                                         <div class="col-md-3">
                                             <label for="start"> <g:message code="Desde Fecha" />
@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="fieldcontain ${hasErrors(bean: requestInstance, field: 'end', 'error')} required">
                                         <div class="col-md-3">
                                             <label for="start"> <g:message code="Hasta Fecha" />
@@ -91,6 +91,7 @@
                                     <button type="submit" class="btn btn-primary" name="list">
                                         <i class="fa fa-search"></i> Buscar
                                     </button>
+                                    <g:actionSubmit action="download" class="btn btn-primary" value="Descargar"/>
                                     <br>
                                 </fieldset>
                             </g:form>

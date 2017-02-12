@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementDTO;
 import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementResult;
+import com.sd.uni.labpatologia.dto.statistic.StatisticResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.article_movement.IArticleMovementService;
 
@@ -61,5 +62,13 @@ public class ArticleMovementResource {
 	//@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_TECNICO"})
 	public ArticleMovementDTO save(ArticleMovementDTO art) {
 		return _stockService.save(art);
+	}
+	
+	@GET
+	@Path("/search/{textToFind}")
+	@Produces("application/xml")
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR" })
+	public ArticleMovementResult search(@PathParam("textToFind") String textToFind ) throws PatologyException {
+		return _stockService.find(textToFind);
 	}
 }

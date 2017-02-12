@@ -247,6 +247,7 @@ class StatisticController {
         
         
         String ruta = "Estadisticas.pdf";
+        DecimalFormat df = new DecimalFormat("#.##");
         def file = new File(System.getProperty("user.dir") + "\\" + ruta)
         Document documento = new Document(PageSize.A4);
         try {
@@ -288,7 +289,7 @@ class StatisticController {
                     promedio = cantidad.div(total);
                     promedio = promedio*100;
                 }
-                documento.add(new Phrase("Se observan " + data.get(data.get("getByDiagnostic")) + " casos, que representan el " + promedio + " % de los casos registrados en el laboratorio en ese periodo."));
+                documento.add(new Phrase("Se observan " + data.get(data.get("getByDiagnostic")) + " casos, que representan el " + df.format(promedio) + " % de los casos registrados en el laboratorio en ese periodo."));
             }
             PdfPTable tabla = new PdfPTable(3);
             tabla.setWidthPercentage([240, 120, 120] as float[], new Rectangle(520, 770));
@@ -313,7 +314,7 @@ class StatisticController {
             tabla.addCell(cabecerac);
             // Datos
             PdfPCell datosc;
-            DecimalFormat df = new DecimalFormat("#.##");
+            
             if(data.get("getByDiagnostic") == 'false'){
                 for(DiagnosticEnum diagnostic in DiagnosticEnum.values()){
                     datosc = new PdfPCell(new Phrase(diagnostic.getKey()));
@@ -337,7 +338,7 @@ class StatisticController {
             }
             documento.close();
             if (file.exists()){
-                render(file: new File(System.getProperty("user.dir") + "\\" + "Estadisticas.pdf"), fileName: 'F.pdf', contentType: "application/pdf")
+                render(file: new File(System.getProperty("user.dir") + "\\" + "Estadisticas.pdf"), fileName: 'Estadisticas.pdf', contentType: "application/pdf")
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);

@@ -8,5 +8,5 @@ import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.IBaseService;
 
 public interface IArticleMovementService extends IBaseService<ArticleMovementDTO, ArticleMovementDomain, ArticleMovementDaoImpl, ArticleMovementResult> {
-	
+	public ArticleMovementResult find(String textToFind) throws PatologyException;
 }
