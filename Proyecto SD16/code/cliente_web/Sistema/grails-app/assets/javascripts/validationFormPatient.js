@@ -74,7 +74,7 @@ $(document).ready(function(e){
 });
 jQuery.validator.addMethod("lettersonly", function(value, element) {
 	return this.optional(element) || /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/i.test(value);
-	}, "Solo letras");
+	}, "No se admiten números");
 
 function saveDataPa(){
 	var expresion = /\w+@\w+\.+[a-z]/;

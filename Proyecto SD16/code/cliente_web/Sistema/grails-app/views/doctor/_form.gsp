@@ -69,7 +69,7 @@
 		<label>Correo</label>
 		<div class="form-group">
 			<input class="form-control" type="text" maxlength="50" 
-			id="email" name="email" placeholder="Ingrese un correo" value="${doctorInstance?.email}" />
+			id="email" name="email" placeholder="ejemplo999@correo.com" value="${doctorInstance?.email}" />
 		</div>
 	</div>
 	<div class="col-md-6">
