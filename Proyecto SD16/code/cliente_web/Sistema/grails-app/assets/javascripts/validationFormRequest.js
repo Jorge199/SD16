@@ -30,6 +30,9 @@ $(document).ready(function(e){
 					},
 					note:{
 						
+					},
+					specimen:{
+						required:true
 					}
 				},
 
@@ -60,28 +63,15 @@ $(document).ready(function(e){
 					},
 					note:{
 						
-					}	
-					
-				},
-				errorPlacement: function(error, element){
-					if(element.is("select")){
-						if(element.attr("name") == "patientId"){
-						 error.insertAfter("#data-patient");
-						}
-						if(element.attr("name") == "doctorId"){
-							error.insertAfter("#data-doctor");
-						}
-						if(element.attr("name") == "studyTypeId"){
-							error.insertAfter("#studyTypeId");
-						}
+					},
+					specimen:{
+						required:"El campo specimen es obligatorio"
 					}
 					
+				},
+				errorPlacement: function(error, element){	
 					if(element.is(":text")){
-						if(element.attr("name") == "date"){
-							 error.insertAfter("#datetimepicker2");
-						}else{
-							error.insertAfter(element);
-						}
+						error.insertAfter(element);
 					}
 				}
 			

@@ -6,20 +6,25 @@ $(document).ready(function(e){
 				rules: {
 					name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[3,50],
+						lettersonly:true
 					},
 					last_name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[3,50],
+						lettersonly:true
 					},
 					ci:{
-						rangelength:[6,10]
+						maxlength:10
+					},
+					sex:{
+						required:true
 					},
 					speciality:{
 						rangelength:[3,20]
 					},
 					phone:{
-						rangelength:[9,15]
+						maxlength:15
 					},
 					email:{
 						email:true
@@ -39,14 +44,17 @@ $(document).ready(function(e){
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					ci:{
-						rangelength:"Cantidad de caracteres de 6 a 10"
+						maxlength:"Cantidad de caracteres hasta 10"
+					},
+					sex:{
+						required:"Este campo es obligatorio"
 					},
 					speciality:{
 						rangelength:"Cantidad de caracteres de 3 a 20"
 					},
 					phone:{
 						number:"Debe ser numerico",
-						rangelength:"Debe tener entre 9 a 15 numeros",
+						maxlength:"Debe tener hasta 15 numeros"
 					},
 					email:{
 						email:"Formato de correo incorrecto"
@@ -63,48 +71,62 @@ $(document).ready(function(e){
 			
 			});
 });
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+	return this.optional(element) || /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/i.test(value);
+	}, "No se admiten números");
 
 function saveDataDoctor(){
 	var expresion = /\w+@\w+\.+[a-z]/;
-	if($("#myFormDoctor input[id=name]").val() == "" || $("#myFormDoctor input[id=lastName]").val() == ""){
+	var letter = /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/;
+	
+	if($("#myFormDoctor input[id=name]").val() == "" || $("#myFormDoctor input[id=lastName]").val() == "" || $("#myFormDoctor :radio[id=sex]:checked").val() === undefined){
 		alert("Complete los campos obligatorios (*)")
 		return false;
 	}
 	if($("#myFormDoctor input[id=name]").val().length < 3 || $("#myFormDoctor input[id=name]").val().length > 50){
-		$("#myFormDoctor input[id=name]").focus();
+		alert("Verifique su nombre");
 		return false;
 	}
 	if($("#myFormDoctor input[id=last_name]").val().length < 3 || $("#myFormDoctor input[id=last_name]").val().length > 50){
-		$("#myFormDoctor input[id=last_name]").focus();
+		alert("Verifique su apellido");
 		return false;
 	}
-	if($("#myFormDoctor input[id=ci]").val().length < 6 || $("#myFormDoctor input[id=ci]").val().length > 10){
+	if($("#myFormDoctor input[id=ci]").val().length > 10){
 		if(!($("#myFormDoctor input[id=ci]").val() == "")){
-			$("#myFormDoctor input[id=ci]").focus();
+			alert("Verifique su documento de identidad");
 			return false;
 		}	
 	}
 	if($("#myFormDoctor input[id=address]").val().length < 3 || $("#myFormDoctor input[id=address]").val().length > 50){
 		if(!($("#myFormDoctor input[id=address]").val() == "")){
-			$("#myFormDoctor input[id=address]").focus();
+			alert("Verifique su dirección");
 			return false;	
 		}	
 	}
 	if(isNaN($("#myFormDoctor input[id=phone]").val())){
-		$("#myFormDoctor input[id=phone]").focus();
+		alert("Verifique su número de teléfono");
 		return false;
 	}
 	if(!($("#myFormDoctor input[id=phone]").val() == "")){
-		if($("#myFormDoctor input[id=phone]").val().length < 9 || $("#myFormDoctor input[id=phone]").val().length > 15){
-			$("#myFormDoctor input[id=phone]").focus();
+		if($("#myFormDoctor input[id=phone]").val().length > 15){
+			alert("Verifique su número de teléfono");
 			return false;
 		}
 	}
-	if($("#myFormDoctor input[id=email]").val == ""){
-		if(!expresion.test($("#myFormDoctor input[id=email]").val())){
-			$("#myFormDoctor input[id=email]").focus();
+	
+	if(!expresion.test($("#myFormDoctor input[id=email]").val())){
+		if(mail != ""){
+			alert("Verifique su correo");
 			return false;
-		}
+		}	
+	}
+	if(!(letter.test($("#myFormDoctor input[id=name]").val()))){
+		alert("El nombre debe tener solo letras");
+		return false;
+	}
+	if(!(letter.test($("#myFormDoctor input[id=last_name]").val()))){
+		alert("El apellido debe tener solo letras");
+		return false;
 	}
 	return true;
 	
