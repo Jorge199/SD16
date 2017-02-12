@@ -5,11 +5,9 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Articulo <span class="required-indicator">*</span></label>
-            <g:select class="form-control selectpicker many-to-one" 
-            id="articleId" type="text"
-            data-live-search="true" name="articleId" from="${articles}"
-            value="${ArticleMovementInstance?.article?.id}" optionKey="id" optionValue="name" 
-            noSelection="${['':'Seleccione un articulo..']}" />
+            <select class="select-article form-control" name="articleId" id="articleId">
+						<option value="${ArticleMovementInstance?.article?.id}">Selecciona un articulo</option>
+			</select>
         </div>
     </div>
     <div class="col-md-6">
@@ -37,15 +35,37 @@
         </div>
     </div>
     
-    <!-- estilo a la validacion -->
-  	<style>
-		input.error{
-		    border: 2px dotted #FF0000; 
-		}
-		form label.error{
-		    font-size: 1em;
-		    color: #FF0000;
-		    font-weight: bold;
-		    display: inline-table;
-		}
-  	</style>
+    <!-- Para selector de doctor -->
+    <script type="text/javascript">
+	    	$(".select-article").select2({
+				language: 'es',
+	    		  ajax: {
+	    		    url: "${createLink(controller: 'article', action: 'selectArticle')}",
+	    		    dataType: 'json',
+	    		    delay: 250,
+	    		    data: function (params) {
+	    		      return {
+	    		        q: params.term, 
+	    		        page: 0
+	    		      };
+	    		    },
+	    		    processResults: function (data) {
+	    		        return {
+	    		            results: $.map(data, function(obj) {
+	    		                return { id: obj.id, text: obj.name };
+	    		            })
+	    		        };
+	    		    },
+	    		    cache: true
+	    		  },
+	    		  escapeMarkup: function (markup) { return markup; }, 
+	    		  minimumInputLength: 1,
+	    	});
+   
+	   
+    </script>
+    <style>
+		.select2-container--default .select2-selection--single{
+		    height: 32px;
+		}	
+	</style>

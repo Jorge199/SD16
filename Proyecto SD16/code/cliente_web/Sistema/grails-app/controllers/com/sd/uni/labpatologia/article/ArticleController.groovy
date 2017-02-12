@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.article
 
 import grails.plugin.springsecurity.annotation.Secured;
+import grails.converters.JSON
 
 import com.sd.uni.labpatologia.beans.article.ArticleB
 import com.sd.uni.labpatologia.beans.doctor.DoctorB
@@ -108,5 +109,10 @@ class ArticleController {
 		articleService.save(articleInstance)
 		redirect(action: "list")
 	}
-
+	
+	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
+	def selectArticle() {
+		def doctors = articleService.find(params.get("q"), 0, 0)
+		render doctors as JSON
+	}
 }

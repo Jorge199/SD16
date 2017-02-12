@@ -2,15 +2,8 @@
 <html>
     <head>
         <meta name="layout" content="template">
-        <g:set var="entityName"
-        value="${message(code: 'articleMovement.label', default: 'ArticleMovement')}" />
-        <title><g:message code="default.create.label"
-                args="[entityName]" /></title>
-    <asset:stylesheet src="application.css" />
-    <asset:javascript src="application.js" />
-    <script src=" ${request.contextPath}/template/js/jquery.js"></script>
-	<script src="jquery.validate.js"></script>
-	<script src="validationFormArticleMovement.js"></script>
+		<script src="jquery.validate.js"></script>
+		<script src="validationFormArticleMovement.js"></script>
 </head>
 <body>
 
