@@ -106,5 +106,6 @@ function saveDataDoctor(){
 			return false;
 		}
 	}
+	return true;
 	
 }

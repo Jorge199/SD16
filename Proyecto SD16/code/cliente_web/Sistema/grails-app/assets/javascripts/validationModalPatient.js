@@ -115,6 +115,7 @@ function saveDataPatient(){
 		}
 	}
 	
+	return true;
 }
 
 

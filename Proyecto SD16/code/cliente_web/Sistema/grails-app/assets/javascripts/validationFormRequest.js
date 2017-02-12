@@ -98,5 +98,6 @@ function saveDataRequest(){
 		alert("Complete los campos obligatorios (*)");
 		return false;
 	}
+	return true;
 	
 }
