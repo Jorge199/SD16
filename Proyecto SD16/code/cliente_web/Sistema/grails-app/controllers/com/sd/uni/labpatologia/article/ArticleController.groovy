@@ -24,7 +24,7 @@ class ArticleController {
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
 	def index() {
 		redirect(action: "list", params: params)
@@ -33,7 +33,7 @@ class ArticleController {
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
 	def create(){
 		[articleInstance: new ArticleB(params),laboratoryInstanceList: laboratoryService.getAll(),
@@ -43,7 +43,7 @@ class ArticleController {
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
 	def list(Integer max) {
 		def page = 0
@@ -67,7 +67,7 @@ class ArticleController {
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
 	def save() {
 		def articleInstance = new ArticleB(params)
@@ -86,7 +86,7 @@ class ArticleController {
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
 	def edit(Long id) {
 		def articleInstance = articleService.getById((Integer.parseInt(params.get("id"))))
@@ -98,7 +98,7 @@ class ArticleController {
 	@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
 	def update(Long id) {
 		def articleInstance = articleService.getById(Integer.parseInt(params.get("edit")))
@@ -110,7 +110,7 @@ class ArticleController {
 		redirect(action: "list")
 	}
 	
-	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
+	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_TECNICO'])
 	def selectArticle() {
 		def doctors = articleService.find(params.get("q"), 0, 0)
 		render doctors as JSON

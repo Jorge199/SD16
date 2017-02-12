@@ -42,7 +42,7 @@ class ArticleMovementController {
     @Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
     def index() {
         redirect(action: "list", params: params)
@@ -51,7 +51,7 @@ class ArticleMovementController {
     @Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
     def create(){
         [articleMovementInstance: new ArticleMovementB(params), articles: articleService.getAll(), laboratoryInstanceList: laboratoryService.getAll(),
@@ -61,7 +61,7 @@ class ArticleMovementController {
     @Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
     def list(Integer max) {
         def page = 0
@@ -100,15 +100,18 @@ class ArticleMovementController {
     @Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
     def save() {
         def articleMovementInstance = new ArticleMovementB(params)
         articleMovementInstance.setDate(Calendar.getInstance().getTime());
         def article = articleService.getById(Integer.parseInt(params.get("articleId")))
         if(params.get("movementType").equals("SALIDA") && (article.getQuantity() - Integer.valueOf(params.get("quantity"))) < 0){
-            flash.message = "Stock insuficiente"
-            redirect(action: "list")
+            flash.error = "Stock insuficiente"
+			params.put('articleId' , article?.id)
+			params.put('articleName' , article?.name)
+			params.put('articleQuantity' , article?.quantity)
+            redirect(action: "create", params:params)
         }else{
             articleMovementInstance.setArticle(articleService.getById(Integer.parseInt(params.get("articleId"))))
             articleMovementInstance.setMovementType(MovementTypeEnum.valueOf(params.get("movementType")))
@@ -121,7 +124,7 @@ class ArticleMovementController {
     @Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR',
-		'ROLE_SECRETARIA'
+		'ROLE_TECNICO'
 	])
     def download() {
         def text = params.text
