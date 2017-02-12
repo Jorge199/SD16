@@ -87,7 +87,6 @@ class PatientController {
 		def newPatient = patientService.save(patientInstance)
 		if (!newPatient?.getId()) {
 			render(view: "create", model: [patientInstance: patientInstance])
-			return
 		}
 
 		flash.message = message(code: 'default.created.message', args: [
