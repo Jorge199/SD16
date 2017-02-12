@@ -26,7 +26,7 @@ $(document).ready(function(e){
 						email:true
 					},
 					sex:{
-
+						required:true
 					},
 					birthDate:{
 						dateBR: true
@@ -56,7 +56,7 @@ $(document).ready(function(e){
 						email:"Formato de correo incorrecto"
 					},
 					sex:{
-
+						required:"Este campo es obligatorio"
 					},
 					birthDate:{
 						dateBR:""
@@ -71,45 +71,45 @@ $(document).ready(function(e){
 			});
 });
 
-function saveData(){
+function saveDataPa(){
 	var expresion = /\w+@\w+\.+[a-z]/;
-	if($("#name").val() == "" || $("#lastName").val() == ""){
-		alert("Complete los campos obligatorios (*)")
+	if($("#patient input[id=name]").val() == "" || $("#patient input[id=lastName]").val() == "" || $("#patient :radio[id=sex]:checked").val() === undefined){
+		alert("Complete los campos obligatorios(*)");
 		return false;
 	}
-	if($("#name").val().length < 3 || $("#name").val().length > 50){
-		$("#name").focus();
+	if($("#patient input[id=name]").val().length < 3 || $("#patient input[id=name]").val().length > 50){
+		$("#patient input[id=name]").focus();
 		return false;
 	}
-	if($("#lastName").val().length < 3 || $("#lastName").val().length > 50){
-		$("#lastName").focus();
+	if($("#patient input[id=lastName]").val().length < 3 || $("#patient input[id=lastName]").val().length > 50){
+		$("#patient input[id=lastName]").focus();
 		return false;
 	}
-	if($("#document").val().length < 6 || $("#document").val().length > 10){
-		if(!($("#document").val() == "")){
-			$("#document").focus();
+	if($("#patient input[id=document]").val().length < 6 || $("#patient input[id=document]").val().length > 10){
+		if(!($("#patient input[id=document]").val() == "")){
+			$("#patient input[id=document]").focus();
 			return false;
 		}	
 	}
-	if($("#address").val().length < 3 || $("#address").val().length > 50){
-		if(!($("#address").val() == "")){
-			$("#address").focus();
+	if($("#patient input[id=address]").val().length < 3 || $("#patient input[id=address]").val().length > 50){
+		if(!($("#patient input[id=address]").val() == "")){
+			$("#patient input[id=address]").focus();
 			return false;	
 		}	
 	}
-	if(isNaN($("#phone").val())){
-		$("#phone").focus();
+	if(isNaN($("#patient input[id=phone]").val())){
+		$("#patient input[id=phone]").focus();
 		return false;
 	}
-	if(!($("#phone").val() == "")){
-		if($("#phone").val().length < 9 || $("#phone").val().length > 15){
-			$("#phone").focus();
+	if(!($("#patient input[id=phone]").val() == "")){
+		if($("#patient input[id=phone]").val().length < 9 || $("#patient input[id=phone]").val().length > 15){
+			$("#patient input[id=phone]").focus();
 			return false;
 		}
 	}
-	if($("#mail").val == ""){
-		if(!expresion.test($("#mail").val())){
-			$("#mail").focus();
+	if($("#patient input[id=mail]").val != ""){
+		if(!expresion.test($("#patient input[id=mail]").val())){
+			$("#patient input[id=mail]").focus();
 			return false;
 		}
 	}

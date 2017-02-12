@@ -56,7 +56,7 @@
 </div>
 <div class="row">	
 	<div class="col-md-6">
-		<label>Sexo</label>
+		<label>Sexo<span class="required-indicator">*</span></label>
 			<div class="form-group">
 				<label class="radio-inline"> 
 					<g:radio id="sex" name="sex" value="${SexEnum.MASCULINO}" checked="${patientInstance?.sex == SexEnum.MASCULINO }"/>
@@ -100,18 +100,7 @@
 			}
 		 });
 	</script>
+
 	
-	<!-- estilo a la validacion -->
-  	<style>
-		input.error{
-		    border: 2px dotted #FF0000; 
-		}
-		form label.error{
-		    font-size: 1em;
-		    color: #FF0000;
-		    font-weight: bold;
-		    display: inline-table;
-		}
-  	</style>
 
 

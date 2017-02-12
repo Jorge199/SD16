@@ -3,14 +3,6 @@
 <html>
 <head>
 	<meta name="layout" content="template">
-	<g:set var="entityName"
-		value="${message(code: 'patient.label', default: 'Patient')}" />
-	<title><g:message code="default.create.label"
-			args="[entityName]" /></title>
-	<asset:stylesheet src="application.css" />
-	<asset:javascript src="application.js" />
-	<!-- jQuery -->	
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src="jquery.validate.js"></script>
 	<script src="validationFormPatient.js"></script>
 	<script src="jquery.number.js"></script>
@@ -24,12 +16,12 @@
 					<h4><strong>Registrar Paciente</strong></h4>
 				</div>
 				<div class="panel-body">
-					<form action="/Sistema/patient/save" method="post" id="patient" onsubmit="return saveData();">
+					<form action="/Sistema/patient/save" method="post" id="patient" onsubmit="return saveDataPa();">
 							<g:render template="form" />
 						<fieldset class="buttons">
 							<br> <br>
 							<div class="col-xs-12" align="center">
-									<button type="submit" class="btn btn-primary" id="save" name="create" >
+									<button type="submit" class="btn btn-primary" name="create">
 										<i class="fa fa-floppy-o"></i> Guardar
 									</button>
 									<a class="btn btn-default" href="/Sistema/patient/list"
@@ -42,8 +34,7 @@
 		</div>
 	</div>
 	
-	<!-- jQuery -->
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	
 	<!-- Jasny-Bootstrap JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>

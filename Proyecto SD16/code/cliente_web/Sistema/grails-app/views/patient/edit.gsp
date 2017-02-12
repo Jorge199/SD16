@@ -3,12 +3,9 @@
 <html>
 <head>
 	<meta name="layout" content="template">
-	<title><g:message code="default.edit.label" args="[entityName]" /></title>
-	<script src="validationFormPatient.js"></script>
-	<!-- jQuery -->
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src="jquery.validate.js"></script>
 	<script src="validationFormPatient.js"></script>
+	<script src="jquery.number.js"></script>
 </head>
 
 <body>
@@ -19,7 +16,7 @@
 					<h4><strong>Editar Información del Paciente</strong></h4>
 				</div>
 				<div class="panel-body">
-					<form action="/Sistema/patient/update" method="post" id="patient" onsubmit="return saveData();">
+					<form action="/Sistema/patient/update" method="post" id="patient" onsubmit="return saveDataPa();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
@@ -40,8 +37,6 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<!-- Jasny-Bootstrap JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>

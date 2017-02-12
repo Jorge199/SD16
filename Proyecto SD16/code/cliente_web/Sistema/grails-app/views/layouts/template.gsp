@@ -15,8 +15,6 @@
 <asset:javascript src="application.js" />
 <title>Sistema</title>
 
-<!-- jQuery -->
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 <!-- Select2 -->
 	<link rel="stylesheet" href="${request.contextPath}/dist/css/select2.min.css">
     <script src="${request.contextPath}/dist/js/select2.js"></script>
@@ -149,6 +147,18 @@
 		</div>
 		
 	</div>
+	<!-- estilo a la validacion -->
+  	<style>
+		input.error{
+		    border: 2px dotted #FF0000; 
+		}
+		form label.error{
+		    font-size: 1em;
+		    color: #FF0000;
+		    font-weight: bold;
+		    display: inline-table;
+		}
+  	</style>
 </body>
 
 </html>
