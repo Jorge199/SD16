@@ -83,6 +83,10 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 				// diagnostico
 				criteria.add(Restrictions.eq("_status", StatusEnum.valueOf( map.get("status"))));
 			}
+			if (map.containsKey("specimen")) { // si quiere filtrar por
+				// especimen
+				criteria.add(Restrictions.ilike("_specimen", "%"+map.get("specimen")+"%"));
+			}
 
 			if (map.containsKey("start") && map.containsKey("end")) { // si quiere buscar entre fechas
 				try {

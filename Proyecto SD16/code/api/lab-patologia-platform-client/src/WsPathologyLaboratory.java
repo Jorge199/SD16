@@ -236,9 +236,9 @@ public class WsPathologyLaboratory {
 	public static void testStudyType() {
 		System.out.println("###### ESTUDIOS #####");
 		StudyTypeManager s = new StudyTypeManager();
-		s.addStudy("Cancer", "alguncancer");
-		s.addStudy("Gripe", "alguna gripe");
-		s.addStudy("Cancer de mama", "cancer de mama");
+		s.addStudy("Anatomía Patológica", "");
+		s.addStudy("Citología No Ginecológica", "");
+		s.addStudy("Citología Ginecológica", "");
 
 		// System.out.println("Obtenemos el estudio por id = 1");
 		// s.getById(1);

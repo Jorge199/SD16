@@ -107,14 +107,12 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		dto.setStudyId(domain.getStudyType().getId());
 		dto.setDoctorId(domain.getDoctor().getId());
 		dto.setSpecimen(domain.getSpecimen());
+		dto.setDate(domain.getDate());
 		if (null != domain.getCode()){
 			dto.setCode(domain.getCode());
-			dto.setDate(domain.getDate());
 		}else {
 			Calendar today = Calendar.getInstance();        
 			dto.setCode(today.get(Calendar.DATE) + today.get(Calendar.MONTH) + today.get(Calendar.YEAR) + "-" + dto.getId());
-			dto.setDate(today.getTime());
-			domain.setDate(today.getTime());
 		}
 		if (null != domain.getCodeCassette()){
 			dto.setCodeCassette(domain.getCodeCassette());
@@ -147,7 +145,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		domain.setStatus(dto.getStatus());
 		domain.setSpecimen(dto.getSpecimen());
 		domain.setCode(dto.getCode());
-		
+		domain.setDate(dto.getDate());
 		// Si el estado es TERMINADO le agraga a la tabla de pendientes para notificacion
 		if (dto.getStatus() == StatusEnum.TERMINADO){
 			String mail = patientDao.getById(dto.getPatientId()).getMail();

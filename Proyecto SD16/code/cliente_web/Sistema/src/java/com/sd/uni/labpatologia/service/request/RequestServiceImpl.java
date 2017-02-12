@@ -73,6 +73,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("note", dto.getNote());
 		params.put("code", dto.getCode());
+		params.put("specimen", dto.getSpecimen());
 		final RequestB requestB = new RequestB(params);
 		requestB.setDate(dto.getDate());
 		requestB.setStatus(dto.getStatus());
@@ -91,9 +92,11 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 		dto.setDate(bean.getDate());
 		dto.setCode(bean.getCode());
 		dto.setStatus(bean.getStatus());
+		dto.setSpecimen(bean.getSpecimen());
 		dto.setPatientId(bean.getPatient().getId());
 		dto.setDoctorId(bean.getDoctor().getId());
 		dto.setStudyId(bean.getStudyType().getId());
+		
 		//dto.setUserId(bean.getUser().getId());
 		return dto;
 	}

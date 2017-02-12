@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.itextpdf.text.io.GetBufferedRandomAccessSource
 import com.sd.uni.labpatologia.beans.request.RequestB
 import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.doctor.IDoctorService
@@ -58,6 +59,9 @@ class RequestController {
 		if (params.containsKey("text")){
 			textToFind= params.get("text");
 		}else{
+			if(null!=params.get("specimen") && !"".equals(params.get("specimen")) && !"null".equals(params.get("specimen"))){
+				textToFind+="specimen="+params.get("specimen")+'&'
+			}
 			if(null!=params.get("patient") && !"".equals(params.get("patient")) && !"null".equals(params.get("patient"))){
 				textToFind+="patient="+params.get("patient")+'&'
 			}
@@ -105,15 +109,20 @@ class RequestController {
 	def save(Integer id) {
 
 		def requestInstance = new RequestB(params)
-		if(""!=params.get("date")){
-			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-			requestInstance.setDate(formatter.parse(params.get("date")));
-		}
+		//if(""!=params.get("date")){
+		//	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		//	requestInstance.setDate(formatter.parse(params.get("date")));
+		//}
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		requestInstance.setDate(formatter.parse(formatter.format(new Date())));
+		System.out.println("dateFormated" + formatter.parse(formatter.format(new Date())));
+		
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
 		requestInstance.setStatus(StatusEnum.RECIBIDO)
 		def newRequest= requestService.save(requestInstance)
+		System.out.println("date" + newRequest.getDate());
 		if (!newRequest?.getId()) {
 			//redirect(action: "list", id: newReport.getId())
 			//return
@@ -148,10 +157,11 @@ class RequestController {
 	])
 	def update(Integer id) {
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("edit")))
-		if(""!=params.get("date")){
-			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-			requestInstance.setDate(formatter.parse(params.get("date")));
-		}
+		//if(""!=params.get("date")){
+		//	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		//	requestInstance.setDate(formatter.parse(params.get("date")));
+		//}
+		//requestInstance.setDate(new Date((String)params.get("date")));
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
@@ -169,6 +179,7 @@ class RequestController {
 			requestInstance.setStatus(StatusEnum.PROCESADO)
 		}
 		requestInstance.setNote(params.get("note"))
+		requestInstance.setSpecimen(params.get("specimen"))
 		requestService.save(requestInstance)
 		redirect(action: "list")
 	}

@@ -64,6 +64,17 @@
 									placeholder=" Ingrese dato del paciente" />
 										</div>
 									</div>
+									<div class="col-md-3">
+										<label for="specimen"> <g:message code="Espécimen" />
+										</label>
+									</div>
+									<div class="col-md-9">
+										<div class="form-group">
+											<input type="text" name="specimen"
+												class="form-control
+									placeholder=" Ingrese el espécimen" />
+										</div>
+									</div>
 								</div>
 								<div class="col-md-6">
 									<div

@@ -10,15 +10,16 @@
 <div class="row">
 	<div class=col-md-12>
 		<div class="col-md-4">
-			<label>Fecha de Ingreso <span class="required-indicator">*</span></label>
+			<label for="date">Fecha de Ingreso</label>
 			<div class="form-group">
-			<div class='input-group date' id='datetimepicker2'>
-				<input type='text' class="form-control" name="date" id="date" placeholder="Selecciona una fecha"
-					value="${formatDate(format: 'dd-MM-yyyy', date:requestInstance.getDate())}" /> <span
-					class="input-group-addon"> <span
-					class="glyphicon glyphicon-calendar"> </span>
-				</span>
-				</div>
+			<g:if test="${null!= requestInstance?.date}">
+				<g:formatDate date="${requestInstance?.date}" class="form-label" name="date" id="date"
+				type="date" value="${requestInstance?.date}" />
+				</g:if>
+				<g:else>
+				<g:formatDate date="${new Date()}" class="form-label" name="date" id="date"
+				type="date" />
+				</g:else>
 			</div>
 		</div>
 		
@@ -74,7 +75,9 @@
 				</g:else>
 			</div>
 		</div>
+
 	</div>
+	
 	
 	
 	
@@ -134,6 +137,15 @@
 	</div>
 	
 	<div class="col-md-12">
+	<div class="col-md-6">
+			<label>Espécimen <span class="required-indicator">*</span></label>
+			<div class="form-group">
+				<g:textArea class="form-control" rows="5" cols="40"
+					class="form-control" name="specimen" maxlength="250" id="specimen"
+					placeholder="Ingrese el espécimen"
+					value="${requestInstance?.specimen}" />
+			</div>
+		</div>
 		<div class="col-md-6">
 			<label>Observaciones <span class="required-indicator"></span></label>
 			<div class="form-group">
