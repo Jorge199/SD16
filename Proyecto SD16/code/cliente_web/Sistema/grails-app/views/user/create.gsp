@@ -3,11 +3,6 @@
 <html>
 	<head>
 		<meta name="layout" content="template">
-		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-		<title><g:message code="default.create.label" args="[entityName]" /></title>
-		<asset:stylesheet src="application.css"/>
-		<asset:javascript src="application.js"/>
-		<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 		<script src="jquery.validate.js"></script>
 		<script src="validationFormUser.js"></script>
 	</head>
@@ -19,7 +14,7 @@
 						<h4><strong>Registrarse</strong></h4>
 					</div>
 					<div class="panel-body">
-						<form action="/Sistema/user/save" method="post" id="user"  onsubmit="return saveData();" >
+						<form action="/Sistema/user/save" method="post" id="user"  onsubmit="return saveDataUser();" >
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>

@@ -15,6 +15,7 @@ $(document).ready(function(e){
 					},
 					pass1:{
 						required:true,
+						equalTo:"#password2",
 						rangelength:[8,16]
 					},
 					password2:{
@@ -68,41 +69,57 @@ $(document).ready(function(e){
 			
 			});
 });
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+	return this.optional(element) || /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/i.test(value);
+	}, "No se admiten números");
 
-function saveData(){
-	if($("#name").val() == "" || $("#userName").val() == "" || $("#pass1").val() == "" || $("#password2").val() == "" || $("#updater").val() == ""){
+function saveDataUser(){
+	var name = $("#user input[id=name]").val();
+	var userName = $("#user input[id=userName]").val();
+	var pass1 = $("#user input[id=pass1]").val();
+	var password2 = $("#user input[id=password2]").val();
+	var updater = $("#user input[id=updater]").val();
+	var registrationNumber = $("#user input[id=registrationNumber]").val();
+	var letter = /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/;
+	
+	if(name == "" || userName == "" || pass1 == "" || password2 == "" || updater == ""){
 		alert("Complete los campos obligatorios (*)")
 		return false;
 	}
-	if($("#name").val().length < 3 || $("#name").val().length > 50){
-		$("#name").focus();
+	if(name.length < 3 || name.length > 50){
+		alert("Verifique el nombre");
 		return false;
 	}
-	if($("#userName").val().length < 3 || $("#userName").val().length > 50){
-		$("#userName").focus();
+	if(userName.length < 3 || userName.length > 50){
+		alert("Verifique el usuario");
 		return false;
 	}
-	if($("#pass1").val() < 8 || $("#pass1").val() > 16){
-		$("#pass1").focus();
+	if(pass1 < 8 || pass1 > 16){
+		alert("Verifique la contraseña");
 		return false;
 	}
-	if($("#password2").val() < 8 || $("#password2").val() > 16){
-		$("#password2").focus();
+	if(password2 < 8 || password2 > 16){
+		alert("Verifique la contraseña");
 		return false;
 	}
-	if($("#pass1").val() != $("#password2").val()){
-		$("#password2").focus();
+	if(pass1 != password2){
+		alert("Las contraseñas no son iguales");
 		return false;
 	}
 	
-	if($("#updater").val() == "Doctor"){
-		if(isNaN($("#registrationNumber").val())){
-			$("#registrationNumber").focus();
+	if(updater == "Doctor"){
+		if(isNaN(registrationNumber)){
+			alert("La matricula debe ser numérica");
 			return false;
 		}
-		if($("#registrationNumber").val().length < 3 || $("#registrationNumber").val().length > 10){
-			$("#registrationNumber").focus();
+		if(registrationNumber.length < 3 || registrationNumber.length > 10){
+			alert("Verifique la matricula");
 			return false;
 		}
+	}
+	
+	if(!(letter.test(name))){
+		alert("El nombre debe tener solo letras");
+		return false;
 	}
 }

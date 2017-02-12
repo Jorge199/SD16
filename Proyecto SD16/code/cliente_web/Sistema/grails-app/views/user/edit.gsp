@@ -3,18 +3,18 @@
 <html>
 	<head>
 		<meta name="layout" content="template">
-		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<script src="jquery.validate.js"></script>
+		<script src="validationFormUser.js"></script>
 	</head>
 	<body>
        <div class="container-fluid">
         	<div class="row">
             	<div class="panel panel-default">		
                 	<div class="panel-heading">
-						<h4><strong>Editar Informacion</strong></h4>
+						<h4><strong>Editar Información</strong></h4>
 					</div>
 					<div class="panel-body">
-						<form action="/Sistema/user/update" method="post" id="user"  onsubmit="return saveData();" >
+						<form action="/Sistema/user/update" method="post" id="user"  onsubmit="return saveDataUser();" >
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
