@@ -123,11 +123,13 @@
 				${reportInstance?.observations}
 			</g:if>
 			<g:else>
-	${reportInstance?.request?.studyType?.name.toUpperCase()}
+MACROSCOPÍA
+
+Tipo de Estudio: ${reportInstance?.request?.studyType?.name}
 	
-	DIAGNÓSTICO
-	
-	LEC, BIOPSIA:
+Material/es: ${reportInstance?.request?.specimen}
+
+DIAGNÓSTICO
 			</g:else>
 			</textarea>
 		</div>

@@ -14,6 +14,7 @@ import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
 import com.sd.uni.labpatologia.service.request.IRequestService;
 import com.sd.uni.labpatologia.service.statistic.IStatisticService
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
+import com.sd.uni.labpatologia.util.SexEnum
 import com.sd.uni.labpatologia.util.StatusEnum;
 
 import grails.plugin.springsecurity.annotation.Secured
@@ -194,9 +195,14 @@ class ReportController {
 		params.age = reportInstance.getAge()
 		params.date = "ENCARNACION, "+ new Date().getDate() + " de " + (new SimpleDateFormat("MMMM", new Locale("es", "ES"))).format(new Date())+ " del "+(new SimpleDateFormat("yyyy", new Locale("es", "ES"))).format(new Date())
 		params.code = reportInstance?.request?.code
+		if(reportInstance?.request.doctor?.sex == SexEnum.MASCULINO){
+			params.doctor = "Dr. " + reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName
+		}else{
+			params.doctor = "Dra. " + reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName
+		}
 		params.sex = reportInstance?.request?.patient?.sex
-		params.doctor = reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName
-		params.specimen = "specimen"//reportInstance?.request?.specimen
+		
+		params.specimen = reportInstance?.request?.specimen
 		params.signature = "DR. SERGIO ARIEL MEDINA S."
 		
 		params.diagnostic = reportInstance.getDiagnostic()
