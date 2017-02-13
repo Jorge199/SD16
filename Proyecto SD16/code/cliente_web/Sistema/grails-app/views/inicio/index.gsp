@@ -110,7 +110,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="#">
+						<a href="/Sistema/article/list/">
 							<div class="panel-footer">
 								<span class="pull-left">Ver Detalle</span> <span
 									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

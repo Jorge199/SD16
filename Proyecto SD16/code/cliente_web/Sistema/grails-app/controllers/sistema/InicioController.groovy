@@ -45,12 +45,12 @@ class InicioController {
 		}
 
 		if (SpringSecurityUtils.ifNotGranted('ROLE_SECRETARIA')) {
-			//articles = articleService.getAll()
+			articles = articleService.getAll()
 		}
 
 		[laboratoryInstanceList:laboratoryService.getAll(),
 			patientInstanceList:patients,
-			//articleInstanceList:articles,
+			articleInstanceList:articles,
 			requestInstanceList:cantRecibido,
 			doctorInstanceList: listDoctor,
 			user:authService.getName()]
