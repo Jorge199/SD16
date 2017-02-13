@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid" style="margin-bottom: 100px">
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
