@@ -30,20 +30,13 @@
 						</fieldset>
 						<fieldset class="buttons">
 							<br>
-							<div class="col-xs-8">
-								<div class="text-right">
-									<g:if test="${reportShow.equals("request")}">
-										<a class="btn btn-default" href="/Sistema/request/list"
-											role="button"><i class="fa fa-times"></i> Atrás</a>
-									</g:if>
-									<g:else>
-										<a class="btn btn-default" href="/Sistema/report/list"
-											role="button"><i class="fa fa-times"></i> Atrás</a>
-									</g:else>
+							<div class="col-xs-12" align="center">
 									
-									
+									<a class="btn btn-default" href="/Sistema/report/list"
+											role="button"><i class="fa fa-times"></i> Atrás</a>
 								</div>
-							</div>
+						
+
 						</fieldset>
 					</g:form>
 				</div>
@@ -55,6 +48,7 @@
 	</script>
 	<script>
 	document.getElementById("diagnostic").disabled = true;
+	document.getElementById("diagnosticDetail").disabled = true;
 	</script>
 </body>
 </html>
