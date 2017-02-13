@@ -101,16 +101,16 @@
 			<label for="diagnostic"> <g:message code="Diagnostico" /> <span
 				class="required-indicator">*</span>
 			</label>
-			<g:select name="diagnostic" class="form-control"
+			<g:select name="diagnostic" id="diagnostic" class="form-control"
 				from="${DiagnosticEnum.values()}"
-				value="${reportInstance?.diagnostic}" optionKey="key" required=""
+				value="${reportInstance?.diagnostic}" optionKey="key" 
 				noSelection="${['SIN_INDICIOS':'Seleccione un diagnostico..']}"></g:select>
 		</div>
 	</div>
 	<div class="col-md-4">
 		<label>Descripción</label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="25"
+			<input class="form-control" type="text" maxlength="25" id="diagnosticDetail"
 			id="diagnosticDetail" name="diagnosticDetail" placeholder="Descripción del Diagnóstico" value="${reportInstance?.diagnosticDetail}" />
 		</div>
 	</div>
@@ -135,8 +135,6 @@
 
 </fieldset>
 <div class="row"></div>
-<!-- jQuery -->
-<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function () {
@@ -155,6 +153,8 @@ $(window).on('afterprint', function(){
 
 });
 	</script>
+	
+	
 
    
    

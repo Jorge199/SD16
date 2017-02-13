@@ -3,13 +3,8 @@
 <html>
 <head>
 <meta name="layout" content="template">
-<g:set var="entityName"
-	value="${message(code: 'report.label', default: 'Report')}" />
-<title><g:message code="default.create.label"
-		args="[entityName]" /></title>
-<asset:stylesheet src="application.css" />
-<asset:javascript src="application.js" />
-
+<script src="jquery.validate.js"></script>
+<script src="validationFormReport.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -21,7 +16,7 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<g:form action="save">
+					<form action="/Sistema/report/save" method="post" id="report" onsubmit="return saveDataReport();">
 					
 						<fieldset class="form">
 							
@@ -41,11 +36,12 @@
 						
 
 						</fieldset>
-					</g:form>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<br><br><br><br>
+	
 </body>
 </html>
