@@ -52,6 +52,10 @@
 		</div>
 	</div>
 	<br><br><br><br>
+	<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationFormReport.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
 

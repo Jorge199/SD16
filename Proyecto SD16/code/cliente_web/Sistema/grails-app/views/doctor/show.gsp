@@ -70,6 +70,8 @@
 				</div>
 			</div>
 		</div>
+		<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 		<!-- Bootstrap Core JavaScript -->
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
 </body>

@@ -183,4 +183,17 @@ class RequestController {
 		requestService.save(requestInstance)
 		redirect(action: "list")
 	}
+	
+	@Secured([
+		'ROLE_DOCTOR',
+		'ROLE_ADMINISTRADOR',
+		'ROLE_SECRETARIA'
+	])
+	def retire(Integer id){
+		def requestInstance = requestService.getById(Integer.parseInt(params.get("id")))
+		requestInstance.setStatus(StatusEnum.RETIRADO)
+		requestService.save(requestInstance)
+		System.out.println(requestInstance.getId() + "id")
+		redirect(action: "list")
+	}
 }

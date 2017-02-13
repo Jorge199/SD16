@@ -199,9 +199,11 @@
         </div>
     </div>
     <br/><br/><br/><br/>
-    <!-- jQuery -->
+     <!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
-
+	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationFormArticleMovement.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
 	<script src=" ${request.contextPath}/template/js/es.js"></script>

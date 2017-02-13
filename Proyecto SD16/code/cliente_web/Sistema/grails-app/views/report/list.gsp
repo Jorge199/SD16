@@ -179,6 +179,8 @@
 	<br/><br/><br/><br/>
 	<!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationFormReport.js"></script>
 
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>

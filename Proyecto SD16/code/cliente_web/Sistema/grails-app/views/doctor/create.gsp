@@ -3,9 +3,6 @@
 <html>
 <head>
 	<meta name="layout" content="template">
-	<script src="jquery.validate.js"></script>
-	<script src="validationFormDoctor.js"></script>
-	<script src="jquery.number.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -37,5 +34,10 @@
 			</div>
 		</div>
 	</div>	
+	 <!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationFormDoctor.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
 </body>
 </html>

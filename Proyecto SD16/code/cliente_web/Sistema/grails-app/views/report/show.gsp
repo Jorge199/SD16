@@ -43,6 +43,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script>
 	$('#observations').prop('readonly', true);
 	</script>

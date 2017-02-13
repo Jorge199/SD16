@@ -2,11 +2,6 @@
 <html>
 <head>
 	<meta name="layout" content="template">
-	<script src="jquery.validate.js"></script>
-	<script src="validationModalPatient.js"></script>
-	<script src="validationModalDoctor.js"></script>
-	<script src="validationFormRequest.js"></script>
-	<script src="jquery.number.js"></script>	
 </head>
 <body>
 	
@@ -27,7 +22,14 @@
 			</div>
 		</div>
 		
-
+<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationModalPatient.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationModalDoctor.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationFormRequest.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
+	
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
 	<script src=" ${request.contextPath}/template/js/es.js"></script>

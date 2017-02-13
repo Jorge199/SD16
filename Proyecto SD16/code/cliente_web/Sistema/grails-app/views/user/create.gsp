@@ -3,8 +3,6 @@
 <html>
 	<head>
 		<meta name="layout" content="template">
-		<script src="jquery.validate.js"></script>
-		<script src="validationFormUser.js"></script>
 	</head>
 	<body>
         <div class="container-fluid">
@@ -34,6 +32,11 @@
 			</div>
 		</div>
 		<br><br><br><br>
+		<!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationFormUser.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
 		<!-- Bootstrap Core JavaScript -->
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
     <script type="text/javascript">

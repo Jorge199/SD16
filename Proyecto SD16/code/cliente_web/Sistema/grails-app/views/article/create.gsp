@@ -3,9 +3,6 @@
 <html>
 <head>
 	<meta name="layout" content="template">
-	<script src="jquery.validate.js"></script>
-	<script src="validationFormArticle.js"></script>
-	<script src="jquery.number.js"></script>
 </head>
 <body>
 
@@ -40,6 +37,11 @@
 		</div>
 	</div>
         
+        <!-- jQuery -->
+	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationFormArticle.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
 	<!-- Jasny-Bootstrap JavaScript -->
 	<script
 		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>

@@ -199,12 +199,12 @@
 																<i class="fa fa-list-alt"></i> Informar</g:link>
 														</g:if>
 														<g:if test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
-
 															<g:link action="edit" class="btn btn-default"
 																params="[reportEdit: 'request']" controller="report"
 																id="${requestInstance.getId()}">
 																<i class="fa fa-list-alt"></i> Informe</g:link>
 														</g:if>
+														
 													</sec:ifAnyGranted> 
 													</td>
 											</tr>
@@ -228,6 +228,11 @@
 	<br />
 	<!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationModalPatient.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationModalDoctor.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationFormRequest.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
 
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
