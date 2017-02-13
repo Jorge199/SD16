@@ -8,16 +8,13 @@ $(document).ready(function(e){
 						required:true,
 					},
 					code:{
-						required:true,
-						number:true
+						required:true
 					},
 					code_cortes:{
 						required:true,
-						number:true
 					},
 					code_laminas:{
 						required:true,
-						number:true
 					},
 					patientId:{
 						required:true
@@ -41,16 +38,13 @@ $(document).ready(function(e){
 						required:"El campo fecha es obligatorio"
 					},
 					code:{
-						required:"El campo codigo es obligatorio",
-						number:"Debe estar en formato numerico"
+						required:"El campo codigo es obligatorio"
 					},
 					code_cortes:{
-						required:"El campo codigo es obligatorio",
-						number:"Debe estar en formato numerico"
+						required:"El campo codigo es obligatorio"
 					},
 					code_laminas:{
-						required:"El campo codigo es obligatorio",
-						number:"Debe estar en formato numerico"
+						required:"El campo codigo es obligatorio"
 					},
 					patientId:{
 						required:"El campo paciente es obligatorio"

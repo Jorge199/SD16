@@ -32,13 +32,13 @@
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<input type="number" class="form-control"  maxlength="20" name="code_cortes" id="code_cortes"
+							<input type="text" class="form-control"  maxlength="20" name="code_cortes" id="code_cortes"
 							placeholder="Nro de cortes" />
 							</div>
 						</div>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<input type="number" class="form-control"  maxlength="20" name="code_laminas" id="code_laminas"
+							<input type="text" class="form-control"  maxlength="20" name="code_laminas" id="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
