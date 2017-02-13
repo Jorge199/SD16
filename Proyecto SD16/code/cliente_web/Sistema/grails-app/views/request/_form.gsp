@@ -26,7 +26,7 @@
 				<g:if test="${requestInstance?.status == StatusEnum.RECIBIDO }">
 					<div class="col-sm-4">
 					<div class="form-group">
-						<input type="text" name="code" id="code" readonly="readonly" class="form-control" value="${requestInstance?.code}"/>
+						<input type="text" name="code" id="code" class="form-control" value="${requestInstance?.code}"/>
 					</div>
 					</div>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
@@ -45,7 +45,7 @@
 					</sec:ifAnyGranted>
 					
 				</g:if>
-				<g:elseif test="${requestInstance?.status==StatusEnum.PROCESO }">
+				<g:elseif test="${requestInstance?.status==StatusEnum.PROCESO  || requestInstance?.status==StatusEnum.PROCESADO || requestInstance?.status==StatusEnum.TERMINADO}">
 					<div class="col-sm-4">
 					<div class="form-group">
 						<input type="text" name="code" id="code" maxlength="20" readonly="readonly" class="form-control" value="${requestInstance?.code}"/>
