@@ -86,7 +86,7 @@ class RequestController {
 		}
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
 		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind,
-			user:authService.getName(), reports:reportService.getAll()]
+			user:authService.getName()]
 	}
 
 	@Secured([

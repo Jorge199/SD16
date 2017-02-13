@@ -54,7 +54,7 @@
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<input type="number" class="form-control"  maxlength="20" name="code_laminas" id="code_laminas"
+							<input type="text" class="form-control"  maxlength="20" name="code_laminas" id="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
@@ -66,7 +66,7 @@
 							placeholder="Ingrese un codigo" value="${requestInstance?.code}"/>
 					</sec:ifAnyGranted>
 					<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
-						<input class="form-control"  maxlength="20" name="code" readonly="readonly" id="code"
+						<input class="form-control"  maxlength="20" name="code" id="code"
 							placeholder="Ingrese un codigo" value="${requestInstance?.code}" />
 					</sec:ifAnyGranted>
 				</g:else>
