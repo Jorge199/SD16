@@ -60,8 +60,7 @@
 									<div class="col-md-9">
 										<div class="form-group">
 											<input type="text" name="patient"
-												class="form-control
-									placeholder=" Ingrese dato del paciente" />
+												class="form-control" placeholder=" Ingrese dato del paciente" />
 										</div>
 									</div>
 									<div class="col-md-3">
@@ -71,8 +70,7 @@
 									<div class="col-md-9">
 										<div class="form-group">
 											<input type="text" name="specimen"
-												class="form-control
-									placeholder=" Ingrese el espécimen" />
+												class="form-control" placeholder=" Ingrese el espécimen" />
 										</div>
 									</div>
 								</div>
@@ -86,7 +84,7 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker1'>
-													<input type='text' class="form-control " name="startSearch" />
+													<input type='text' class="form-control " name="startSearch" placeholder="Seleccione una fecha"/>
 													<span class="input-group-addon"> <span
 														class="glyphicon glyphicon-calendar"> </span>
 													</span>
@@ -100,13 +98,23 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker2'>
-													<input type='text' class="form-control" name="endSearch" />
+													<input type='text' class="form-control" name="endSearch" placeholder="Seleccione una fecha"/>
 													<span class="input-group-addon"> <span
 														class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
 											</div>
 										</div>
+										<div class="col-md-4">
+										<label for="code"> <g:message code="Código" />
+										</label>
+									</div>
+									<div class="col-md-5">
+										<div class="form-group">
+											<input type="text" name="code"
+												class="form-control" placeholder=" Ingrese el código" />
+										</div>
+									</div>
 									</div>
 								</div>
 
@@ -141,8 +149,9 @@
 											<g:sortableColumn property="date" title="Fecha" />
 											<g:sortableColumn property="doctor" title="Doctor" />
 											<g:sortableColumn property="patient" title="Paciente" />
-											<g:sortableColumn property="studyType"
+											<g:sortableColumn property="studyType" 
 												title="Tipo de estudio" />
+											<g:sortableColumn property="specimen" title="Espécimen" />
 											<td colspan="2" align="center">Acciones</td>
 										</tr>
 									</thead>
@@ -156,29 +165,32 @@
 												 requestInstance?.status == StatusEnum.RECIBIDO ?'danger' :
 												 requestInstance?.status == StatusEnum.TERMINADO ?'success' :
 												 'default'}">
-												<td>
+												<td width="9%">
 													${requestInstance?.code }
 												</td>
-												<td>
+												<td width="5%">
 													${formatDate(format: 'dd/MM/yyyy', date:requestInstance.getDate())}
 												</td>
-												<td>
+												<td width="15%">
 													${requestInstance?.doctor?.name} ${requestInstance?.doctor?.lastName}
 													<br> ${requestInstance?.doctor?.phone}
 												</td>
-												<td>
+												<td width="15%"> 
 													${requestInstance?.patient?.name} ${requestInstance?.patient?.lastName}
 													<br> ${requestInstance?.patient?.phone}
 												</td>
-												<td>
+												<td width="12%">
 													${requestInstance?.studyType?.name}
+												</td>
+												<td width="20%">
+													${requestInstance?.specimen}
 												</td>
 
 
 												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 													<g:if
 														test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
-														<td align="center"><g:jasperReport
+														<td align="center" width="12%"><g:jasperReport
 																action="generateReport" controller="report"
 																format="PDF,DOCX" jasper="report"
 																id="${requestInstance.getId()}">
@@ -186,9 +198,9 @@
 																	value="${requestInstance.getId()}" />Descargar
 																</g:jasperReport></td>
 													</g:if>
-													<g:else><td></td></g:else>
+													<g:else><td width="12%"></td></g:else>
 												</sec:ifAnyGranted>
-												<td align="center"><g:link action="edit"
+												<td align="center" width="12%"><g:link action="edit"
 														class="btn btn-success" id="${requestInstance.getId()}">
 														<i class="fa fa-pencil"></i> Editar</g:link> 
 													<sec:ifAnyGranted
