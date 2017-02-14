@@ -182,8 +182,8 @@ class ArticleMovementController {
                 documento.add(new Phrase("Fecha final: No\n"));
             }
             
-            PdfPTable tabla = new PdfPTable(2);
-            tabla.setWidthPercentage([240, 120] as float[], new Rectangle(520, 770));
+            PdfPTable tabla = new PdfPTable(3);
+            tabla.setWidthPercentage([240, 120, 120] as float[], new Rectangle(520, 770));
             Font cabeceraf = new Font();
             cabeceraf.setColor(BaseColor.WHITE);
             cabeceraf.setSize(13);
@@ -198,25 +198,38 @@ class ArticleMovementController {
             cabecerac.setColspan(1);
             cabecerac.setBackgroundColor(BaseColor.DARK_GRAY);
             tabla.addCell(cabecerac);
+            // Stock actual
+            cabecerac = new PdfPCell(new Phrase("Stock actual", cabeceraf));
+            cabecerac.setColspan(1);
+            cabecerac.setBackgroundColor(BaseColor.DARK_GRAY);
+            tabla.addCell(cabecerac);
             // Datos
             PdfPCell datosc;
-            HashMap<String, Integer> lista = new HashMap();
+            HashMap<Integer, Integer> lista = new HashMap();
             for(ArticleMovementB am: articleMovements){
-                lista.put(am.getArticle().getName(), 0);
+                lista.put(am.getArticle().getId(), 0);
             }
             int cantidadActual = 0;
             for(ArticleMovementB am: articleMovements){
-                cantidadActual = lista.get(am.getArticle().getName());
+                //cantidadActual = lista.get(am.getId().getName());
+                cantidadActual = lista.get(am.getArticle().getId());
                 if(am.getMovementType() == MovementTypeEnum.ENTRADA){
-                    lista.put(am.getArticle().getName(), (cantidadActual + am.getQuantity()));
+                    lista.put(am.getArticle().getId(), (cantidadActual + am.getQuantity()));
+                    System.out.println("Agregado id: " + am.getArticle().getId())
                 }else{
-                    lista.put(am.getArticle().getName(), (cantidadActual - am.getQuantity()));
+                    lista.put(am.getArticle().getId(), (cantidadActual - am.getQuantity()));
+                    System.out.println("Agregado id: " + am.getArticle().getId())
                 }
             }
-            for(String key: lista.keySet()){
-                datosc = new PdfPCell(new Phrase(key));
+            String nombre = "";
+            for(Integer key: lista.keySet()){
+                datosc = new PdfPCell(new Phrase(String.valueOf(articleMovementService.getById(key).getArticle().getName())));
                 tabla.addCell(datosc);
+                
                 datosc = new PdfPCell(new Phrase(String.valueOf(lista.get(key))));
+                tabla.addCell(datosc);
+                
+                datosc = new PdfPCell(new Phrase(String.valueOf(articleMovementService.getById(key).getArticle().getQuantity())));
                 tabla.addCell(datosc);
             }
             /*for(ArticleMovementB am: articleMovements){
