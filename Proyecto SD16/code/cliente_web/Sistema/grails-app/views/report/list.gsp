@@ -92,7 +92,7 @@
 
 						</div>
 					</div>
-
+<br> <br> 
 
 					<div class="dataTable_wrapper">
 						<div class="row">

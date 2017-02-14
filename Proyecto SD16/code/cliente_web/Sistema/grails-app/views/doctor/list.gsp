@@ -40,7 +40,7 @@
 							</div>
 						</g:form>
 					</div>
-					<br> <br> 
+					<br> <br> <br> <br> 
 					<div class="dataTable_wrapper">
 						<div class="row">
 							<div class="col-sm-12">
