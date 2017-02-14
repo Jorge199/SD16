@@ -54,13 +54,18 @@ class RequestController {
 			page = Integer.parseInt(params.get("page"))
 		}
 		def requests = null
+		System.out.println("principio")
 		String textToFind=""
 		System.out.println(params)
 		if (params.containsKey("text")){
-			textToFind= params.get("text");
+			textToFind= params.get("text")
+			System.out.println("no entro else" + textToFind)
 		}else{
 			if(null!=params.get("specimen") && !"".equals(params.get("specimen")) && !"null".equals(params.get("specimen"))){
 				textToFind+="specimen="+params.get("specimen")+'&'
+			}
+			if(null!=params.get("code") && !"".equals(params.get("code")) && !"null".equals(params.get("code"))){
+				textToFind+="code="+params.get("code")+'&'
 			}
 			if(null!=params.get("patient") && !"".equals(params.get("patient")) && !"null".equals(params.get("patient"))){
 				textToFind+="patient="+params.get("patient")+'&'
@@ -76,7 +81,9 @@ class RequestController {
 					textToFind+="date="+params.get("startSearch")
 				}
 			}
+			System.out.println("entro else" + textToFind)
 		}
+		System.out.println("text" + textToFind)
 		if(!textToFind.equals("")){
 			requests = requestService.find(textToFind,10,page)
 			siguiente = requestService.find(textToFind,10,page+1)

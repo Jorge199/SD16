@@ -60,7 +60,7 @@
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker1'>
 													<input type='text' class="form-control"
-														name="startSearch" /> <span class="input-group-addon">
+														name="startSearch" placeholder="Seleccione una fecha" /> <span class="input-group-addon">
 														<span class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
@@ -75,7 +75,7 @@
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker2'>
 													<input type='text' class="form-control"
-														name="endSearch" /> <span class="input-group-addon">
+														name="endSearch" placeholder="Seleccione una fecha"/> <span class="input-group-addon">
 														<span class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>

@@ -187,10 +187,6 @@ class ReportController {
 
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
 		
-		params.title = "Hello World !"
-		params.reportId = "220/B, Baker Street, London"
-		params.operationTime = new Date()
-		
 		params.patient = reportInstance?.request?.patient?.name +" "+ reportInstance?.request?.patient?.lastName
 		params.age = reportInstance.getAge()
 		params.date = "ENCARNACION, "+ new Date().getDate() + " de " + (new SimpleDateFormat("MMMM", new Locale("es", "ES"))).format(new Date())+ " del "+(new SimpleDateFormat("yyyy", new Locale("es", "ES"))).format(new Date())
