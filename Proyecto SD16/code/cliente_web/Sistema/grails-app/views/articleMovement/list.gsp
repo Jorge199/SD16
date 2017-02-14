@@ -149,10 +149,8 @@
                                                                         </div>
                                                                 </div>
                                         </div>-->
-                    <div class="col-md-1"><strong>Referencias:</strong></div>
-                    <div class="col-md-2 bg-success">Entrada</div>
-                    <div class="col-md-2 bg-danger">Salida</div>
-                    <br> <br> 
+                   
+                    <br> <br>
                     <div class="dataTable_wrapper">
                         <div class="row">
                             <div class="col-sm-12">
@@ -170,14 +168,18 @@
                                 <tbody>
                                     <g:each in="${articleMovementInstanceList}" status="i"
                                         var="articleMovementInstance">
-                                        <tr class="${articleMovementInstance?.movementType == MovementTypeEnum.ENTRADA ? 'success' :
-					articleMovementInstance?.movementType == MovementTypeEnum.SALIDA ?'danger' :
-					'default'}">
+                                        <tr align="center">
                                             <td>
                                                 ${articleMovementInstance?.article?.name}
                                             </td>
                                             <td>
-                                                ${fieldValue(bean: articleMovementInstance, field: "movementType")}
+                                            <g:if test="${articleMovementInstance?.movementType.toString()=="Entrada"}">
+													<h4><span class="label label-success label-col-lg" >Entrada</span></h4>
+												</g:if>
+												<g:else test="${articleMovementInstance?.movementType.toString()=="Salida"}">
+													<h4><span class="label label-danger label-col-lg" >Salida</span></h4>
+												</g:else>
+												
                                             </td>
                                             <td>
                                                 ${fieldValue(bean: articleMovementInstance, field: "quantity")}

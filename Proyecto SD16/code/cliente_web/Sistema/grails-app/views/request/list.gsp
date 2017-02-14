@@ -128,25 +128,18 @@
 							</g:form>
 						</div>
 					</div>
-					<div class="col-md-1">
-						<strong>Referencia:</strong>
-					</div>
-					<div class="col-md-2 bg-danger">Recibido</div>
-					<div class="col-md-2 bg-warning">Proceso</div>
-					<div class="col-md-2 bg-info">Procesado</div>
-					<div class="col-md-2 bg-success">Terminado</div>
-					<div class="col-md-2">Retirado</div>
+								
 					<br>
 					<br>
 					<div class="dataTable_wrapper">
 						<div class="row">
 							<div class="col-sm-12">
-								<table id="list-request" class="table table-bordered"
-									cellspacing="0" width="100%">
+								<table id="list-request" class="table table-bordered" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<g:sortableColumn property="id" title="Codigo" />
 											<g:sortableColumn property="date" title="Fecha" />
+											<g:sortableColumn property="status" title="Estado" />
 											<g:sortableColumn property="doctor" title="Doctor" />
 											<g:sortableColumn property="patient" title="Paciente" />
 											<g:sortableColumn property="studyType" 
@@ -159,17 +152,29 @@
 										<g:each in="${requestInstanceList}" status="i"
 											var="requestInstance">
 
-											<tr
-												class="${requestInstance?.status == StatusEnum.PROCESADO ? 'info' :
-												 requestInstance?.status == StatusEnum.PROCESO ?'warning' :
-												 requestInstance?.status == StatusEnum.RECIBIDO ?'danger' :
-												 requestInstance?.status == StatusEnum.TERMINADO ?'success' :
-												 'default'}">
+											<tr align="center">
 												<td width="9%">
 													${requestInstance?.code }
 												</td>
 												<td width="5%">
 													${formatDate(format: 'dd/MM/yyyy', date:requestInstance.getDate())}
+												</td>
+												<td width="9%">
+												<g:if test="${requestInstance?.status==StatusEnum.RECIBIDO}">
+													<h4><span class="label label-danger label-col-lg" >Recibido</span></h4>
+												</g:if>
+												<g:elseif test="${requestInstance?.status==StatusEnum.PROCESO}">
+													<h4><span class="label label-warning">Proceso</span></h4>
+												</g:elseif>
+												<g:elseif test="${requestInstance?.status==StatusEnum.PROCESADO}">
+													<h4><span class="label label-info">Procesado</span></h4>
+												</g:elseif>
+												<g:elseif test="${requestInstance?.status==StatusEnum.TERMINADO}">
+													<h4><span class="label label-success">Terminado</span></h4>
+												</g:elseif>
+												<g:else>
+													<h4><span class="label label-default col-lg">Retirado</span></h4>
+												</g:else>
 												</td>
 												<td width="15%">
 													${requestInstance?.doctor?.name} ${requestInstance?.doctor?.lastName}
