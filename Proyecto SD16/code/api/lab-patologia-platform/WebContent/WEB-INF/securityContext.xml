@@ -10,10 +10,10 @@
           http://www.springframework.org/schema/security/spring-security.xsd"> 
 
 	<!--Fuente: http://www.jtech.ua.es/j2ee/publico/spring-2012-13/sesion07-apuntes.html -->
-	<sec:http auto-config="true" use-expressions="true" pattern="/rest/**" create-session="stateless"> 
-    	<sec:intercept-url pattern="/rest/user/name/**" access="permitAll()"/>
-    	<sec:intercept-url pattern="/rest/role/**" access="permitAll()"/>
-    	<sec:intercept-url pattern="/rest/user/**" access="permitAll()"/> 
+	<sec:http auto-config="true" use-expressions="true" pattern="${autentication.pattern}" create-session="stateless"> 
+    	<sec:intercept-url pattern="${autentication.user.name.pattern}" access="permitAll()"/>
+    	<sec:intercept-url pattern="${autentication.role.pattern}" access="permitAll()"/>
+    	<sec:intercept-url pattern="${autentication.user.pattern}" access="permitAll()"/> 
   		<sec:http-basic/>
   	</sec:http>
   	  	
@@ -39,7 +39,7 @@
 	     Permite a spring security comprender la contraseña guardada en la 
 	     tabla user de la base de datos. La contraseña esta hasheada con BCrypt
 	-->
-    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <bean id="encoder" class="${encoder.class}"/>
 	
 	<!--Para usar la anotacion @Secured de Spring -->
 	<sec:global-method-security secured-annotations="enabled" />

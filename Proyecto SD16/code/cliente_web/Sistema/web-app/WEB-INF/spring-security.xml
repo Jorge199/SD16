@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	xmlns:context="http://www.springframework.org/schema/context"
  xmlns:sec="http://www.springframework.org/schema/security"
+ xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
  xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
    	 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+ 	
+ 	
+ 	<tx:annotation-driven />
+	<context:property-placeholder location="WEB-INF/conf.properties" />
  
- 
-    <bean id="authenticationProcessingFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+    <bean id="authenticationProcessingFilter" class="${authFilter.class}">
         <property name="authenticationManager" ref="authenticationManager" />
-        <property name="filterProcessesUrl" value="/j_spring_security_check" />
+        <property name="filterProcessesUrl" value="${filterProcesses.url}" />
         <property name="authenticationSuccessHandler">
-            <bean class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-                <property name="defaultTargetUrl" value="/pages/home" />
+            <bean class="${authSuccessHandler.class}">
+                <property name="defaultTargetUrl" value="${defaultTarget.url}" />
             </bean>
         </property>
         <property name="authenticationFailureHandler">
-            <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-                <property name="defaultFailureUrl" value="/pages/errorlogin" />
+            <bean class="${authFailureHandler}">
+                <property name="defaultFailureUrl" value="${defaultFailure.url}" />
             </bean>
         </property>
     </bean>
  
-    <bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+    <bean id="authenticationManager" class="${authManager.class}">
         <property name="providers">
             <list>
                 <ref bean="myAuthenticationProvider" />
@@ -31,11 +35,11 @@ http://www.springframework.org/schema/security/spring-security-3.0.xsd">
         </property>
     </bean>
  
-    <bean id="myAuthenticationProvider" class="com.cleventy.spring.filter.MyAuthenticationProvider">
+    <bean id="myAuthenticationProvider" class="${myAuthProvider.class}">
         <property name="userDetailsService" ref="myUserDetailsService" />
     </bean>
  
-    <bean id="myUserDetailsService" class="com.cleventy.spring.filter.MyUserDetailsService" />
+    <bean id="myUserDetailsService" class="${myUserDetailsService.class}" />
  
     <sec:http auto-config="true" use-expressions="true" access-denied-page="/pages/denied">
         <sec:intercept-url pattern="/login" access="permitAll" />
