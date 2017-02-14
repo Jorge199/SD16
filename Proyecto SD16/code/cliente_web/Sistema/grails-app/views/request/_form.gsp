@@ -56,21 +56,23 @@
 					</div>
 					</div>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+					<g:if test="${requestInstance?.status == StatusEnum.PROCESO }">
 						<div class="col-sm-4">
 						<div class="form-group">
 							<input type="text" class="form-control"  maxlength="20" name="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
+						</g:if>
 					</sec:ifAnyGranted>
 				</g:elseif>
 				<g:else>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
-						<input class="form-control"  maxlength="20" name="code" id="code"
+						<input class="form-control"  maxlength="20" readonly="readonly" name="code" id="code"
 							placeholder="Ingrese un codigo" value="${requestInstance?.code}" />
 					</sec:ifAnyGranted>
 					<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
-						<input class="form-control"  maxlength="20" name="code" id="code"
+						<input class="form-control"  readonly="readonly" maxlength="20" name="code" id="code"
 							placeholder="Ingrese un codigo" value="${requestInstance?.code}"  />
 					</sec:ifAnyGranted>
 				</g:else>

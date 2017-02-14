@@ -32,9 +32,15 @@
 							<br>
 							<div class="col-xs-12" align="center">
 									
-									<a class="btn btn-default" href="/Sistema/report/list"
-											role="button"><i class="fa fa-times"></i> Atrás</a>
-								</div>
+									<g:if test="${reportShow.equals("request")}">
+							<a class="btn btn-default" href="/Sistema/request/list"
+								role="button"><i class="fa fa-times"></i> Atrás</a>
+						</g:if>
+						<g:else>
+							<a class="btn btn-default" href="/Sistema/report/list"
+								role="button"><i class="fa fa-times"></i> Atrás</a>
+						</g:else>
+						</div>
 						
 
 						</fieldset>
