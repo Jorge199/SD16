@@ -12,11 +12,9 @@
 						<h4><strong>Actualizar ficha</strong></h4>
 					</div>
 					<div class="panel-body">
-						<g:form action="update" >
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
-						</g:form>						
 					</div>
 				</div>
 			</div>
@@ -29,7 +27,6 @@
 	<script src=" ${request.contextPath}/template/js/validationModalDoctor.js"></script>
 	<script src=" ${request.contextPath}/template/js/validationFormRequest.js"></script>
 	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
-	
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
 	<script src=" ${request.contextPath}/template/js/es.js"></script>

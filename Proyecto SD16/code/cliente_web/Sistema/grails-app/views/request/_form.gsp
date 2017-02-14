@@ -1,8 +1,12 @@
 <%@ page import="java.lang.System"%>
 <%@ page import="com.sd.uni.labpatologia.util.StatusEnum" %>
 
-<form id="myFormRequest" action="/Sistema/request/save" method="post" onsubmit="return saveDataRequest();">
 	
+	<g:if test="${action == 'save'}">
+ 	   <form id="myFormRequest" action="/Sistema/request/save" method="post" id="request" onsubmit="return saveDataRequest();">
+ 	</g:if><g:else>
+ 	   <form id="myFormRequest" action="/Sistema/request/update" method="post" id="request" onsubmit="return saveDataRequest();">
+ 	</g:else>
 
 <div class="row">
 	<div class=col-md-12>
@@ -21,24 +25,24 @@
 		</div>
 		
 		<div class="col-md-4">
-			<label>Codigo <span class="required-indicator">*</span></label>
+			<label>Codigo *</label>
 			<div>
 				<g:if test="${requestInstance?.status == StatusEnum.RECIBIDO }">
 					<div class="col-sm-4">
 					<div class="form-group">
-						<input type="text" name="code" id="code" class="form-control" value="${requestInstance?.code}"/>
+						<input type="text" name="code" id="code" class="form-control" value="${requestInstance?.code}" />
 					</div>
 					</div>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<div class="col-sm-4">
 						<div class="form-group">
 							<input type="text" class="form-control"  maxlength="20" name="code_cortes" id="code_cortes"
-							placeholder="Nro de cortes" />
+							placeholder="Nro de cortes"  />
 							</div>
 						</div>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<input type="text" class="form-control"  maxlength="20" name="code_laminas" id="code_laminas"
+							<input type="text" class="form-control"  maxlength="20" name="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
@@ -54,7 +58,7 @@
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<div class="col-sm-4">
 						<div class="form-group">
-							<input type="text" class="form-control"  maxlength="20" name="code_laminas" id="code_laminas"
+							<input type="text" class="form-control"  maxlength="20" name="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
@@ -63,11 +67,11 @@
 				<g:else>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<input class="form-control"  maxlength="20" name="code" id="code"
-							placeholder="Ingrese un codigo" value="${requestInstance?.code}"/>
+							placeholder="Ingrese un codigo" value="${requestInstance?.code}" />
 					</sec:ifAnyGranted>
 					<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
 						<input class="form-control"  maxlength="20" name="code" id="code"
-							placeholder="Ingrese un codigo" value="${requestInstance?.code}" />
+							placeholder="Ingrese un codigo" value="${requestInstance?.code}"  />
 					</sec:ifAnyGranted>
 				</g:else>
 			</div>

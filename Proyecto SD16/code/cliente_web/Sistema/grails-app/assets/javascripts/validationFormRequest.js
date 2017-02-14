@@ -13,9 +13,7 @@ $(document).ready(function(e){
 					code_cortes:{
 						required:true,
 					},
-					code_laminas:{
-						required:true,
-					},
+			
 					patientId:{
 						required:true
 					},
@@ -43,9 +41,7 @@ $(document).ready(function(e){
 					code_cortes:{
 						required:"El campo codigo es obligatorio"
 					},
-					code_laminas:{
-						required:"El campo codigo es obligatorio"
-					},
+					
 					patientId:{
 						required:"El campo paciente es obligatorio"
 					},
@@ -76,7 +72,7 @@ function saveDataRequest(){
 	var expresion = /\w+@\w+\.+[a-z]/;
 
 	if($("#myFormRequest input[id=date]").val() == "" || $("#myFormRequest input[id=code]").val() == ""
-		|| $("#myFormRequest input[id=code_cortes]").val() == "" || $("#myFormRequest input[id=code_laminas]").val() == "" 
+		|| $("#myFormRequest input[id=code_cortes]").val() == "" 
 			|| $("#myFormRequest select[id=patientId]").val() == "" || $("#myFormRequest select[id=doctorId]").val() == ""
 				|| $("#myFormRequest select[id=studyTypeId]").val() == ""){
 		alert("Complete los campos obligatorios (*)");

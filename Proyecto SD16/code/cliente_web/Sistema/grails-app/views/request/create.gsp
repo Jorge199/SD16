@@ -52,7 +52,6 @@
 	<script
 		src=" ${request.contextPath}/template/js/bootstrap-datetimepicker.es.js"></script>
 
-
 	<link rel="stylesheet"
 		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
 	<script type="text/javascript">
