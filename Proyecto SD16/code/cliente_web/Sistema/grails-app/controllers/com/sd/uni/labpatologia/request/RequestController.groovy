@@ -92,7 +92,7 @@ class RequestController {
 			siguiente = requestService.find(null,10,page+1)
 		}
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
-		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind,
+		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind,
 			user:authService.getName()]
 	}
 
@@ -104,7 +104,7 @@ class RequestController {
 	def create() {
 		def action = "save"
 		def requestInstance = new RequestB(params)
-		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll(),
+		[requestInstance: requestInstance, studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll(),
 			user:authService.getName(), action:action]
 	}
 
@@ -153,7 +153,7 @@ class RequestController {
 			redirect(action: "list")
 			return
 		}
-		[requestInstance: requestInstance, patients: patientService.getAll(), doctors: doctorService.getAll(), studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll(),
+		[requestInstance: requestInstance, studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll(),
 			user:authService.getName()]
 	}
 

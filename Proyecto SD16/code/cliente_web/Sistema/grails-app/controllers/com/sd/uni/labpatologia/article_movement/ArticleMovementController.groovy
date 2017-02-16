@@ -54,7 +54,7 @@ class ArticleMovementController {
 		'ROLE_TECNICO'
 	])
     def create(){
-        [articleMovementInstance: new ArticleMovementB(params), articles: articleService.getAll(), laboratoryInstanceList: laboratoryService.getAll(),
+        [articleMovementInstance: new ArticleMovementB(params), laboratoryInstanceList: laboratoryService.getAll(),
             user:authService.getName()]
     }
 
@@ -93,7 +93,7 @@ class ArticleMovementController {
             articleMovements = articleMovementService.find(null,10,page)
             siguiente = articleMovementService.find(null,10,page+1)
         }
-        [articleMovementInstanceList: articleMovements, articles: articleService.getAll(), articleMovementInstanceTotal: articleMovements?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll(), textToFind: textToFind,
+        [articleMovementInstanceList: articleMovements, articleMovementInstanceTotal: articleMovements?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll(), textToFind: textToFind,
             user:authService.getName()]
     }
 
