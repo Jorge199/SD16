@@ -44,7 +44,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 			return newDto;
 		} catch(PatologyException ex) { 
 			 logger.error(ex);
-			 throw new RuntimeException("Error"+PatientServiceImpl.class+"" + ex.getMessage(), ex); 
+			 throw new RuntimeException("Error"+DoctorServiceImpl.class+"" + ex.getMessage(), ex); 
 		}
 		
 	}
