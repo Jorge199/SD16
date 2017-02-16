@@ -40,6 +40,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 	@Override
 	@Transactional
 	//@CacheEvict(value = "lab-patologia-platform-cache", key = "'articles'")
+	@CacheEvict(value = "lab-patologia-platform-cache", key = "'articleCount'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'article_' + #dto.id", condition = "#dto.id!=null")
 	public ArticleDto save(ArticleDto dto) {
 		try{
@@ -155,6 +156,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		}
 	}
 	
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'articleCount'")
 	@Transactional(readOnly = true)
 	public ArticleResult getCount(){
 		final ArticleResult articleResult = new ArticleResult();

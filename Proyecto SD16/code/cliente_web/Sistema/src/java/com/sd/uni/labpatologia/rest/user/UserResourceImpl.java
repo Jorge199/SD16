@@ -31,7 +31,7 @@ public class UserResourceImpl extends BaseResourceImpl<UserDTO> implements
 	
 	
 	@Override
-	@Cacheable(value = CACHE_REGION, key = "'user_' + #id")
+	//@Cacheable(value = CACHE_REGION, key = "'user_' + #id")
 	public UserDTO getById(Integer id) {
 		return getWebResource().path("/" + id).get(UserDTO.class);
 	}

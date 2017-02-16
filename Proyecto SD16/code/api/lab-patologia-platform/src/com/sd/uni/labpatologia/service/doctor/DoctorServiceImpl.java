@@ -30,7 +30,8 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 	
 	@Override
 	@Transactional
-	//@CacheEvict(value= "lab-patologia-platform-cache",key = "'doctors'")
+	//@CacheEvict(value= "lab-patologia-platform-cache",key = "'doctors'")doctorCount
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'doctorCount'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'doctor_' + #dto.id", condition="#dto.id!=null")
 	public DoctorDto save(DoctorDto dto) {
 		try { 
@@ -116,6 +117,7 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 		return doctorResult;
 	}
 	
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'doctorCount'")
 	@Transactional(readOnly = true)
 	public DoctorResult getCount(){
 		final DoctorResult doctorResult = new DoctorResult();

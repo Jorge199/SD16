@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,6 @@ import com.sd.uni.labpatologia.dao.study_type.IStudyTypeDao;
 import com.sd.uni.labpatologia.dao.user.IUserDao;
 import com.sd.uni.labpatologia.domain.message.MessageDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
-import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -58,6 +58,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	@Override
 	@Transactional
 	//@CacheEvict(value= "lab-patologia-platform-cache",key = "'requests'")
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'requestCount'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'request_' + #dto.id", condition="#dto.id!=null")
 	public RequestDTO save(RequestDTO dto) {
 		try { 
@@ -175,6 +176,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		return requestResult;
 	}
 	
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'requestCount'")
 	@Transactional(readOnly = true)
 	public RequestResult getCount(){
 		final RequestResult requestResult = new RequestResult();

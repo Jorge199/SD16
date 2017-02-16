@@ -35,6 +35,7 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 	@Override
 	@Transactional
 	//@CacheEvict(value= "lab-patologia-platform-cache",key = "'patients'")
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'patientCount'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'patient_' + #dto.id", condition="#dto.id!=null")
 	public PatientDTO save(PatientDTO dto) {
 		try { 
@@ -119,6 +120,8 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 		patResult.setPatients(patients);
 		return patResult;
 	}
+	
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'patientCount'")
 	@Transactional(readOnly = true)
 	public PatientResult getCount(){
 		final PatientResult patientResult = new PatientResult();

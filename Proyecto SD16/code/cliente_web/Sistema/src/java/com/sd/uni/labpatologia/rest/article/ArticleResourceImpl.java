@@ -19,7 +19,7 @@ public class ArticleResourceImpl extends BaseResourceImpl<ArticleDto> implements
 	}
 
 	@Override
-	@CacheEvict(value = CACHE_REGION, key = "'articles'")
+	//@CacheEvict(value = CACHE_REGION, key = "'articles'")
 	@CachePut(value = CACHE_REGION, key = "'article_' + #article.id", condition = "#article.id!=null")
 	public ArticleDto save(ArticleDto article) {
 		ArticleDto newDto = super.save(article);
@@ -37,7 +37,7 @@ public class ArticleResourceImpl extends BaseResourceImpl<ArticleDto> implements
 	}
 
 	@Override
-	@Cacheable(value = CACHE_REGION, key = "'articles'")
+	//@Cacheable(value = CACHE_REGION, key = "'articles'")
 	public ArticleResult getAll() {
 		setWebResourceBasicAuthFilter();
 		final ArticleResult result = getWebResource().get(ArticleResult.class);

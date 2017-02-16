@@ -39,7 +39,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	@Transactional
 
 	//@CacheEvict(value= "lab-patologia-platform-cache",key = "'users'")
-	@CachePut(value = "lab-patologia-platform-cache", key = "'user_' + #dto.id", condition="#dto.id!=null")
+	//@CachePut(value = "lab-patologia-platform-cache", key = "'user_' + #dto.id", condition="#dto.id!=null")
 	public UserDTO save(UserDTO dto) {
 		try{
 		final UserDomain domain = convertDtoToDomain(dto);
@@ -57,7 +57,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "lab-patologia-platform-cache", key = "'user_' + #id")
+	//@Cacheable(value = "lab-patologia-platform-cache", key = "'user_' + #id")
 	public UserDTO getById(Integer id) throws PatologyException {
 		final UserDomain domain = userDao.getById(id);
 		final UserDTO dto = convertDomainToDto(domain);
@@ -91,7 +91,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		return usuarioResult;
 	}
 	
-	@Cacheable(value="lab-patologia-platform-cache", key="'user_' + #username")
+	//@Cacheable(value="lab-patologia-platform-cache", key="'user_' + #username")
 	@Transactional(readOnly = true)
 	public UserDTO getByUsername(String username) {
 		final UserDomain userDomain = userDao.getByUsername(username);
