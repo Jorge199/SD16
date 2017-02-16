@@ -5,6 +5,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
+import com.sd.uni.labpatologia.dto.patient.PatientResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
@@ -41,6 +42,12 @@ public class RequestResourceImpl extends BaseResourceImpl<RequestDTO> implements
 		setWebResourceBasicAuthFilter();
 		final RequestResult result = getWebResource().get(RequestResult.class);
 		return result;
+	}
+	
+	public int getCount(){
+		setWebResourceBasicAuthFilter();
+		final RequestResult countResult = getCountResult().get(RequestResult.class);
+		return countResult.getCount();
 	}
 
 	@Override

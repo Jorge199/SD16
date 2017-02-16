@@ -2,6 +2,7 @@ package com.sd.uni.labpatologia.rest.article;
 
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
+import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
 
 import org.springframework.cache.annotation.CacheEvict;
@@ -43,6 +44,12 @@ public class ArticleResourceImpl extends BaseResourceImpl<ArticleDto> implements
 		return result;
 	}
 
+	public int getCount(){
+		setWebResourceBasicAuthFilter();
+		final ArticleResult countResult = getCountResult().get(ArticleResult.class);
+		return countResult.getCount();
+	}
+	
     @Override
     public ArticleResult find(String textToFind, int maxItems, int page) {
         setWebResourceBasicAuthFilter();

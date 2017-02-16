@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
+import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.exception.StockException;
 import com.sd.uni.labpatologia.service.article.IArticleService;
@@ -42,6 +43,15 @@ public class ArticleResource {
 	public ArticleResult getAll() throws PatologyException {
 		return _articleService.getAll();
 	}
+	
+	@GET
+	@Path("/count")
+	@Produces("application/xml")
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_TECNICO" })
+	public ArticleResult getCount(){
+		return _articleService.getCount();
+	}
+	
 	
 	/* http://localhost:8080/lab-patologia-platform/rest/article/search/textToFind */
 	@GET

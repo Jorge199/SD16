@@ -22,6 +22,7 @@ import com.sd.uni.labpatologia.dao.study_type.IStudyTypeDao;
 import com.sd.uni.labpatologia.dao.user.IUserDao;
 import com.sd.uni.labpatologia.domain.message.MessageDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
+import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -171,6 +172,13 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		}
 		final RequestResult requestResult = new RequestResult();
 		requestResult.setRequests(requests);
+		return requestResult;
+	}
+	
+	@Transactional(readOnly = true)
+	public RequestResult getCount(){
+		final RequestResult requestResult = new RequestResult();
+		requestResult.setCount(requestDao.getCount());
 		return requestResult;
 	}
 

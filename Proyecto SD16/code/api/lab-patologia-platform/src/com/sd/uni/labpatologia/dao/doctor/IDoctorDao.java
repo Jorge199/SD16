@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface IDoctorDao extends IBaseDao<DoctorDomain>{
-	
+	public int getCount();
 }

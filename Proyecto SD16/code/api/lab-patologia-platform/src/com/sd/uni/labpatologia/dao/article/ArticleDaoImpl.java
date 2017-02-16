@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.article.ArticleDomain;
+import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
 @Repository
 public class ArticleDaoImpl  extends BaseDaoImpl<ArticleDomain> implements IArticleDao {
@@ -39,6 +40,11 @@ public class ArticleDaoImpl  extends BaseDaoImpl<ArticleDomain> implements IArti
 	public List<ArticleDomain> findAll() {
 		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ArticleDomain.class);
 		return criteria.list();
+	}
+	
+	public int getCount() {
+		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ArticleDomain.class);
+		return criteria.list().size();
 	}
 
 	@Override

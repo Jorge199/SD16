@@ -36,14 +36,11 @@
 									<i class="fa fa fa-fw fa-bars fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<g:if test="${requestInstanceList?.size()}">
+									
 										<div class="huge">
-											${requestInstanceList.size()}
+											${requestCount}
 										</div>
-									</g:if>
-									<g:else>
-										<div class="huge">0</div>
-									</g:else>
+									
 									<div>Fichas recibidas</div>
 								</div>
 							</div>
@@ -65,14 +62,11 @@
 									<i class="fa fa-child fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<g:if test="${patientInstanceList?.size()}">
+
 										<div class="huge">
-											${patientInstanceList.size()}
+											${patientCount}
 										</div>
-									</g:if>
-									<g:else>
-										<div class="huge">0</div>
-									</g:else>
+
 									<div>Pacientes</div>
 								</div>
 							</div>
@@ -98,14 +92,10 @@
 									<i class="fa fa-medkit fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<g:if test="${articleInstanceList?.size()}">
 										<div class="huge">
-											${articleInstanceList.size()}
+											${articleCount}
 										</div>
-									</g:if>
-									<g:else>
-										<div class="huge">0</div>
-									</g:else>
+								
 									<div>Insumos</div>
 								</div>
 							</div>
@@ -130,9 +120,9 @@
 								<i class="fa fa-user-md fa-5x"></i>
 							</div>
 							<div class="col-xs-9 text-right">
-								<g:if test="${doctorInstanceList?.size()}">
+								<g:if test="${doctorCount}">
 										<div class="huge">
-											${doctorInstanceList.size()}
+											${doctorCount}
 										</div>
 									</g:if>
 									<g:else>

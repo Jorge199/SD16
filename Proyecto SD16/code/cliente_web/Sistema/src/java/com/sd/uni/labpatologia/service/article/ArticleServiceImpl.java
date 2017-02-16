@@ -44,6 +44,11 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleB, ArticleDto> im
 		return laboratories;
 	}
 
+	public int getCount(){
+		final int count = _articleResource.getCount();
+		return count;
+	}
+	
 	@Override
 	public ArticleB getById(Integer id) {
 		final ArticleDto dto = _articleResource.getById(id);

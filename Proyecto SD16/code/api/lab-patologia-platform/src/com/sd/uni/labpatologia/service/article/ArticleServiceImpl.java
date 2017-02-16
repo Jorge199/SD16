@@ -19,6 +19,7 @@ import com.sd.uni.labpatologia.domain.article.ArticleDomain;
 //import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
+import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.exception.StockException;
 import com.sd.uni.labpatologia.service.article_movement.ArticleMovementServiceImpl;
@@ -152,5 +153,12 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		} else {
 			throw new StockException("Stock insuficiente");
 		}
+	}
+	
+	@Transactional(readOnly = true)
+	public ArticleResult getCount(){
+		final ArticleResult articleResult = new ArticleResult();
+		articleResult.setCount(_articleDao.getCount());
+		return articleResult;
 	}
 }

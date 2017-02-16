@@ -115,7 +115,13 @@ public class DoctorServiceImpl extends BaseServiceImpl<DoctorDto, DoctorDomain, 
 		doctorResult.setDoctors(doctors);
 		return doctorResult;
 	}
-
+	
+	@Transactional(readOnly = true)
+	public DoctorResult getCount(){
+		final DoctorResult doctorResult = new DoctorResult();
+		doctorResult.setCount(_doctorDao.getCount());
+		return doctorResult;
+	}
 	
 
 }

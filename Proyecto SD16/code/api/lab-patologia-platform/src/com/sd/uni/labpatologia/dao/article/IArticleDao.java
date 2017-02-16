@@ -5,5 +5,5 @@ import com.sd.uni.labpatologia.domain.article.ArticleDomain;
 
 
 public interface IArticleDao extends IBaseDao<ArticleDomain>{
-
+	public int getCount();
 }

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
+import com.sd.uni.labpatologia.domain.article.ArticleDomain;
 import com.sd.uni.labpatologia.domain.doctor.DoctorDomain;
 import com.sd.uni.labpatologia.domain.study_type.StudyTypeDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -45,6 +46,11 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorDomain> implements IDoctorD
 		return criteria.list();
 	}
 
+	public int getCount() {
+		final Criteria criteria = _sessionFactory.getCurrentSession().createCriteria(DoctorDomain.class);
+		return criteria.list().size();
+	}
+	
 	@Override
 	public List<DoctorDomain> find(String textToFind, int page, int maxItems) {
 		Session session = _sessionFactory.getCurrentSession();

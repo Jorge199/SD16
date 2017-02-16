@@ -15,6 +15,7 @@ import com.sd.uni.labpatologia.dao.patient.IPatientDao;
 import com.sd.uni.labpatologia.dao.patient.PatientDaoImpl;
 import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
+import com.sd.uni.labpatologia.dto.article.ArticleResult;
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
 import com.sd.uni.labpatologia.dto.report.ReportDTO;
@@ -117,6 +118,12 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomai
 		final PatientResult patResult = new PatientResult();
 		patResult.setPatients(patients);
 		return patResult;
+	}
+	@Transactional(readOnly = true)
+	public PatientResult getCount(){
+		final PatientResult patientResult = new PatientResult();
+		patientResult.setCount(patientDao.getCount());
+		return patientResult;
 	}
 
 }

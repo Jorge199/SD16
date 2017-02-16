@@ -7,5 +7,5 @@ import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.service.base.IBaseService;
 
 public interface IRequestService extends IBaseService<RequestDTO, RequestDomain, RequestDaoImpl, RequestResult> {
-	
+	public RequestResult getCount();
 }

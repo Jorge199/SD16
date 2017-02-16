@@ -60,6 +60,11 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestB, RequestDTO>
 		return requests;
 	}
 
+	public int getCount(){
+		final int count = requestResource.getCount();
+		return count;
+	}
+	
 	@Override
 	public RequestB getById(Integer id) {
 		final RequestDTO dto = requestResource.getById(id);

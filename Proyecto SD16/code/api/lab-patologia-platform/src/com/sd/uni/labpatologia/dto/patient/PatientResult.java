@@ -11,6 +11,7 @@ import com.sd.uni.labpatologia.dto.base.BaseResult;
 public class PatientResult extends BaseResult<PatientDTO> {
 
 	private static final long serialVersionUID = 1L;
+	private int _count;
 
 	@XmlElement
 	public List<PatientDTO> getPatients() {
@@ -19,5 +20,12 @@ public class PatientResult extends BaseResult<PatientDTO> {
 
 	public void setPatients(List<PatientDTO> dtos) {
 		super.setList(dtos);
+	}
+	
+	public int getCount(){
+		return _count;
+	}
+	public void setCount(int count){
+		_count = count;
 	}
 }

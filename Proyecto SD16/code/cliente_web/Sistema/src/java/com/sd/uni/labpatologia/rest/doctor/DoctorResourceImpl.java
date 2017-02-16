@@ -43,6 +43,12 @@ public class DoctorResourceImpl extends BaseResourceImpl<DoctorDto> implements
 		return result;
 	}
 
+	public int getCount(){
+		setWebResourceBasicAuthFilter();
+		final DoctorResult countResult = getCountResult().get(DoctorResult.class);
+		return countResult.getCount();
+	}
+	
 	@Override
 	public DoctorResult find(String textToFind, int maxItems, int page) {
 		setWebResourceBasicAuthFilter();

@@ -7,5 +7,5 @@ import com.sd.uni.labpatologia.dto.patient.PatientResult;
 import com.sd.uni.labpatologia.service.base.IBaseService;
 
 public interface IPatientService extends IBaseService<PatientDTO, PatientDomain, PatientDaoImpl, PatientResult> {
-	
+	public PatientResult getCount();
 }

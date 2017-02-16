@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
+import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -35,6 +36,14 @@ public class RequestResource {
 	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
 	public RequestResult getAll() throws PatologyException {
 		return requestService.getAll();
+	}
+	
+	@GET
+	@Path("/count")
+	@Produces("application/xml")
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
+	public RequestResult getCount(){
+		return requestService.getCount();
 	}
 
 	@POST

@@ -14,5 +14,5 @@ import com.sd.uni.labpatologia.dto.doctor.DoctorDto;
 import com.sd.uni.labpatologia.service.base.IBaseService;
 
 public interface IDoctorService extends IBaseService<DoctorB, DoctorDto> {
-
+	public int getCount();
 }
