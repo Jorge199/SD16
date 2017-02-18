@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,6 +41,7 @@ public class StudyTypeDaoImpl extends BaseDaoImpl<StudyTypeDomain> implements IS
 	@Override
 	public List<StudyTypeDomain> findAll() {
 		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(StudyTypeDomain.class);
+		criteria.addOrder(Order.asc("_name"));
 		return criteria.list();
 	}
 
@@ -61,7 +63,7 @@ public class StudyTypeDaoImpl extends BaseDaoImpl<StudyTypeDomain> implements IS
 				criteria.add(propertyCriterion);
 			}
 		}
-		
+		criteria.addOrder(Order.asc("_name"));
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);

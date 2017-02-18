@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -70,7 +71,8 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 						criteria.add(propertyCriterion);
 					}
 		}
-		
+		criteria.addOrder(Order.asc("_lastName"));
+		criteria.addOrder(Order.asc("_name"));
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);

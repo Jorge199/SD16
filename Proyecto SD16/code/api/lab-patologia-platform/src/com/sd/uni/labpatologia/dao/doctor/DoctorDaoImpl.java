@@ -4,20 +4,17 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
-import com.sd.uni.labpatologia.domain.article.ArticleDomain;
 import com.sd.uni.labpatologia.domain.doctor.DoctorDomain;
-import com.sd.uni.labpatologia.domain.study_type.StudyTypeDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
 
 @Repository
@@ -74,7 +71,8 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorDomain> implements IDoctorD
 			}
 			
 		}
-	
+		criteria.addOrder(Order.asc("_last_name"));
+		criteria.addOrder(Order.asc("_name"));
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);

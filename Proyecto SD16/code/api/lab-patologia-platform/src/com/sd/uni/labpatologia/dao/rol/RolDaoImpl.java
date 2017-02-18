@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -58,7 +59,7 @@ public class RolDaoImpl extends BaseDaoImpl<RolDomain> implements IRolDao {
 				criteria.add(nameCriterion);
 			}
 		}
-		
+		criteria.addOrder(Order.asc("_name"));
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
