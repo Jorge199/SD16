@@ -38,6 +38,5 @@
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
 	<script src=" ${request.contextPath}/template/js/validationFormDoctor.js"></script>
-	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
 </body>
 </html>

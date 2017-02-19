@@ -4,7 +4,7 @@
 	<div class="col-md-6">
 		<label>Nombre<span class="required-indicator">*</span></label>
 		<div class="form-group">
-			<input class="form-control" type="text"  maxlength="50" pattern="^[a-zA-Z ]+$"
+			<input class="form-control letter" type="text"  maxlength="50" pattern="^[a-zA-Z ]+$"
 			id="name" name="name" placeholder="Ingrese un Nombre" value="${doctorInstance?.name }"
 			title='No se deben poner numeros o caracteres especiales'/>
 		</div>
@@ -13,7 +13,7 @@
 	<div class="col-md-6">
 		<label>Apellido<span class="required-indicator">*</span></label> 
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="50" pattern="^[a-zA-Z ]+$"
+			<input class="form-control letter" type="text" maxlength="50" pattern="^[a-zA-Z ]+$"
 			id="last_name" name="last_name" placeholder="Ingrese un Apellido" value="${doctorInstance?.lastName }" 
 			title='No se deben poner numeros o caracteres.' />
 		</div>
@@ -24,7 +24,7 @@
 	<div class="col-md-6">
 		<label>C.I</label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="10"
+			<input class="form-control numeric" type="text" maxlength="10"
 			id="ci" name="ci" placeholder="Ingrese un número de Cédula" value="${doctorInstance?.ci}"/>
 		</div>
 	</div>
@@ -49,14 +49,14 @@
 <div class="col-md-6">
 		<label>Especialidad</label> 
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="20"
+			<input class="form-control letter" type="text" maxlength="20"
 			id="speciality" name="speciality" placeholder="Ingrese una Especialidad" value="${doctorInstance?.speciality}"/>
 		</div>
 	</div>
 	<div class="col-md-6">
 		<label>Teléfono</label> 
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="19"
+			<input class="form-control numeric" type="text" maxlength="17"
 			id="phone" name="phone" placeholder="Ingrese un Número" value="${doctorInstance?.phone}"/>
 		</div>
 	</div>
@@ -81,12 +81,6 @@
 	</div>
 </div>
 <!-- formato a telefono y documento -->
-  	<script type="text/javascript">	
-		$(function(){
-			$('#phone').number(true, 0 ,',','-');
-		});
-		
-	</script>
 	<script type="text/javascript">
 		$('#ci').on('input', function() {
 			if(!isNaN($("#ci").val())){
