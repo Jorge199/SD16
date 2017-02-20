@@ -32,14 +32,14 @@
 	<div class="col-md-6">
 		<label>Sexo<span class="required-indicator">*</span></label>
 			<div class="form-group">
-				<label class="radio-inline"> 
+				<div class="col-md-3"> 
 					<g:radio id="sex" name="sex" value="${SexEnum.MASCULINO}" checked="${doctorInstance?.sex == SexEnum.MASCULINO }"/>
 				 	${SexEnum.MASCULINO}
-				</label>
-				<label class="radio-inline"> 
+				</div>
+				<div class="col-md-3"> 
 					<g:radio id="sex" name="sex" value="${SexEnum.FEMENINO}" checked="${doctorInstance?.sex == SexEnum.FEMENINO }"/>
 				 	${SexEnum.FEMENINO}
-				</label>
+				</div>
 			</div>
 	</div>
 	

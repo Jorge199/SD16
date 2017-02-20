@@ -29,17 +29,17 @@ $(document).ready(function(e){
 						required:true
 					},
 					birthDate:{
-						dateBR: true
+						
 					}
 				},
 
 				messages:{
 					name:{
-						required:"El campo nombre es obligatorio",
+						required:"El nombre es obligatorio(*)",
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					lastName:{
-						required:"El campo apellido es obligatorio",
+						required:"El apellido es obligatorio(*)",
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					document:{
@@ -56,15 +56,18 @@ $(document).ready(function(e){
 						email:"Formato de correo incorrecto"
 					},
 					sex:{
-						required:"Este campo es obligatorio"
+						required:"Obligatorio(*)"
 					},
 					birthDate:{
-						dateBR:""
+					
 					}
 				},
 				errorPlacement: function(error, element){
 					if(element.is(":text")){
 						error.insertAfter(element);
+					}
+					if(element.is(":radio")){
+						error.appendTo(element.parent());
 					}
 				}
 			

@@ -1,4 +1,4 @@
-<%@page import="java.lang.System"%>
+
 <%@ page import="com.sd.uni.labpatologia.util.SexEnum"%>
 
 
@@ -58,14 +58,14 @@
 	<div class="col-md-6">
 		<label>Sexo<span class="required-indicator">*</span></label>
 			<div class="form-group">
-				<label class="radio-inline"> 
+				<div class="col-md-3"> 
 					<g:radio id="sex" name="sex" value="${SexEnum.MASCULINO}" checked="${patientInstance?.sex == SexEnum.MASCULINO }"/>
 				 	${SexEnum.MASCULINO}
-				</label>
-				<label class="radio-inline"> 
+				</div>
+				<div class="col-md-3"> 
 					<g:radio id="sex" name="sex" value="${SexEnum.FEMENINO}" checked="${patientInstance?.sex == SexEnum.FEMENINO }"/>
 				 	${SexEnum.FEMENINO}
-				</label>
+				</div>
 			</div>
 	</div>
 	

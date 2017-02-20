@@ -35,18 +35,18 @@ $(document).ready(function(e){
 
 				messages:{
 					name:{
-						required:"El campo nombre es obligatorio",
+						required:"El nombre es obligatorio(*)",
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					last_name:{
-						required:"El campo apellido es obligatorio",
+						required:"El apellido es obligatorio(*)",
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					ci:{
 						maxlength:"Cantidad de caracteres hasta 10"
 					},
 					sex:{
-						required:"Campo obligarorio....."
+						required:"Obligatorio(*)"
 					},
 					speciality:{
 						rangelength:"Cantidad de caracteres de 3 a 20"
@@ -67,7 +67,7 @@ $(document).ready(function(e){
 						error.insertAfter(element);
 					}
 					if(element.is(":radio")){
-						error.insertBefore(element);
+						error.appendTo(element.parent());
 					}
 				}
 			
