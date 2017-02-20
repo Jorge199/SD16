@@ -47,13 +47,13 @@
 									width="100%">
 									<thead>
 										<tr>
-											<g:sortableColumn property="name" title="Nombre" />
-											<g:sortableColumn property="lastName" title="Apellido" />
-											<g:sortableColumn property="sex" title="Sexo" />
-											<g:sortableColumn property="document" title="C.I" />
-											<g:sortableColumn property="birthDate" title="Fecha de Nac." />
-											<g:sortableColumn property="address" title="Direcccion" />
-											<g:sortableColumn property="phone" title="Telefono" />
+											<th>Nombre</th>
+											<th>Apellido</th>
+											<th>Sexo</th>
+											<th>C.I</th>
+											<th>Fecha de Nac.</th>
+											<th>Direcccion</th>
+											<th>Telefono</th>
 											<td></td>
 										</tr>
 									</thead>

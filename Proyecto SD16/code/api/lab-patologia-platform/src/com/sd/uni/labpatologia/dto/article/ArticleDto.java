@@ -16,7 +16,6 @@ public class ArticleDto extends BaseDTO{
 	private String _description;
 	private String _units;
 	private Integer _quantity;
-	public List<Integer> _articleLots;
 	
 	@XmlElement
 	public String getUnits() {
@@ -51,13 +50,5 @@ public class ArticleDto extends BaseDTO{
 
 	public void setQuantity(Integer count) {
 		_quantity = count;
-	}
-
-	public void setArticleLots(List<Integer> articleLots) {
-		_articleLots = articleLots;
-	}
-
-	public List<Integer> getArticleLots() {
-		return _articleLots;
 	}
 }

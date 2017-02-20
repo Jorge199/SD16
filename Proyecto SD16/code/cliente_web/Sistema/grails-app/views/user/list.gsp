@@ -52,12 +52,10 @@
 									width="100%">
 									<thead>
 										<tr>
-											<g:sortableColumn property="name" title="Nombre y Apellido" />
-											<g:sortableColumn property="password"
-												title="Nombre de Usuario" />
-											<g:sortableColumn property="rol" title="Rol" />
-											<g:sortableColumn property="registrationNumber"
-												title="Matricula" />
+											<th>Nombre y Apellido</th>
+											<th>Nombre de Usuario</th>
+											<th>Rol</th>
+											<th>Matricula</th>
 
 											<td></td>
 										</tr>

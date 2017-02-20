@@ -137,15 +137,14 @@
 								<table id="list-request" class="table table-bordered" cellspacing="0" width="100%">
 									<thead>
 										<tr>
-											<g:sortableColumn property="id" title="Codigo" />
-											<g:sortableColumn property="date" title="Fecha" />
-											<g:sortableColumn property="status" title="Estado" />
-											<g:sortableColumn property="doctor" title="Doctor" />
-											<g:sortableColumn property="patient" title="Paciente" />
-											<g:sortableColumn property="studyType" 
-												title="Tipo de estudio" />
-											<g:sortableColumn property="specimen" title="Espécimen" />
-											<td colspan="2" align="center">Acciones</td>
+											<th>Codigo</th>
+											<th>Fecha</th>
+											<th>Estado"</th>
+											<th>Doctor</th>
+											<th>Paciente</th>
+											<th>Tipo de estudio</th>
+											<th>Espécimen</th>
+											<th colspan="2" align="center">Acciones</th>
 										</tr>
 									</thead>
 									<tbody>

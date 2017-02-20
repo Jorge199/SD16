@@ -40,10 +40,10 @@
 									width="100%">
 									<thead>
 										<tr>
-											<g:sortableColumn property="name" title="Nombre" />
-											<g:sortableColumn property="address" title="Direcccion" />
-											<g:sortableColumn property="email" title="Correo" />
-											<g:sortableColumn property="phone" title="Telefono" />
+											<th>Nombre</th>
+											<th>Direcccion</th>
+											<th>Correo</th>
+											<th>Telefono</th>
 											<td>Acciones</td>
 										</tr>
 									</thead>

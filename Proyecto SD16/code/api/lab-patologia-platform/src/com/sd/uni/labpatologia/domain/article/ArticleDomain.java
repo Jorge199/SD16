@@ -38,9 +38,6 @@ public class ArticleDomain extends BaseDomain{
 	@Column(name = "quantity")
 	private Integer _quantity;
 	
-	/*@OneToMany(cascade = CascadeType.REMOVE, mappedBy="_article")
-	private List<ArticleLotDomain> _articleLots = new ArrayList<ArticleLotDomain>();*/
-	
 	public Integer getId() {
 		return _id;
 	}
@@ -80,12 +77,4 @@ public class ArticleDomain extends BaseDomain{
 	public void setQuantity(Integer c) {
 		_quantity = c;
 	}
-
-	/*public List<ArticleLotDomain> get_articleLots() {
-		return _articleLots;
-	}
-
-	public void set_articleLots(List<ArticleLotDomain> _articleLots) {
-		this._articleLots = _articleLots;
-	}*/
 }

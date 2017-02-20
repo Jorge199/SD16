@@ -47,10 +47,10 @@
                                 width="100%">
                                 <thead>
                                     <tr>
-                                        <g:sortableColumn property="name" title="Nombre" />
-                                        <g:sortableColumn property="description" title="Descripcion" />
-                                        <g:sortableColumn property="units" title="Unidades" />
-                                        <g:sortableColumn property="quantity" title="Cantidad" />
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Unidades</th>
+                                        <th>Cantidad</th>
                                         <td></td>
                                     </tr>
                                 </thead>
