@@ -8,5 +8,5 @@ public interface IPatientResource extends IBaseResource<PatientDTO> {
 
 	public PatientResult getAll();
 	public PatientResult find(String textToFind, int maxItems, int page);
-
+	public int getCount();
 }

@@ -12,6 +12,7 @@ import com.sd.uni.labpatologia.dto.base.BaseResult;
 public class RequestResult extends BaseResult<RequestDTO> {
 
 	private static final long serialVersionUID = 1L;
+	private int _count;
 
 	@XmlElement
 	public List<RequestDTO> getRequests() {
@@ -20,5 +21,12 @@ public class RequestResult extends BaseResult<RequestDTO> {
 
 	public void setRequests(List<RequestDTO> dtos) {
 		super.setList(dtos);
+	}
+	
+	public int getCount(){
+		return _count;
+	}
+	public void setCount(int count){
+		_count = count;
 	}
 }

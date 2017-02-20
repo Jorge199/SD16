@@ -17,4 +17,5 @@ public interface IDoctorResource extends IBaseResource<DoctorDto> {
 
 	public DoctorResult getAll();
 	public DoctorResult find(String textToFind, int maxItems, int page);
+	public int getCount();
 }

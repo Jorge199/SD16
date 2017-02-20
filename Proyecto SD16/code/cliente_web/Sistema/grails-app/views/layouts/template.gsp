@@ -149,7 +149,7 @@
 		</div>
 		
 	</div>
-	<!-- estilo a la validacion -->
+	<!-- estilo a la validacion inline-table;-->
   	<style>
 		input.error{
 		    border: 2px dotted #FF0000; 
@@ -158,7 +158,7 @@
 		    font-size: 1em;
 		    color: #FF0000;
 		    font-weight: bold;
-		    display: inline-table;
+		    display: block;
 		}
   	</style>
 </body>

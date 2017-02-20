@@ -3,6 +3,7 @@ package com.sd.uni.labpatologia.service.rol;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -17,18 +18,20 @@ import com.sd.uni.labpatologia.dto.rol.RolDTO;
 import com.sd.uni.labpatologia.dto.rol.RolResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
+import com.sd.uni.labpatologia.service.doctor.DoctorServiceImpl;
 
 @Service
 public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImpl, RolResult> implements IRolService {
 	@Autowired
 	private IRolDao rolDao;
-
+	private static Logger logger = Logger.getLogger(RolServiceImpl.class);
 	@Override
 	@Transactional
-
+	
 	//@CacheEvict(value = "lab-patologia-platform-cache", key = "'roles'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'rol_' + #dto.id", condition = "#dto.id!=null")
 	public RolDTO save(RolDTO dto) {
+		try{
 		final RolDomain domain = convertDtoToDomain(dto);
 		final RolDomain rol = rolDao.save(domain);
 		final RolDTO newDto = convertDomainToDto(rol);
@@ -36,6 +39,11 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 			getCacheManager().getCache("lab-patologia-platform-cache").put("rol_" + rol.getId(), newDto);
 		}
 		return newDto;
+		}catch(PatologyException ex){
+			logger.error(ex);
+			throw new RuntimeException("Error"+RolServiceImpl.class+"" + ex.getMessage(), ex);
+		}
+		
 	}
 
 	@Override
@@ -83,7 +91,7 @@ public class RolServiceImpl extends BaseServiceImpl<RolDTO, RolDomain, RolDaoImp
 	}
 
 	@Override
-	protected RolDomain convertDtoToDomain(RolDTO dto) {
+	protected RolDomain convertDtoToDomain(RolDTO dto)  throws PatologyException{
 		final RolDomain domain = new RolDomain();
 		domain.setId(dto.getId());
 		domain.setName(dto.getName());

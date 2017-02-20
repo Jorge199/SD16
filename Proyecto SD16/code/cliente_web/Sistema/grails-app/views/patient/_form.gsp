@@ -1,4 +1,4 @@
-<%@page import="java.lang.System"%>
+
 <%@ page import="com.sd.uni.labpatologia.util.SexEnum"%>
 
 
@@ -6,7 +6,7 @@
 	<div class="col-md-6">
 		<label>Nombre<span class="required-indicator">*</span></label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="50"
+			<input class="form-control letter" type="text" maxlength="50"
 			id="name" name="name" placeholder="Ingrese un Nombre" value="${patientInstance?.name }"/>
 		</div>
 	</div>
@@ -14,7 +14,7 @@
 	<div class="col-md-6">
 		<label>Apellido<span class="required-indicator">*</span></label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="50"
+			<input class="form-control letter" type="text" maxlength="50"
 			id="lastName" name="lastName" placeholder="Ingrese un Apellido" value="${patientInstance?.lastName }"/>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 	<div class="col-md-6">
 		<label>Teléfono</label> 
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="19"
+			<input class="form-control numeric" type="text" maxlength="17"
 			id="phone" name="phone" placeholder="Ingrese un Número" value="${patientInstance?.phone}"
 			/>
 		</div>
@@ -58,14 +58,14 @@
 	<div class="col-md-6">
 		<label>Sexo<span class="required-indicator">*</span></label>
 			<div class="form-group">
-				<label class="radio-inline"> 
+				<div class="col-md-3"> 
 					<g:radio id="sex" name="sex" value="${SexEnum.MASCULINO}" checked="${patientInstance?.sex == SexEnum.MASCULINO }"/>
 				 	${SexEnum.MASCULINO}
-				</label>
-				<label class="radio-inline"> 
+				</div>
+				<div class="col-md-3"> 
 					<g:radio id="sex" name="sex" value="${SexEnum.FEMENINO}" checked="${patientInstance?.sex == SexEnum.FEMENINO }"/>
 				 	${SexEnum.FEMENINO}
-				</label>
+				</div>
 			</div>
 	</div>
 	
@@ -81,12 +81,7 @@
 	</div>
 </div>
 <!-- formato a telefono y documento -->
-  	<script type="text/javascript">	
-		$(function(){
-			$('#phone').number(true, 0 ,',','-');
-		});
-		
-	</script>
+ 
 	<script type="text/javascript">
 		$('#document').on('input', function() {
 			if(!isNaN($("#document").val())){

@@ -20,14 +20,14 @@ $(document).ready(function(e){
 
 				messages:{
 					name:{
-						required:"El campo nombre es obligatorio",
+						required:"El nombre es obligatorio(*)",
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
 					description:{
 						maxlength:"Cantidad de caracteres hasta 100"
 					},
 					units:{
-						required:"El campo unidad es obligatorio",
+						required:"La unidad es obligatorio(*)",
 						maxlength:"Cantidad de caracteres hasta 40"
 					}
 				},
@@ -41,25 +41,30 @@ $(document).ready(function(e){
 });
 
 function saveDataArticle(){
-	var name = $("#name").val();
-	var description = $("#description").val();
-	var units = $("#units").val();
+	var name = $("#article input[id=name]").val();
+	var description = $("#article input[id=description]").val();
+	var units = $("#article input[id=units]").val();
 	
-	if( name == "" || units  == ""){
-		alert("Complete los campos obligatorios (*)");
+	if(name == "" ){
+		$("#article input[id=name]").focus();
+		return false;
+	}
+	if(units  == ""){
+		$("#article input[id=units]").focus();
 		return false;
 	}
 	if(name.length < 3 || name.length > 50){
-		alert("Verifique el nombre del artículo");
+		$("#article input[id=name]").focus();
 		return false;
 	}
 	if(description.length > 100){
-		alert("Verifique la descripción del artículo");
+		$("#article input[id=description]").focus();
 		return false;
 	}
 	if(units.length > 40){
-		alert("Verifique la unidades del artículo");
+		$("#article input[id=units]").focus();
 		return false;
 	}
+	return true;
 
 }

@@ -4,7 +4,7 @@
 	<div class="col-md-6">
 		<label>Nombre y Apellido<span class="required-indicator">*</span></label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="50"
+			<input class="form-control letter" type="text" maxlength="50"
 			id="name" name="name" placeholder="Ingrese un Nombre y Apellido" value="${userInstance?.name }"/>
 		</div>
 	</div>
@@ -22,7 +22,7 @@
 	<div class="col-md-6" id="updatePass" style="display: none">
 		<label>Constraseña<span class="required-indicator">*</span></label>
 		<div class="form-group">
-			<input class="form-control" type="password" maxlength="20" 
+			<input class="form-control" type="password" maxlength="16" 
 			id="pass1" name="password"  placeholder="Ingrese la contraseña" value="${userInstance?.password}"/>
 		</div>
 	</div>
@@ -51,7 +51,7 @@
 	<div class="col-md-3" id="update" style="display: none">
 		<label>Matricula<span class="required-indicator">*</span></label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="10"
+			<input class="form-control numeric" type="text" maxlength="10"
 			id="registrationNumber" name="registrationNumber" value="${userInstance?.registrationNumber}" />
 		</div>
 	</div>

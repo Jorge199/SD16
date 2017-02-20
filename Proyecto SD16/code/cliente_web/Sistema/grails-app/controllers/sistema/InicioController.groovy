@@ -33,26 +33,26 @@ class InicioController {
 	])
 	def index() {
 		String text = "status=RECIBIDO"
-		List<PatientB> patients = null
-		List<ArticleB> articles = null
-		List<RequestB> cantRecibido = null
-		List<DoctorB> listDoctor = null
+		int patientCount;
+		int articleCount;
+		int requestCount;
+		int doctorCount;
 
 		if (SpringSecurityUtils.ifNotGranted('ROLE_TECNICO')) {
-			patients = patientService.getAll()
-			cantRecibido = requestService.find(text,0,0)
-			listDoctor = doctorService.getAll()
+			patientCount = patientService.getCount()
+			requestCount = requestService.getCount()
+			doctorCount = doctorService.getCount()
 		}
 
 		if (SpringSecurityUtils.ifNotGranted('ROLE_SECRETARIA')) {
-			articles = articleService.getAll()
+			articleCount = articleService.getCount()
 		}
 
 		[laboratoryInstanceList:laboratoryService.getAll(),
-			patientInstanceList:patients,
-			articleInstanceList:articles,
-			requestInstanceList:cantRecibido,
-			doctorInstanceList: listDoctor,
+			patientCount:patientCount,
+			articleCount:articleCount,
+			requestCount:requestCount,
+			doctorCount: doctorCount,
 			user:authService.getName()]
 	}
 }

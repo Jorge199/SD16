@@ -55,6 +55,11 @@ implements IDoctorService {
 		return doctors;
 	}
 
+	public int getCount(){
+		final int count =_doctorResource.getCount();
+		return count;
+	}
+	
 	@Override
 	public DoctorB getById(Integer id) {
 		final DoctorDto dto = _doctorResource.getById(id);

@@ -8,5 +8,5 @@ public interface IRequestResource extends IBaseResource<RequestDTO> {
 
 	public RequestResult getAll();
 	public RequestResult find(String textToFind, int maxItems, int page);
-
+	public int getCount();
 }

@@ -21,10 +21,10 @@ public class ArticleMovementResourceImpl extends BaseResourceImpl<ArticleMovemen
     }
 
     @Override
-    @CacheEvict(value = CACHE_REGION, key = "'articleMovements'")
+    //@CacheEvict(value = CACHE_REGION, key = "'articleMovements'")
     @CachePut(value = CACHE_REGION, key = "'articleMovement_' + #articleMovement.id", condition = "#articleMovement.id!=null")
     public ArticleMovementDTO save(ArticleMovementDTO articleMovement) {
-        ArticleMovementDTO newDto = super.save(articleMovement);
+    	ArticleMovementDTO newDto = super.save(articleMovement);
         if (null == articleMovement.getId()) {
             getCacheManager().getCache(CACHE_REGION).put(
                     "articleMovement_" + newDto.getId(), newDto);
@@ -39,7 +39,7 @@ public class ArticleMovementResourceImpl extends BaseResourceImpl<ArticleMovemen
     }
 
     @Override
-    @Cacheable(value = CACHE_REGION, key = "'articleMovements'")
+    //@Cacheable(value = CACHE_REGION, key = "'articleMovements'")
     public ArticleMovementResult getAll() {
         setWebResourceBasicAuthFilter();
         final ArticleMovementResult result = getWebResource().get(ArticleMovementResult.class);

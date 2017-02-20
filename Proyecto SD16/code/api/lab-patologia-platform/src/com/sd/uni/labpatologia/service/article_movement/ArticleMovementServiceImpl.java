@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.service.article_movement;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;

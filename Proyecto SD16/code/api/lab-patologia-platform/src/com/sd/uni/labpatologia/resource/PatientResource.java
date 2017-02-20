@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
+import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
@@ -40,6 +41,15 @@ public class PatientResource {
 		return _patientService.getAll();
 	}
 
+	@GET
+	@Path("/count")
+	@Produces("application/xml")
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
+	public PatientResult getCount(){
+		return _patientService.getCount();
+	}
+
+	
 	/*
 	 * http://localhost:8080/lab-patologia-platform/rest/patient/search/
 	 * textToFind

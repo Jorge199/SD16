@@ -9,13 +9,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.user.UserDomain;
-
 import com.sd.uni.labpatologia.exception.PatologyException;
 
 import java.security.MessageDigest;
@@ -66,7 +66,7 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 				criteria.add(propertyCriterion);
 			}
 		}
-
+		criteria.addOrder(Order.asc("_name"));
 		criteria.setFirstResult(page * maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);

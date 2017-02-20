@@ -13,11 +13,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
+import com.sd.uni.labpatologia.domain.doctor.DoctorDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.util.StatusEnum;
@@ -52,6 +54,10 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 		return criteria.list();
 	}
 
+	public int getCount() {
+		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(RequestDomain.class);
+		return criteria.list().size();
+	}
 	
 	@Override
 	public List<RequestDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
@@ -108,7 +114,7 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 				}
 			}
 		}
-		
+		criteria.addOrder(Order.desc("_id"));
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);

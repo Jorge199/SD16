@@ -67,11 +67,18 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 		return getWebResource().entity(dto).post(getDtoClass());
 	}
 
+	public WebResource getCountResult(){
+		setWebResourceBasicAuthFilter();
+		return getWebResource().path("/count");
+	}
+	
 	@Override
 	public DTO getById(Integer id) {
 		setWebResourceBasicAuthFilter();
 		return getWebResource().path("/" + id).get(getDtoClass());
 	}
+	
+	
 	public WebResource findWR(String textToFind, int maxItems, int page) {
 		if (null == textToFind){
 			setWebResourceBasicAuthFilter();

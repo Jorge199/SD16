@@ -43,6 +43,15 @@ public class DoctorResource {
 		return _doctorService.getAll();
 	}
 	
+	@GET
+	@Path("/count")
+	@Produces("application/xml")
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA" })
+	public DoctorResult getCount(){
+		return _doctorService.getCount();
+	}
+
+	
 	/* http://localhost:8080/lab-patologia-platform/rest/doctor/search/textToFind */
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,7 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 	@Override
 	@Transactional
 	//@CacheEvict(value= "lab-patologia-platform-cache",key = "'requests'")
+	@CacheEvict(value= "lab-patologia-platform-cache",key = "'requestCount'")
 	@CachePut(value = "lab-patologia-platform-cache", key = "'request_' + #dto.id", condition="#dto.id!=null")
 	public RequestDTO save(RequestDTO dto) {
 		try { 
@@ -171,6 +173,14 @@ public class RequestServiceImpl extends BaseServiceImpl<RequestDTO, RequestDomai
 		}
 		final RequestResult requestResult = new RequestResult();
 		requestResult.setRequests(requests);
+		return requestResult;
+	}
+	
+	@Cacheable(value = "lab-patologia-platform-cache", key = "'requestCount'")
+	@Transactional(readOnly = true)
+	public RequestResult getCount(){
+		final RequestResult requestResult = new RequestResult();
+		requestResult.setCount(requestDao.getCount());
 		return requestResult;
 	}
 

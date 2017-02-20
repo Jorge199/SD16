@@ -47,6 +47,11 @@ public class PatientServiceImpl extends BaseServiceImpl<PatientB, PatientDTO>imp
 		return patients;
 	}
 
+	public int getCount(){
+		final int count = _patientResource.getCount();
+		return count;
+	}
+	
 	@Override
 	public PatientB getById(Integer id) {
 		final PatientDTO dto = _patientResource.getById(id);

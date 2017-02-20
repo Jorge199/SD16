@@ -15,12 +15,10 @@ $(document).ready(function(e){
 					},
 					pass1:{
 						required:true,
-						equalTo:"#password2",
 						rangelength:[8,16]
 					},
 					password2:{
 						required:true,
-						equalTo:"#pass1",
 						rangelength:[8,16]
 					},
 					rolId:{
@@ -68,10 +66,57 @@ $(document).ready(function(e){
 				}
 			
 			});
+	$(".letter").keypress(function (key) {
+        window.console.log(key.charCode)
+        if ((key.charCode < 97 || key.charCode > 122)//letras mayusculas
+            && (key.charCode < 65 || key.charCode > 90) //letras minusculas
+            && (key.charCode != 45) //retroceso
+            && (key.charCode != 241) //ñ
+             && (key.charCode != 209) //Ñ
+             && (key.charCode != 32) //espacio
+             && (key.charCode != 225) //á
+             && (key.charCode != 233) //é
+             && (key.charCode != 237) //í
+             && (key.charCode != 243) //ó
+             && (key.charCode != 250) //ú
+             && (key.charCode != 193) //Á
+             && (key.charCode != 201) //É
+             && (key.charCode != 205) //Í
+             && (key.charCode != 211) //Ó
+             && (key.charCode != 218) //Ú
+
+            )
+            return false;
+    });
+	$(".numeric").keydown(function(event) {
+		   if(event.shiftKey)
+		   {
+		        event.preventDefault();
+		   }
+		 
+		   if (event.keyCode == 46 || event.keyCode == 8)    {
+		   }
+		   else {
+		        if (event.keyCode < 95) {
+		          if (event.keyCode < 48 || event.keyCode > 57) {
+		                event.preventDefault();
+		          }
+		        } 
+		        else {
+		              if (event.keyCode < 96 || event.keyCode > 105) {
+		                  event.preventDefault();
+		              }
+		        }
+		      }
+	});
+	$("#user input[id=password2]").keyup(function(){
+		if($(this).val() == $("#user input[id=pass1]").val()){
+			return true;
+		}else{
+			return false;
+		}
+	});
 });
-jQuery.validator.addMethod("lettersonly", function(value, element) {
-	return this.optional(element) || /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/i.test(value);
-	}, "No se admiten números");
 
 function saveDataUser(){
 	var name = $("#user input[id=name]").val();
@@ -82,44 +127,53 @@ function saveDataUser(){
 	var registrationNumber = $("#user input[id=registrationNumber]").val();
 	var letter = /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/;
 	
-	if(name == "" || userName == "" || pass1 == "" || password2 == "" || updater == ""){
-		alert("Complete los campos obligatorios (*)")
+	if(name == ""){
+		$("#user input[id=name]").focus();
+		return false;
+	}
+	if(userName == ""){
+		$("#user input[id=userName]").focus();
+		return false;
+	}
+	if(pass1 == ""){
+		alert(pass1);
+		$("#user input[id=pass1]").focus();
+		return false;
+	}
+	if(password2 == ""){
+		alert(password2);
+		$("#user input[id=password2]").focus();
+		return false;
+	}
+	if(updater == ""){
+		$("#user input[id=updater]").focus();
 		return false;
 	}
 	if(name.length < 3 || name.length > 50){
-		alert("Verifique el nombre");
+		$("#user input[id=name]").focus();
 		return false;
 	}
 	if(userName.length < 3 || userName.length > 50){
-		alert("Verifique el usuario");
+		$("#user input[id=userName]").focus();
 		return false;
 	}
 	if(pass1 < 8 || pass1 > 16){
-		alert("Verifique la contraseña");
+		$("#user input[id=pass1]").focus();
 		return false;
 	}
 	if(password2 < 8 || password2 > 16){
-		alert("Verifique la contraseña");
-		return false;
-	}
-	if(pass1 != password2){
-		alert("Las contraseñas no son iguales");
+		$("#user input[id=password2]").focus();
 		return false;
 	}
 	
 	if(updater == "Doctor"){
 		if(isNaN(registrationNumber)){
-			alert("La matricula debe ser numérica");
+			$("#user input[id=updater]").focus();
 			return false;
 		}
 		if(registrationNumber.length < 3 || registrationNumber.length > 10){
-			alert("Verifique la matricula");
+			$("#user input[id=updater]").focus();
 			return false;
 		}
-	}
-	
-	if(!(letter.test(name))){
-		alert("El nombre debe tener solo letras");
-		return false;
 	}
 }

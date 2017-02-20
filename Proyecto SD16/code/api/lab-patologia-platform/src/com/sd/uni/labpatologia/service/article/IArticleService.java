@@ -15,4 +15,6 @@ public interface IArticleService extends IBaseService<ArticleDto, ArticleDomain,
 	ArticleDto withdraw(Integer id, Integer quantity)
 			throws PatologyException, StockException;
 	
+	public ArticleResult getCount();
+
 }

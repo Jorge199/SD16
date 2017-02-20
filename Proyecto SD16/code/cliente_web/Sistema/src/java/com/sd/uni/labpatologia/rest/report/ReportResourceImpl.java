@@ -19,18 +19,18 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO> implements
 
 	@Override
 	//@CacheEvict(value = CACHE_REGION, key = "'reports'")
-	//@CachePut(value = CACHE_REGION, key = "'report_' + #report.id", condition = "#report.id!=null")
+	@CachePut(value = CACHE_REGION, key = "'report_' + #report.id", condition = "#report.id!=null")
 	public ReportDTO save(ReportDTO report) {
 		ReportDTO newDto = super.save(report);
-		//if (null == report.getId()) {
-		//	getCacheManager().getCache(CACHE_REGION).put(
-	//				"report_" + newDto.getId(), newDto);
-		//}
+		if (null == report.getId()) {
+			getCacheManager().getCache(CACHE_REGION).put(
+					"report_" + newDto.getId(), newDto);
+		}
 		return newDto;
 	}
 
 	@Override
-	//@Cacheable(value = CACHE_REGION, key = "'report_' + #id")
+	@Cacheable(value = CACHE_REGION, key = "'report_' + #id")
 	public ReportDTO getById(Integer id) {
 		return super.getById(id);
 	}
