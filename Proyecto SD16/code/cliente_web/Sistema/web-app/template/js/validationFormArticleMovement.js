@@ -19,10 +19,10 @@ $(document).ready(function(e){
 
 				messages:{
 					articleId:{
-						required:"El campo articulo es obligatorio"
+						required:"El articulo es obligatorio(*)"
 					},
 					movementType:{
-						required:"El campo tipo de movimiento es obligatorio"
+						required:"El tipo de movimiento es obligatorio(*)"
 					},
 					quantity:{
 						number:"Debe estar en formato numerico",
@@ -31,32 +31,57 @@ $(document).ready(function(e){
 					}	
 				},
 				errorPlacement: function(error, element){
-					if(element.is("form-group") || element.attr("name") == "quantity"){
+					if(element.is("select")){
 						error.insertAfter(element);
 					}
 				}
 			
 			});
+	$(".numeric").keydown(function(event) {
+		   if(event.shiftKey)
+		   {
+		        event.preventDefault();
+		   }
+		 
+		   if (event.keyCode == 46 || event.keyCode == 8)    {
+		   }
+		   else {
+		        if (event.keyCode < 95) {
+		          if (event.keyCode < 48 || event.keyCode > 57) {
+		                event.preventDefault();
+		          }
+		        } 
+		        else {
+		              if (event.keyCode < 96 || event.keyCode > 105) {
+		                  event.preventDefault();
+		              }
+		        }
+		      }
+	});
 });
 
 function saveDataArticleMovement(){
-	var articleId = $("#articleId").val();
-	var movementType = $("#movementType").val();
-	var quantity = $("#quantity").val();
+	var articleId = $("#articleMovement select[id=articleId]").val();
+	var movementType = $("#articleMovement select[id=movementType]").val();
+	var quantity = $("#articleMovement input[id=quantity]").val();
 	
-	if( articleId == "" || movementType == ""){
-		alert("Complete los campos obligatorios (*)");
+	if( articleId == ""){
+		$("#articleMovement select[id=articleId]").focus();
+		return false;
+	}
+	if(movementType == ""){
+		 $("#articleMovement select[id=movementType]").focus();
 		return false;
 	}
 	if( quantity == ""){
 		$("#quantity").val(1);
 	}
 	if(isNaN(quantity)){
-		alert("Verifique la cantidad");
+		$("#articleMovement input[id=quantity]").focus();
 		return false;
 	}
 	if(quantity < 1 || quantity > 2147483647){
-		alert("Verifique la cantidad");
+		$("#articleMovement input[id=quantity]").focus();
 		return false;	
 	}
 	

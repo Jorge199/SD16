@@ -14,14 +14,14 @@ $(document).ready(function(e){
 
 					messages:{
 						diagnostic:{
-							required:"Este campo es obligatorio"
+							required:"Campo es obligatorio(*)"
 						},
 						diagnosticDetail:{
 							maxlength:"Cantidad de caracteres hasta 25"
 						}
 					},
 					errorPlacement: function(error, element){
-						if(element.is(":text")){
+						if(element.is(":select")){
 							error.insertAfter(element);
 						}
 					}
@@ -30,13 +30,13 @@ $(document).ready(function(e){
 	});
 
 	function saveDataReport(){
-		if($("#diagnostic").val() == "SIN_INDICIOS"){
-			alert("Complete los campos obligatorios(*)");
+		if($("#report select[id=diagnostic]").val() == "SIN_INDICIOS"){
+			$("#diagnostic").focus();
 			return false;
 		}
 		if($("#report input[id=diagnosticDetail]").val() != ""){
-			if($("#diagnosticDetail").val() > 25){
-				alert("La descripcion admitida es hasta 25 caracteres");
+			if($("#report input[id=diagnosticDetail]").val() > 25){
+				$("#report input[id=diagnosticDetail]").focus();
 				return false;
 			}
 		}
