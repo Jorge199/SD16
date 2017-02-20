@@ -1,4 +1,4 @@
-<%@ page import="java.lang.System"%>
+
 <%@ page import="com.sd.uni.labpatologia.util.StatusEnum" %>
 
 	
@@ -59,7 +59,7 @@
 					<g:if test="${requestInstance?.status == StatusEnum.PROCESO }">
 						<div class="col-sm-4">
 						<div class="form-group">
-							<input type="text" class="form-control"  maxlength="20" name="code_laminas"
+							<input type="text" class="form-control"  maxlength="20" name="code_laminas" id="code_laminas"
 							placeholder="Nro de laminas"/>
 						</div>
 						</div>
@@ -296,6 +296,22 @@
 	    		  },
 	    		  escapeMarkup: function (markup) { return markup; }, 
 	    		  minimumInputLength: 1,
+	    	}).on("change", function (e) {
+	    	    $(this).valid(); //jquery validation script validate on change
+	    	}).on("select2:open", function() { //correct validation classes (has=*)
+	    	    if ($(this).parents("[class*='has-']").length) { //copies the classes
+	    	        var classNames = $(this).parents("[class*='has-']")[0].className.split(/\s+/);
+
+	    	        for (var i = 0; i < classNames.length; ++i) {
+	    	            if (classNames[i].match("has-")) {
+	    	                $("body > .select2-container").addClass(classNames[i]);
+	    	            }
+	    	        }
+	    	    } else { //removes any existing classes
+	    	        $("body > .select2-container").removeClass (function (index, css) {
+	    	            return (css.match (/(^|\s)has-\S+/g) || []).join(' ');
+	    	        });            
+	    	    }
 	    	});
    
 	   
@@ -325,6 +341,22 @@
 	    		  },
 	    		  escapeMarkup: function (markup) { return markup; }, 
 	    		  minimumInputLength: 1,
+	    	}).on("change", function (e) {
+	    	    $(this).valid(); //jquery validation script validate on change
+	    	}).on("select2:open", function() { //correct validation classes (has=*)
+	    	    if ($(this).parents("[class*='has-']").length) { //copies the classes
+	    	        var classNames = $(this).parents("[class*='has-']")[0].className.split(/\s+/);
+
+	    	        for (var i = 0; i < classNames.length; ++i) {
+	    	            if (classNames[i].match("has-")) {
+	    	                $("body > .select2-container").addClass(classNames[i]);
+	    	            }
+	    	        }
+	    	    } else { //removes any existing classes
+	    	        $("body > .select2-container").removeClass (function (index, css) {
+	    	            return (css.match (/(^|\s)has-\S+/g) || []).join(' ');
+	    	        });            
+	    	    }
 	    	});
 	   
     </script>

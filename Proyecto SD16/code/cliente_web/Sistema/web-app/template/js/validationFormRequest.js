@@ -13,7 +13,6 @@ $(document).ready(function(e){
 					code_cortes:{
 						required:true,
 					},
-					
 					patientId:{
 						required:true
 					},
@@ -36,31 +35,39 @@ $(document).ready(function(e){
 						required:"El campo fecha es obligatorio"
 					},
 					code:{
-						required:"El campo codigo es obligatorio"
+						required:"Obligatorio(*)"
 					},
 					code_cortes:{
-						required:"El campo codigo es obligatorio"
+						required:"Obligatorio(*)"
 					},
-					
 					patientId:{
-						required:"El campo paciente es obligatorio"
+						required:"El paciente es obligatorio(*)"
 					},
 					doctorId:{
-						required:"El campo doctor es obligatorio"
+						required:"El doctor es obligatorio(*)"
 					},
 					studyTypeId:{
-						required:"El campo tipo de estudio es obligatorio"
+						required:"El tipo de estudio es obligatorio(*)"
 					},
 					note:{
 						
 					},
 					specimen:{
-						required:"El campo specimen es obligatorio"
+						required:"El specimen es obligatorio(*)"
 					}
 					
 				},
-				errorPlacement: function(error, element){	
-					if(element.is(":text")){
+				errorPlacement: function(error, element){
+					if(element.is(":text") || element.attr("name") == "specimen"){
+						error.insertAfter(element);
+					}
+					if(element.attr("name") == "patientId"){
+						error.insertAfter("#data-patient");
+					}
+					if(element.attr("name") == "doctorId"){
+						error.insertAfter("#data-doctor");
+					}
+					if(element.attr("name") == "studyTypeId"){
 						error.insertAfter(element);
 					}
 				}
@@ -69,13 +76,30 @@ $(document).ready(function(e){
 });
 
 function saveDataRequest(){
-	var expresion = /\w+@\w+\.+[a-z]/;
+	var code =  $("#myFormRequest input[id=code]").val();
+	var codeCortes = $("#myFormRequest input[id=code_cortes]").val();
+	var selectPatient = $("#myFormRequest select[id=patientId]").val();
+	var selectDoctor = $("#myFormRequest select[id=doctorId]").val();
+	var study =  $("#myFormRequest select[id=studyTypeId]").val();
 
-	if($("#myFormRequest input[id=date]").val() == "" || $("#myFormRequest input[id=code]").val() == ""
-		|| $("#myFormRequest input[id=code_cortes]").val() == ""  
-			|| $("#myFormRequest select[id=patientId]").val() == "" || $("#myFormRequest select[id=doctorId]").val() == ""
-				|| $("#myFormRequest select[id=studyTypeId]").val() == ""){
-		alert("Complete los campos obligatorios (*)");
+	if(code == ""){
+		$("#myFormRequest input[id=code]").focus();
+		return false;
+	}
+	if(codeCortes == ""){
+		$("#myFormRequest input[id=code_cortes]").focus();
+		return false;
+	}  
+	if(selectPatient == ""){
+		$("#myFormRequest select[id=patientId]").focus();
+		return false;
+	} 
+	if(selectDoctor == ""){
+		$("#myFormRequest select[id=doctorId]").focus();
+		return false;
+	}
+	if(study == ""){
+		$("#myFormRequest select[id=studyTypeId]").focus();
 		return false;
 	}
 	return true;
