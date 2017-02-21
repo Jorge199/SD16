@@ -42,7 +42,7 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <g:select name="type" class="form-control"
-                                                from="${MovementTypeEnum.values()}" name="movementType"
+                                                from="${MovementTypeEnum.values()}" name="movementType" value="${movementType}"
                                                     optionKey="key"
                                                 noSelection="${['null':'Entrada y Salida']}"
                                                     required="">
@@ -60,7 +60,7 @@
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <div class='input-group date' id='datetimepicker1'>
-                                                    <input type='text' class="form-control "
+                                                    <input type='text' class="form-control " value="${startSearch}"
                                                     name="startSearch" /> <span class="input-group-addon">
                                                         <span class="glyphicon glyphicon-calendar"> </span>
                                                     </span>
@@ -76,7 +76,7 @@
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <div class='input-group date' id='datetimepicker2'>
-                                                    <input type='text' class="form-control"
+                                                    <input type='text' class="form-control" value="${endSearch}"
                                                     name="endSearch" /> <span class="input-group-addon">
                                                         <span class="glyphicon glyphicon-calendar"> </span>
                                                     </span>

@@ -50,6 +50,13 @@ class RequestController {
 	def list() {
 		def page = 0
 		def siguiente
+		def statusSearch = ""
+		def patient = ""
+		def specimen = ""
+		def startSearch = ""
+		def endSearch = ""
+		def code = ""
+		
 		if(null != params.get("page")){
 			page = Integer.parseInt(params.get("page"))
 		}
@@ -62,22 +69,29 @@ class RequestController {
 			System.out.println("no entro else" + textToFind)
 		}else{
 			if(null!=params.get("specimen") && !"".equals(params.get("specimen")) && !"null".equals(params.get("specimen"))){
+				specimen = params.get("specimen")
 				textToFind+="specimen="+params.get("specimen")+'&'
 			}
 			if(null!=params.get("code") && !"".equals(params.get("code")) && !"null".equals(params.get("code"))){
+				code = params.get("code")
 				textToFind+="code="+params.get("code")+'&'
 			}
 			if(null!=params.get("patient") && !"".equals(params.get("patient")) && !"null".equals(params.get("patient"))){
+				patient = params.get("patient")
 				textToFind+="patient="+params.get("patient")+'&'
 			}
 			if(null!=params.get("statusSearch") && !"".equals(params.get("statusSearch")) && !"null".equals(params.get("statusSearch"))){
+				statusSearch = params.get("statusSearch")
 				textToFind+="status="+params.get("statusSearch")+'&'
 			}
 			if((!"".equals(params.get("startSearch"))) && !"".equals(params.get("endSearch")) && (null != params.get("startSearch")) && (null != params.get("endSearch"))){
+				startSearch = params.get("startSearch")
+				endSearch = params.get("endSearch")
 				textToFind+="start="+params.get("startSearch")+'&'
 				textToFind+="end="+params.get("endSearch")
 			}else{
 				if((null != params.get("startSearch")) && !"".equals(params.get("startSearch"))){
+					startSearch = params.get("startSearch")
 					textToFind+="date="+params.get("startSearch")
 				}
 			}
@@ -93,7 +107,7 @@ class RequestController {
 		}
 		System.out.println("Cantidad Solicitudes----------------------------->"+requests.size())
 		[requestInstanceList: requests, requestInstanceTotal: requests?.size(), studies: studyTypeService.getAll(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind,
-			user:authService.getName()]
+			user:authService.getName(), statusSearch: statusSearch, patient: patient, specimen: specimen, startSearch: startSearch, endSearch: endSearch, code: code]
 	}
 
 	@Secured([

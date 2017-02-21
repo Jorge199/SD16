@@ -37,7 +37,7 @@
 									</label>
 									<div class="col-md-9">
 										<g:select name="diagnostic" class="form-control"
-											from="${DiagnosticEnum.values()}" value=""
+											from="${DiagnosticEnum.values()}" value="${diagnostic}"
 											name="diagnosticSearch" optionKey="key"
 											noSelection="${['null':'Todos los diagnósticos..']}"
 											required=""></g:select>
@@ -51,7 +51,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<input type="number" min="0" name="startAge"
+										<input type="number" min="0" name="startAge" value="${startAge}"
 											class="form-control" placeholder="Edad Inicial" />
 									</div>
 								</div>
@@ -61,7 +61,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<input type="number" min="0" name="endAge"
+										<input type="number" min="0" name="endAge" value="${endAge}"
 											class="form-control" placeholder="Edad Final" />
 									</div>
 								</div>
@@ -74,11 +74,11 @@
 									<div class="form-group">
 										<label class="radio-inline"> <g:radio name="sex"
 												value="${SexEnum.MASCULINO}"
-												checked="${patientInstance?.sex == SexEnum.MASCULINO }" />
+												checked="${sex == "Masculino" }" />
 											${SexEnum.MASCULINO}
 										</label> <label class="radio-inline"> <g:radio name="sex"
 												value="${SexEnum.FEMENINO}"
-												checked="${patientInstance?.sex == SexEnum.FEMENINO }" /> ${SexEnum.FEMENINO}
+												checked="${sex ==  "Femenino"}" /> ${SexEnum.FEMENINO}
 										</label>
 									</div>
 								</div>
@@ -94,7 +94,7 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker1'>
-												<input type='text' class="form-control" name="startSearch" />
+												<input type='text' class="form-control" name="startSearch" value="${startSearch}" />
 												<span class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"> </span>
 												</span>
@@ -108,7 +108,7 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker2'>
-												<input type='text' class="form-control" name="endSearch" />
+												<input type='text' class="form-control" name="endSearch" value="${endSearch}" />
 												<span class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"> </span>
 												</span>

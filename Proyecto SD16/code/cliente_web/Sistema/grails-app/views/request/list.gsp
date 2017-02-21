@@ -46,7 +46,7 @@
 											<div class="form-group">
 												<g:select name="status" class="form-control"
 													from="${StatusEnum.values()}" name="statusSearch"
-													optionKey="key"
+													optionKey="key" value="${statusSearch}"
 													noSelection="${['null':'Seleccione un estado..']}"
 													required=""></g:select>
 											</div>
@@ -59,7 +59,7 @@
 									</div>
 									<div class="col-md-9">
 										<div class="form-group">
-											<input type="text" name="patient"
+											<input type="text" name="patient" value="${patient}"
 												class="form-control" placeholder=" Ingrese dato del paciente" />
 										</div>
 									</div>
@@ -69,7 +69,7 @@
 									</div>
 									<div class="col-md-9">
 										<div class="form-group">
-											<input type="text" name="specimen"
+											<input type="text" name="specimen" value="${specimen}"
 												class="form-control" placeholder=" Ingrese el espécimen" />
 										</div>
 									</div>
@@ -84,7 +84,8 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker1'>
-													<input type='text' class="form-control " name="startSearch" placeholder="Seleccione una fecha"/>
+													<input type='text' class="form-control " name="startSearch" value="${startSearch}" 
+													placeholder="Seleccione una fecha"/>
 													<span class="input-group-addon"> <span
 														class="glyphicon glyphicon-calendar"> </span>
 													</span>
@@ -98,7 +99,8 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker2'>
-													<input type='text' class="form-control" name="endSearch" placeholder="Seleccione una fecha"/>
+													<input type='text' class="form-control" name="endSearch" value="${endSearch}" 
+													 placeholder="Seleccione una fecha"/>
 													<span class="input-group-addon"> <span
 														class="glyphicon glyphicon-calendar"> </span>
 													</span>
@@ -111,7 +113,7 @@
 									</div>
 									<div class="col-md-5">
 										<div class="form-group">
-											<input type="text" name="code"
+											<input type="text" name="code" value="${code}"
 												class="form-control" placeholder=" Ingrese el código" />
 										</div>
 									</div>

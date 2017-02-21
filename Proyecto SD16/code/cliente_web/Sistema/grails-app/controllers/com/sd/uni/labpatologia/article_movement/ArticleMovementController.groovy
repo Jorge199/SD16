@@ -71,19 +71,26 @@ class ArticleMovementController {
             page = Integer.parseInt(params.get("page"))
         }
         def text = params.text
-        def articleMovements = null
+		
+		def startSearch= ""
+		def endSearch=""
+		def movementType = ""
+		def articleMovements = null
         String textToFind=""
         if (params.containsKey("text")){
             textToFind= params.get("text");
         }else{
             String tipo = params.get("movementType")
             if(!"".equals(params.get("movementType")) && null != params.get("movementType") && !"null".equals(params.get("movementType"))){
-                textToFind+="type="+params.get("movementType")+"&"
+				movementType = params.get("movementType")
+				textToFind+="type="+params.get("movementType")+"&"
             }
             if(!"".equals(params.get("startSearch")) && null != params.get("startSearch")){
+				startSearch = params.get("startSearch")
                 textToFind+="start="+params.get("startSearch")+"&"
             }
             if(!"".equals(params.get("endSearch")) && null != params.get("endSearch")){
+				endSearch = params.get("endSearch")
                 textToFind+="end="+params.get("endSearch")
             }
         }
@@ -95,7 +102,7 @@ class ArticleMovementController {
             siguiente = articleMovementService.find(null,10,page+1)
         }
         [articleMovementInstanceList: articleMovements, articleMovementInstanceTotal: articleMovements?.size(), page: page, siguiente: siguiente?.size(), text: text, laboratoryInstanceList: laboratoryService.getAll(), textToFind: textToFind,
-            user:authService.getName()]
+            user:authService.getName(), startSearch: startSearch, endSearch: endSearch, movementType: movementType]
     }
 
     @Secured([

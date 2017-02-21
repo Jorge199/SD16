@@ -46,13 +46,22 @@ class StatisticController {
 	])
 	def list() {
 		def statistics = null
+		def diagnostic = ""
+		def startAge = ""
+		def endAge = ""
+		def sex = ""
+		def startSearch = ""
+		def endSearch = ""
 		def data = [getByDate: 'false', getByDiagnostic: 'false', getByPatientAge: 'false', getBySex:'false']
 		String textToFind=""
 		if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
+			diagnostic = params.get("diagnosticSearch")
 			textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
 			data.put("getByDiagnostic", params.get("diagnosticSearch"))
 		}
 		if((!"".equals(params.get("startSearch"))) && !"".equals(params.get("endSearch")) && (null != params.get("startSearch")) && (null != params.get("endSearch"))){
+			startSearch = params.get("startSearch")
+			endSearch = params.get("endSearch")
 			textToFind+="start="+params.get("startSearch")+'&'
 			textToFind+="end="+params.get("endSearch")+'&'
 			data.put("getByDate", "true")
@@ -61,6 +70,8 @@ class StatisticController {
 		}
 
 		if((!"".equals(params.get("startAge"))) && !"".equals(params.get("endAge")) && (null != params.get("startAge")) && (null != params.get("endAge"))){
+			startAge = params.get("startAge")
+			endAge = params.get("endAge")
 			textToFind+="startAge="+params.get("startAge")+'&'
 			textToFind+="endAge="+params.get("endAge")+'&'
 			data.put("getByPatientAge", "true")
@@ -68,6 +79,7 @@ class StatisticController {
 			data.put("endAge", params.get("endAge"))
 		}
 		if(null!=params.get("sex") && !"".equals(params.get("sex")) && !"null".equals(params.get("sex"))){
+			sex = params.get("sex")
 			textToFind+="sex="+params.get("sex")
 			data.put("getBySex", params.get("sex"))
 		}
@@ -94,9 +106,9 @@ class StatisticController {
 			//Si no especifica un diagnostico entonces busca todos los diagnosticos
 			if(data.get("getByDiagnostic")=='false'){
 				int totalDiagnostic=0
-				for(DiagnosticEnum diagnostic in DiagnosticEnum.values()){
-					data.put(diagnostic.getKey(), statisticService.find("diagnostic="+diagnostic.getKey()+'&'+textToFind).size())
-					totalDiagnostic+=data.get(diagnostic.getKey())
+				for(DiagnosticEnum diagnosticFor in DiagnosticEnum.values()){
+					data.put(diagnosticFor.getKey(), statisticService.find("diagnostic="+diagnosticFor.getKey()+'&'+textToFind).size())
+					totalDiagnostic+=data.get(diagnosticFor.getKey())
 				}
 				data.put("totalDiagnostic", totalDiagnostic)
 			}else{
@@ -107,12 +119,12 @@ class StatisticController {
 				}else{
 					diagnosticTextToFind=textToFind.substring(textToFind.indexOf('&')+1,textToFind.length())
 				}
-				for(DiagnosticEnum diagnostic in DiagnosticEnum.values()){
-					if(data.get("getByDiagnostic")==diagnostic.getKey()){
-						data.put(diagnostic.getKey(), statisticService.find("diagnostic="+diagnostic.getKey()+'&'+diagnosticTextToFind).size())
-						System.out.println(diagnostic.getKey() + " " + data.get(diagnostic.getKey()))
+				for(DiagnosticEnum diagnosticFor in DiagnosticEnum.values()){
+					if(data.get("getByDiagnostic")==diagnosticFor.getKey()){
+						data.put(diagnosticFor.getKey(), statisticService.find("diagnostic="+diagnosticFor.getKey()+'&'+diagnosticTextToFind).size())
+						System.out.println(diagnosticFor.getKey() + " " + data.get(diagnosticFor.getKey()))
 					}
-					totalDiagnostic+=statisticService.find("diagnostic="+diagnostic.getKey()+'&'+diagnosticTextToFind).size()
+					totalDiagnostic+=statisticService.find("diagnostic="+diagnosticFor.getKey()+'&'+diagnosticTextToFind).size()
 				}
 				data.put("totalDiagnostic", totalDiagnostic)
 				
@@ -134,13 +146,13 @@ class StatisticController {
 			data.put("totalSex",totalSex)
 
 			//Para Diagnóstico
-			for(DiagnosticEnum diagnostic in DiagnosticEnum.values()){
-				data.put(diagnostic.getKey(), statisticService.find("diagnostic="+diagnostic.getKey()).size())
-				totalDiagnostic+=data.get(diagnostic.getKey())
+			for(DiagnosticEnum diagnosticFor in DiagnosticEnum.values()){
+				data.put(diagnosticFor.getKey(), statisticService.find("diagnostic="+diagnosticFor.getKey()).size())
+				totalDiagnostic+=data.get(diagnosticFor.getKey())
 			}
 			data.put("totalDiagnostic", totalDiagnostic)
 		}
-		[user:authService.getName(), laboratoryInstanceList: laboratoryService.getAll(), dataMap: data]
+		[user:authService.getName(), laboratoryInstanceList: laboratoryService.getAll(), dataMap: data, diagnostic: diagnostic, startAge: startAge, endAge: endAge, sex: sex, startSearch: startSearch, endSearch: endSearch ]
 	}
         
     @Secured([
