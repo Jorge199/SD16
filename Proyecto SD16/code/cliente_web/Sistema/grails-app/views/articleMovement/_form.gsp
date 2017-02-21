@@ -3,11 +3,14 @@
 
 <div class="row">
     <div class="col-md-6">
-        <div class="form-group">
+       
             <label>Articulo <span class="required-indicator">*</span></label>
+             <div class="form-group">
+             <div id="data-article">
             <select class="select-article form-control" name="articleId" id="articleId">
 						<option value="${ArticleMovementInstance?.article?.id}">Selecciona un articulo</option>
 			</select>
+			</div>
         </div>
     </div>
     <div class="col-md-6">

@@ -31,8 +31,14 @@ $(document).ready(function(e){
 					}	
 				},
 				errorPlacement: function(error, element){
-					if(element.is("select")){
-						error.insertAfter(element);
+					if(element.attr("name") == "articleId"){
+						error.insertAfter("#data-article");
+					}
+					if(element.attr("name") == "movementType"){
+						error.insertAfter("#movementType");
+					}
+					if(element.attr("name") == "quantity"){
+						error.insertAfter("#quantity");
 					}
 				}
 			
