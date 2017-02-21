@@ -28,7 +28,7 @@
 						<g:form action="list" class="form-search">
 
 							<div class="input-group col-md-10">
-								<input type="text" name="text" class="form-control" maxlength="50"
+								<input type="text" name="text" class="form-control" maxlength="50"  value="${text}"
 									placeholder="Ingrese un texto para buscar" /> <span
 									class="input-group-btn">
 									<button class="btn btn-primary" name="list" value="Buscar">
