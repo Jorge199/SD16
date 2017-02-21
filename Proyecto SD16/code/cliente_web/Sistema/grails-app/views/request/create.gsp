@@ -59,6 +59,7 @@
 			$('#datetimepicker1').datetimepicker({
 				format : 'DD-MM-YYYY',
 				locale : 'es',
+				maxDate : 'now'
 			});
 		});
 	</script>
