@@ -14,7 +14,6 @@ $(document).ready(function(e){
 					},
 					units:{
 						required:true,
-						maxlength:40
 					}
 				},
 
@@ -27,12 +26,14 @@ $(document).ready(function(e){
 						maxlength:"Cantidad de caracteres hasta 100"
 					},
 					units:{
-						required:"La unidad es obligatorio(*)",
-						maxlength:"Cantidad de caracteres hasta 40"
+						required:"La unidad es obligatorio(*)"
 					}
 				},
 				errorPlacement: function(error, element){
 					if(element.is(":text")){
+						error.insertAfter(element);
+					}
+					if(element.attr("name") == "units"){
 						error.insertAfter(element);
 					}
 				}
@@ -49,8 +50,8 @@ function saveDataArticle(){
 		$("#article input[id=name]").focus();
 		return false;
 	}
-	if(units  == ""){
-		$("#article input[id=units]").focus();
+	if($("#article select[id=units]").val() == ""){
+		$("#units").focus();
 		return false;
 	}
 	if(name.length < 3 || name.length > 50){
@@ -59,10 +60,6 @@ function saveDataArticle(){
 	}
 	if(description.length > 100){
 		$("#article input[id=description]").focus();
-		return false;
-	}
-	if(units.length > 40){
-		$("#article input[id=units]").focus();
 		return false;
 	}
 	return true;

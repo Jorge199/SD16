@@ -16,7 +16,7 @@
 		</div>
 	</div>-->
         <div class="col-md-4">
-		<label>Unidades<span class="required-indicator">*</span></label>
+		<label for="units">Unidades<span class="required-indicator">*</span></label>
 		<div class="form-group">
                     <g:select id="units" class="form-control" name="units" value="${articleInstance?.units}"
                         from="${['Litros': 'Litros', 'Unidades': 'Unidades', 'Kilos': 'Kilos']}"
