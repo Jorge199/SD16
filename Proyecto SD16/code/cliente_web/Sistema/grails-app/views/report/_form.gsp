@@ -102,9 +102,9 @@
 				class="required-indicator">*</span>
 			</label>
 			<g:select name="diagnostic" id="diagnostic" class="form-control"
-				from="${DiagnosticEnum.values()}"
-				value="${reportInstance?.diagnostic}" optionKey="key" 
-				noSelection="${['SIN_INDICIOS':'Seleccione un diagnostico..']}"></g:select>
+				from="${DiagnosticEnum.values()}" 
+				value="${reportInstance?.diagnostic}" optionKey="key"  
+				noSelection="${['':'Seleccione un diagnostico..']}"></g:select>
 		</div>
 	</div>
 	<div class="col-md-4">

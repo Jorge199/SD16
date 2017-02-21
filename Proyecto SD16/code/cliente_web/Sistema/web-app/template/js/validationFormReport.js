@@ -7,6 +7,9 @@ $(document).ready(function(e){
 						diagnostic:{
 							required:true
 						},
+						observations:{
+							required:true
+						},
 						diagnosticDetail:{
 							maxlength:25
 						}
@@ -14,14 +17,20 @@ $(document).ready(function(e){
 
 					messages:{
 						diagnostic:{
-							required:"Campo es obligatorio(*)"
+							required:"El diagnóstico es obligatorio(*)"
+						},
+						observations:{
+							required:"El informe es obligatorio(*)"
 						},
 						diagnosticDetail:{
 							maxlength:"Cantidad de caracteres hasta 25"
 						}
 					},
 					errorPlacement: function(error, element){
-						if(element.is(":select")){
+						if(element.is(":text") || element.attr("name") == "observations"){
+							error.insertAfter(element);
+						}
+						if(element.attr("name") == "diagnostic"){
 							error.insertAfter(element);
 						}
 					}
@@ -30,15 +39,18 @@ $(document).ready(function(e){
 	});
 
 	function saveDataReport(){
-		if($("#report select[id=diagnostic]").val() == "SIN_INDICIOS"){
+		
+		if($("#report select[id=diagnostic]").val() == ""){
 			$("#diagnostic").focus();
 			return false;
 		}
+		
 		if($("#report input[id=diagnosticDetail]").val() != ""){
 			if($("#report input[id=diagnosticDetail]").val() > 25){
 				$("#report input[id=diagnosticDetail]").focus();
 				return false;
 			}
 		}
+		return true;
 
 	}

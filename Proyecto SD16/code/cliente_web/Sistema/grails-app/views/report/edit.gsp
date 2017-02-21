@@ -3,15 +3,8 @@
 <html>
 <head>
 <meta name="layout" content="template">
-<g:set var="entityName"
-	value="${message(code: 'report.label', default: 'Report')}" />
-<title><g:message code="default.create.label"
-		args="[entityName]" /></title>
-<asset:stylesheet src="application.css" />
-<asset:javascript src="application.js" />
 </head>
 <body>
-
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel panel-default">
@@ -21,7 +14,7 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<g:form action="update">
+					<form action="/Sistema/report/update" method="post" id="report" onsubmit="return saveDataReport();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
@@ -46,7 +39,7 @@
 							</div>
 
 						</fieldset>
-					</g:form>
+					</form>
 				</div>
 			</div>
 		</div>
