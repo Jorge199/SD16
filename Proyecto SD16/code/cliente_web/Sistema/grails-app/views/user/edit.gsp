@@ -34,7 +34,7 @@
 		
    <script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
-	<script src=" ${request.contextPath}/template/js/validationFormUser.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationUserEdit.js"></script>
 	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
