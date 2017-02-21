@@ -8,13 +8,21 @@
 				id="name" name="name" placeholder="Ingrese un Nombre" value="${articleInstance?.name }" />
 		</div>
 	</div>
-	<div class="col-md-6">
+	<!--<div class="col-md-6">
 		<div class="form-group">
 			<label>Unidades*</label> 
 				<input class="form-control" type="text" maxlength="40" 
 				id="units" name="units" placeholder="Ingrese las unidades" value="${articleInstance?.units}" />
 		</div>
-	</div>
+	</div>-->
+        <div class="col-md-4">
+		<label>Unidades<span class="required-indicator">*</span></label>
+		<div class="form-group">
+                    <g:select id="units" class="form-control" name="units" value="${articleInstance?.units}"
+                        from="${['Litros': 'Litros', 'Unidades': 'Unidades', 'Kilos': 'Kilos']}"
+                        optionKey="key" optionValue="value" noSelection="${['':'Seleccione una unidad de medida..']}" />
+		</div>
+        </div>
 </div>
 
 <div class="row">
