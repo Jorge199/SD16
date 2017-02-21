@@ -130,24 +130,25 @@
 			<!-- /.navbar-collapse -->
 		</nav>
 		
-		<div id="page-wrapper">
-			
-			<g:layoutBody />
-			
-		</div>
-		<div class="pag-footer" align="center">
-			<strong>Desarrolladores:</strong> 
-			Jorge Esquivel<a href="mailto:jorgeesquivelfernandez@gmail.com?Subject=Laboratorio%20SD2016">(jorgeesquivelfernandez@gmail.com)</a> 
-			- Alex Jiñes<a href="mailto:abel.oalex@gmail.com?Subject=Laboratorio%20SD2016">(abel.oalex@gmail.com)</a> 
-			- Tania Monges<a href="mailto:taniamonges@gmail.com?Subject=Laboratorio%20SD2016">(taniamonges@gmail.com)</a> 
-			- Jerson Paniagua<a href="mailto:diazpany@gmail.com?Subject=Laboratorio%20SD2016">(diazpany@gmail.com)</a> 
-			- Fátima Talavera<a href="mailto:fa.talavera95@gmail.com?Subject=Laboratorio%20SD2016">(fa.talavera95@gmail.com)</a> 
-			<br> Líder del Proyecto: 
-			Ing. Aldo Medina
-			<a href="mailto:medinaldo@gmail.com?Subject=Laboratorio%20SD2016">(medinaldo@gmail.com)</a> 
-			<br> <strong>Copyright © 2016 - Sistemas Distribuídos - F.I.U.N.I</strong>
-		</div>
-		
+		<div id="page-wrapper"> 
+			 
+			<g:layoutBody /> 
+			 <br>
+                         <br>
+		</div> 
+		<div class="pag-footer" align="center"> 
+		<strong>Desarrolladores:</strong>  
+                	Jorge Esquivel<a href="mailto:jorgeesquivelfernandez@gmail.com?Subject=Laboratorio%20SD2016">(jorgeesquivelfernandez@gmail.com)</a>  
+			- Alex Jiñes<a href="mailto:abel.oalex@gmail.com?Subject=Laboratorio%20SD2016">(abel.oalex@gmail.com)</a>  
+			- Tania Monges<a href="mailto:taniamonges@gmail.com?Subject=Laboratorio%20SD2016">(taniamonges@gmail.com)</a>  
+			- Jerson Paniagua<a href="mailto:diazpany@gmail.com?Subject=Laboratorio%20SD2016">(diazpany@gmail.com)</a>  
+			- Fátima Talavera<a href="mailto:fa.talavera95@gmail.com?Subject=Laboratorio%20SD2016">(fa.talavera95@gmail.com)</a>  
+			<br> Líder del Proyecto:  
+			Ing. Aldo Medina 
+			<a href="mailto:medinaldo@gmail.com?Subject=Laboratorio%20SD2016">(medinaldo@gmail.com)</a>  
+			<br> <strong>Copyright © 2016 - Sistemas Distribuídos - F.I.U.N.I</strong> 
+		</div> 
+
 	</div>
 	<!-- estilo a la validacion inline-table;-->
   	<style>
