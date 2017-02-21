@@ -31,10 +31,6 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 
 	@Autowired
 	private IArticleDao _articleDao;
-	
-	//@Autowired
-	//private IArticleLotDao _articleLotDao;
-
 	private static Logger logger = Logger.getLogger(ArticleServiceImpl.class);
 
 	@Override
@@ -94,11 +90,6 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		article.setDescription(domain.getDescription());
 		article.setUnits(domain.getUnits());
 		article.setQuantity(domain.getQuantity());
-		/*ArrayList<Integer> articleLots = new ArrayList<>();
-		for(ArticleLotDomain a: domain.get_articleLots()){
-			articleLots.add(a.getId());
-		}
-		article.setArticleLots(articleLots);*/
 		return article;
 	}
 
@@ -110,15 +101,6 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleDto, ArticleDomai
 		article.setDescription(dto.getDescription());
 		article.setUnits(dto.getUnits());
 		article.setQuantity(dto.getQuantity());
-		/*ArrayList<ArticleLotDomain> articleLots = new ArrayList<>();
-		for(int id: dto.getArticleLots()){
-			try {
-				articleLots.add(_articleLotDao.getById(id));
-			} catch (PatologyException e) {
-				e.printStackTrace();
-			}
-		}
-		article.set_articleLots(articleLots);*/
 		return article;
 	}
 

@@ -49,14 +49,14 @@
 									width="100%">
 									<thead>
 										<tr>
-											<g:sortableColumn property="name" title="Nombre" />
-											<g:sortableColumn property="last_name" title="Apellido" />
-											<g:sortableColumn property="sex" title="Sexo" />
-											<g:sortableColumn property="ci" title="C.I" />
-											<g:sortableColumn property="speciality" title="Especialidad" />
-											<g:sortableColumn property="phone" title="Telefono" />
-											<g:sortableColumn property="email" title="Correo" />
-											<g:sortableColumn property="address" title="Direcccion" />
+											<th>Nombre</th>
+											<th>Apellido</th>
+											<th>Sexo</th>
+											<th>C.I</th>
+											<th>Especialidad</th>
+											<th>Telefono</th>
+											<th>Correo</th>
+											<th>Direcccion</th>
 											<td></td>
 										</tr>
 									</thead>

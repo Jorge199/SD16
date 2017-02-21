@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.text.SimpleDateFormat
 import org.springframework.beans.factory.annotation.Autowired
 import com.sd.uni.labpatologia.beans.article_movement.ArticleMovementB;
+import com.sd.uni.labpatologia.beans.article.ArticleB;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -182,8 +183,21 @@ class ArticleMovementController {
                 documento.add(new Phrase("Fecha final: No\n"));
             }
             
-            PdfPTable tabla = new PdfPTable(3);
-            tabla.setWidthPercentage([240, 120, 120] as float[], new Rectangle(520, 770));
+            PdfPTable tabla;
+            if(!"".equals(params.get("startSearch")) && null != params.get("startSearch") && !"null".equals(params.get("startSearch"))){
+                    tabla = new PdfPTable(4);
+                    tabla.setWidthPercentage([120, 240, 80, 80] as float[], new Rectangle(520, 770));
+            }else{
+                if(!"".equals(params.get("endSearch")) && null != params.get("endSearch") && !"null".equals(params.get("endSearch"))){
+                    
+                    tabla = new PdfPTable(4);
+                    tabla.setWidthPercentage([120, 240, 80, 80] as float[], new Rectangle(520, 770));
+                }else{
+                    tabla = new PdfPTable(3);
+                    tabla.setWidthPercentage([120, 240, 160] as float[], new Rectangle(520, 770));
+                }
+            }
+            
             Font cabeceraf = new Font();
             cabeceraf.setColor(BaseColor.WHITE);
             cabeceraf.setSize(13);
@@ -192,22 +206,42 @@ class ArticleMovementController {
             cabecerac = new PdfPCell(new Phrase("Artículo", cabeceraf));
             cabecerac.setColspan(1);
             cabecerac.setBackgroundColor(BaseColor.DARK_GRAY);
+            cabecerac.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(cabecerac);
-            // Diferencia
-            cabecerac = new PdfPCell(new Phrase("Diferencia", cabeceraf));
+            // Unidades
+            cabecerac = new PdfPCell(new Phrase("Unidades", cabeceraf));
             cabecerac.setColspan(1);
             cabecerac.setBackgroundColor(BaseColor.DARK_GRAY);
+            cabecerac.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(cabecerac);
+            if(!"".equals(params.get("startSearch")) && null != params.get("startSearch") && !"null".equals(params.get("startSearch"))){
+                    // Diferencia
+                    cabecerac = new PdfPCell(new Phrase("Diferencia", cabeceraf));
+                    cabecerac.setColspan(1);
+                    cabecerac.setBackgroundColor(BaseColor.DARK_GRAY);
+                    cabecerac.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    tabla.addCell(cabecerac);
+            }else{
+                if(!"".equals(params.get("endSearch")) && null != params.get("endSearch") && !"null".equals(params.get("endSearch"))){
+                    // Diferencia
+                    cabecerac = new PdfPCell(new Phrase("Diferencia", cabeceraf));
+                    cabecerac.setColspan(1);
+                    cabecerac.setBackgroundColor(BaseColor.DARK_GRAY);
+                    cabecerac.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    tabla.addCell(cabecerac);
+                }
+            }
             // Stock actual
             cabecerac = new PdfPCell(new Phrase("Stock actual", cabeceraf));
             cabecerac.setColspan(1);
             cabecerac.setBackgroundColor(BaseColor.DARK_GRAY);
+            cabecerac.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(cabecerac);
             // Datos
             PdfPCell datosc;
             HashMap<Integer, Integer> lista = new HashMap();
-            for(ArticleMovementB am: articleMovements){
-                lista.put(am.getArticle().getId(), 0);
+            for(ArticleB a: articleService.getAll()){
+                lista.put(a.getId(), 0);
             }
             int cantidadActual = 0;
             for(ArticleMovementB am: articleMovements){
@@ -215,30 +249,38 @@ class ArticleMovementController {
                 cantidadActual = lista.get(am.getArticle().getId());
                 if(am.getMovementType() == MovementTypeEnum.ENTRADA){
                     lista.put(am.getArticle().getId(), (cantidadActual + am.getQuantity()));
-                    System.out.println("Agregado id: " + am.getArticle().getId())
                 }else{
                     lista.put(am.getArticle().getId(), (cantidadActual - am.getQuantity()));
-                    System.out.println("Agregado id: " + am.getArticle().getId())
                 }
             }
             String nombre = "";
             for(Integer key: lista.keySet()){
-                datosc = new PdfPCell(new Phrase(String.valueOf(articleMovementService.getById(key).getArticle().getName())));
+                // Articulo
+                datosc = new PdfPCell(new Phrase(String.valueOf(articleService.getById(key).getName())));
                 tabla.addCell(datosc);
                 
-                datosc = new PdfPCell(new Phrase(String.valueOf(lista.get(key))));
+                // Unidades
+                datosc = new PdfPCell(new Phrase(String.valueOf(articleService.getById(key).getUnits())));
                 tabla.addCell(datosc);
                 
-                datosc = new PdfPCell(new Phrase(String.valueOf(articleMovementService.getById(key).getArticle().getQuantity())));
+                // Diferencia
+                if(!"".equals(params.get("startSearch")) && null != params.get("startSearch") && !"null".equals(params.get("startSearch"))){
+                        datosc = new PdfPCell(new Phrase(String.valueOf(lista.get(key))));
+                        datosc.setHorizontalAlignment(Element.ALIGN_CENTER);
+                        tabla.addCell(datosc);
+                }else{
+                    if(!"".equals(params.get("endSearch")) && null != params.get("endSearch") && !"null".equals(params.get("endSearch"))){
+                        datosc = new PdfPCell(new Phrase(String.valueOf(lista.get(key))));
+                        datosc.setHorizontalAlignment(Element.ALIGN_CENTER);
+                        tabla.addCell(datosc);
+                    }
+                }
+                
+                // Cantidad Actual
+                datosc = new PdfPCell(new Phrase(String.valueOf(articleService.getById(key).getQuantity())));
+                datosc.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tabla.addCell(datosc);
             }
-            /*for(ArticleMovementB am: articleMovements){
-            datosc = new PdfPCell(new Phrase(am.getArticle().getName()));
-            tabla.addCell(datosc);
-            datosc = new PdfPCell(new Phrase(String.valueOf(am.getQuantity())));
-            tabla.addCell(datosc);
-            }*/
-            
             documento.add(tabla);
             documento.close();
             if (file.exists()){

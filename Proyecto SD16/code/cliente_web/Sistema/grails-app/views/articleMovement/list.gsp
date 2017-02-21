@@ -159,10 +159,10 @@
                                 width="100%">
                                 <thead>
                                     <tr>
-                                        <g:sortableColumn property="article.name" title="Articulo" />
-                                        <g:sortableColumn property="movementType" title="Tipo de movimiento" />
-                                        <g:sortableColumn property="quantity" title="Cantidad" />
-                                        <g:sortableColumn property="date" title="Fecha" />
+                                        <th>Articulo</th>
+                                        <th>Tipo de movimiento</th>
+                                        <th>Cantidad</th>
+                                        <th>Fecha</th>
                                     </tr>
                                 </thead>
                                 <tbody>
