@@ -13,15 +13,6 @@ $(document).ready(function(e){
 						required:true,
 						rangelength:[3,50]
 					},
-					password:{
-						required:true,
-						rangelength:[8,16]
-					},
-					password2:{
-						required:true,
-						equalTo:"#pass1",
-						rangelength:[8,16]
-					},
 					rolId:{
 						required:true
 					},
@@ -41,27 +32,18 @@ $(document).ready(function(e){
 						required:"El usuario es obligatorio(*)",
 						rangelength:"Cantidad de caracteres entre 3 a 50"
 					},
-					password:{
-						required:"La contraseña es obligatorio(*)",
-						rangelength:"Debe tener entre 8 a 16 caracteres"
-					},
-					password2:{
-						required:"La contraseña es obligatorio(*)",
-						equalTo:"Debe ser igual al campo contraseña",
-						rangelength:"Debe tener entre 8 a 16 caracteres"
-					},
 					rolId:{
 						required:"El rol es obligatorio(*)"
 					},
 					registrationNumber:{
-						required:"La matricula obligatorio(*)",
+						required:"La matricula es obligatorio(*)",
 						number:"Debe estar en formato numerico",
 						rangelength:"Debe tener entre 3 a 10 caracteres",
 						maxlength:"Maximo de caracteres 10"
 					}
 				},
 				errorPlacement: function(error, element){
-					if(element.is(":text") || element.is(":password") || element.is("select")){
+					if(element.is(":text") || element.is("select")){
 						error.insertAfter(element);
 					}
 				}
@@ -115,8 +97,6 @@ $(document).ready(function(e){
 function saveDataUser(){
 	var name = $("#user input[id=name]").val();
 	var userName = $("#user input[id=userName]").val();
-	var pass1 = $("#user input[id=pass1]").val();
-	var password2 = $("#user input[id=password2]").val();
 	var updater = $("#user input[id=updater]").val();
 	var registrationNumber = $("#user input[id=registrationNumber]").val();
 	var letter = /^[a-zA-Z\s áãàéèíìóõòúùñ]+$/;
@@ -130,14 +110,7 @@ function saveDataUser(){
 		$("#user input[id=userName]").focus();
 		return false;
 	}
-	if(pass1 == ""){
-		$("#user input[id=pass1]").focus();
-		return false;
-	}
-	if(password2 == ""){
-		$("#user input[id=password2]").focus();
-		return false;
-	}
+	
 	if(updater == ""){
 		$("#user input[id=updater]").focus();
 		return false;
@@ -148,14 +121,6 @@ function saveDataUser(){
 	}
 	if(userName.length < 3 || userName.length > 50){
 		$("#user input[id=userName]").focus();
-		return false;
-	}
-	if(pass1.length < 8 || pass1.length > 16){
-		$("#user input[id=pass1]").focus();
-		return false;
-	}
-	if(password2.length < 8 || password2.length > 16){
-		$("#user input[id=password2]").focus();
 		return false;
 	}
 	
