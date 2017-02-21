@@ -71,8 +71,8 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorDomain> implements IDoctorD
 			}
 			
 		}
-		criteria.addOrder(Order.asc("_last_name"));
-		criteria.addOrder(Order.asc("_name"));
+		criteria.addOrder(Order.asc("_last_name").ignoreCase());
+		criteria.addOrder(Order.asc("_name").ignoreCase());
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);

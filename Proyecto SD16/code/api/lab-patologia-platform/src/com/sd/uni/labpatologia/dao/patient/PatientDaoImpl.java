@@ -71,8 +71,8 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 						criteria.add(propertyCriterion);
 					}
 		}
-		criteria.addOrder(Order.asc("_lastName"));
-		criteria.addOrder(Order.asc("_name"));
+		criteria.addOrder(Order.asc("_lastName").ignoreCase());
+		criteria.addOrder(Order.asc("_name").ignoreCase());
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
