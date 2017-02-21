@@ -1,6 +1,7 @@
 package com.sd.uni.labpatologia.service.scheduling;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,15 @@ public class MessageCron {
 	@Autowired
 	private IMessageService messageService;
 	
+	@Value("${cron.enable}")
+	private String enableCron;
+	
 	@Scheduled(cron = "${cron.secondPeriod}")
     public void sendNotification(){
 		try {
-			messageService.sendNotifications();
+			if (enableCron.equalsIgnoreCase("true")){
+				messageService.sendNotifications();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
