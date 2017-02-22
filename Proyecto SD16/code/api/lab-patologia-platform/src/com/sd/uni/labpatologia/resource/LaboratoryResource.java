@@ -2,8 +2,6 @@ package com.sd.uni.labpatologia.resource;
 
 
 import javax.ws.rs.GET;
-
-
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;

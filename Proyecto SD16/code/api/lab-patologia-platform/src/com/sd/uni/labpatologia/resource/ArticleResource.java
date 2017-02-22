@@ -2,7 +2,6 @@ package com.sd.uni.labpatologia.resource;
 
 
 import javax.ws.rs.GET;
-
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -14,9 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
-import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
-import com.sd.uni.labpatologia.exception.StockException;
 import com.sd.uni.labpatologia.service.article.IArticleService;
 
 

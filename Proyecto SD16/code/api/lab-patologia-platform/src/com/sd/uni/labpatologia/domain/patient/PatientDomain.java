@@ -11,12 +11,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
-import com.sd.uni.labpatologia.util.DiagnosticEnum;
 import com.sd.uni.labpatologia.util.SexEnum;
 
 

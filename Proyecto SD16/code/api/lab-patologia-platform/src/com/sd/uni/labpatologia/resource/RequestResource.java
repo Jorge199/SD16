@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
-import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.exception.PatologyException;

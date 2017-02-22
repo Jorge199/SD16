@@ -1,7 +1,6 @@
 package com.sd.uni.labpatologia.resource;
 
 import javax.ws.rs.GET;
-
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
-import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
 import com.sd.uni.labpatologia.exception.PatologyException;

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementDTO;
 import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementResult;
-import com.sd.uni.labpatologia.dto.statistic.StatisticResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.article_movement.IArticleMovementService;
 

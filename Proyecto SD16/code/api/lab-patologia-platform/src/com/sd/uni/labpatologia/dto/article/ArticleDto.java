@@ -1,10 +1,7 @@
 package com.sd.uni.labpatologia.dto.article;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 //import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
 import com.sd.uni.labpatologia.dto.base.BaseDTO;

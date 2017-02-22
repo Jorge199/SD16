@@ -1,7 +1,6 @@
 package com.sd.uni.labpatologia.service.article;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,7 +10,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.sd.uni.labpatologia.exception.PatologyException;
+
 import com.sd.uni.labpatologia.dao.article.ArticleDaoImpl;
 import com.sd.uni.labpatologia.dao.article.IArticleDao;
 //import com.sd.uni.labpatologia.dao.article_lot.IArticleLotDao;
@@ -19,10 +18,8 @@ import com.sd.uni.labpatologia.domain.article.ArticleDomain;
 //import com.sd.uni.labpatologia.domain.article_lot.ArticleLotDomain;
 import com.sd.uni.labpatologia.dto.article.ArticleDto;
 import com.sd.uni.labpatologia.dto.article.ArticleResult;
-import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.exception.StockException;
-import com.sd.uni.labpatologia.service.article_movement.ArticleMovementServiceImpl;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 @Service

@@ -1,13 +1,11 @@
 package com.sd.uni.labpatologia.dto.article;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.uni.labpatologia.dto.base.BaseResult;
-import com.sd.uni.labpatologia.dto.doctor.DoctorDto;
-import com.sd.uni.labpatologia.dto.article.ArticleDto;
-
-import java.util.List;
 
 @XmlRootElement(name = "ArticleResult")
 public class ArticleResult extends BaseResult<ArticleDto>{
