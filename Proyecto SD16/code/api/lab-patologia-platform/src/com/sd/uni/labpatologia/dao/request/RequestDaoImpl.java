@@ -113,8 +113,53 @@ public class RequestDaoImpl extends BaseDaoImpl<RequestDomain> implements IReque
 					throw new PatologyException("Formato de ruta invalido", e);
 				}
 			}
+			
+			if (map.containsKey("sort")) {
+				String sort = (map.get("sort"));
+				if(sort.equals("_code") || sort.equals("_date") || sort.equals("_status") || sort.equals("_specimen") || sort.equals("_studyType")){
+					if (map.containsKey("order")){
+						String order = (map.get("order"));
+						if(order.equals("desc")){
+							criteria.addOrder(Order.desc(sort));
+						}else{
+							criteria.addOrder(Order.asc(sort));
+						}
+					}else{
+						criteria.addOrder(Order.desc("_id"));
+					}
+					
+				}else if(sort.equals("_patient")){
+					if (map.containsKey("order")){
+						String order = (map.get("order"));
+						if(order.equals("desc")){
+							criteria.addOrder(Order.desc("patient._name"));
+						}else{
+							criteria.addOrder(Order.asc("patient._name"));
+						}
+					}else{
+						criteria.addOrder(Order.desc("patient._name"));
+					}
+				}else if(sort.equals("_doctor")){
+					criteria.createAlias("request._doctor", "doctor");
+					if (map.containsKey("order")){
+						String order = (map.get("order"));
+						if(order.equals("desc")){
+							criteria.addOrder(Order.desc("doctor._name"));
+						}else{
+							criteria.addOrder(Order.asc("doctor._name"));
+						}
+					}else{
+						criteria.addOrder(Order.desc("doctor._name"));
+					}
+				}
+				else{
+					criteria.addOrder(Order.desc("_id"));
+				}
+			}
+		}else{
+			criteria.addOrder(Order.desc("_id"));
 		}
-		criteria.addOrder(Order.desc("_id"));
+		
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);

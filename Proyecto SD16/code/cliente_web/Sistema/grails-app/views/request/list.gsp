@@ -133,19 +133,22 @@
 								
 					<br>
 					<br>
+					
 					<div class="dataTable_wrapper">
 						<div class="row">
 							<div class="col-sm-12">
 								<table id="list-request" class="table table-bordered" cellspacing="0" width="100%">
 									<thead>
 										<tr>
-											<th>Codigo</th>
-											<th>Fecha</th>
-											<th>Estado"</th>
-											<th>Doctor</th>
-											<th>Paciente</th>
-											<th>Tipo de estudio</th>
-											<th>Espécimen</th>
+										<g:set var="searchParams" value="[ statusSearch: "${statusSearch}", patient: "${patient}", specimen: "${specimen}", startSearch: "${startSearch}", endSearch: "${endSearch}", code: "${code}"  ]" />
+											<g:sortableColumn property="_code" params= "${searchParams}" title="Código" ></g:sortableColumn>
+											<g:sortableColumn property="_date" params= "${searchParams}" title="Fecha" />
+											<g:sortableColumn property="_status" params= "${searchParams}" title="Estado" />
+											<g:sortableColumn property="_doctor" params= "${searchParams}" title="Doctor" />
+											<g:sortableColumn property="_patient" params= "${searchParams}" title="Paciente" />
+											<g:sortableColumn property="_studyType" params="${searchParams}" title="Tipo de Estudio" />
+											<g:sortableColumn property="_specimen" params="${searchParams}" title="Espécimen" />
+											
 											<th colspan="2" align="center">Acciones</th>
 										</tr>
 									</thead>
@@ -201,7 +204,7 @@
 																format="PDF,DOCX" jasper="report"
 																id="${requestInstance.getId()}">
 																<input type="hidden" name="id"
-																	value="${requestInstance.getId()}" />Descargar
+																	value="${requestInstance.getId()}" />
 																</g:jasperReport></td>
 													</g:if>
 													<g:else><td width="12%"></td></g:else>

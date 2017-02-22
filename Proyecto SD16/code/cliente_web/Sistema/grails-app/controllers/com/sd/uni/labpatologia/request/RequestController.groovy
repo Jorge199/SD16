@@ -68,6 +68,12 @@ class RequestController {
 			textToFind= params.get("text")
 			System.out.println("no entro else" + textToFind)
 		}else{
+			if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+				textToFind+="sort="+params.get("sort")+'&'
+			}
+			if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+				textToFind+="order="+params.get("order")+'&'
+			}
 			if(null!=params.get("specimen") && !"".equals(params.get("specimen")) && !"null".equals(params.get("specimen"))){
 				specimen = params.get("specimen")
 				textToFind+="specimen="+params.get("specimen")+'&'
