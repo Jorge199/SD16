@@ -159,10 +159,10 @@
                                 width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Articulo</th>
-                                        <th>Tipo de movimiento</th>
+                                        <g:sortableColumn property="_article" params= "${params}" title="Articulo" ></g:sortableColumn>
+                                        <g:sortableColumn property="_movement_type" params= "${params}" title="Tipo de Movimiento" ></g:sortableColumn>
                                         <th>Cantidad</th>
-                                        <th>Fecha</th>
+                                        <g:sortableColumn property="_date" params= "${params}" title="Fecha" ></g:sortableColumn>
                                     </tr>
                                 </thead>
                                 <tbody>

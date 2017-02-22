@@ -81,6 +81,12 @@ class ArticleMovementController {
             textToFind= params.get("text");
         }else{
             String tipo = params.get("movementType")
+			if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+				textToFind+="sort="+params.get("sort")+'&'
+			}
+			if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+				textToFind+="order="+params.get("order")+'&'
+			}
             if(!"".equals(params.get("movementType")) && null != params.get("movementType") && !"null".equals(params.get("movementType"))){
 				movementType = params.get("movementType")
 				textToFind+="type="+params.get("movementType")+"&"
