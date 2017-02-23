@@ -16,6 +16,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.uni.labpatologia.dao.laboratory.ILaboratoryDao;
@@ -63,7 +64,8 @@ public class MessageServiceImpl implements IMessageService{
 
 	@Value("${mail.workingHours}")
 	private String workingHours;
-
+	
+	@Transactional(propagation = Propagation.REQUIRES_NEW )
 	public boolean send(MessageDomain msg) throws PatologyException{
 		
 		RequestDomain request = requestDao.getById(msg.getId());
@@ -128,6 +130,7 @@ public class MessageServiceImpl implements IMessageService{
 		}	
 	}
 
+	@Transactional
 	public void sendNotifications() throws PatologyException{
 
 		List<MessageDomain> messages = messageDao.findAll();
