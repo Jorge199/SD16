@@ -44,7 +44,7 @@
 										</label>
 										<div class="col-md-9">
 											<div class="form-group">
-												<g:select name="status" class="form-control"
+												<g:select name="status" class="form-control" id="dataStatus"
 													from="${StatusEnum.values()}" name="statusSearch"
 													optionKey="key" value="${statusSearch}"
 													noSelection="${['null':'Seleccione un estado..']}"
@@ -59,7 +59,7 @@
 									</div>
 									<div class="col-md-9">
 										<div class="form-group">
-											<input type="text" name="patient" value="${patient}"
+											<input type="text" name="patient" value="${patient}" id="dataPatient"
 												class="form-control" placeholder=" Ingrese dato del paciente" />
 										</div>
 									</div>
@@ -69,7 +69,7 @@
 									</div>
 									<div class="col-md-9">
 										<div class="form-group">
-											<input type="text" name="specimen" value="${specimen}"
+											<input type="text" id="dataSpecimen" name="specimen" value="${specimen}"
 												class="form-control" placeholder=" Ingrese el espécimen" />
 										</div>
 									</div>
@@ -85,7 +85,7 @@
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker1'>
 													<input type='text' class="form-control " name="startSearch" value="${startSearch}" 
-													placeholder="Seleccione una fecha"/>
+													placeholder="Seleccione una fecha" id="dataStartSearch"/>
 													<span class="input-group-addon"> <span
 														class="glyphicon glyphicon-calendar"> </span>
 													</span>
@@ -100,7 +100,7 @@
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker2'>
 													<input type='text' class="form-control" name="endSearch" value="${endSearch}" 
-													 placeholder="Seleccione una fecha"/>
+													 placeholder="Seleccione una fecha" id="dataEndSearch"/>
 													<span class="input-group-addon"> <span
 														class="glyphicon glyphicon-calendar"> </span>
 													</span>
@@ -113,7 +113,7 @@
 									</div>
 									<div class="col-md-5">
 										<div class="form-group">
-											<input type="text" name="code" value="${code}"
+											<input type="text" name="code" value="${code}" id="dataCode"
 												class="form-control" placeholder=" Ingrese el código" />
 										</div>
 									</div>
@@ -123,6 +123,13 @@
 								<fieldset class="buttons">
 									<button type="submit" class="btn btn-primary" name="list">
 										<i class="fa fa-search"></i> Buscar
+									</button>
+									<br>
+								</fieldset>
+								<br>
+								<fieldset class="buttons">
+									<button class="btn btn-default" name="delete" onclick="deleteData()">
+										<i class="fa fa-eraser"></i> Borrar
 									</button>
 									<br>
 								</fieldset>
@@ -301,6 +308,16 @@
 				locale : 'es'
 			});
 		});
+	</script>
+	<script>
+		function deleteData(){
+			$("#dataSpecimen").val("");
+			$("#dataPatient").val("");
+			$("#dataStatus").val("null");
+			$("#dataStartSearch").val("");
+			$("#dataEndSearch").val("");
+			$("#dataCode").val("");
+		}
 	</script>
 </body>
 </html>
