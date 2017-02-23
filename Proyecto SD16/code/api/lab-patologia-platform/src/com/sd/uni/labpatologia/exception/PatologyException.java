@@ -1,6 +1,5 @@
 package com.sd.uni.labpatologia.exception;
 
-import java.text.ParseException;
 
 public class PatologyException extends Exception {
 

@@ -144,7 +144,7 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomai
 				    + "<strong>Laboratorio de " + laboratory.getName() + "</strong><br>" + laboratory.getAddress() + "<br>"
 				    + "Encarnaci&oacute;n<br>"
 				    + "<abbr title=\"Phone\">Telefono: </abbr>" + laboratory.getPhone()
-				    + "<abbr title=\", Email\">Email: </abbr>" + laboratory.getEmail()
+				    + "<abbr title=\"Email\">, Email: </abbr>" + laboratory.getEmail()
 				    + "</address><br>"
 				    + "<span class=\"label label-warning\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>  Favor no responder a este correo </span>"
 				    + "<br></div></div><br/></div></body></html>";
