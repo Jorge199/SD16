@@ -14,26 +14,27 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.uni.labpatologia.dao.contact.ContactDaoImpl;
+import com.sd.uni.labpatologia.dao.contact.IContactDao;
 import com.sd.uni.labpatologia.dao.laboratory.ILaboratoryDao;
-import com.sd.uni.labpatologia.dao.user.IUserDao;
+import com.sd.uni.labpatologia.domain.contact.ContactDomain;
 import com.sd.uni.labpatologia.domain.laboratory.LaboratoryDomain;
-import com.sd.uni.labpatologia.domain.user.UserDomain;
 import com.sd.uni.labpatologia.dto.contact.ContactDto;
+import com.sd.uni.labpatologia.dto.contact.ContactResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
+import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 
 
 @Service
-public class ContactServiceImpl implements IContactService {
-
+public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomain, ContactDaoImpl, ContactResult> implements IContactService{
 	@Autowired
-	private static Logger logger = Logger.getLogger(ContactServiceImpl.class);
-
-	@Autowired
-	private IUserDao userDao;
+	private IContactDao _contactDao;
 	
-	@Autowired
-	private ILaboratoryDao laboratoryDao;
+	private ILaboratoryDao _laboratoryDao;
+	
+	private static Logger logger = Logger.getLogger(ContactServiceImpl.class);
 	
 	@Value("${mail.username:lpatologico@gmail.com}")
 	private String username;
@@ -41,11 +42,71 @@ public class ContactServiceImpl implements IContactService {
 	@Value("${mail.password:lpatologico}")
 	private String password;
 	
+	@Override
+	@Transactional
+	public ContactDto save(ContactDto dto) {
+		try { 
+		    // Lanzo exepcion de tipo runtime para realizar rollback
+			/*final ContactDomain contactDomain = convertDtoToDomain(dto);
+			final ContactDomain contact = _contactDao.save(contactDomain);
+			final ContactDto newDto = convertDomainToDto(contact);
+			sent(newDto);*/
+			sent(dto);
+			return null;
+		} catch(PatologyException ex) { 
+			 logger.error(ex);
+			 throw new RuntimeException("Error"+ContactServiceImpl.class+"" + ex.getMessage(), ex); 
+		}
+		
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public ContactDto getById(Integer id) throws PatologyException {
+		final ContactDomain contactDomain = _contactDao.getById(id);
+		final ContactDto contactDTO = convertDomainToDto(contactDomain);
+		return contactDTO;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public ContactResult getAll() {
+		return null;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public ContactResult find(String textToFind, int page, int maxItems) throws PatologyException {
+		return null;
+	}
 	
 	@Override
+	protected ContactDto convertDomainToDto(ContactDomain domain) throws PatologyException {
+		final ContactDto contact = new ContactDto();
+		contact.setId(domain.getId());
+		contact.setName(domain.getName());
+		contact.setMessage(domain.getMessage());
+		contact.setSubject(domain.getSubject());
+		contact.setPhone(domain.getPhone());
+		contact.setEmail(domain.getEmail());
+		return contact;
+	}
+
+	@Override
+	protected ContactDomain convertDtoToDomain(ContactDto dto) throws PatologyException {
+		final ContactDomain contact = new ContactDomain();
+		contact.setId(dto.getId());
+		contact.setName(dto.getName());
+		contact.setMessage(dto.getMessage());
+		contact.setSubject(dto.getSubject());
+		contact.setPhone(dto.getPhone());
+		contact.setEmail(dto.getEmail());
+		return contact;
+	}
+	
 	public ContactDto sent(ContactDto contactDto) throws PatologyException {
-		LaboratoryDomain laboratory = laboratoryDao.getById(1);
-		UserDomain user = userDao.getById(contactDto.getUserId());
+		System.out.println("enviando mensaje al grupo" + contactDto.getMessage());
+		LaboratoryDomain laboratory = _laboratoryDao.getById(1);
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -62,7 +123,7 @@ public class ContactServiceImpl implements IContactService {
 		
 		try {
 			String text = "<h3>Notificaci&oacute;n de contacto</h3>"    
-					+ "<br/><p>El usuario  <strong>" +  user.getName() + " " + user.getLastName() + "</strong> "
+					+ "<br/><p>El usuario  <strong>" +  contactDto.getName() + "</strong> "
 					+ "ha realizado una consulta sobre el Sistema desarrollado en la materia Sistemas Distribuidos - 2016 "
 					+ "para el laboratorio Patol&oacute;gico de Encarnaci&oacute;n. El mismo es el siguiente:</p>"
 					+ "<br/><p style=\"padding-left:5%;\">Mensaje: " + contactDto.getMessage() + "</p>"
@@ -80,7 +141,7 @@ public class ContactServiceImpl implements IContactService {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("fa.talavera95@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("taniamonges@gmail.com"));
+			//message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("taniamonges@gmail.com"));
 			message.setSubject("Contacto: " + contactDto.getSubject());
 			message.setContent(text, "text/html; charset=utf-8");
 			Transport.send(message);
@@ -90,7 +151,6 @@ public class ContactServiceImpl implements IContactService {
 		} 
 		return contactDto;
 	}
+	
 
 }
-
-

@@ -9,7 +9,6 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
 import com.sd.uni.labpatologia.dto.contact.ContactDto;
-import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.contact.IContactService;
 
 
@@ -21,8 +20,8 @@ public class ContactResource {
 	private IContactService _contactService;
 	
 	@POST
-	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA", "ROLE_TECNICO"})
-	public ContactDto save(ContactDto contact) throws PatologyException {
-		return _contactService.sent(contact);
+	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR"})
+	public ContactDto save(ContactDto contact) {
+		return _contactService.save(contact);
 	}
 }

@@ -11,7 +11,7 @@ public class ContactDto extends BaseDTO{
 	private String _phone;
 	private String _subject;
 	private String _message;
-	private Integer _userId;
+	private String _name;
 
 	@XmlElement
 	public String getSubject() {
@@ -50,11 +50,11 @@ public class ContactDto extends BaseDTO{
 	}
 	
 	@XmlElement
-	public Integer getUserId() {
-		return _userId;
+	public String getName() {
+		return _name;
 	}
 	
-	public void setUserId(Integer userId) {
-		_userId = userId;
+	public void setName(String userName) {
+		_name = userName;
 	}
 }
