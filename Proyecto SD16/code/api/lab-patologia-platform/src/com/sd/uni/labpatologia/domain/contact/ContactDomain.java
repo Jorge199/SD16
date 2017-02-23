@@ -20,7 +20,7 @@ public class ContactDomain extends BaseDomain{
 	@Column(name = "subject")
 	private String _subject;
 
-	@Column(name = "message")
+	@Column(name = "message" , length = 260)
 	private String _message;
 
 	

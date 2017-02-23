@@ -38,24 +38,7 @@
         <!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
-	<script src=" ${request.contextPath}/template/js/validationFormArticle.js"></script>
-	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
-	<!-- Jasny-Bootstrap JavaScript -->
-	<script
-		src=" ${request.contextPath}/template/js/jasny-bootstrap.min.js"></script>
-
-	<!-- Moment -->
-	<script src=" ${request.contextPath}/template/js/moment.js"></script>
-	<script src=" ${request.contextPath}/template/js/es.js"></script>
-
-	<!-- Transition -->
-	<script src=" ${request.contextPath}/template/js/transition.js"></script>
-
-	<!-- Collapse -->
-	<script src=" ${request.contextPath}/template/js/collapse.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
+	<script src=" ${request.contextPath}/template/js/validationFormContact.js"></script>
 	
 </body>
 </html>

@@ -42,6 +42,7 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomai
 	
 	@Value("${mail.password:lpatologico}")
 	private String password;
+
 	
 	@Override
 	@Transactional
@@ -143,11 +144,14 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomai
 			System.out.println(text);
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("fa.talavera95@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("taniamonges@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("abel.oalex@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("jorgeesquivelfernandez@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("diazpany@gmail.com"));
+			InternetAddress[] mailTo = {
+					new InternetAddress("jorgeesquivelfernandez@gmail.com"),
+					new InternetAddress("fa.talavera95@gmail.com"),
+					new InternetAddress("taniamonges@gmail.com"),
+					new InternetAddress("abel.oalex@gmail.com"),
+					new InternetAddress("diazpany@gmail.com")
+			};
+			message.setRecipients(Message.RecipientType.TO, mailTo);
 			
 			message.setSubject("Contacto: " + contactDto.getSubject());
 			message.setContent(text, "text/html; charset=utf-8");

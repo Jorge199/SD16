@@ -33,27 +33,13 @@
 	</div>
 	
 	<div>
-		<label>Mensaje <span class="required-indicator"></span></label>
+		<label>Mensaje <span class="required-indicator">*</span></label>
 		<div class="form-group">
 		<g:textArea class="form-control" rows="5" cols="40" class="form-control"
 			id="message" name="message" maxlength="250"
 			placeholder="Ingrese su mensaje" />
 			</div>
 	</div>
-
 	
 </div>
 
-
-<!-- estilo a la validacion -->
-  	<style>
-		input.error{
-		    border: 2px dotted #FF0000; 
-		}
-		form label.error{
-		    font-size: 1em;
-		    color: #FF0000;
-		    font-weight: bold;
-		    display: inline-table;
-		}
-  	</style>
