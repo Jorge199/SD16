@@ -64,6 +64,8 @@
 
 
 										<g:each in="${userInstanceList}" status="i" var="userInstance">
+										<g:if test="${userInstance.getRol().getName()!="ROLE_ADMINISTRADOR"}">
+ 										
 
 											<tr>
 												<td>
@@ -87,7 +89,7 @@
 														class="btn btn-success" id="${userInstance.getId()}">
 														<i class="fa fa-pencil"></i> Editar</g:link></td>
 											</tr>
-
+											</g:if>
 										</g:each>
 
 

@@ -39,6 +39,7 @@
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
 	<script src=" ${request.contextPath}/template/js/validationFormContact.js"></script>
-	
+		<!-- Bootstrap Core JavaScript -->
+	<script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -49,8 +49,10 @@ $(document).ready(function(e){
 					if(element.is(":radio")){
 						error.appendTo(element.parent());
 					}
+					if(element.attr("name") == "message"){
+						error.insertAfter(element);
+					}
 				}
-			
 			});
 			
 			$(".letter").keypress(function (key) {

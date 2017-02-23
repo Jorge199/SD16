@@ -57,7 +57,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a href="#" class="navbar-brand"><strong> <g:each
+				<a href="/Sistema/" class="navbar-brand"><strong> <g:each
 							in="${laboratoryInstanceList}" status="i"
 							var="laboratoryInstance">
 							<g:if test="${laboratoryInstance?.name}">
@@ -122,11 +122,9 @@
 						<li><a href="/Sistema/statistic/list/"><i
 							class="fa fa-pie-chart"></i> Estadísticas</a></li>
 					</sec:ifNotGranted>
-					<sec:ifNotGranted roles='ROLE_TECNICO, ROLE_SECRETARIA'>
 						<li><a href="/Sistema/contact/create/"><i
 							class="fa fa-info"></i> Contactenos</a></li>
-					</sec:ifNotGranted>
-					
+	
 
 
 				</ul>

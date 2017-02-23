@@ -24,7 +24,7 @@ public class StatisticResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR"})
+	@Secured({ "ROLE_ADMINISTRADOR", "ROLE_DOCTOR", "ROLE_SECRETARIA"})
 	public StatisticDTO getById(@PathParam("id") Integer statisticId) throws PatologyException {
 		return _statisticService.getById(statisticId);
 	}

@@ -17,13 +17,13 @@ class ContactController {
 	def ILaboratoryService laboratoryService
 	@Autowired def IAuthService authService
 	
-	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR'])
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR', 'ROLE_SECRETARIA', 'ROLE_TECNICO'])
 	def create(){
 		[laboratoryInstanceList: laboratoryService.getAll(),
 			user:authService.getName(), userName:authService.getName()]
 	}
 	
-	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR'])
+	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR', 'ROLE_SECRETARIA', 'ROLE_TECNICO'])
 	def save() {
 		def contactInstance = new ContactB(params)
 		contactInstance.setUserName(authService.getName());
