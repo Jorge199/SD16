@@ -36,10 +36,22 @@ class DoctorController {
 			page = Integer.parseInt(params.get("page"))
 		}
 		def text = params.text
+		def search = ""
 		def doctors = null
-		if(null != text && !"".equals(text)){
-			doctors = doctorService.find(text,10,page)
-			siguiente = doctorService.find(text,10,page+1)
+		
+		if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+			search += "text="+params.text+'&'
+		}
+		if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+			search +="sort="+params.get("sort")+'&'
+		}
+		if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+			search +="order="+params.get("order")+'&'
+		}
+		
+		if(null != search && !"".equals(search)){
+			doctors = doctorService.find(search,10,page)
+			siguiente = doctorService.find(search,10,page+1)
 		}else{
 			doctors = doctorService.find(null,10,page)
 			siguiente = doctorService.find(null,10,page+1)
@@ -100,7 +112,7 @@ class DoctorController {
 	
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def selectDoctor() {
-		def doctors = doctorService.find(params.get("q"), 0, 0)
+		def doctors = doctorService.find("text="+params.get("q"), 0, 0)
 		render doctors as JSON
 	}
 
