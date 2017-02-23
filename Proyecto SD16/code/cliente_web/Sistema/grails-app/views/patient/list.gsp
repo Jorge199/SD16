@@ -47,13 +47,14 @@
 									width="100%">
 									<thead>
 										<tr>
-											<th>Nombre</th>
-											<th>Apellido</th>
+											
+											<g:sortableColumn property="_name" params= "${params}" title="Nombre" ></g:sortableColumn>
+											<g:sortableColumn property="_lastName" params= "${params}" title="Apellido" ></g:sortableColumn>
 											<th>Sexo</th>
-											<th>C.I</th>
-											<th>Fecha de Nac.</th>
+											<g:sortableColumn property="_document" params= "${params}" title="C.I" ></g:sortableColumn>
+											<g:sortableColumn property="_birthDate" params= "${params}" title="Fecha de Nac." ></g:sortableColumn>
 											<th>Direcccion</th>
-											<th>Telefono</th>
+											<g:sortableColumn property="_phone" params= "${params}" title="Teléfono" ></g:sortableColumn>
 											<td></td>
 										</tr>
 									</thead>

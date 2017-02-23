@@ -52,10 +52,20 @@ class PatientController {
 			page = Integer.parseInt(params.get("page"))
 		}
 		def text = params.text
+		def search = ""
+		if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+			search += "text="+params.text+'&'
+		}
+		if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+			search +="sort="+params.get("sort")+'&'
+		}
+		if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+			search +="order="+params.get("order")+'&'
+		}
 		def patients = null
-		if(null != text && !"".equals(text)){
-			patients = patientService.find(text,10,page)
-			siguiente = patientService.find(text,10,page+1)
+		if(null != search && !"".equals(search)){	
+			patients = patientService.find(search,10,page)
+			siguiente = patientService.find(search,10,page+1)
 		}else{
 			patients = patientService.find(null,10,page)
 			siguiente = patientService.find(null,10,page+1)
@@ -141,7 +151,7 @@ class PatientController {
 
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def selectPatient() {
-		def doctors = patientService.find(params.get("q"), 0, 0)
+		def doctors = patientService.find("text="+params.get("q"), 0, 0)
 		render doctors as JSON
 	}
 }
