@@ -77,7 +77,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 			}
 			if (map.containsKey("sort")) {
 				String sort = (map.get("sort"));
-				if(sort.equals("_name") || sort.equals("_lastName") || sort.equals("_document") || sort.equals("_birthDate") || sort.equals("_phone")){
+				if(sort.equals("_name") || sort.equals("_lastName") || sort.equals("_sex") || sort.equals("_address") || sort.equals("_document") || sort.equals("_birthDate") || sort.equals("_phone")){
 					if (map.containsKey("order")){
 						String order = (map.get("order"));
 						if(order.equals("desc")){
@@ -108,8 +108,6 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 	/**
 	 * Creo un diccionario con clave valor En donde clave=columna de la bd y
 	 * valor=valor a buscar
-	 * 
-	 * @throws PatologyException
 	 */
 	private Map<String, String> obtenerQuery(String textToFind) {
 		String[] params = textToFind.split("&");

@@ -151,8 +151,8 @@ class PatientController {
 
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR', 'ROLE_SECRETARIA'])
 	def selectPatient() {
-		def doctors = patientService.find("text="+params.get("q"), 0, 0)
-		render doctors as JSON
+		def patients = patientService.find("text="+params.get("q"), 0, 0)
+		render patients as JSON
 	}
 }
 

@@ -50,10 +50,10 @@
 											
 											<g:sortableColumn property="_name" params= "${params}" title="Nombre" ></g:sortableColumn>
 											<g:sortableColumn property="_lastName" params= "${params}" title="Apellido" ></g:sortableColumn>
-											<th>Sexo</th>
+											<g:sortableColumn property="_sex" params= "${params}" title="Sexo" ></g:sortableColumn>
 											<g:sortableColumn property="_document" params= "${params}" title="C.I" ></g:sortableColumn>
 											<g:sortableColumn property="_birthDate" params= "${params}" title="Fecha de Nac." ></g:sortableColumn>
-											<th>Direcccion</th>
+											<g:sortableColumn property="_address" params= "${params}" title="Direcccion" ></g:sortableColumn>
 											<g:sortableColumn property="_phone" params= "${params}" title="Teléfono" ></g:sortableColumn>
 											<td></td>
 										</tr>

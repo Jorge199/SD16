@@ -166,7 +166,8 @@
                                     <tr>
                                         <g:sortableColumn property="_article" params= "${params}" title="Articulo" ></g:sortableColumn>
                                         <g:sortableColumn property="_movement_type" params= "${params}" title="Tipo de Movimiento" ></g:sortableColumn>
-                                        <th>Cantidad</th>
+                                        <g:sortableColumn property="_quantity" params= "${params}" title="Cantidad" ></g:sortableColumn>
+                                        
                                         <g:sortableColumn property="_date" params= "${params}" title="Fecha" ></g:sortableColumn>
                                     </tr>
                                 </thead>

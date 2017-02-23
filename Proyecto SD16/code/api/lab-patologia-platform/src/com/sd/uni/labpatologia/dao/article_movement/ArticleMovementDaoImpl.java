@@ -101,7 +101,7 @@ public class ArticleMovementDaoImpl extends BaseDaoImpl<ArticleMovementDomain> i
 
 			if (map.containsKey("sort")) {
 				String sort = (map.get("sort"));
-				if (sort.equals("_date") || sort.equals("_type")) {
+				if (sort.equals("_date") || sort.equals("_movement_type") || sort.equals("_quantity")) {
 					if (map.containsKey("order")) {
 						String order = (map.get("order"));
 						if (order.equals("desc")) {
