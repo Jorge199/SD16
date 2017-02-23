@@ -87,18 +87,28 @@ public class MessageServiceImpl implements IMessageService{
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
 			
 			try {
-				String text = "<h3>Estimado/a paciente</h3> <h2>" 
-						+ patient.getName() + " " + patient.getLastName() + "</h2>"    
-						+ "<br/><p>Cumplimos en informarle que el an&aacute;lisis solicitado en fecha " +  sdf.format(request.getDate())
-						+ " se encuentra terminado</p>"
-						+ "<p>Nuestro horarios de atenci&oacute;n son los siguientes: </p>"
-						+ "<p style=\"padding-left:5%; font-weight: bold;\">" + workingHours + "</p>"
-						+ "<br/><p>Atentamente</p>"
-						+ "<br/><br/><p style=\"color: blue; font-weight: bold;\">Laboratorio de " + laboratory.getName() + "</p>" 
-						+ "<p>Tel&eacute;fono: " + laboratory.getPhone() + "</p>"
-						+ "<p>Direcci&oacute;n: " + laboratory.getAddress() + "</p>"
-						+ "<p>Email: " + laboratory.getEmail() + "</p>"
-						+ "<br/><br/><p style=\"color: red\">Este correo fue autogenerado, favor no responder </p>";
+				String text = "<!DOCTYPE html><html lang=\"es\"><head><title>Bootstrap Example</title>"
+						+ "<meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+						+ "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
+						+ "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\"></script>"
+						+ "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>"
+						+ "<style> .grey-color {background-color: #eee} .center {text-align: center; margin-left: auto; margin-right: auto; margin-bottom: auto; margin-top: auto;} </style>"
+						+ "</head><body>" 
+						+ "<div class=\"container grey-color\">"
+					  	+ "<div class=\"row\"><div class=\"span12\"><div class=\"hero-unit center\">"
+					    + "<br><br><h1>Hola " +  patient.getName() + " " + patient.getLastName()  + "</h1><br/>"
+					    + "<p>Este correo es para informarle que su an&aacute;lisis solicitado en fecha" + sdf.format(request.getDate()) + "<p> Se encuentra" 
+					    + "<b>TERMINADO</b>.</p><p>Le esperamos en nuestro horario de atenci&oacute;n.</p>"
+					    + "<p><b>" + workingHours + "</b></p>"
+					    + "<p>Ante cualquier duda contactenos.</p><br>"                            
+					    + "<address>"
+					    + "<strong>Laboratorio de " + laboratory.getName() + "</strong><br>" + laboratory.getAddress() + "<br>"
+					    + "Encarnaci&oacute;n<br>"
+					    + "<abbr title=\"Phone\">Telefono: </abbr>" + laboratory.getPhone()
+					    + "<abbr title=\", Email\">Email: </abbr>" + laboratory.getEmail()
+					    + "</address><br>"
+					    + "<span class=\"label label-warning\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>  Favor no responder a este correo </span>"
+					    + "<br><br></div></div><br/></div></body></html>";
 				
 				System.out.println("Enviando un mensaje al: "+ msg.getEmail());
 				Message message = new MimeMessage(session);

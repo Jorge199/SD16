@@ -125,21 +125,29 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomai
 		});
 		
 		try {
-			String text = "<h3>Notificaci&oacute;n de contacto</h3>"
-					+ "<br/><p>El usuario  <strong>" +  contactDto.getName() + "</strong> "
-					+ "ha realizado una consulta sobre el Sistema desarrollado en la materia Sistemas Distribuidos - 2016 "
-					+ "para el laboratorio Patol&oacute;gico de Encarnaci&oacute;n. El mismo es el siguiente:</p>"
-					+ "<br/><p style=\"padding-left:5%;border: 1px solid #e1e1e8;background-color: #f7f7f9;\">"
-					+ "<strong>Mensaje:</strong> " + contactDto.getMessage() + "</p>"
-					+ "<br/><p>Sus datos de contacto son: </p>"
-					+ "<p style=\"padding-left:5%;\">Tel&eacute;fono: " + contactDto.getPhone() + "</p>"
-					+ "<p style=\"padding-left:5%;\">Email: " + contactDto.getEmail() + "</p>"
-					+ "<br/><p>Atentamente</p>"
-					+ "<br/><br/><p style=\"color: blue; font-weight: bold;\">Laboratorio de " + laboratory.getName() + "</p>" 
-					+ "<p>Tel&eacute;fono: " + laboratory.getPhone() + "</p>"
-					+ "<p>Direcci&oacute;n: " + laboratory.getAddress() + "</p>"
-					+ "<p>Email: " + laboratory.getEmail() + "</p>"
-					+ "<br/><br/><p style=\"color: red\">Este correo fue autogenerado, favor no responder </p>";
+			String text = "<!DOCTYPE html><html lang=\"es\"><head><title>Bootstrap Example</title>"
+					+ "<meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+					+ "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
+					+ "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\"></script>"
+					+ "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>"
+					+ "<style> .grey-color {background-color: #eee} .white-color {background-color: #fff; width: 50%;} .center {text-align: center; margin-left: auto; margin-right: auto; margin-bottom: auto; margin-top: auto;} </style>"
+					+ "</head><body>" 
+					+ "<div class=\"container grey-color\">"
+				  	+ "<div class=\"row\"><div class=\"span12\"><div class=\"hero-unit center\">"
+				    + "<br><br><h1>Grupo de Sistemas de Distribuidos 2016</h1><br/>"
+				    + "<p>El usuario <b>" + contactDto.getName() + "</b> ha realizado la siguiente consulta:"
+				    + "<div class=\"container white-color center\">"
+					+ "<blockquote><br><p>\"" + contactDto.getMessage() + "\"</p>"
+					+ "<footer>" + contactDto.getName() + "<em><br>Tel&eacute;fono: " + contactDto.getPhone() + "<br>Email: "+ contactDto.getEmail() + "</em></footer>"
+					+ "<br></blockquote></div>"
+				    + "<br><address>"
+				    + "<strong>Laboratorio de " + laboratory.getName() + "</strong><br>" + laboratory.getAddress() + "<br>"
+				    + "Encarnaci&oacute;n<br>"
+				    + "<abbr title=\"Phone\">Telefono: </abbr>" + laboratory.getPhone()
+				    + "<abbr title=\", Email\">Email: </abbr>" + laboratory.getEmail()
+				    + "</address><br>"
+				    + "<span class=\"label label-warning\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>  Favor no responder a este correo </span>"
+				    + "<br></div></div><br/></div></body></html>";
 			
 			System.out.println(text);
 			Message message = new MimeMessage(session);
