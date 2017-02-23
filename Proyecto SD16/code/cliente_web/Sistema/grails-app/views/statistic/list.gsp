@@ -36,7 +36,7 @@
 											code="Diagnostico" />
 									</label>
 									<div class="col-md-9">
-										<g:select name="diagnostic" class="form-control"
+										<g:select name="diagnostic" class="form-control" id="dataDiagnostic"
 											from="${DiagnosticEnum.values()}" value="${diagnostic}"
 											name="diagnosticSearch" optionKey="key"
 											noSelection="${['null':'Todos los diagnósticos..']}"
@@ -52,6 +52,7 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<input type="number" min="0" name="startAge" value="${startAge}"
+										id="dataStartAge"
 											class="form-control" placeholder="Edad Inicial" />
 									</div>
 								</div>
@@ -62,6 +63,7 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<input type="number" min="0" name="endAge" value="${endAge}"
+										id="dataEndAge"
 											class="form-control" placeholder="Edad Final" />
 									</div>
 								</div>
@@ -74,10 +76,10 @@
 									<div class="form-group">
 										<label class="radio-inline"> <g:radio name="sex"
 												value="${SexEnum.MASCULINO}"
-												checked="${sex == "Masculino" }" />
+												checked="${sex == "Masculino" }" id="dataSexMas"/>
 											${SexEnum.MASCULINO}
 										</label> <label class="radio-inline"> <g:radio name="sex"
-												value="${SexEnum.FEMENINO}"
+												value="${SexEnum.FEMENINO}" id="dataSexFem"
 												checked="${sex ==  "Femenino"}" /> ${SexEnum.FEMENINO}
 										</label>
 									</div>
@@ -94,7 +96,8 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker1'>
-												<input type='text' class="form-control" name="startSearch" value="${startSearch}" />
+												<input type='text' class="form-control" id="dataStartSearch"
+												name="startSearch" value="${startSearch}" />
 												<span class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"> </span>
 												</span>
@@ -108,7 +111,8 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<div class='input-group date' id='datetimepicker2'>
-												<input type='text' class="form-control" name="endSearch" value="${endSearch}" />
+												<input type='text' class="form-control" 
+												id="dataEndSearch" name="endSearch" value="${endSearch}" />
 												<span class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"> </span>
 												</span>
@@ -127,6 +131,9 @@
 										<i class="fa fa-pie-chart"></i> listar
                                                                         </button>
                                                                         <g:actionSubmit action="download" class="btn btn-primary" value="Descargar"/>
+                                                                        <button class="btn btn-default" name="delete" onclick="deleteData()">
+										<i class="fa fa-eraser"></i> Borrar
+									</button>
                                                                         <!--<g:link action="download" type="submit">
                                                                             generar
                                                                         </g:link>
@@ -398,6 +405,16 @@
 		}
 	</script>
 
-
+	<script>
+		function deleteData(){
+			$("#dataDiagnostic").val("null");
+			$("#dataStartAge").val("");
+			$("#dataEndAge").val("");
+			$("#dataStartSearch").val("");
+			$("#dataEndSearch").val("");
+			$("#dataSexMas").val("");
+			$("#dataSexFem").val("");
+		}
+	</script>
 </body>
 </html>
