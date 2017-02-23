@@ -76,17 +76,23 @@ class UserController {
 
 
 
-	@Secured(['ROLE_ADMINISTRADOR'])
+	@Secured(['ROLE_ADMINISTRADOR', 'ROLE_DOCTOR'])
 
 	def create() {
 		def rols = rolService.getAll();
+		def rolsWithoutAdmin = rolService.getAll();
+		rolsWithoutAdmin.remove(0);
+		rols.remove(0);
 		for(roles in rols){
 			roles._name=roles._name.charAt(5).toString()+roles._name.substring(6,roles.name.length()).toLowerCase()
 		}
-		[userInstance: new UserB(params), rols:rols,laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
+		for(roles in rolsWithoutAdmin){
+			roles._name=roles._name.charAt(5).toString()+roles._name.substring(6,roles.name.length()).toLowerCase()
+		}
+		[userInstance: new UserB(params), rols:rols, rolsWithoutAdmin: rolsWithoutAdmin, laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
 	}
 
-	@Secured(['ROLE_ADMINISTRADOR'])
+	@Secured(['ROLE_ADMINISTRADOR', 'ROLE_DOCTOR'])
 
 	def save() {
 		def newUser = new UserB(params)
@@ -133,7 +139,12 @@ class UserController {
 	def edit(Long id) {
 		def userInstance = userService.getById(id.intValue())
 		def rols = rolService.getAll()
+		def rolsWithoutAdmin = rolService.getAll();
+		rolsWithoutAdmin.remove(0);
 		for(roles in rols){
+			roles._name=roles._name.charAt(5).toString()+roles._name.substring(6,roles.name.length()).toLowerCase()
+		}
+		for(roles in rolsWithoutAdmin){
 			roles._name=roles._name.charAt(5).toString()+roles._name.substring(6,roles.name.length()).toLowerCase()
 		}
 		if (!userInstance) {
@@ -145,7 +156,7 @@ class UserController {
 			return
 		}
 
-		[userInstance: userInstance, rols:rols,laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
+		[userInstance: userInstance, rols:rols, rolsWithoutAdmin: rolsWithoutAdmin, laboratoryInstanceList: laboratoryService.getAll(), user:authService.getName()]
 	}
 
 

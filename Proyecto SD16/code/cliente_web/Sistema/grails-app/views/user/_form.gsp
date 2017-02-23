@@ -41,10 +41,18 @@
 	<div class="col-md-3">
 		<label>Rol <span class="required-indicator">*</span></label>
 		<div class="form-group">
-			<g:select class="form-control" type="text" 
-			id="updater" name="rolId" from="${rols}" value="${userInstance?.rol?.id}"
-			optionKey="id" optionValue="name" 
-			noSelection="${['':'Seleccione un rol..']}"/>
+			<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR'>
+				<g:select class="form-control" type="text" 
+				id="updater" name="rolId" from="${rols}" value="${userInstance?.rol?.id}"
+				optionKey="id" optionValue="name" 
+				noSelection="${['':'Seleccione un rol..']}"/>
+			</sec:ifAnyGranted>
+			<sec:ifAnyGranted roles='ROLE_DOCTOR'>
+				<g:select class="form-control" type="text" 
+				id="updater" name="rolId" from="${rolsWithoutAdmin}" value="${userInstance?.rol?.id}"
+				optionKey="id" optionValue="name" 
+				noSelection="${['':'Seleccione un rol..']}"/>
+			</sec:ifAnyGranted>
 		</div>
 	</div>
 	
