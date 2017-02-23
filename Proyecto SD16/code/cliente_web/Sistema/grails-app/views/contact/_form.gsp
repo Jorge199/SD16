@@ -36,7 +36,7 @@
 		<label>Mensaje <span class="required-indicator"></span></label>
 		<div class="form-group">
 		<g:textArea class="form-control" rows="5" cols="40" class="form-control"
-			name="message" maxlength="250" id="message"
+			id="message" name="message" maxlength="250"
 			placeholder="Ingrese su mensaje" />
 			</div>
 	</div>

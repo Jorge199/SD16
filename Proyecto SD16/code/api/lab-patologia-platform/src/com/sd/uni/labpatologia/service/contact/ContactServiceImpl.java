@@ -30,9 +30,10 @@ import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 @Service
 public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomain, ContactDaoImpl, ContactResult> implements IContactService{
 	@Autowired
-	private IContactDao _contactDao;
+	private IContactDao contactDao;
 	
-	private ILaboratoryDao _laboratoryDao;
+	@Autowired
+	private ILaboratoryDao laboratoryDao;
 	
 	private static Logger logger = Logger.getLogger(ContactServiceImpl.class);
 	
@@ -47,12 +48,11 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomai
 	public ContactDto save(ContactDto dto) {
 		try { 
 		    // Lanzo exepcion de tipo runtime para realizar rollback
-			/*final ContactDomain contactDomain = convertDtoToDomain(dto);
-			final ContactDomain contact = _contactDao.save(contactDomain);
+			final ContactDomain contactDomain = convertDtoToDomain(dto);
+			final ContactDomain contact = contactDao.save(contactDomain);
 			final ContactDto newDto = convertDomainToDto(contact);
-			sent(newDto);*/
-			sent(dto);
-			return null;
+			sent(newDto);
+			return newDto;
 		} catch(PatologyException ex) { 
 			 logger.error(ex);
 			 throw new RuntimeException("Error"+ContactServiceImpl.class+"" + ex.getMessage(), ex); 
@@ -63,7 +63,7 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomai
 	@Override
 	@Transactional(readOnly = true)
 	public ContactDto getById(Integer id) throws PatologyException {
-		final ContactDomain contactDomain = _contactDao.getById(id);
+		final ContactDomain contactDomain = contactDao.getById(id);
 		final ContactDto contactDTO = convertDomainToDto(contactDomain);
 		return contactDTO;
 	}
@@ -105,8 +105,10 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomai
 	}
 	
 	public ContactDto sent(ContactDto contactDto) throws PatologyException {
-		System.out.println("enviando mensaje al grupo" + contactDto.getMessage());
-		LaboratoryDomain laboratory = _laboratoryDao.getById(1);
+		System.out.println("mensaje" + contactDto.getMessage());
+		System.out.println("mensaje" + contactDto.getSubject());
+		System.out.println("mensaje" + contactDto.getName());
+		LaboratoryDomain laboratory = laboratoryDao.getById(1);
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -122,14 +124,15 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomai
 		});
 		
 		try {
-			String text = "<h3>Notificaci&oacute;n de contacto</h3>"    
+			String text = "<h3>Notificaci&oacute;n de contacto</h3>"
 					+ "<br/><p>El usuario  <strong>" +  contactDto.getName() + "</strong> "
 					+ "ha realizado una consulta sobre el Sistema desarrollado en la materia Sistemas Distribuidos - 2016 "
 					+ "para el laboratorio Patol&oacute;gico de Encarnaci&oacute;n. El mismo es el siguiente:</p>"
-					+ "<br/><p style=\"padding-left:5%;\">Mensaje: " + contactDto.getMessage() + "</p>"
+					+ "<br/><p style=\"padding-left:5%;border: 1px solid #e1e1e8;background-color: #f7f7f9;\">"
+					+ "<strong>Mensaje:</strong> " + contactDto.getMessage() + "</p>"
 					+ "<br/><p>Sus datos de contacto son: </p>"
-					+ "<p>Tel&eacute;fono: " + contactDto.getPhone() + "</p>"
-					+ "<p>Email: " + contactDto.getEmail() + "</p>"
+					+ "<p style=\"padding-left:5%;\">Tel&eacute;fono: " + contactDto.getPhone() + "</p>"
+					+ "<p style=\"padding-left:5%;\">Email: " + contactDto.getEmail() + "</p>"
 					+ "<br/><p>Atentamente</p>"
 					+ "<br/><br/><p style=\"color: blue; font-weight: bold;\">Laboratorio de " + laboratory.getName() + "</p>" 
 					+ "<p>Tel&eacute;fono: " + laboratory.getPhone() + "</p>"
@@ -137,11 +140,15 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactDto, ContactDomai
 					+ "<p>Email: " + laboratory.getEmail() + "</p>"
 					+ "<br/><br/><p style=\"color: red\">Este correo fue autogenerado, favor no responder </p>";
 			
-			System.out.println("Enviando un mensaje al grupo");
+			System.out.println(text);
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("fa.talavera95@gmail.com"));
-			//message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("taniamonges@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("taniamonges@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("abel.oalex@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("jorgeesquivelfernandez@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("diazpany@gmail.com"));
+			
 			message.setSubject("Contacto: " + contactDto.getSubject());
 			message.setContent(text, "text/html; charset=utf-8");
 			Transport.send(message);

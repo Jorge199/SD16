@@ -26,6 +26,7 @@ class ContactController {
 	@Secured(['ROLE_DOCTOR', 'ROLE_ADMINISTRADOR'])
 	def save() {
 		def contactInstance = new ContactB(params)
+		contactInstance.setUserName(authService.getName());
 		def newContact = contactService.save(contactInstance)
 		if (!newContact?.getId()) {
 			render(view: "create", model: [contactInstance: contactInstance])

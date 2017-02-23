@@ -34,7 +34,7 @@ public class ContactServiceImpl extends BaseServiceImpl<ContactB, ContactDto> im
 	protected ContactB convertDtoToBean(ContactDto dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
-		params.put("userName", String.valueOf(dto.getName()));
+		params.put("userName", dto.getName());
 		params.put("subject", dto.getSubject());		
         params.put("message", dto.getMessage());
 		params.put("email", dto.getEmail());
