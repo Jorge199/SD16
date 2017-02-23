@@ -40,7 +40,7 @@
 												code="Diagnostico" />
 										</label>
 										<div class="col-md-9">
-											<g:select name="diagnostic" class="form-control"
+											<g:select name="diagnostic" class="form-control" id="dataDiagnosticSearch"
 												from="${DiagnosticEnum.values()}" value=""
 												name="diagnosticSearch" optionKey="key"
 												noSelection="${['null':'Seleccione un diagnostico..']}"
@@ -59,7 +59,7 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker1'>
-													<input type='text' class="form-control"
+													<input type='text' class="form-control" id="dataStartSearch"
 														name="startSearch" placeholder="Seleccione una fecha" /> <span class="input-group-addon">
 														<span class="glyphicon glyphicon-calendar"> </span>
 													</span>
@@ -74,7 +74,7 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker2'>
-													<input type='text' class="form-control"
+													<input type='text' class="form-control" id="dataEndSearch"
 														name="endSearch" placeholder="Seleccione una fecha"/> <span class="input-group-addon">
 														<span class="glyphicon glyphicon-calendar"> </span>
 													</span>
@@ -87,6 +87,10 @@
 								<fieldset class="buttons">
 									<button type="submit" class="btn btn-primary" name="list">
 										<i class="fa fa-search"></i> Buscar
+									</button>
+									<br><br>
+                                    <button class="btn btn-default" name="delete" onclick="deleteData()">
+										<i class="fa fa-eraser"></i> Borrar
 									</button>
 								</fieldset>
 
@@ -219,6 +223,13 @@
 				locale : 'es'
 			});
 		});
+	</script>
+	<script>
+		function deleteData(){
+			$("#dataDiagnosticSearch").val("null");
+			$("#dataEndSearch").val("");
+			$("#dataStartSearch").val("");
+		}
 	</script>
 </body>
 </html>
