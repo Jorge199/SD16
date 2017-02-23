@@ -6,15 +6,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
-
-
 
 import com.sd.uni.labpatologia.dao.rol.IRolDao;
 import com.sd.uni.labpatologia.dao.user.IUserDao;
@@ -24,7 +17,6 @@ import com.sd.uni.labpatologia.dto.user.UserDTO;
 import com.sd.uni.labpatologia.dto.user.UserResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
-import com.sd.uni.labpatologia.service.doctor.DoctorServiceImpl;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDaoImpl, UserResult>

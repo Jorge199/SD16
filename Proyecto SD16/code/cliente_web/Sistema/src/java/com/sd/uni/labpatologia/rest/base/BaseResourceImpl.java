@@ -6,11 +6,10 @@ import org.springframework.cache.CacheManager;
 
 import com.sd.uni.labpatologia.dto.base.BaseDTO;
 import com.sd.uni.labpatologia.service.auth.IAuthService;
+import com.sd.uni.labpatologia.utils.Config;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
-import com.sd.uni.labpatologia.utils.Config;
-import javax.swing.JOptionPane;
 
 public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseResource<DTO> {
 	private final String _resourcePath;

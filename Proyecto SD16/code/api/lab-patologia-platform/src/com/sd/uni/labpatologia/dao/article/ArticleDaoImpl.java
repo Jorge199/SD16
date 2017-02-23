@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.article.ArticleDomain;
-import com.sd.uni.labpatologia.domain.patient.PatientDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
 @Repository
 public class ArticleDaoImpl  extends BaseDaoImpl<ArticleDomain> implements IArticleDao {

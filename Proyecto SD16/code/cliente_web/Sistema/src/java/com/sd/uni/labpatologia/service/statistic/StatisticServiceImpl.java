@@ -14,10 +14,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sd.uni.labpatologia.beans.request.RequestB;
 import com.sd.uni.labpatologia.beans.statistic.StatisticB;
-import com.sd.uni.labpatologia.dto.request.RequestDTO;
-import com.sd.uni.labpatologia.dto.request.RequestResult;
 import com.sd.uni.labpatologia.dto.statistic.StatisticDTO;
 import com.sd.uni.labpatologia.dto.statistic.StatisticResult;
 import com.sd.uni.labpatologia.rest.statistic.IStatisticResource;

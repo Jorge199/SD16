@@ -5,19 +5,20 @@
  */
 package com.sd.uni.labpatologia.service.article_movement;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sd.uni.labpatologia.beans.article_movement.ArticleMovementB;
 import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementDTO;
 import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementResult;
-import com.sd.uni.labpatologia.rest.article_movement.ArticleMovementResourceImpl;
 import com.sd.uni.labpatologia.rest.article_movement.IArticleMovementResource;
 import com.sd.uni.labpatologia.service.article.IArticleService;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service("articleMovementService")
 public class ArticleMovementServiceImpl extends BaseServiceImpl<ArticleMovementB, ArticleMovementDTO> implements IArticleMovementService{

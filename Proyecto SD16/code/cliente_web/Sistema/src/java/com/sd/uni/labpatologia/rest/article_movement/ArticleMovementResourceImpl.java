@@ -1,12 +1,12 @@
 package com.sd.uni.labpatologia.rest.article_movement;
 
-import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementDTO;
-import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementResult;
-import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
+
+import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementDTO;
+import com.sd.uni.labpatologia.dto.article_movement.ArticleMovementResult;
+import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
 
 /**
  *

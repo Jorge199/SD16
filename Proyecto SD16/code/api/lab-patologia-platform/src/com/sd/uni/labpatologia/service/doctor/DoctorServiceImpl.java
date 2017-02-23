@@ -18,7 +18,6 @@ import com.sd.uni.labpatologia.dto.doctor.DoctorDto;
 import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
-import com.sd.uni.labpatologia.service.patient.PatientServiceImpl;
 
 
 @Service

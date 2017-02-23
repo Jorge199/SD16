@@ -14,16 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.uni.labpatologia.dao.patient.IPatientDao;
 import com.sd.uni.labpatologia.dao.patient.PatientDaoImpl;
 import com.sd.uni.labpatologia.domain.patient.PatientDomain;
-import com.sd.uni.labpatologia.domain.request.RequestDomain;
-import com.sd.uni.labpatologia.dto.article.ArticleResult;
 import com.sd.uni.labpatologia.dto.patient.PatientDTO;
 import com.sd.uni.labpatologia.dto.patient.PatientResult;
-import com.sd.uni.labpatologia.dto.report.ReportDTO;
-import com.sd.uni.labpatologia.dto.request.RequestDTO;
 import com.sd.uni.labpatologia.exception.PatologyException;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
-import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
-import com.sd.uni.labpatologia.service.request.RequestServiceImpl;
 
 @Service
 public class PatientServiceImpl extends BaseServiceImpl<PatientDTO, PatientDomain, PatientDaoImpl, PatientResult> implements IPatientService {

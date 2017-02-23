@@ -1,14 +1,12 @@
 package com.sd.uni.labpatologia.rest.article;
 
-import com.sd.uni.labpatologia.dto.article.ArticleDto;
-import com.sd.uni.labpatologia.dto.article.ArticleResult;
-import com.sd.uni.labpatologia.dto.doctor.DoctorResult;
-import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
-
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
+
+import com.sd.uni.labpatologia.dto.article.ArticleDto;
+import com.sd.uni.labpatologia.dto.article.ArticleResult;
+import com.sd.uni.labpatologia.rest.base.BaseResourceImpl;
 
 @Repository("articleResource")
 public class ArticleResourceImpl extends BaseResourceImpl<ArticleDto> implements

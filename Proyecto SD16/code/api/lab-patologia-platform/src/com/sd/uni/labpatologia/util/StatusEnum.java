@@ -1,6 +1,5 @@
 package com.sd.uni.labpatologia.util;
 
-import java.util.EnumSet;
 
 public enum StatusEnum {
 	RECIBIDO("Recibido"),
