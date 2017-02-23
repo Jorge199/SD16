@@ -52,12 +52,12 @@
 									width="100%">
 									<thead>
 										<tr>
-											<th>Nombre y Apellido</th>
-											<th>Nombre de Usuario</th>
-											<th>Rol</th>
-											<th>Matricula</th>
-
-											<td></td>
+											<g:sortableColumn property="_name" params= "${params}" title="Nombre y Apellido" ></g:sortableColumn>
+											<g:sortableColumn property="_userName" params= "${params}" title="Nombre de Usuario" ></g:sortableColumn>
+											<g:sortableColumn property="_rol" params= "${params}" title="Rol" ></g:sortableColumn>
+											<g:sortableColumn property="_registrationNumber" params= "${params}" title="Matrícula" ></g:sortableColumn>
+											
+											<td>Acciones</td>
 										</tr>
 									</thead>
 									<tbody>

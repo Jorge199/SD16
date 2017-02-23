@@ -52,10 +52,20 @@ class ArticleController {
 			page = Integer.parseInt(params.get("page"))
 		}
 		def text = params.text
+		def search = ""
+		if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+			search += "text="+params.text+'&'
+		}
+		if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+			search +="sort="+params.get("sort")+'&'
+		}
+		if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+			search +="order="+params.get("order")+'&'
+		}
 		def articles = null
-		if(null != text && !"".equals(text)){
-			articles = articleService.find(text,10,page)
-			siguiente = articleService.find(text,10,page+1)
+		if(null != search && !"".equals(search)){
+			articles = articleService.find(search,10,page)
+			siguiente = articleService.find(search,10,page+1)
 		}else{
 			articles = articleService.find(null,10,page)
 			siguiente = articleService.find(null,10,page+1)

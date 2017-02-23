@@ -1,6 +1,8 @@
 package com.sd.uni.labpatologia.dao.article;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -51,25 +53,66 @@ public class ArticleDaoImpl  extends BaseDaoImpl<ArticleDomain> implements IArti
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ArticleDomain.class);
 		if (textToFind != null){
-			Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+textToFind+"%")).add(
-					Restrictions.ilike("_description", "%"+textToFind+"%")).add(
-					Restrictions.ilike("_units", "%"+textToFind+"%"));	
-			Criterion idCriterion = null;
-			if (StringUtils.isNumeric(textToFind)) {
-				idCriterion = Restrictions.eq("_id", Integer.valueOf(textToFind));
+			
+			Map<String, String> map = obtenerQuery(textToFind);
+			if (map.containsKey("text")) {
+				String text = map.get("text");
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+text+"%")).add(
+						Restrictions.ilike("_description", "%"+text+"%")).add(
+						Restrictions.ilike("_units", "%"+text+"%"));	
+				Criterion idCriterion = null;
+				if (StringUtils.isNumeric(text)) {
+					idCriterion = Restrictions.eq("_id", Integer.valueOf(text));
+				}
+				if (null != idCriterion) {
+					criteria.add(Restrictions.or(propertyCriterion, idCriterion));
+				} else {
+					criteria.add(propertyCriterion);
+				}
+			}if (map.containsKey("sort")) {
+				String sort = (map.get("sort"));
+				if(sort.equals("_name") || sort.equals("_description") || sort.equals("_units") || sort.equals("_quantity")){
+					if (map.containsKey("order")){
+						String order = (map.get("order"));
+						if(order.equals("desc")){
+							criteria.addOrder(Order.desc(sort).ignoreCase());
+						}else{
+							criteria.addOrder(Order.asc(sort).ignoreCase());
+						}
+					}else{
+						criteria.addOrder(Order.asc(sort).ignoreCase());
+						criteria.addOrder(Order.asc(sort).ignoreCase());
+					}
+				}
+			}else{
+				criteria.addOrder(Order.asc("_name").ignoreCase());
 			}
-			if (null != idCriterion) {
-				criteria.add(Restrictions.or(propertyCriterion, idCriterion));
-			} else {
-				criteria.add(propertyCriterion);
-			}
+		}else{
+			criteria.addOrder(Order.asc("_name").ignoreCase());
 		}
-		criteria.addOrder(Order.asc("_name"));
+		
 		criteria.setFirstResult(page*maxItems);
 		criteria.setMaxResults(maxItems);
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<ArticleDomain> requests = criteria.list();
 		return requests;
 	}
-
+	/**
+	 * Creo un diccionario con clave valor En donde clave=columna de la bd y
+	 * valor=valor a buscar
+	 */
+	private Map<String, String> obtenerQuery(String textToFind) {
+		String[] params = textToFind.split("&");
+		Map<String, String> map = new HashMap<String, String>();
+		try {
+			for (String param : params) {
+				String name = param.split("=")[0];
+				String value = param.split("=")[1];
+				map.put(name, value);
+			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
 }

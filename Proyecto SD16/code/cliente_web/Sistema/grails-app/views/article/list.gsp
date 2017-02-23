@@ -47,10 +47,10 @@
                                 width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Descripcion</th>
-                                        <th>Unidades</th>
-                                        <th>Cantidad</th>
+                                        <g:sortableColumn property="_name" params= "${params}" title="Nombre" ></g:sortableColumn>
+                                        <g:sortableColumn property="_description" params= "${params}" title="Descripción" ></g:sortableColumn>
+                                        <g:sortableColumn property="_units" params= "${params}" title="Unidades" ></g:sortableColumn>
+                                        <g:sortableColumn property="_quantity" params= "${params}" title="Cantidad" ></g:sortableColumn>                                        
                                         <td></td>
                                     </tr>
                                 </thead>

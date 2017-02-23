@@ -40,10 +40,21 @@ class UserController {
 		def text = params.text
 		userService=new UserServiceImpl()
 		def users = userService.getAll()
+		
+		def search = ""
+		if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+			search += "text="+params.text+'&'
+		}
+		if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+			search +="sort="+params.get("sort")+'&'
+		}
+		if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+			search +="order="+params.get("order")+'&'
+		}
 
-		if(null != text && !"".equals(text)){
-			users = userService.find(text,10,page)
-			siguiente = userService.find(text,10,page+1)
+		if(null != search && !"".equals(search)){
+			users = userService.find(search,10,page)
+			siguiente = userService.find(search,10,page+1)
 		}else{
 			users = userService.find(null,10,page)
 			siguiente = userService.find(null,10,page+1)

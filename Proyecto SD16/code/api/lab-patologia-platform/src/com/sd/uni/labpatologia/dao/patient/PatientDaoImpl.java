@@ -95,6 +95,9 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientDomain> implements IPatie
 				criteria.addOrder(Order.asc("_lastName").ignoreCase());
 			}
 			
+		}else{
+			criteria.addOrder(Order.asc("_name").ignoreCase());
+			criteria.addOrder(Order.asc("_lastName").ignoreCase());
 		}
 
 		
