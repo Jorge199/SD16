@@ -72,7 +72,7 @@
                                             </td>
                                             <td width="80" class="center"><g:link action="edit"
                                                 class="btn btn-success" id="${articleInstance.getId()}">
-                                                    <i class="fa fa-pencil"></i>Editar</g:link></td>
+                                                    <i class="fa fa-pencil"></i></g:link></td>
                                             </tr>
 
                                     </g:each>

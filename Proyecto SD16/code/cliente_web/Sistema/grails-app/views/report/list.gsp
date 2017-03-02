@@ -150,17 +150,17 @@
 												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 												<td align="center">
 												<g:jasperReport action="generateReport" controller="report" format="PDF,DOCX" jasper="report" id="${reportInstance.getId()}">
-												<input type="hidden" name="id" value="${reportInstance.getId()}" />Descargar
+												<input type="hidden" name="id" value="${reportInstance.getId()}" />
 												</g:jasperReport>
 												</td>
 													<td class="center"><g:link action="edit"
 															class="btn btn-success" id="${reportInstance.getId()}">
-															<i class="fa fa-pencil"></i> Editar</g:link>
+															<i class="fa fa-pencil"></i></g:link>
 												</sec:ifAnyGranted>
 												<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
 														<td class="center"><g:link action="show"
 															class="btn btn-default" id="${reportInstance.getId()}">
-															<i class="fa fa-list-alt"></i> Informe</g:link>
+															<i class="fa fa-list-alt"></i></g:link>
 														</sec:ifAnyGranted>
 											</tr>
 

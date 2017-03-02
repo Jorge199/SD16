@@ -57,7 +57,7 @@
 											<g:sortableColumn property="_rol" params= "${params}" title="Rol" ></g:sortableColumn>
 											<g:sortableColumn property="_registrationNumber" params= "${params}" title="Matrícula" ></g:sortableColumn>
 											
-											<td>Acciones</td>
+											<td></td>
 										</tr>
 									</thead>
 									<tbody>
@@ -87,7 +87,7 @@
 												<%--  <td>${fieldValue(bean: userInstance, field: "user.id")}</td>		--%>
 												<td class="center"><g:link action="edit"
 														class="btn btn-success" id="${userInstance.getId()}">
-														<i class="fa fa-pencil"></i> Editar</g:link></td>
+														<i class="fa fa-pencil"></i></g:link></td>
 											</tr>
 											</g:if>
 										</g:each>
