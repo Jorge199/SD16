@@ -129,10 +129,10 @@
 													</g:link></td>
 
 												<td>
-													${formatDate(format: 'dd/MM/yyyy', date:reportInstance.getRequest().getDate())}
+													${formatDate(format: 'dd-MM-yyyy', date:reportInstance.getRequest().getDate())}
 												</td>
 												<td>
-													${formatDate(format: 'dd/MM/yyyy', date:reportInstance.getDate())}
+													${formatDate(format: 'dd-MM-yyyy', date:reportInstance.getDate())}
 												</td>
 												<td>
 													${fieldValue(bean: reportInstance, field: "request.patient.name")}

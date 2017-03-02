@@ -76,7 +76,7 @@
 													${fieldValue(bean: patientInstance, field: "document")}
 												</td>
 												<td>
-													${formatDate(format: 'dd/MM/yyyy', date:patientInstance.getBirthDate())}
+													${formatDate(format: 'dd-MM-yyyy', date:patientInstance.getBirthDate())}
 												</td>
 												<td>
 													${fieldValue(bean: patientInstance, field: "address")}

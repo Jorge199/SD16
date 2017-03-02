@@ -167,8 +167,8 @@
 												<td width="9%">
 													${requestInstance?.code }
 												</td>
-												<td width="5%">
-													${formatDate(format: 'dd/MM/yyyy', date:requestInstance.getDate())}
+												<td width="10%">
+													${formatDate(format: 'dd-MM-yyyy', date:requestInstance.getDate())}
 												</td>
 												<td width="9%">
 												<g:if test="${requestInstance?.status==StatusEnum.RECIBIDO}">

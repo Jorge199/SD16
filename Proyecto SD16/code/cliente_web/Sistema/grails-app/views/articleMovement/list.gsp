@@ -191,7 +191,7 @@
                                                 ${fieldValue(bean: articleMovementInstance, field: "quantity")}
                                             </td>
                                             <td>
-                                                ${formatDate(format: 'dd/MM/yyyy', date:articleMovementInstance?.date)}
+                                                ${formatDate(format: 'dd-MM-yyyy', date:articleMovementInstance?.date)}
                                             </td>
                                             <%--  <td>${fieldValue(bean: laboratoryInstance, field: "laboratory.id")}</td>		--%>
 
