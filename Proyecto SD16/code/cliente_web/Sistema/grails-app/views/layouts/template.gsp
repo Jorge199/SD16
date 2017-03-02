@@ -106,11 +106,11 @@
 								class="fa fa-fw fa-file-text-o"></i>Informes</a></li>
 					</sec:ifNotGranted>
 					
-					<sec:ifNotGranted roles='ROLE_SECRETARIA'>
+					<sec:ifNotGranted roles='ROLE_SECRETARIA, ROLE_TECNICO, ROLE_DOCTOR'>
 						<li><a href="/Sistema/article/list/"><i class="fa fa-fw fa-medkit"></i>Insumos</a></li>
 					</sec:ifNotGranted>
                                         
-                    <sec:ifNotGranted roles='ROLE_SECRETARIA'>
+                    <sec:ifNotGranted roles='ROLE_SECRETARIA, ROLE_TECNICO, ROLE_DOCTOR'>
 						<li><a href="/Sistema/articleMovement/list/"><i class="fa fa-fw fa-bars"></i>Movimientos de Stock</a></li>
 					</sec:ifNotGranted>
 					

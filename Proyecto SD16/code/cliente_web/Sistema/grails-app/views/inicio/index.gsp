@@ -83,7 +83,7 @@
 				
 			</sec:ifAnyGranted>
 
-			<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR,ROLE_TECNICO'>
+			<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR'>
 				<div class="col-lg-3 col-md-6">
 					<div class="panel panel-red">
 						<div class="panel-heading">

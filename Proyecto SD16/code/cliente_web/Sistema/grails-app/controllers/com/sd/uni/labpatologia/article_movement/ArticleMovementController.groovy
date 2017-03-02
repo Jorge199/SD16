@@ -41,18 +41,14 @@ class ArticleMovementController {
     @Autowired def IAuthService authService
 
     @Secured([
-		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR',
-		'ROLE_TECNICO'
+		'ROLE_ADMINISTRADOR'
 	])
     def index() {
         redirect(action: "list", params: params)
     }
 
     @Secured([
-		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR',
-		'ROLE_TECNICO'
+		'ROLE_ADMINISTRADOR'
 	])
     def create(){
         [articleMovementInstance: new ArticleMovementB(params), laboratoryInstanceList: laboratoryService.getAll(),
@@ -60,9 +56,7 @@ class ArticleMovementController {
     }
 
     @Secured([
-		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR',
-		'ROLE_TECNICO'
+		'ROLE_ADMINISTRADOR'
 	])
     def list(Integer max) {
         def page = 0
@@ -112,9 +106,7 @@ class ArticleMovementController {
     }
 
     @Secured([
-		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR',
-		'ROLE_TECNICO'
+		'ROLE_ADMINISTRADOR'
 	])
     def save() {
         def articleMovementInstance = new ArticleMovementB(params)
@@ -136,9 +128,7 @@ class ArticleMovementController {
     }
         
     @Secured([
-		'ROLE_DOCTOR',
-		'ROLE_ADMINISTRADOR',
-		'ROLE_TECNICO'
+		'ROLE_ADMINISTRADOR'
 	])
     def download() {
         def text = params.text
