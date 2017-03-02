@@ -24,7 +24,7 @@
 	<div class="col-md-6">
 		<label>C.I</label>
 		<div class="form-group">
-			<input class="form-control numeric" type="text" maxlength="10"
+			<input class="form-control" type="text" maxlength="10"
 			id="ci" name="ci" placeholder="Ingrese un número de Cédula" value="${doctorInstance?.ci}"/>
 		</div>
 	</div>
