@@ -195,14 +195,14 @@ class RequestController {
 		requestInstance.setCode(params.get("code"))
 		if (!"".equals(params.get("code_cortes")) && params.containsKey("code_cortes")){
 			if (!"".equals(params.get("code_laminas")) && params.containsKey("code_laminas")){
-				requestInstance.setCode(params.get("code")+"/"+params.get("code_cortes")+"/"+params.get("code_laminas"))
+				requestInstance.setCode(params.get("code")+"-"+params.get("code_cortes")+"-"+params.get("code_laminas"))
 				requestInstance.setStatus(StatusEnum.PROCESADO)
 			}else{
-				requestInstance.setCode(params.get("code")+"/"+params.get("code_cortes"))
+				requestInstance.setCode(params.get("code")+"-"+params.get("code_cortes"))
 				requestInstance.setStatus(StatusEnum.PROCESO)
 			}
 		}else if (requestInstance.getStatus() == StatusEnum.PROCESO && !"".equals(params.get("code_laminas")) && params.containsKey("code_laminas")){
-			requestInstance.setCode(params.get("code")+"/"+params.get("code_laminas"))
+			requestInstance.setCode(params.get("code")+"-"+params.get("code_laminas"))
 			requestInstance.setStatus(StatusEnum.PROCESADO)
 		}
 		requestInstance.setNote(params.get("note"))
