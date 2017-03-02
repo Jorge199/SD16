@@ -150,11 +150,11 @@
 										<g:set var="searchParams" value="[ statusSearch: "${statusSearch}", patient: "${patient}", specimen: "${specimen}", startSearch: "${startSearch}", endSearch: "${endSearch}", code: "${code}"  ]" />
 											<g:sortableColumn property="_code" params= "${searchParams}" title="Código" ></g:sortableColumn>
 											<g:sortableColumn property="_date" params= "${searchParams}" title="Fecha" />
-											<g:sortableColumn property="_status" params= "${searchParams}" title="Estado" />
 											<g:sortableColumn property="_doctor" params= "${searchParams}" title="Doctor" />
 											<g:sortableColumn property="_patient" params= "${searchParams}" title="Paciente" />
 											<g:sortableColumn property="_studyType" params="${searchParams}" title="Tipo de Estudio" />
 											<g:sortableColumn property="_specimen" params="${searchParams}" title="Espécimen" />
+											<g:sortableColumn property="_status" params= "${searchParams}" title="Estado" />
 											
 											<th colspan="2" align="center">Acciones</th>
 										</tr>
@@ -169,6 +169,20 @@
 												</td>
 												<td width="10%">
 													${formatDate(format: 'dd-MM-yyyy', date:requestInstance.getDate())}
+												</td>
+												<td width="15%">
+													${requestInstance?.doctor?.name} ${requestInstance?.doctor?.lastName}
+													<br> ${requestInstance?.doctor?.phone}
+												</td>
+												<td width="15%"> 
+													${requestInstance?.patient?.name} ${requestInstance?.patient?.lastName}
+													<br> ${requestInstance?.patient?.phone}
+												</td>
+												<td width="12%">
+													${requestInstance?.studyType?.name}
+												</td>
+												<td width="20%">
+													${requestInstance?.specimen}
 												</td>
 												<td width="9%">
 												<g:if test="${requestInstance?.status==StatusEnum.RECIBIDO}">
@@ -186,20 +200,6 @@
 												<g:else>
 													<h4><span class="label label-default col-lg">Retirado</span></h4>
 												</g:else>
-												</td>
-												<td width="15%">
-													${requestInstance?.doctor?.name} ${requestInstance?.doctor?.lastName}
-													<br> ${requestInstance?.doctor?.phone}
-												</td>
-												<td width="15%"> 
-													${requestInstance?.patient?.name} ${requestInstance?.patient?.lastName}
-													<br> ${requestInstance?.patient?.phone}
-												</td>
-												<td width="12%">
-													${requestInstance?.studyType?.name}
-												</td>
-												<td width="20%">
-													${requestInstance?.specimen}
 												</td>
 
 
