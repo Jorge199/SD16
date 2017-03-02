@@ -126,9 +126,6 @@
 					</sec:ifNotGranted>
 						
 					</g:if>
-						
-						<li><a href="/Sistema/contact/create/"><i
-							class="fa fa-info"></i> Contactenos</a></li>
 	
 
 
