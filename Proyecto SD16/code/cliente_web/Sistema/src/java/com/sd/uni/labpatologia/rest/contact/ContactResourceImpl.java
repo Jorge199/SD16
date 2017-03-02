@@ -14,7 +14,7 @@ public class ContactResourceImpl extends BaseResourceImpl<ContactDto> implements
 
 	@Override
 	public ContactDto save(ContactDto contact) {
-		ContactDto newDto = super.save(contact);
+		ContactDto newDto = getWebResource().entity(contact).post(contact.getClass());
 		return newDto;
 	}
 

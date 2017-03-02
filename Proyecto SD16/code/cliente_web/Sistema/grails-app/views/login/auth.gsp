@@ -77,6 +77,8 @@
 			href="mailto:medinaldo@gmail.com?Subject=Laboratorio%20SD2016">(medinaldo@gmail.com)</a>
 		<br> <strong>Copyright © 2016 - Sistemas Distribuídos -
 			F.I.U.N.I</strong>
+			<br><a href="/Sistema/contact/create/" class="btn btn-info"><i
+							class="fa fa-info"></i> Contactenos</a>
 	</div>
 	<!-- jQuery -->
 
@@ -84,12 +86,16 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
 	<script type='text/javascript'>
+	
 	<!--
 		(function() {
 			document.forms['loginForm'].elements['j_username'].focus();
 		})();
 	// -->
 	</script>
+	<link
+	href="${request.contextPath}/template/font-awesome/css/font-awesome.min.css?v=1"
+	rel="stylesheet" type="text/css">
 </body>
 
 </html>

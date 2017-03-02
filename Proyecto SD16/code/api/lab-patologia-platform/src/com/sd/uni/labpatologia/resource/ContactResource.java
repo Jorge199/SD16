@@ -20,7 +20,6 @@ public class ContactResource {
 	private IContactService _contactService;
 	
 	@POST
-	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA","ROLE_TECNICO"})
 	public ContactDto save(ContactDto contact) {
 		return _contactService.save(contact);
 	}

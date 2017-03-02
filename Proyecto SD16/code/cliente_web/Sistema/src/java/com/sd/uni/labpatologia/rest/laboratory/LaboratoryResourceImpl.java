@@ -37,7 +37,6 @@ public class LaboratoryResourceImpl extends BaseResourceImpl<LaboratoryDto> impl
 	@Cacheable(value = CACHE_REGION, key = "'laboratories'")
 	@Override
 	public LaboratoryResult getAll() {
-		setWebResourceBasicAuthFilter();
 		final LaboratoryResult result = getWebResource().get(LaboratoryResult.class);
 		return result;
 	}

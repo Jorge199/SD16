@@ -3,6 +3,9 @@ package com.sd.uni.labpatologia.contact
 import grails.plugin.springsecurity.annotation.Secured
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.authentication.AnonymousAuthenticationToken
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 
 import com.sd.uni.labpatologia.beans.contact.ContactB
 import com.sd.uni.labpatologia.service.auth.IAuthService
@@ -17,16 +20,27 @@ class ContactController {
 	def ILaboratoryService laboratoryService
 	@Autowired def IAuthService authService
 	
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR', 'ROLE_SECRETARIA', 'ROLE_TECNICO'])
 	def create(){
+		def name = "Anónimo"
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			name = authService.getName();
+		}
+		
 		[laboratoryInstanceList: laboratoryService.getAll(),
-			user:authService.getName(), userName:authService.getName()]
+			user:name, userName:name]
 	}
 	
-	@Secured(['ROLE_ADMINISTRADOR','ROLE_DOCTOR', 'ROLE_SECRETARIA', 'ROLE_TECNICO'])
+	
 	def save() {
 		def contactInstance = new ContactB(params)
-		contactInstance.setUserName(authService.getName());
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			contactInstance.setUserName(authService.getName());
+		}else{
+			contactInstance.setUserName("Anónimo");
+		}
 		def newContact = contactService.save(contactInstance)
 		if (!newContact?.getId()) {
 			render(view: "create", model: [contactInstance: contactInstance])

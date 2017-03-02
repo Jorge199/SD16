@@ -36,7 +36,6 @@ public class LaboratoryResource {
 	/* http://localhost:8080/lab-patologia-platform/rest/laboratory */
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA","ROLE_TECNICO"})
 	public LaboratoryResult getAll() throws PatologyException {
 		return _laboratoryService.getAll();
 	}

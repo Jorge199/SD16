@@ -181,10 +181,10 @@
 												<td width="12%">
 													${requestInstance?.studyType?.name}
 												</td>
-												<td width="20%">
+												<td width="15%">
 													${requestInstance?.specimen}
 												</td>
-												<td width="9%">
+												<td width="5%">
 												<g:if test="${requestInstance?.status==StatusEnum.RECIBIDO}">
 													<h4><span class="label label-danger label-col-lg" >Recibido</span></h4>
 												</g:if>
@@ -206,7 +206,7 @@
 												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR, ROLE_SECRETARIA'>
 													<g:if
 														test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
-														<td align="center" width="12%"><g:jasperReport
+														<td align="center" width="10%"><g:jasperReport
 																action="generateReport" controller="report" name="${requestInstance.patient.getName()+requestInstance.patient.getLastName()+"_"+requestInstance.getCode()}" 
 																format="PDF,DOCX" jasper="report" description=" "
 																id="${requestInstance.getId()}">
@@ -215,9 +215,9 @@
 																	value="${requestInstance.getId()}" />
 																</g:jasperReport></td>
 													</g:if>
-													<g:else><td width="12%"></td></g:else>
+													<g:else><td width="1%"></td></g:else>
 												</sec:ifAnyGranted>
-												<td align="center" width="12%"><g:link action="edit"
+												<td align="center" width="10%"><g:link action="edit"
 														class="btn btn-success" id="${requestInstance.getId()}">
 														<i class="fa fa-pencil"></i></g:link> 
 													<sec:ifAnyGranted

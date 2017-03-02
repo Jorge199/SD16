@@ -87,6 +87,8 @@
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
+					<g:if test="${user!="Anónimo"}" >
+					
 					<li><a href="/Sistema/inicio/index"><i
 							class="fa fa-fw fa-bars"></i>Panel Principal</a></li>
 					
@@ -122,6 +124,9 @@
 						<li><a href="/Sistema/statistic/list/"><i
 							class="fa fa-pie-chart"></i> Estadísticas</a></li>
 					</sec:ifNotGranted>
+						
+					</g:if>
+						
 						<li><a href="/Sistema/contact/create/"><i
 							class="fa fa-info"></i> Contactenos</a></li>
 	
@@ -149,6 +154,8 @@
 			Ing. Aldo Medina 
 			<a href="mailto:medinaldo@gmail.com?Subject=Laboratorio%20SD2016">(medinaldo@gmail.com)</a>  
 			<br> <strong>Copyright © 2016 - Sistemas Distribuídos - F.I.U.N.I</strong> 
+			<br><a href="/Sistema/contact/create/" class="btn btn-info"><i
+							class="fa fa-info"></i> Contactenos</a>
 		</div> 
 
 	</div>
