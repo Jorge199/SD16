@@ -22,8 +22,20 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfTemplate;
+import com.itextpdf.awt.DefaultFontMapper;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import com.sd.uni.labpatologia.utils.PageEvent;
 import java.text.DecimalFormat;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.axis.CategoryAxis;
 
 import grails.plugin.springsecurity.annotation.Secured;
 
@@ -326,8 +338,10 @@ class StatisticController {
             tabla.addCell(cabecerac);
             // Datos
             PdfPCell datosc;
+            JFreeChart chart;
             
             if(data.get("getByDiagnostic") == 'false'){
+                DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
                 for(DiagnosticEnum diagnostic in DiagnosticEnum.values()){
                     datosc = new PdfPCell(new Phrase(diagnostic.getKey()));
                     tabla.addCell(datosc);
@@ -336,6 +350,7 @@ class StatisticController {
                     tabla.addCell(new Phrase(String.valueOf(cantidad2)));
                     datosc = new PdfPCell(new Phrase(df.format(porcentaje)));
                     tabla.addCell(datosc);
+                    dataSet.setValue(cantidad2, "Cantidad", diagnostic.getKey());
                 }
                 datosc = new PdfPCell(new Phrase("Total: "));
                 datosc.setBackgroundColor(BaseColor.LIGHT_GRAY);
@@ -347,7 +362,52 @@ class StatisticController {
                 datosc.setBackgroundColor(BaseColor.LIGHT_GRAY);
                 tabla.addCell(datosc);
                 documento.add(tabla);
+                
+                // Hago el chart
+		chart = ChartFactory.createBarChart(
+				"", "Diagnósticos", "Cantidad",
+				dataSet, PlotOrientation.VERTICAL, false, true, false);
+                CategoryPlot plot = chart.getCategoryPlot();
+                CategoryAxis axis = plot.getDomainAxis();
+                axis.setTickLabelFont(new java.awt.Font("Courier", java.awt.Font.PLAIN, 8));
+                writeChartToPDF(chart, 500, 300, documento, writer);
+            }else{
+                    def par = params;
+                    datosc = new PdfPCell(new Phrase(data.get("getByDiagnostic")));
+                    tabla.addCell(datosc);
+                    def cantidad2 = data.get(data.get("getByDiagnostic"));
+                    double porcentaje = (double)cantidad2.div(total) * 100;
+                    tabla.addCell(new Phrase(String.valueOf(cantidad2)));
+                    datosc = new PdfPCell(new Phrase(df.format(porcentaje)));
+                    tabla.addCell(datosc);
+                    
+                DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+                dataSet.setValue(cantidad2, "Cantidad", data.get("getByDiagnostic"));
+                dataSet.setValue(total - cantidad2, "Cantidad", "Otros");
+                
+                datosc = new PdfPCell(new Phrase("Total: "));
+                datosc.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                tabla.addCell(datosc);
+                datosc = new PdfPCell(new Phrase(String.valueOf(total)));
+                datosc.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                tabla.addCell(datosc);
+                datosc = new PdfPCell(new Phrase(""));
+                datosc.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                tabla.addCell(datosc);
+                documento.add(tabla);
+                
+                // Hago el chart
+		chart = ChartFactory.createBarChart(
+				"", "Diagnósticos", "Cantidad",
+				dataSet, PlotOrientation.VERTICAL, false, true, false);
+                
+                CategoryPlot plot = chart.getCategoryPlot();
+                CategoryAxis axis = plot.getDomainAxis();
+                axis.setTickLabelFont(new java.awt.Font("Courier", java.awt.Font.PLAIN, 8));
+                writeChartToPDF(chart, 240, 300, documento, writer);
             }
+            
+            //writeChartToPDF(generateBarChart(), 500, 300, documento, writer);
             documento.close();
             if (file.exists()){
                 render(file: new File(System.getProperty("user.dir") + "\\" + "Estadisticas.pdf"), fileName: 'Estadisticas.pdf', contentType: "application/pdf")
@@ -358,4 +418,40 @@ class StatisticController {
             Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static JFreeChart generateBarChart() {
+		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+		dataSet.setValue(791, "Population", "1750 AD");
+		dataSet.setValue(978, "Population", "1800 AD");
+		dataSet.setValue(1262, "Population", "1850 AD");
+		dataSet.setValue(1650, "Population", "1900 AD");
+		dataSet.setValue(2519, "Population", "1950 AD");
+		dataSet.setValue(6070, "Population", "2000 AD");
+
+		JFreeChart chart = ChartFactory.createBarChart(
+				"World Population growth", "Year", "Population in millions",
+				dataSet, PlotOrientation.VERTICAL, false, true, false);
+
+		return chart;
+    }
+    
+    public static void writeChartToPDF(JFreeChart chart, int width, int height, Document document, PdfWriter writer) {
+
+		try {
+			PdfContentByte contentByte = writer.getDirectContent();
+			PdfTemplate template = contentByte.createTemplate(width, height);
+			Graphics2D graphics2d = template.createGraphics(width, height,
+					new DefaultFontMapper());
+			Rectangle2D rectangle2d = new Rectangle2D.Double(0, 0, width,
+					height);
+
+			chart.draw(graphics2d, rectangle2d);
+			
+			graphics2d.dispose();
+			contentByte.addTemplate(template, 40, 200);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
