@@ -203,7 +203,7 @@ class ReportController {
 		
 		params.diagnostic = reportInstance.getDiagnostic()
 		params.diagnosticDetail = reportInstance.getDiagnosticDetail()
-		
+		params.studyType= "Tipo de Estudio: " + reportInstance?.request?.studyType?.name;
 		params.observations = reportInstance.getObservations()
 		
 		chain(controller:'jasper', action:'index',

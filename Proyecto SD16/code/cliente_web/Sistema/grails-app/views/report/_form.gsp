@@ -118,18 +118,11 @@
 		<label> Informe <span class="required-indicator">*</span>
 		</label>
 		<div class="form-group">
-		<textarea class="form-control" rows="10" id="observations" name="observations" placeholder="Ingrese el Informe">
-			<g:if test="${null!=reportInstance?.observations}">
-				${reportInstance?.observations}
-			</g:if>
-			<g:else>
-MACROSCOPÍA
-
-Tipo de Estudio: ${reportInstance?.request?.studyType?.name}
-	
+		<textarea class="form-control" rows="10" id="observations" name="observations" placeholder="Ingrese el Informe"><g:if test="${null!=reportInstance?.observations}">${reportInstance?.observations}</g:if><g:else>
 Material/es: ${reportInstance?.request?.specimen}
+MACROSCOPÍA	
 
-DIAGNÓSTICO
+
 			</g:else>
 			</textarea>
 		</div>
