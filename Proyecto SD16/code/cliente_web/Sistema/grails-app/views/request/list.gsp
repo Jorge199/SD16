@@ -207,9 +207,10 @@
 													<g:if
 														test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
 														<td align="center" width="12%"><g:jasperReport
-																action="generateReport" controller="report"
-																format="PDF,DOCX" jasper="report"
+																action="generateReport" controller="report" name="${requestInstance.patient.getName()+requestInstance.patient.getLastName()+"_"+requestInstance.getCode()}" 
+																format="PDF,DOCX" jasper="report" description=" "
 																id="${requestInstance.getId()}">
+																
 																<input type="hidden" name="id"
 																	value="${requestInstance.getId()}" />
 																</g:jasperReport></td>
