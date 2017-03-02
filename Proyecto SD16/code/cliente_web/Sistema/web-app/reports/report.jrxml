@@ -22,6 +22,7 @@
 	<parameter name="date" class="java.lang.String"/>
 	<parameter name="signature" class="java.lang.String"/>
 	<parameter name="observations" class="java.lang.String"/>
+	<parameter name="studyType" class="java.lang.String"/>
 	
 	<background>
 		<band splitType="Stretch"/>
@@ -114,7 +115,7 @@ Facultad de Medicina U.N.I / VII Región Sanitaria]]></text>
 					<textFieldExpression><![CDATA[$P{specimen}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="8" y="180" width="521" height="330" uuid="8b0ffc1e-090d-4867-bab6-d74d0ca0caa8"/>
+					<reportElement x="8" y="210" width="521" height="300" uuid="8b0ffc1e-090d-4867-bab6-d74d0ca0caa8"/>
 					<textFieldExpression><![CDATA[$P{observations}]]></textFieldExpression>
 				</textField>
 				<staticText>
@@ -128,6 +129,14 @@ Facultad de Medicina U.N.I / VII Región Sanitaria]]></text>
 				<textField>
 					<reportElement x="0" y="520" width="370" height="36" uuid="a265d432-16c6-462f-96d0-3a40e72f1fa2"/>
 					<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="168" width="106" height="22" uuid="0e982197-b891-4c12-ab49-2f07aec319e8"/>
+					<text><![CDATA[DIAGNÓSTICO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="10" y="191" width="521" height="19" uuid="2864db60-46f9-4164-8bf2-5e2611cbb17c"/>
+					<textFieldExpression><![CDATA[$P{studyType}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
