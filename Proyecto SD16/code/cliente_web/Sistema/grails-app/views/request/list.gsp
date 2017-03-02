@@ -203,7 +203,7 @@
 												</td>
 
 
-												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR, ROLE_SECRETARIA'>
 													<g:if
 														test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
 														<td align="center" width="12%"><g:jasperReport
@@ -233,15 +233,6 @@
 																<i class="fa fa-list-alt"></i></g:link>
 														</g:if>
 													</sec:ifAnyGranted> 
-													<sec:ifAnyGranted
-														roles='ROLE_SECRETARIA'>
-														<g:if test="${requestInstance?.status==StatusEnum.TERMINADO || requestInstance?.status==StatusEnum.RETIRADO}">
-														<g:link action="show" class="btn btn-default"
-														params="[reportShow: 'request']"
-																controller="report" id="${requestInstance.getId()}">
-																<i class="fa fa-list-alt"></i></g:link>
-																</g:if>
-														</sec:ifAnyGranted>
 														
 													</td>
 											</tr>

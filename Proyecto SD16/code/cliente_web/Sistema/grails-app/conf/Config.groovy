@@ -120,8 +120,8 @@ log4j.main = {
 grails.plugin.springsecurity.providerManager.eraseCredentialsAfterAuthentication=false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
-	'/report/**':                     ["ROLE_ADMINISTRADOR","ROLE_DOCTOR"],
-	'/jasper/**':					  ["ROLE_ADMINISTRADOR","ROLE_DOCTOR"],
+	'/report/**':                     ["ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA"],
+	'/jasper/**':					  ["ROLE_ADMINISTRADOR","ROLE_DOCTOR","ROLE_SECRETARIA"],
 	'/index':                         ['permitAll'],
 	'/index.gsp':                     ['permitAll'],
 	'/assets/**':                     ['permitAll'],
