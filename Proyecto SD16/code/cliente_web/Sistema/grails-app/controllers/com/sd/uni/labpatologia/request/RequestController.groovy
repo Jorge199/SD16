@@ -124,6 +124,7 @@ class RequestController {
 	def create() {
 		def action = "save"
 		def requestInstance = new RequestB(params)
+		requestInstance.setDate(new Date());
 		[requestInstance: requestInstance, studies: studyTypeService.getAll(),laboratoryInstanceList: laboratoryService.getAll(),
 			user:authService.getName(), action:action]
 	}
@@ -136,13 +137,16 @@ class RequestController {
 	def save(Integer id) {
 
 		def requestInstance = new RequestB(params)
-		//if(""!=params.get("date")){
-		//	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		//	requestInstance.setDate(formatter.parse(params.get("date")));
-		//}
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		requestInstance.setDate(formatter.parse(formatter.format(new Date())));
-		System.out.println("dateFormated" + formatter.parse(formatter.format(new Date())));
+		if(""!=params.get("date")){
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			Date date = formatter.parse(params.get("date"));
+			requestInstance.setDate(date);
+			formatter = new SimpleDateFormat("yy");
+			requestInstance.setCode(formatter.format(date) + params.get("code"));
+		}
+		//SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		//requestInstance.setDate(formatter.parse(formatter.format(new Date())));
+		//System.out.println("dateFormated" + formatter.parse(formatter.format(new Date())));
 		
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
@@ -184,25 +188,30 @@ class RequestController {
 	])
 	def update(Integer id) {
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("edit")))
-		//if(""!=params.get("date")){
-		//	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		//	requestInstance.setDate(formatter.parse(params.get("date")));
-		//}
+		String code = params.get("code")
+		if(""!=params.get("date")){
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			Date date = formatter.parse(params.get("date"));
+			requestInstance.setDate(date);
+			formatter = new SimpleDateFormat("yy");
+			code = formatter.format(date) + code.substring(2);
+			
+		}
 		//requestInstance.setDate(new Date((String)params.get("date")));
 		requestInstance.setStudyType(studyTypeService.getById(Integer.parseInt(params.get("studyTypeId"))))
 		requestInstance.setDoctor(doctorService.getById(Integer.parseInt(params.get("doctorId"))))
 		requestInstance.setPatient(patientService.getById(Integer.parseInt(params.get("patientId"))))
-		requestInstance.setCode(params.get("code"))
+		requestInstance.setCode(code)
 		if (!"".equals(params.get("code_cortes")) && params.containsKey("code_cortes")){
 			if (!"".equals(params.get("code_laminas")) && params.containsKey("code_laminas")){
-				requestInstance.setCode(params.get("code")+"-"+params.get("code_cortes")+"-"+params.get("code_laminas"))
+				requestInstance.setCode(code+"-"+params.get("code_cortes")+"-"+params.get("code_laminas"))
 				requestInstance.setStatus(StatusEnum.PROCESADO)
 			}else{
-				requestInstance.setCode(params.get("code")+"-"+params.get("code_cortes"))
+				requestInstance.setCode(code+"-"+params.get("code_cortes"))
 				requestInstance.setStatus(StatusEnum.PROCESO)
 			}
 		}else if (requestInstance.getStatus() == StatusEnum.PROCESO && !"".equals(params.get("code_laminas")) && params.containsKey("code_laminas")){
-			requestInstance.setCode(params.get("code")+"-"+params.get("code_laminas"))
+			requestInstance.setCode(code+"-"+params.get("code_laminas"))
 			requestInstance.setStatus(StatusEnum.PROCESADO)
 		}
 		requestInstance.setNote(params.get("note"))

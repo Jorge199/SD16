@@ -10,7 +10,7 @@
 
 <div class="row">
 	<div class=col-md-12>
-		<div class="col-md-4">
+		<!--  <div class="col-md-4">
 			<label for="date">Fecha de Ingreso</label>
 			<div class="form-group">
 			<g:if test="${null!= requestInstance?.date}">
@@ -22,28 +22,39 @@
 				type="date" />
 				</g:else>
 			</div>
+		</div>-->
+		
+		<div class="col-md-4">
+			<label>Fecha de Ingreso<span class="required-indicator">*</span></label>
+			<div class="form-group">
+				<div class='input-group date' id='datetimepicker1'>
+					<input class="form-control" type="text" maxlength="10"
+					id="date" name="date" placeholder="Seleccione la fecha" value="${formatDate(format: 'dd-MM-yyyy', date:requestInstance?.date)}"/> 
+					<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"> </span></span>
+				</div>
+			</div>
 		</div>
 		
 		<div class="col-md-4">
-			<label>Codigo *</label>
+			<label>Código *</label>
 			<div>
 				<g:if test="${requestInstance?.status == StatusEnum.RECIBIDO }">
 					<div class="col-sm-4">
 					<div class="form-group">
-						<input type="text" name="code" id="code" class="form-control" value="${requestInstance?.code}" />
+						<input type="text" name="code" id="code" class="form-control" value="${requestInstance?.code}" readonly="readonly"/>
 					</div>
 					</div>
 					<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
 						<div class="col-sm-4">
 						<div class="form-group">
 							<input type="text" class="form-control"  maxlength="20" name="code_cortes" id="code_cortes"
-							placeholder="Nro de cortes"  />
+							placeholder="Nro de bloques"  />
 							</div>
 						</div>
 						<div class="col-sm-4">
 						<div class="form-group">
 							<input type="text" class="form-control"  maxlength="20" name="code_laminas"
-							placeholder="Nro de laminas"/>
+							placeholder="Nro de láminas"/>
 						</div>
 						</div>
 					</sec:ifAnyGranted>
