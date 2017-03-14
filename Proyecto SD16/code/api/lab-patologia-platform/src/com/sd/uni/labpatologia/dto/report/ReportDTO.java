@@ -14,7 +14,7 @@ public class ReportDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 
 	private Integer _requestId;
-	private DiagnosticEnum _diagnostic;
+	private Integer _diagnosticId;
 	private Date _date;
 	private String _observations;
 	private Integer _age;
@@ -32,12 +32,12 @@ public class ReportDTO extends BaseDTO {
 	}
 
 	@XmlElement
-	public DiagnosticEnum getDiagnostic() {
-		return _diagnostic;
+	public Integer getDiagnosticId() {
+		return _diagnosticId;
 	}
 
-	public void setDiagnostic(DiagnosticEnum diagnostic) {
-		_diagnostic = diagnostic;
+	public void setDiagnosticId(Integer diagnostic) {
+		_diagnosticId = diagnostic;
 	}
 	
 	@XmlElement

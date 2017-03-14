@@ -4,7 +4,15 @@
 <ckeditor:resources />
 </head>
 
-				<h4><p style="text-align: center">INFORME DE ANATOMIA PATOLOGICA</p></h4>
+<h4>
+	<p style="text-align: center">INFORME DE ANATOMIA PATOLOGICA</p>
+</h4>
+	<g:if test="${action == 'save'}">
+ 	   <form action="/Sistema/report/save" method="post" id="report" onsubmit="return saveDataReport();">
+ 	</g:if><g:else>
+ 	 	   <form action="/Sistema/report/update" method="post" id="report" onsubmit="return saveDataReport();">
+  	</g:else>
+ 	
 
 <fieldset>
 	<legend>Datos de la Solicitud</legend>
@@ -96,29 +104,53 @@
 		<g:formatDate date="${new Date()}" class="form-control" name="date"
 			type="date" value="${reportInstance?.date}" />
 	</div>
+
+
 	<div class="col-md-4">
-		<div class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
-			<label for="diagnostic"> <g:message code="Diagnostico" /> <span
-				class="required-indicator">*</span>
-			</label>
-			<g:select name="diagnostic" id="diagnostic" class="form-control"
-				from="${DiagnosticEnum.values()}" 
-				value="${reportInstance?.diagnostic}" optionKey="key"  
-				noSelection="${['':'Seleccione un diagnostico..']}"></g:select>
+		<label>Diagnóstico <span class="required-indicator">*</span></label>
+		<div class="form-group">
+			<div class="input-group" id="data-diagnostic">
+				<g:if test="${action == 'save'}">
+					<select class="select-diagnostic form-control" name="diagnosticId"
+						id="diagnosticId">
+						<option value="${reportInstance?.diagnostic?.id}">Selecciona
+							un diagnóstico</option>
+					</select>
+				</g:if>
+				<g:else>
+					<select class="select-diagnostic form-control" name="diagnosticId"
+						id="diagnosticId">
+						<option value="${reportInstance?.diagnostic?.id}">
+							${reportInstance?.diagnostic?.name}
+						</option>
+					</select>
+				</g:else>
+				<label type="button" class="btn btn-primary input-group-addon"
+					data-toggle="modal" data-target="#createDiagnostic"> <i
+					class="fa fa-plus"></i>
+				</label>
+			</div>
 		</div>
 	</div>
+
 	<div class="col-md-4">
 		<label>Descripción</label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="25" id="diagnosticDetail"
-			id="diagnosticDetail" name="diagnosticDetail" placeholder="Descripción del Diagnóstico" value="${reportInstance?.diagnosticDetail}" />
+			<input class="form-control" type="text" maxlength="25"
+				id="diagnosticDetail" id="diagnosticDetail" name="diagnosticDetail"
+				placeholder="Descripción del Diagnóstico"
+				value="${reportInstance?.diagnosticDetail}" />
 		</div>
 	</div>
 	<div class="col-md-12">
 		<label> Informe <span class="required-indicator">*</span>
 		</label>
 		<div class="form-group">
-		<textarea class="form-control" rows="10" id="observations" name="observations" placeholder="Ingrese el Informe"><g:if test="${null!=reportInstance?.observations}">${reportInstance?.observations}</g:if><g:else>
+			<textarea class="form-control" rows="10" id="observations"
+				name="observations" placeholder="Ingrese el Informe"><g:if
+					test="${null!=reportInstance?.observations}">
+					${reportInstance?.observations}
+				</g:if><g:else>
 Material/es: ${reportInstance?.request?.specimen}
 MACROSCOPÍA	
 
@@ -130,28 +162,136 @@ MACROSCOPÍA
 
 </fieldset>
 <div class="row"></div>
+							<br>
+							<g:if test="${action == 'save'}">
+ 	  <div class="col-xs-12" align="center">
+									<button type="submit" class="btn btn-primary" name="create"
+										value="${reportInstance?.request?.id}">
+										<i class="fa fa-floppy-o"></i> Guardar
+									</button>
+									<a class="btn btn-default" href="/Sistema/request/list"
+											role="button"><i class="fa fa-times"></i> Cancelar</a>
+								</div>
+ 	</g:if><g:else>
+							<div class="col-xs-12" align="center">
+									<g:hiddenField name="reportEdit" value="${reportEdit}" />
+									<button type="submit" class="btn btn-primary" name="edit"
+										value="${reportInstance?.id}">
+										<i class="fa fa-save"></i> Guardar
+									</button>
+									<g:if test="${reportEdit.equals("request")}">
+										<a class="btn btn-default" href="/Sistema/request/list"
+											role="button"><i class="fa fa-times"></i> Cancelar</a>
+									</g:if>
+									<g:else>
+										<a class="btn btn-default" href="/Sistema/report/list"
+											role="button"><i class="fa fa-times"></i> Cancelar</a>
+									</g:else>
 
-<script type="text/javascript">
-$(document).ready(function () {
-$(document).on('mousedown', '.cke_button__print', function(){
-	alert("asd");
-	CKEDITOR.instances.editor.setData( "<p>This is the editor data.</p>" );
-    
-    CKEDITOR.tools.callFunction(16,this);return false;
+								
+							</div>
 
-});
+  	</g:else>
+							
+						
+
+</form>
+<!-- Modal diagnostico -->
+<div class="modal fade" id="createDiagnostic" tabindex="-1" role="dialog" aria-labelledby="myModalDiagnostic" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Registrar Diagnóstico</h4>
+			</div>
+			<div class="modal-body">
+			<form id="myFormDiagnostic" onsubmit="return callDiagnostic();">
+			
+				<g:render template="/diagnostic/form"/>
+			
+					<fieldset class="buttons">
+						<br><br><div class="col-xs-10">
+							<div class="text-right">
+							<button  type="submit"  class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+							</div></div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 
-});
-$(window).on('afterprint', function(){
-	alert("asd");
-
-});
-	</script>
-	
-	
-
-   
-   
 <!-- Bootstrap Core JavaScript -->
 <script src=" ${request.contextPath}/template/js/bootstrap.min.js"></script>
+
+<style>
+		.select2-container--default .select2-selection--single{
+		    height: 32px;
+		}	
+	</style>
+    <!-- Para boton guardar de doctor -->
+    <script>
+        function callDiagnostic(){
+        	if(saveDataDiagnostic()){
+        	    $.ajax({
+                	type:"POST",
+                    url : "${createLink(controller: 'diagnostic', action: 'save')}",
+                    data :   $("#myFormDiagnostic").serialize() , 
+                    dataType: 'json',
+                    success : function(data){
+                    	 $("#myFormDiagnostic").submit();
+                    },
+                });
+        	}else{
+				return false;
+            }
+        }
+    </script>
+    
+<!-- Para selector de diagnóstico -->
+    <script type="text/javascript">
+	    	$(".select-diagnostic").select2({
+		    	language: 'es',
+	    		  ajax: {
+	    		    url: "${createLink(controller: 'diagnostic', action: 'selectDiagnostic')}",
+	    		    dataType: 'json',
+	    		    delay: 250,
+	    		    data: function (params) {
+	    		      return {
+	    		        q: params.term, 
+	    		        page: 0
+	    		      };
+	    		    },
+	    		    processResults: function (data) {
+	    		        return {
+	    		            results: $.map(data, function(obj) {
+	    		                return { id: obj.id, text: obj.name};
+	    		            })
+	    		        };
+	    		    },
+	    		    cache: true
+	    		  },
+	    		  escapeMarkup: function (markup) { return markup; }, 
+	    		  minimumInputLength: 1,
+	    	}).on("change", function (e) {
+	    	    $(this).valid(); //jquery validation script validate on change
+	    	}).on("select2:open", function() { //correct validation classes (has=*)
+	    	    if ($(this).parents("[class*='has-']").length) { //copies the classes
+	    	        var classNames = $(this).parents("[class*='has-']")[0].className.split(/\s+/);
+
+	    	        for (var i = 0; i < classNames.length; ++i) {
+	    	            if (classNames[i].match("has-")) {
+	    	                $("body > .select2-container").addClass(classNames[i]);
+	    	            }
+	    	        }
+	    	    } else { //removes any existing classes
+	    	        $("body > .select2-container").removeClass (function (index, css) {
+	    	            return (css.match (/(^|\s)has-\S+/g) || []).join(' ');
+	    	        });            
+	    	    }
+	    	});
+	   
+    </script>

@@ -10,6 +10,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.uni.labpatologia.dao.diagnostic.IDiagnosticDao;
+import com.sd.uni.labpatologia.dao.doctor.IDoctorDao;
 import com.sd.uni.labpatologia.dao.statistic.IStatisticDao;
 import com.sd.uni.labpatologia.dao.statistic.StatisticDaoImpl;
 import com.sd.uni.labpatologia.domain.statistic.StatisticDomain;
@@ -27,7 +29,9 @@ public class StatisticServiceImpl extends
 
 	@Autowired
 	private StatisticBatchService _statisticBatchService;
-
+	@Autowired
+	private IDiagnosticDao _diagnosticDao;
+	
 	private static Logger logger = Logger.getLogger(StatisticServiceImpl.class);
 
 	@Override
@@ -81,7 +85,7 @@ public class StatisticServiceImpl extends
 		dto.setId(domain.getId());
 		dto.setDate(domain.getDate());
 		dto.setSex(domain.getSex());
-		dto.setDiagnostic(domain.getDiagnostic());
+		dto.setDiagnosticId(domain.getDiagnostic().getId());
 		dto.setPatientAge(domain.getPatientAge());
 		return dto;
 	}
@@ -91,7 +95,7 @@ public class StatisticServiceImpl extends
 		final StatisticDomain domain = new StatisticDomain();
 		domain.setId(dto.getId());
 		domain.setDate(dto.getDate());
-		domain.setDiagnostic(dto.getDiagnostic());
+		domain.setDiagnostic(_diagnosticDao.getById(dto.getDiagnosticId()));
 		domain.setPatientAge(dto.getPatientAge());
 		domain.setSex(dto.getSex());
 		return domain;

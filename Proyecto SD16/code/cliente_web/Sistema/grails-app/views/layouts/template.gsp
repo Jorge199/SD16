@@ -101,6 +101,8 @@
 	
 						<li><a href="/Sistema/doctor/list/"><i
 								class="fa fa-fw fa-user-md"></i>Doctores</a></li>
+						<li><a href="/Sistema/diagnostic/list/"><i
+								class="fa fa-fw  fa-eyedropper"></i>Diagnósticos</a></li>
 					</sec:ifNotGranted>
 					
 					<sec:ifNotGranted roles='ROLE_TECNICO'>

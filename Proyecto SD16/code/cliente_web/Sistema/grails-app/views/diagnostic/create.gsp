@@ -14,7 +14,7 @@
 					</h4>
 				</div>
 				<div class="panel-body">
-					<form action="/Sistema/diagnostic/save" method="post" id="diagnostic" onsubmit="return saveDataDiagnostic();">
+					<form action="/Sistema/diagnostic/save" method="post" id="diagnostic" onsubmit="return saveDataDia();">
 						<fieldset class="form">
 							<g:render template="form" />
 						</fieldset>
@@ -38,5 +38,6 @@
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
 	<script src=" ${request.contextPath}/template/js/validationFormDiagnostic.js"></script>
+	<script src=" ${request.contextPath}/template/js/jquery.number.js"></script>
 </body>
 </html>

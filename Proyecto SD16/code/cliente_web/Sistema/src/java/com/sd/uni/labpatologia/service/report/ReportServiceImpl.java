@@ -13,6 +13,8 @@ import com.sd.uni.labpatologia.dto.report.ReportDTO;
 import com.sd.uni.labpatologia.dto.report.ReportResult;
 import com.sd.uni.labpatologia.rest.report.IReportResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
+import com.sd.uni.labpatologia.service.diagnostic.IDiagnosticService;
+import com.sd.uni.labpatologia.service.doctor.IDoctorService;
 import com.sd.uni.labpatologia.service.request.IRequestService;
 import com.sd.uni.labpatologia.service.statistic.IStatisticService;
 
@@ -26,6 +28,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	private IRequestService _requestService;
 	@Autowired
 	private IRequestService _patienService;
+	@Autowired
+	private IDiagnosticService _diagnosticService;
 	@Autowired
 	private IRequestService _doctorService;
 	@Autowired
@@ -69,7 +73,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("observations", dto.getObservations());
 		final ReportB reportB = new ReportB(params);
-		reportB.setDiagnostic(dto.getDiagnostic());
+		reportB.setDiagnostic(_diagnosticService.getById(dto.getDiagnosticId()));
 		reportB.setDate(dto.getDate());
 		reportB.setRequest(_requestService.getById(dto.getRequestId()));
 		reportB.setAge(dto.getAge());
@@ -86,7 +90,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(bean.getId());
 		dto.setDate(bean.getDate());
-		dto.setDiagnostic(bean.getDiagnostic());
+		dto.setDiagnosticId(bean.getDiagnostic().getId());
 		dto.setObservations(bean.getObservations());
 		dto.setRequestId(bean.getRequest().getId());
 		dto.setAge(bean.getAge());

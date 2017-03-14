@@ -4,14 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
+import com.sd.uni.labpatologia.domain.diagnostic.DiagnosticDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.domain.statistic.StatisticDomain;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
@@ -32,8 +31,8 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "observations", length = 10000)
 	private String _observations;
 
-	@Enumerated(EnumType.STRING)
-	private DiagnosticEnum _diagnostic;
+	@ManyToOne
+	private DiagnosticDomain _diagnostic;
 
 	@Column(name = "diagnosticDetail")
 	private String _diagnosticDetail;
@@ -79,11 +78,11 @@ public class ReportDomain extends BaseDomain {
 		_observations = observations;
 	}
 
-	public DiagnosticEnum getDiagnostic() {
+	public DiagnosticDomain getDiagnostic() {
 		return _diagnostic;
 	}
 
-	public void setDiagnostic(DiagnosticEnum diagnostic) {
+	public void setDiagnostic(DiagnosticDomain diagnostic) {
 		_diagnostic = diagnostic;
 	}
 

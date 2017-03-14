@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.sd.uni.labpatologia.beans.base.BaseBean;
+import com.sd.uni.labpatologia.beans.diagnostic.DiagnosticB;
 import com.sd.uni.labpatologia.beans.request.RequestB;
 import com.sd.uni.labpatologia.beans.statistic.StatisticB;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
@@ -13,7 +14,7 @@ import com.sd.uni.labpatologia.util.DiagnosticEnum;
 public class ReportB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private Date _date;
-	private DiagnosticEnum _diagnostic;
+	private DiagnosticB _diagnostic;
 	private String _diagnosticDetail;
 	private String _observations;
 	private RequestB _request;
@@ -43,11 +44,11 @@ public class ReportB extends BaseBean {
 		_date = date;
 	}
 
-	public DiagnosticEnum getDiagnostic() {
+	public DiagnosticB getDiagnostic() {
 		return _diagnostic;
 	}
 
-	public void setDiagnostic(DiagnosticEnum diagnostic) {
+	public void setDiagnostic(DiagnosticB diagnostic) {
 		_diagnostic = diagnostic;
 	}
 	

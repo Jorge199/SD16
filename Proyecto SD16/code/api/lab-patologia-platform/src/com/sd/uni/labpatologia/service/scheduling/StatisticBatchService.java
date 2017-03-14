@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.uni.labpatologia.dao.diagnostic.IDiagnosticDao;
 import com.sd.uni.labpatologia.dao.report.IReportDao;
 import com.sd.uni.labpatologia.dao.statistic.IStatisticDao;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
@@ -25,6 +26,9 @@ public class StatisticBatchService {
 	private IReportDao _reportDao;
 	@Autowired
 	private IStatisticDao _statisticDao;
+	
+	@Autowired
+	private IDiagnosticDao _diagnosticDao;
 //	@Autowired
 //	private IStatisticService _statisticService;
 
@@ -44,7 +48,7 @@ public class StatisticBatchService {
 						//final StatisticDTO statistic = new StatisticDTO();
 						StatisticDomain statistic = new StatisticDomain();
 						statistic.setDate(report.getDate());
-						statistic.setDiagnostic(report.getDiagnostic());
+						statistic.setDiagnostic(_diagnosticDao.getById(report.getDiagnostic().getId()));
 						RequestDomain request = report.getRequest();
 						statistic.setSex(request.getPatient().getSex());
 						statistic.setPatientAge(report.getAge());

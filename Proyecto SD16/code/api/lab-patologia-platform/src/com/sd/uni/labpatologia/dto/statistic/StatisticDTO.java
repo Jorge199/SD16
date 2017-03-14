@@ -15,7 +15,7 @@ public class StatisticDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer _patientAge;
-	private DiagnosticEnum _diagnostic;
+	private Integer _diagnosticId;
 	private Date _date;
 	private SexEnum _sex;
 	
@@ -30,12 +30,12 @@ public class StatisticDTO extends BaseDTO {
 	}
 	
 	@XmlElement
-	public DiagnosticEnum getDiagnostic() {
-		return _diagnostic;
+	public Integer getDiagnosticId() {
+		return _diagnosticId;
 	}
 
-	public void setDiagnostic(DiagnosticEnum diagnostic) {
-		_diagnostic = diagnostic;
+	public void setDiagnosticId(Integer diagnostic) {
+		_diagnosticId = diagnostic;
 	}
 
 	@XmlElement

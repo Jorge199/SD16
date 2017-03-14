@@ -17,8 +17,11 @@ import org.springframework.stereotype.Service;
 import com.sd.uni.labpatologia.beans.statistic.StatisticB;
 import com.sd.uni.labpatologia.dto.statistic.StatisticDTO;
 import com.sd.uni.labpatologia.dto.statistic.StatisticResult;
+import com.sd.uni.labpatologia.rest.diagnostic.IDiagnosticResource;
 import com.sd.uni.labpatologia.rest.statistic.IStatisticResource;
 import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
+import com.sd.uni.labpatologia.service.diagnostic.IDiagnosticService;
+import com.sd.uni.labpatologia.service.doctor.IDoctorService;
 
 @Service("statisticService")
 public class StatisticServiceImpl extends
@@ -26,7 +29,8 @@ public class StatisticServiceImpl extends
 
 	@Autowired
 	private IStatisticResource _statisticResource;
-
+	@Autowired
+	private IDiagnosticService _diagnosticService;
 	public StatisticServiceImpl() {
 	}
 
@@ -37,7 +41,7 @@ public class StatisticServiceImpl extends
 		final StatisticB statisticB = new StatisticB(params);
 		statisticB.setDate(dto.getDate());
 		statisticB.setPatientAge(dto.getPatientAge());
-		statisticB.setDiagnostic(dto.getDiagnostic());
+		statisticB.setDiagnostic(_diagnosticService.getById(dto.getDiagnosticId()));
 		statisticB.setSex(dto.getSex());
 		return statisticB;
 	}
@@ -47,7 +51,7 @@ public class StatisticServiceImpl extends
 		final StatisticDTO dto = new StatisticDTO();
 		dto.setId(bean.getId());
 		dto.setDate(bean.getDate());
-		dto.setDiagnostic(bean.getDiagnostic());
+		dto.setDiagnosticId(bean.getDiagnostic().getId());
 		dto.setPatientAge(bean.getPatientAge());
 		dto.setSex(bean.getSex());
 		return dto;

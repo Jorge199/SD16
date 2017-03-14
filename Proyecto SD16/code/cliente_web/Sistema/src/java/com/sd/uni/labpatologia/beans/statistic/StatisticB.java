@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.sd.uni.labpatologia.beans.base.BaseBean;
+import com.sd.uni.labpatologia.beans.diagnostic.DiagnosticB;
 import com.sd.uni.labpatologia.beans.doctor.DoctorB;
 import com.sd.uni.labpatologia.beans.patient.PatientB;
 import com.sd.uni.labpatologia.beans.study_type.StudyTypeB;
@@ -20,7 +21,7 @@ public class StatisticB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private Integer _patientAge;
 	private SexEnum _sex;
-	private DiagnosticEnum _diagnostic;
+	private DiagnosticB _diagnostic;
 	private Date _date;
 
 	public StatisticB(Map<String, String> params) {
@@ -43,11 +44,11 @@ public class StatisticB extends BaseBean {
 		_sex = sex;
 	}
 
-	public DiagnosticEnum getDiagnostic() {
+	public DiagnosticB getDiagnostic() {
 		return _diagnostic;
 	}
 
-	public void setDiagnostic(DiagnosticEnum diagnostic) {
+	public void setDiagnostic(DiagnosticB diagnostic) {
 		_diagnostic = diagnostic;
 	}
 
@@ -64,9 +65,7 @@ public class StatisticB extends BaseBean {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
-		if (!StringUtils.isBlank(params.get("diagnostic"))) {
-			setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")));
-		}
+
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			// setDate(formato.parse(params.get("date")));

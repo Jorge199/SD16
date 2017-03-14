@@ -9,9 +9,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.sd.uni.labpatologia.domain.base.BaseDomain;
+import com.sd.uni.labpatologia.domain.diagnostic.DiagnosticDomain;
+import com.sd.uni.labpatologia.domain.doctor.DoctorDomain;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
 import com.sd.uni.labpatologia.util.SexEnum;
 
@@ -29,9 +32,9 @@ public class StatisticDomain extends BaseDomain {
 	
 	@Enumerated(EnumType.STRING)
 	private SexEnum _sex;
-
-	@Enumerated(EnumType.STRING)
-	private DiagnosticEnum _diagnostic;
+	
+	@ManyToOne
+	private DiagnosticDomain _diagnostic;
 	
 	@Column(name = "date", nullable = false)
 	private Date _date;
@@ -63,11 +66,11 @@ public class StatisticDomain extends BaseDomain {
 		_sex = sex;
 	}
 	
-	public DiagnosticEnum getDiagnostic() {
+	public DiagnosticDomain getDiagnostic() {
 		return _diagnostic;
 	}
 
-	public void setDiagnostic(DiagnosticEnum diagnostic) {
+	public void setDiagnostic(DiagnosticDomain diagnostic) {
 		_diagnostic = diagnostic;
 	}
 	

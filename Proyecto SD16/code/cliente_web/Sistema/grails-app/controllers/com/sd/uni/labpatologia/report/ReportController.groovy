@@ -1,23 +1,22 @@
 package com.sd.uni.labpatologia.report
 
-import java.text.SimpleDateFormat;
+import grails.plugin.springsecurity.annotation.Secured
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.text.SimpleDateFormat
+
+import org.springframework.beans.factory.annotation.Autowired
 
 import com.sd.uni.labpatologia.beans.report.ReportB
-import com.sd.uni.labpatologia.service.auth.IAuthService;
-import com.sd.uni.labpatologia.service.doctor.IDoctorService;
+import com.sd.uni.labpatologia.service.auth.IAuthService
+import com.sd.uni.labpatologia.service.diagnostic.IDiagnosticService
+import com.sd.uni.labpatologia.service.doctor.IDoctorService
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService
-import com.sd.uni.labpatologia.service.patient.IPatientService;
-import com.sd.uni.labpatologia.service.report.IReportService;
-import com.sd.uni.labpatologia.service.report.ReportServiceImpl;
-import com.sd.uni.labpatologia.service.request.IRequestService;
+import com.sd.uni.labpatologia.service.patient.IPatientService
+import com.sd.uni.labpatologia.service.report.IReportService
+import com.sd.uni.labpatologia.service.request.IRequestService
 import com.sd.uni.labpatologia.service.statistic.IStatisticService
-import com.sd.uni.labpatologia.util.DiagnosticEnum;
 import com.sd.uni.labpatologia.util.SexEnum
-import com.sd.uni.labpatologia.util.StatusEnum;
-
-import grails.plugin.springsecurity.annotation.Secured
+import com.sd.uni.labpatologia.util.StatusEnum
 
 class ReportController {
 	static allowedMethods = [save: "POST", update: "POST"]
@@ -25,6 +24,7 @@ class ReportController {
 	//service
 	def IReportService reportService;
 	def IRequestService requestService;
+	def IDiagnosticService diagnosticService;
 	def IDoctorService doctorService;
 	def IPatientService patientService;
 	def ILaboratoryService laboratoryService;
@@ -97,13 +97,14 @@ class ReportController {
 		'ROLE_ADMINISTRADOR'
 	])
 	def create(Integer id) {
+		def action = "save"
 		def reportInstance = new ReportB(params)
 		reportInstance.setRequest(requestService.getById(id))
 		if((null!=reportInstance.request.patient._birthDate)){
 			reportInstance.setAge(calculateAge(reportInstance.request.patient._birthDate));
 		}
 		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll(),
-			user:authService.getName()] //, requests:requestService.getAll()]
+			user:authService.getName(), action:action] //, requests:requestService.getAll()]
 	}
 	@Secured([
 		'ROLE_DOCTOR',
@@ -117,7 +118,7 @@ class ReportController {
 		reportInstance.setId(Integer.parseInt(params.get("requestId")));
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
 		reportInstance.setRequest(requestService.getById(Integer.parseInt(params.get("requestId"))))
-		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+		reportInstance.setDiagnostic(diagnosticService.getById(Integer.parseInt(params.get("diagnosticId"))))
 		reportInstance.setDiagnosticDetail((params.get("diagnosticDetail")))
 		if((null!=params.get("age"))){
 			reportInstance.setAge(Integer.parseInt(params.get("age")));
@@ -159,11 +160,12 @@ class ReportController {
 		def requestInstance = requestService.getById(Integer.parseInt(params.get("requestId")))
 		reportInstance.setRequest(requestInstance)
 		reportInstance.setId(Integer.parseInt(params.get("edit")))
-		reportInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+		reportInstance.setDiagnostic(diagnosticService.getById(Integer.parseInt(params.get("diagnosticId"))))
+		
 		reportInstance.setDiagnosticDetail(params.get("diagnosticDetail"))
 		if(params.get("isProcessed")=="true"){
 			def statisticInstance = statisticService.getById(Integer.parseInt(params.get("statisticId")))
-			statisticInstance.setDiagnostic(DiagnosticEnum.valueOf(params.get("diagnostic")))
+			statisticInstance.setDiagnostic(diagnosticService.getById(Integer.parseInt(params.get("diagnosticId"))))
 			statisticInstance.setId(Integer.parseInt(params.get("statisticId")))
 			reportInstance.setStatistic(statisticService.save(statisticInstance))
 			reportInstance.setIsProcessed(true)

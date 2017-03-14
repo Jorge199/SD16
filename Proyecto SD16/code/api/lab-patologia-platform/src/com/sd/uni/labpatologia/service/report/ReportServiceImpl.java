@@ -10,6 +10,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.uni.labpatologia.dao.diagnostic.IDiagnosticDao;
+import com.sd.uni.labpatologia.dao.doctor.IDoctorDao;
 import com.sd.uni.labpatologia.dao.report.IReportDao;
 import com.sd.uni.labpatologia.dao.report.ReportDaoImpl;
 import com.sd.uni.labpatologia.dao.request.IRequestDao;
@@ -24,13 +26,16 @@ import com.sd.uni.labpatologia.service.base.BaseServiceImpl;
 public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, ReportDaoImpl, ReportResult>
 		implements IReportService {
 	@Autowired
-	private IReportDao reportDao;
+	private IReportDao _reportDao;
 
 	@Autowired
-	private IRequestDao requestDao;
+	private IRequestDao _requestDao;
 
 	@Autowired
-	private IStatisticDao statisticDao;
+	private IDiagnosticDao _diagnosticDao;
+	
+	@Autowired
+	private IStatisticDao _statisticDao;
 
 	private static Logger logger = Logger.getLogger(ReportServiceImpl.class);
 
@@ -42,7 +47,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		try {
 			// Lanzo exepcion de tipo runtime para realizar rollback
 			final ReportDomain domain = convertDtoToDomain(dto);
-			final ReportDomain report = reportDao.save(domain);
+			final ReportDomain report = _reportDao.save(domain);
 			final ReportDTO newDto = convertDomainToDto(report);
 			if (dto.getId() == null) {
 				getCacheManager().getCache("lab-patologia-platform-cache").put("report_" + report.getId(), newDto);
@@ -59,7 +64,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	@Transactional(readOnly = true)
 	@Cacheable(value = "lab-patologia-platform-cache", key = "'report_' + #id")
 	public ReportDTO getById(Integer id) throws PatologyException {
-		final ReportDomain domain = reportDao.getById(id);
+		final ReportDomain domain = _reportDao.getById(id);
 		final ReportDTO dto = convertDomainToDto(domain);
 		return dto;
 	}
@@ -69,7 +74,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	//@Cacheable(value = "lab-patologia-platform-cache", key = "'reports'")
 	public ReportResult getAll() throws PatologyException {
 		final List<ReportDTO> reports = new ArrayList<>();
-		for (ReportDomain domain : reportDao.findAll()) {
+		for (ReportDomain domain : _reportDao.findAll()) {
 			final ReportDTO dto = convertDomainToDto(domain);
 			reports.add(dto);
 		}
@@ -83,7 +88,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
 		dto.setRequestId(domain.getRequest().getId());
-		dto.setDiagnostic(domain.getDiagnostic());
+		dto.setDiagnosticId(domain.getDiagnostic().getId());
 		dto.setDate(domain.getDate());
 		dto.setObservations(domain.getObservations());
 		dto.setAge(domain.getAge());
@@ -99,15 +104,15 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	protected ReportDomain convertDtoToDomain(ReportDTO dto) throws PatologyException {
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
-		domain.setRequest(requestDao.getById(dto.getRequestId()));
-		domain.setDiagnostic(dto.getDiagnostic());
+		domain.setRequest(_requestDao.getById(dto.getRequestId()));
+		domain.setDiagnostic(_diagnosticDao.getById(dto.getDiagnosticId()));
 		domain.setDate(dto.getDate());
 		domain.setObservations(dto.getObservations());
 		domain.setAge(dto.getAge());
 		domain.setIsProcessed(dto.getIsProcessed());
 		domain.setDiagnosticDetail(dto.getDiagnosticDetail());
 		if(null!=dto.getStatisticId()){
-			domain.setStatistic(statisticDao.getById(dto.getStatisticId()));	
+			domain.setStatistic(_statisticDao.getById(dto.getStatisticId()));	
 		}
 		return domain;
 	}
@@ -116,7 +121,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	@Transactional(readOnly = true)
 	public ReportResult find(String textToFind, int page, int maxItems) throws PatologyException {
 		final List<ReportDTO> reports = new ArrayList<>();
-		for (ReportDomain domain : reportDao.find(textToFind, page, maxItems)) {
+		for (ReportDomain domain : _reportDao.find(textToFind, page, maxItems)) {
 			final ReportDTO dto = convertDomainToDto(domain);
 			reports.add(dto);
 		}
@@ -128,7 +133,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	@Override
 	public ReportResult find(String textToFind) throws PatologyException {
 		final List<ReportDTO> reports = new ArrayList<>();
-		for (ReportDomain domain : reportDao.find(textToFind)) {
+		for (ReportDomain domain : _reportDao.find(textToFind)) {
 			final ReportDTO dto = convertDomainToDto(domain);
 			reports.add(dto);
 		}
