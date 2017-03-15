@@ -28,13 +28,13 @@ public class DiagnosticResourceImpl extends BaseResourceImpl<DiagnosticDto> impl
 	}
 
 	@Override
-	@Cacheable(value = CACHE_REGION, key = "'diagnostic_' + #id")
+	//@Cacheable(value = CACHE_REGION, key = "'diagnostic_' + #id")
 	public DiagnosticDto getById(Integer id) {
 		return super.getById(id);
 	}
 
 	@Override
-	@Cacheable(value = CACHE_REGION, key = "'diagnostics'")
+	//@Cacheable(value = CACHE_REGION, key = "'diagnostics'")
 	public DiagnosticResult getAll() {
 		setWebResourceBasicAuthFilter();
 		final DiagnosticResult result = getWebResource().get(DiagnosticResult.class);

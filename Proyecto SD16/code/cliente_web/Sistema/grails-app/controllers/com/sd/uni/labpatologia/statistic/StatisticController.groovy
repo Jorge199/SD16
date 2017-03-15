@@ -2,10 +2,12 @@ package com.sd.uni.labpatologia.statistic
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.sd.uni.labpatologia.beans.diagnostic.DiagnosticB
 import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService;
 import com.sd.uni.labpatologia.service.request.IRequestService;
 import com.sd.uni.labpatologia.service.statistic.IStatisticService;
+import com.sd.uni.labpatologia.service.diagnostic.IDiagnosticService;
 import com.sd.uni.labpatologia.util.DiagnosticEnum;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -25,10 +27,14 @@ import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.awt.DefaultFontMapper;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+
 import com.sd.uni.labpatologia.utils.PageEvent;
+
 import java.text.DecimalFormat;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
@@ -43,6 +49,8 @@ class StatisticController {
 
 	def ILaboratoryService laboratoryService
 	def IStatisticService statisticService
+	def IDiagnosticService diagnosticService
+	
 	@Autowired def IAuthService authService
 	@Secured([
 		'ROLE_DOCTOR',
@@ -118,9 +126,9 @@ class StatisticController {
 			//Si no especifica un diagnostico entonces busca todos los diagnosticos
 			if(data.get("getByDiagnostic")=='false'){
 				int totalDiagnostic=0
-				for(DiagnosticEnum diagnosticFor in DiagnosticEnum.values()){
-					data.put(diagnosticFor.getKey(), statisticService.find("diagnostic="+diagnosticFor.getKey()+'&'+textToFind).size())
-					totalDiagnostic+=data.get(diagnosticFor.getKey())
+				for( DiagnosticB diagnosticFor in diagnosticService.getAll()){
+					data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()+'&'+textToFind).size())
+					totalDiagnostic+=data.get(diagnosticFor.getName())
 				}
 				data.put("totalDiagnostic", totalDiagnostic)
 			}else{
@@ -131,12 +139,12 @@ class StatisticController {
 				}else{
 					diagnosticTextToFind=textToFind.substring(textToFind.indexOf('&')+1,textToFind.length())
 				}
-				for(DiagnosticEnum diagnosticFor in DiagnosticEnum.values()){
-					if(data.get("getByDiagnostic")==diagnosticFor.getKey()){
-						data.put(diagnosticFor.getKey(), statisticService.find("diagnostic="+diagnosticFor.getKey()+'&'+diagnosticTextToFind).size())
-						System.out.println(diagnosticFor.getKey() + " " + data.get(diagnosticFor.getKey()))
+				for(DiagnosticB diagnosticFor in diagnosticService.getAll()){
+					if(data.get("getByDiagnostic")==diagnosticFor.getName()){
+						data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()+'&'+diagnosticTextToFind).size())
+						System.out.println(diagnosticFor.getName() + " " + data.get(diagnosticFor.getName()))
 					}
-					totalDiagnostic+=statisticService.find("diagnostic="+diagnosticFor.getKey()+'&'+diagnosticTextToFind).size()
+					totalDiagnostic+=statisticService.find("diagnostic="+diagnosticFor.getName()+'&'+diagnosticTextToFind).size()
 				}
 				data.put("totalDiagnostic", totalDiagnostic)
 				
@@ -158,13 +166,13 @@ class StatisticController {
 			data.put("totalSex",totalSex)
 
 			//Para Diagnóstico
-			for(DiagnosticEnum diagnosticFor in DiagnosticEnum.values()){
-				data.put(diagnosticFor.getKey(), statisticService.find("diagnostic="+diagnosticFor.getKey()).size())
-				totalDiagnostic+=data.get(diagnosticFor.getKey())
+			for( DiagnosticB diagnosticFor in diagnosticService.getAll()){
+				data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()).size())
+				totalDiagnostic+=data.get(diagnosticFor.getName())
 			}
 			data.put("totalDiagnostic", totalDiagnostic)
 		}
-		[user:authService.getName(), laboratoryInstanceList: laboratoryService.getAll(), dataMap: data, diagnostic: diagnostic, startAge: startAge, endAge: endAge, sex: sex, startSearch: startSearch, endSearch: endSearch ]
+		[user:authService.getName(), laboratoryInstanceList: laboratoryService.getAll(), dataMap: data, diagnosticSearch: params.get("diagnosticSearch"), startAge: startAge, endAge: endAge, sex: sex, startSearch: startSearch, endSearch: endSearch ]
 	}
         
     @Secured([
