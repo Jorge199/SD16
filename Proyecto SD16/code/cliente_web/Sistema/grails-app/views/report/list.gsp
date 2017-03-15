@@ -12,8 +12,8 @@
 </head>
 <body>
 	<%@ page import="com.sd.uni.labpatologia.util.DiagnosticEnum"%>
-	
-	
+
+
 
 
 	<div class="container-fluid">
@@ -33,6 +33,7 @@
 					</g:if>
 					<div class="row">
 						<div class="panel-body">
+							<g:form action="list">
 								<div class="col-md-4">
 									<div
 										class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
@@ -40,11 +41,9 @@
 												code="Diagnostico" />
 										</label>
 										<div class="col-md-9">
-											<g:select name="diagnostic" class="form-control" id="dataDiagnosticSearch"
-												from="${DiagnosticEnum.values()}" value=""
-												name="diagnosticSearch" optionKey="key"
-												noSelection="${['null':'Seleccione un diagnostico..']}"
-												required=""></g:select>
+										<input type="text" name="diagnosticSearch" class="form-control" maxlength="50" value="${text}"
+									placeholder="Ingrese un texto para buscar" id="dataDiagnosticSearch" />
+											
 										</div>
 									</div>
 								</div>
@@ -59,9 +58,11 @@
 										<div class="col-md-5">
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker1'>
-													<input type='text' class="form-control" id="dataStartSearch"
-														name="startSearch" placeholder="Seleccione una fecha" /> <span class="input-group-addon">
-														<span class="glyphicon glyphicon-calendar"> </span>
+													<input type='text' class="form-control"
+														id="dataStartSearch" name="startSearch"
+														placeholder="Seleccione una fecha" /> <span
+														class="input-group-addon"> <span
+														class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
 											</div>
@@ -75,8 +76,9 @@
 											<div class="form-group">
 												<div class='input-group date' id='datetimepicker2'>
 													<input type='text' class="form-control" id="dataEndSearch"
-														name="endSearch" placeholder="Seleccione una fecha"/> <span class="input-group-addon">
-														<span class="glyphicon glyphicon-calendar"> </span>
+														name="endSearch" placeholder="Seleccione una fecha" /> <span
+														class="input-group-addon"> <span
+														class="glyphicon glyphicon-calendar"> </span>
 													</span>
 												</div>
 											</div>
@@ -88,15 +90,17 @@
 									<button type="submit" class="btn btn-primary" name="list">
 										<i class="fa fa-search"></i> Buscar
 									</button>
-									<br><br>
-                                    <button class="btn btn-default" name="delete" onclick="deleteData()">
+									<br>
+									<br>
+									<button class="btn btn-default" name="delete"
+										onclick="deleteData()">
 										<i class="fa fa-eraser"></i> Borrar
 									</button>
 								</fieldset>
-
+							</g:form>
 						</div>
 					</div>
-<br> <br> 
+					<br> <br>
 
 					<div class="dataTable_wrapper">
 						<div class="row">
@@ -143,25 +147,29 @@
 													${fieldValue(bean: reportInstance, field: "request.doctor.lastName")}
 												</td>
 												<td>
-													${fieldValue(bean: reportInstance, field: "diagnostic")}
+													${fieldValue(bean: reportInstance, field: "diagnostic.name")}
 												</td>
-												
+
 												<%--  <td>${fieldValue(bean: reportInstance, field: "request.id")}</td>		--%>
 												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
-												<td align="center">
-												<g:jasperReport action="generateReport" controller="report" format="PDF,DOCX" jasper="report" id="${reportInstance.getId()}">
-												<input type="hidden" name="id" value="${reportInstance.getId()}" />
-												</g:jasperReport>
-												</td>
+													<td align="center"><g:jasperReport
+															action="generateReport" controller="report"
+															format="PDF,DOCX" jasper="report"
+															id="${reportInstance.getId()}">
+															<input type="hidden" name="id"
+																value="${reportInstance.getId()}" />
+														</g:jasperReport></td>
 													<td class="center"><g:link action="edit"
 															class="btn btn-success" id="${reportInstance.getId()}">
-															<i class="fa fa-pencil"></i></g:link>
+															<i class="fa fa-pencil"></i>
+														</g:link>
 												</sec:ifAnyGranted>
 												<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
-														<td class="center"><g:link action="show"
+													<td class="center"><g:link action="show"
 															class="btn btn-default" id="${reportInstance.getId()}">
-															<i class="fa fa-list-alt"></i></g:link>
-														</sec:ifAnyGranted>
+															<i class="fa fa-list-alt"></i>
+														</g:link>
+												</sec:ifAnyGranted>
 											</tr>
 
 										</g:each>
@@ -169,10 +177,10 @@
 
 									</tbody>
 								</table>
-								
-								<g:render template="/layouts/paginate"/>
-								
-								
+
+								<g:render template="/layouts/paginate" />
+
+
 							</div>
 						</div>
 					</div>
@@ -180,11 +188,15 @@
 			</div>
 		</div>
 	</div>
-	<br/><br/><br/><br/>
+	<br />
+	<br />
+	<br />
+	<br />
 	<!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
 	<script src=" ${request.contextPath}/template/js/jquery.validate.js"></script>
-	<script src=" ${request.contextPath}/template/js/validationFormReport.js"></script>
+	<script
+		src=" ${request.contextPath}/template/js/validationFormReport.js"></script>
 
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
@@ -225,7 +237,7 @@
 		});
 	</script>
 	<script>
-		function deleteData(){
+		function deleteData() {
 			$("#dataDiagnosticSearch").val("null");
 			$("#dataEndSearch").val("");
 			$("#dataStartSearch").val("");

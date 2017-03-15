@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Repository;
 import com.sd.uni.labpatologia.dao.base.BaseDaoImpl;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.exception.PatologyException;
-import com.sd.uni.labpatologia.util.DiagnosticEnum;
 
 @Repository
 public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportDao {
@@ -56,14 +56,14 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	public List<ReportDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(ReportDomain.class);
+		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._diagnostic", "diagnostic");
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 
-			if (map.containsKey("diagnostic")) { // si quiere filtrar por
-													// diagnostico
-				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic"))));
+			if (map.containsKey("diagnostic")) { // si quiere filtrar por diagnostico
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("diagnostic._name", "%"+map.get("diagnostic")+"%"));
+				criteria.add(Restrictions.or(propertyCriterion));
 			}
 			if (map.containsKey("isProcessed")) { //si quiere filtrar por procesado
 				criteria.add(Restrictions.eq("_isProcessed", map.get("isProcessed")));
@@ -109,14 +109,15 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	public List<ReportDomain> find(String textToFind) throws PatologyException {
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(ReportDomain.class);
+		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._diagnostic", "diagnostic");
+
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por
 													// diagnostico
-				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic"))));
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("diagnostic._name", "%"+map.get("diagnostic")+"%"));
 			}
 			if (map.containsKey("isProcessed")) { //si quiere filtrar por procesado
 				criteria.add(Restrictions.eq("_isProcessed", Boolean.parseBoolean(map.get("isProcessed"))));

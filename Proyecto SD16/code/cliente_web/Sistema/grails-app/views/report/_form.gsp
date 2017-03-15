@@ -232,7 +232,7 @@ MACROSCOPÍA
 		    height: 32px;
 		}	
 	</style>
-    <!-- Para boton guardar de doctor -->
+    <!-- Para boton guardar de diagnóstico -->
     <script>
         function callDiagnostic(){
         	if(saveDataDiagnostic()){

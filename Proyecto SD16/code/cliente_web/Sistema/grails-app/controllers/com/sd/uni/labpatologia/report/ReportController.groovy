@@ -17,6 +17,7 @@ import com.sd.uni.labpatologia.service.request.IRequestService
 import com.sd.uni.labpatologia.service.statistic.IStatisticService
 import com.sd.uni.labpatologia.util.SexEnum
 import com.sd.uni.labpatologia.util.StatusEnum
+import com.sun.corba.se.pept.transport.OutboundConnectionCache
 
 class ReportController {
 	static allowedMethods = [save: "POST", update: "POST"]
@@ -64,10 +65,8 @@ class ReportController {
 		}
 		def reports = null
 		String textToFind="";
-		if (params.containsKey("text")){
-			textToFind= params.get("text");
-		}else{
-
+		System.out.println("asdasd" + textToFind)
+		System.out.println("asdasd" + params)
 			if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
 				textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
 			}
@@ -80,7 +79,7 @@ class ReportController {
 					textToFind+="date="+params.get("startSearch")
 				}
 			}
-		}
+		System.out.println("asdasd" + textToFind)
 		if(!textToFind.equals("")){
 			reports = reportService.find(textToFind,10,page);
 			siguiente = reportService.find(textToFind,10,page+1);
@@ -89,7 +88,7 @@ class ReportController {
 			siguiente = reportService.find(null,10,page+1);
 		}
 		System.out.println("Cantidad Reportes----------------------------->"+reports.size())
-		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: textToFind,
+		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: params.get("diagnosticSearch"),
 			user:authService.getName()]
 	}
 	@Secured([
