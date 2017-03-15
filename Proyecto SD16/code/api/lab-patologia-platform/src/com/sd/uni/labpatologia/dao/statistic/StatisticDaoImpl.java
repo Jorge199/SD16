@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -56,7 +57,7 @@ public class StatisticDaoImpl extends BaseDaoImpl<StatisticDomain> implements IS
 	public List<StatisticDomain> find(String textToFind, int page, int maxItems) throws PatologyException {
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(StatisticDomain.class);
+		Criteria criteria = session.createCriteria(StatisticDomain.class, "statistic").createAlias("statistic._diagnostic", "diagnostic");
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
@@ -64,9 +65,9 @@ public class StatisticDaoImpl extends BaseDaoImpl<StatisticDomain> implements IS
 			if (map.containsKey("startAge") && map.containsKey("endAge")) {
 				criteria.add(Restrictions.between("_patientAge", map.get("startAge"), map.get("endAge")));
 			}
-			if (map.containsKey("diagnostic")) { // si quiere filtrar por
-													// diagnostico
-				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic").toUpperCase())));
+			if (map.containsKey("diagnostic")) { // si quiere filtrar por diagnostico
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("diagnostic._name", "%"+map.get("diagnostic")+"%"));
+				criteria.add(Restrictions.or(propertyCriterion));
 			}
 			if (map.containsKey("sex")) {
 				criteria.add(Restrictions.eq("_sex", SexEnum.valueOf(map.get("sex").toUpperCase())));
@@ -106,7 +107,8 @@ public class StatisticDaoImpl extends BaseDaoImpl<StatisticDomain> implements IS
 	public List<StatisticDomain> find(String textToFind) throws PatologyException {
 		Date minDate, maxDate;
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(StatisticDomain.class);
+		Criteria criteria = session.createCriteria(StatisticDomain.class, "statistic").createAlias("statistic._diagnostic", "diagnostic");
+		
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
@@ -114,7 +116,8 @@ public class StatisticDaoImpl extends BaseDaoImpl<StatisticDomain> implements IS
 				criteria.add(Restrictions.between("_patientAge", Integer.parseInt(map.get("startAge")), Integer.parseInt(map.get("endAge"))));
 			}
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por diagnostico
-				criteria.add(Restrictions.eq("_diagnostic", DiagnosticEnum.valueOf(map.get("diagnostic").toUpperCase())));
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("diagnostic._name", "%"+map.get("diagnostic")+"%"));
+				criteria.add(Restrictions.or(propertyCriterion));
 			}
 			if (map.containsKey("sex")) {
 				criteria.add(Restrictions.eq("_sex", SexEnum.valueOf(map.get("sex").toUpperCase())));

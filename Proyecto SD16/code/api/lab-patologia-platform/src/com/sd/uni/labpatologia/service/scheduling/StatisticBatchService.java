@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.uni.labpatologia.dao.diagnostic.IDiagnosticDao;
 import com.sd.uni.labpatologia.dao.report.IReportDao;
 import com.sd.uni.labpatologia.dao.statistic.IStatisticDao;
+import com.sd.uni.labpatologia.domain.diagnostic.DiagnosticDomain;
 import com.sd.uni.labpatologia.domain.report.ReportDomain;
 import com.sd.uni.labpatologia.domain.request.RequestDomain;
 import com.sd.uni.labpatologia.domain.statistic.StatisticDomain;
@@ -41,9 +42,9 @@ public class StatisticBatchService {
 		if (enableBatch.equalsIgnoreCase("true")){
 			System.out.println("Actualizando Estadísticas");
 			try {
-				for (DiagnosticEnum diagnostico : DiagnosticEnum.values()) {
+				for (DiagnosticDomain diagnostico : _diagnosticDao.findAll()) {
 					//List <ReportDTO> reports = _reportService.find("start=" + minDate + "&end=" + maxDate+"&diagnostic="+diagnostico.getKey()+"&isProcessed=false").getReports();
-					List <ReportDomain> reports = _reportDao.find("diagnostic="+diagnostico.getKey()+"&isProcessed=false");
+					List <ReportDomain> reports = _reportDao.find("diagnostic="+diagnostico.getName()+"&isProcessed=false");
 					for (ReportDomain report : reports) {
 						//final StatisticDTO statistic = new StatisticDTO();
 						StatisticDomain statistic = new StatisticDomain();
