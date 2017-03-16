@@ -199,10 +199,7 @@
 				<div class="panel-heading text-center">Estadísticas de
 					Diagnósticos</div>
 				<div class="panel-body">
-				<g:if test="${(dataMap.getByDiagnostic=="false") && (dataMap.totalDiagnostic >0) }">
-				<table id="list-diagnostics"
-									class="table table-striped table-bordered" cellspacing="0"
-									width="100%">
+				<table id="list-diagnostics" class="table table-striped table-bordered" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 											<td><strong>Diagnóstico</strong></td>
@@ -226,18 +223,23 @@
 											</tr>
 											</g:if>
 										</g:each>
+										<g:if test="${(dataMap.getByDiagnostic!="false")}">
+											<tr>
+												<td>Otros</td>
+												<td>${(dataMap.totalDiagnostic - dataMap.get(dataMap.getByDiagnostic))}</td>
+												<td>${((dataMap.totalDiagnostic - dataMap.get(dataMap.getByDiagnostic))/dataMap.totalDiagnostic)*100}%</td>
+											<tr>
+										</g:if>
 										<tr>
 											<td><strong>Total:</strong></td>
-											<td>${dataMap.totalDiagnostic}<td>
+											<td>${dataMap.totalDiagnostic}</td>
+											<td>100%</td>
 										<tr>
 									</tbody>
 									
 								</table>
 				
-				</g:if>
-				<g:else>
-				<div id="bar-diagnostic"></div>
-				</g:else>
+				
 					
 					
 					
@@ -346,6 +348,7 @@
 			});
 	}
 	</script>
+
 	<script>
 	//show diagnostic statistic
 	var totalDiagnostic = ${dataMap.totalDiagnostic}
