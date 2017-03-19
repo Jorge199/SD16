@@ -72,7 +72,7 @@
 	<div class="col-md-6">
 		<label>Fecha de Nacimiento</label>
 			<div class="form-group">
-			<div class='input-group date' id='datetimepicker1'>
+			<div class='input-group date' id='datetimepicker4'>
 				<input class="form-control" type="text" maxlength="10"
 				id="birthDate" name="birthDate" placeholder="Seleccione la fecha" value="${formatDate(format: 'dd-MM-yyyy', date:patientInstance?.getBirthDate())}"/> 
 				<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"> </span></span>

@@ -219,12 +219,7 @@ function saveDataPatient(){
 			return false;
 		}	
 	}
-	if(birth != ""){
-		if(validateBirthDay()){
-			 $("#myFormPatient input[id=birthDate]").focus();
-			return false;
-		}
-	}
+	
 	return true;
 }
 

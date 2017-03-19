@@ -32,14 +32,14 @@
 			<frame>
 				<reportElement x="80" y="40" width="386" height="100" uuid="ac11e11a-2d25-4957-9fea-df96333a4610"/>
 				<staticText>
-					<reportElement x="8" y="58" width="375" height="21" uuid="278dfb2a-df28-4916-b8d3-acb4adbd95ff"/>
+					<reportElement x="8" y="36" width="375" height="21" uuid="278dfb2a-df28-4916-b8d3-acb4adbd95ff"/>
 					<textElement textAlignment="Center">
-						<font size="16"/>
+						<font size="16" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[LABORATORIO DE ANATOMIA PATOLOGICA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="10" y="40" width="374" height="18" uuid="b3dc4fa8-6de6-4803-a8cb-da8c28e6556d"/>
+					<reportElement x="4" y="80" width="374" height="18" uuid="b3dc4fa8-6de6-4803-a8cb-da8c28e6556d"/>
 					<textElement textAlignment="Center">
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -49,7 +49,7 @@
 ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="0" y="80" width="382" height="19" uuid="bc8dcb05-b7e3-466e-90f2-b1f35d1c16cf"/>
+					<reportElement x="0" y="59" width="382" height="21" uuid="bc8dcb05-b7e3-466e-90f2-b1f35d1c16cf"/>
 					<textElement textAlignment="Center"/>
 					<text><![CDATA[Facultad de Medicina U.N.I / VII Región Sanitaria]]></text>
 				</staticText>
@@ -63,6 +63,9 @@
 				<reportElement x="0" y="120" width="560" height="446" uuid="9d9f5752-45d8-4e7a-bdc9-efc0258646be"/>
 				<textField>
 					<reportElement x="8" y="49" width="521" height="300" uuid="8b0ffc1e-090d-4867-bab6-d74d0ca0caa8"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$P{observations}]]></textFieldExpression>
 				</textField>
 				<staticText>
@@ -77,14 +80,8 @@
 					<reportElement x="0" y="369" width="370" height="36" uuid="a265d432-16c6-462f-96d0-3a40e72f1fa2"/>
 					<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement x="10" y="7" width="106" height="22" uuid="0e982197-b891-4c12-ab49-2f07aec319e8"/>
-					<text><![CDATA[DIAGNÓSTICO]]></text>
-				</staticText>
-				<textField>
-					<reportElement x="10" y="30" width="521" height="19" uuid="2864db60-46f9-4164-8bf2-5e2611cbb17c"/>
-					<textFieldExpression><![CDATA[$P{studyType}]]></textFieldExpression>
-				</textField>
+				
+				
 			</frame>
 			<textField>
 				<reportElement x="365" y="47" width="100" height="19" uuid="02ad5a68-d8c7-4152-9e4e-9a19ec7aa0d9"/>

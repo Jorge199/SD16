@@ -74,7 +74,7 @@
 		href="${request.contextPath}/template/css/bootstrap-datetimepicker.min.css" />
 	<script type="text/javascript">
 		$(function() {
-			$('#datetimepicker1').datetimepicker({
+			$('#datetimepicker4').datetimepicker({
 				format : 'DD-MM-YYYY',
 				locale : 'es',
 				maxDate : 'now'

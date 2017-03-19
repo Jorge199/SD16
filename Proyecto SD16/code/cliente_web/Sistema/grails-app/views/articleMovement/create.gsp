@@ -84,6 +84,10 @@
         (function() {   
             <g:if test='${flash.error}'>
             $('document').ready(function(){
+            	alert("Stock insuficiente, solo dispones de " +  +" " + "${params.articleName}");
+            	$(".select-article").select2("data", { id: 1, text: "Alcohol A1" });
+            	$('#inputID').select2('data', {id: 100, a_key: 'Lorem Ipsum'}).change();
+            
                 alert("Stock insuficiente, solo dispones de " + ${params.articleQuantity} +" " + "${params.articleName}");
             });
             </g:if>

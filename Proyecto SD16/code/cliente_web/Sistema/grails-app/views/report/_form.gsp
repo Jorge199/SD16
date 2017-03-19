@@ -136,7 +136,7 @@
 	<div class="col-md-4">
 		<label>Descripción</label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="25"
+			<input class="form-control" type="text" maxlength="200"
 				id="diagnosticDetail" id="diagnosticDetail" name="diagnosticDetail"
 				placeholder="Descripción del Diagnóstico"
 				value="${reportInstance?.diagnosticDetail}" />
@@ -151,7 +151,6 @@
 					test="${null!=reportInstance?.observations}">
 					${reportInstance?.observations}
 				</g:if><g:else>
-Material/es: ${reportInstance?.request?.specimen}
 MACROSCOPÍA	
 
 

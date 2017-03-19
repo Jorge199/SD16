@@ -135,36 +135,6 @@ $(document).ready(function(e){
 	
 });
 
-	
-function validateBirthDay(){ 
-    var birth =  $("#patient input[id=birthDate]").val();
-    var nowDate = new Date();
-    var formatNowDate = nowDate.getDate() +'-'+(nowDate.getMonth() + 1)+'-'+nowDate.getFullYear();
-    var birthDay = birth.split("-");
-    var now = formatNowDate.split("-");
-   
-    if(now[2].length == 1){
-    	now[2] = '0'+now[2];
-    }
-    if(birthDay[2] > now[2]){
-    	return true;
-    }
-    
-    if(now[1].length == 1){
-    	now[1] = '0'+now[1];
-    }
-    if(birthDay[1] > now[1]){
-    	return true;
-    }
-    
-    if(now[0].length == 1){
-    	now[0] = '0'+now[0];
-    }
-    if(birthDay[0] > now[0]){
-    	return true;
-    }
-    return false;
-}
 
 function saveDataPa(){
 	var expresion = /\w+@\w+\.+[a-z]/;
@@ -225,11 +195,5 @@ function saveDataPa(){
 		}	
 	}
 	
-	if(birth != ""){
-		if(validateBirthDay()){
-			$("#patient input[id=birthDate]").focus();
-			return false;
-		}
-	}
 
 }

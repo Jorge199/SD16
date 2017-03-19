@@ -223,7 +223,7 @@
 											</tr>
 											</g:if>
 										</g:each>
-										<g:if test="${(dataMap.getByDiagnostic!="false")}">
+										<g:if test="${(dataMap.getByDiagnostic!="false") && dataMap.get(dataMap.getByDiagnostic)}">
 											<tr>
 												<td>Otros</td>
 												<td>${(dataMap.totalDiagnostic - dataMap.get(dataMap.getByDiagnostic))}</td>
@@ -380,7 +380,7 @@
 
 	<script>
 		function deleteData(){
-			$("#dataDiagnostic").val("null");
+			$("#dataDiagnosticSearch").val("");
 			$("#dataStartAge").val("");
 			$("#dataEndAge").val("");
 			$("#dataStartSearch").val("");
