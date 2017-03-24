@@ -23,7 +23,7 @@
 	<div class="col-md-6">
 		<label>C.I</label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="10"
+			<input class="form-control" type="text" maxlength="15"
 			id="document" name="document" placeholder="Ingrese un Número de Cédula" value="${patientInstance?.document}" />
 		</div>
 	</div>
@@ -80,21 +80,9 @@
 		</div>
 	</div>
 </div>
-<!-- formato a telefono y documento -->
+
  
-	<script type="text/javascript">
-		$('#document').on('input', function() {
-			if(!isNaN($("#document").val())){
-			    var doc = $(this).val().replace(/[^\d]/g, '')
-			    if (doc.length == 7) {
-			      doc = doc.replace(/(\d{1})(\d{3})(\d{3})/, "$1.$2.$3");
-			    } else if (doc.length == 6) {
-			      doc = doc.replace(/(\d{3})(\d{3})/, "$1.$2");
-			    }
-			    $(this).val(doc)
-			}
-		 });
-	</script>
+	
 
 	
 

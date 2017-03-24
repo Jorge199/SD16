@@ -7,14 +7,14 @@ $(document).ready(function(e){
 				rules: {
 					name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[1,50]
 					},
 					last_name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[1,50]
 					},
 					ci:{
-						maxlength:10
+						maxlength:15
 					},
 					sex:{
 						required:true
@@ -29,21 +29,21 @@ $(document).ready(function(e){
 						email:true
 					},
 					address:{
-						rangelength:[3,50]
+						rangelength:[1,50]
 					}
 				},
 
 				messages:{
 					name:{
 						required:"El nombre es obligatorio(*)",
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						rangelength:"Cantidad de caracteres entre 1 a 50"
 					},
 					last_name:{
 						required:"El apellido es obligatorio(*)",
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						rangelength:"Cantidad de caracteres entre 1 a 50"
 					},
 					ci:{
-						maxlength:"Cantidad de caracteres hasta 10"
+						maxlength:"Cantidad de caracteres hasta 15"
 					},
 					sex:{
 						required:"Obligatorio(*)"
@@ -59,7 +59,7 @@ $(document).ready(function(e){
 						email:"Formato de correo incorrecto"
 					},
 					address:{
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						rangelength:"Cantidad de caracteres entre 1 a 50"
 					}
 				},
 				errorPlacement: function(error, element){
@@ -131,6 +131,43 @@ $(document).ready(function(e){
 			    }
 			    $(this).val(p);
 			});
+			$('#doctor input[id=ci]').on('input', function() {
+			    var p = $(this).val().replace(/[^\w]/g, '')
+			    
+			    if (p.length == 6) {
+			    	p = p.replace(/(\d{3})(\d{3})/, "$1.$2");
+			    }
+			    if (p.length == 7) {
+			    	p = p.replace(/(\d{1})(\d{3})(\d{3})/, "$1.$2.$3");
+			    }
+			    if (p.length == 8) {
+			    	p = p.replace(/(\d{2})(\d{3})(\d{3})/, "$1.$2.$3");
+			    }
+			    if (p.length == 9) {
+			    	p = p.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
+			    }
+			    if (p.length == 10) {
+			    	p = p.replace(/(\d{1})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4");
+			    }
+			    if (p.length == 11) {
+			    	p = p.replace(/(\d{2})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4");
+			    }
+			    if (p.length == 12) {
+			    	p = p.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4");
+			    }
+			    if (p.length == 13) {
+			    	p = p.replace(/(\d{1})(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4.$5");
+			    }
+			    if (p.length == 14) {
+			    	p = p.replace(/(\d{2})(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4.$5");
+			    }
+			    if (p.length == 15) {
+			    	p = p.replace(/(\d{3})(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4.$5");
+			    }
+			    
+			    $(this).val(p);
+			});
+			
 });
 
 function saveDataDoc(){
@@ -157,21 +194,21 @@ function saveDataDoc(){
 		$("#doctor :radio[id=sex]").focus();
 		return false;
 	}
-	if(name.length < 3 || name.length > 50){
+	if(name.length < 1 || name.length > 50){
 		$("#doctor input[id=name]").focus();
 		return false;
 	}
-	if(lastName.length < 3 || lastName.length > 50){
+	if(lastName.length < 1 || lastName.length > 50){
 		$("#doctor input[id=last_name]").focus();
 		return false;
 	}
-	if(doc.length > 10){
+	if(doc.length > 15){
 		if(!(doc == "")){
 			$("#doctor input[id=ci]").focus();
 			return false;
 		}	
 	}
-	if(address.length < 3 || address.length > 50){
+	if(address.length < 1 || address.length > 50){
 		if(!(address == "")){
 			$("#doctor input[id=address]").focus();
 			return false;	

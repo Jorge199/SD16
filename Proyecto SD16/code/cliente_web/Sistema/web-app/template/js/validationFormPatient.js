@@ -7,17 +7,17 @@ $(document).ready(function(e){
 				rules: {
 					name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[1,50]
 					},
 					lastName:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[1,50]
 					},
 					document:{
-						maxlength:10
+						maxlength:15
 					},
 					address:{
-						rangelength:[3,50]
+						rangelength:[1,50]
 					},
 					phone:{
 						maxlength:17
@@ -36,17 +36,17 @@ $(document).ready(function(e){
 				messages:{
 					name:{
 						required:"El nombre es obligatorio(*)",
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						rangelength:"Cantidad de caracteres entre 1 a 50"
 					},
 					lastName:{
 						required:"El apellido es obligatorio(*)",
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						rangelength:"Cantidad de caracteres entre 1 a 50"
 					},
 					document:{
-						maxlength:"Cantidad de caracteres hasta 10"
+						maxlength:"Cantidad de caracteres hasta 15"
 					},
 					address:{
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						rangelength:"Cantidad de caracteres entre 1 a 50"
 					},
 					phone:{
 						number:"Debe ser numerico",
@@ -132,6 +132,42 @@ $(document).ready(function(e){
 	    }
 	    $(this).val(p);
 	});
+	$('#patient input[id=document]').on('input', function() {
+	    var p = $(this).val().replace(/[^\w]/g, '')
+	    
+	    if (p.length == 6) {
+	    	p = p.replace(/(\d{3})(\d{3})/, "$1.$2");
+	    }
+	    if (p.length == 7) {
+	    	p = p.replace(/(\d{1})(\d{3})(\d{3})/, "$1.$2.$3");
+	    }
+	    if (p.length == 8) {
+	    	p = p.replace(/(\d{2})(\d{3})(\d{3})/, "$1.$2.$3");
+	    }
+	    if (p.length == 9) {
+	    	p = p.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
+	    }
+	    if (p.length == 10) {
+	    	p = p.replace(/(\d{1})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4");
+	    }
+	    if (p.length == 11) {
+	    	p = p.replace(/(\d{2})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4");
+	    }
+	    if (p.length == 12) {
+	    	p = p.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4");
+	    }
+	    if (p.length == 13) {
+	    	p = p.replace(/(\d{1})(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4.$5");
+	    }
+	    if (p.length == 14) {
+	    	p = p.replace(/(\d{2})(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4.$5");
+	    }
+	    if (p.length == 15) {
+	    	p = p.replace(/(\d{3})(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4.$5");
+	    }
+	    
+	    $(this).val(p);
+	});
 	
 });
 
@@ -160,21 +196,21 @@ function saveDataPa(){
 		return false;
 	}
 
-	if(name.length < 3 || name.length > 50){
+	if(name.length < 1 || name.length > 50){
 		$("#patient input[id=name]").focus();
 		return false;
 	}
-	if(lastName.length < 3 || lastName.length > 50){
+	if(lastName.length < 1 || lastName.length > 50){
 		$("#patient input[id=lastName]").focus();
 		return false;
 	}
-	if(doc.length > 10){
+	if(doc.length > 15){
 		if(!(doc == "")){
 			$("#patient input[id=document]").focus();
 			return false;
 		}	
 	}
-	if(address.length < 3 || address.length > 50){
+	if(address.length < 1 || address.length > 50){
 		if(!(address == "")){
 			$("#patient input[id=address]").focus();
 			return false;	

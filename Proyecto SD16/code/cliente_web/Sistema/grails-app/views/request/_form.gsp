@@ -344,7 +344,12 @@
 	    		    processResults: function (data) {
 	    		        return {
 	    		            results: $.map(data, function(obj) {
-	    		                return { id: obj.id, text: obj.name + ' ' + obj.lastName };
+		    		            if(obj.document == "" || obj.document == undefined){
+		    		            	return { id: obj.id, text: obj.name + ' ' + obj.lastName};
+			    		        }else{
+			    		        	return { id: obj.id, text: obj.name + ' ' + obj.lastName + ' Ci: ' + obj.document};
+				    		    }
+	    		                
 	    		            })
 	    		        };
 	    		    },

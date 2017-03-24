@@ -6,17 +6,17 @@ $(document).ready(function(e){
 				rules: {
 					name:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[1,50]
 					},
 					lastName:{
 						required:true,
-						rangelength:[3,50]
+						rangelength:[1,50]
 					},
 					document:{
-						maxlength:10
+						maxlength:15
 					},
 					address:{
-						rangelength:[3,50]
+						rangelength:[1,50]
 					},
 					phone:{
 						number:true,
@@ -36,17 +36,17 @@ $(document).ready(function(e){
 				messages:{
 					name:{
 						required:"El nombre es obligatorio(*)",
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						rangelength:"Cantidad de caracteres entre 1 a 50"
 					},
 					lastName:{
 						required:"El apellido es obligatorio(*)",
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						rangelength:"Cantidad de caracteres entre 1 a 50"
 					},
 					document:{
-						maxlength:"Cantidad de caracteres hasta 10"
+						maxlength:"Cantidad de caracteres hasta 15"
 					},
 					address:{
-						rangelength:"Cantidad de caracteres entre 3 a 50"
+						rangelength:"Cantidad de caracteres entre 1 a 50"
 					},
 					phone:{
 						number:"Debe ser numerico",
@@ -131,38 +131,45 @@ $(document).ready(function(e){
 	    }
 	    $(this).val(p);
 	});
+	$('#myFoormPatient input[id=document]').on('input', function() {
+	    var p = $(this).val().replace(/[^\w]/g, '')
+	    
+	    if (p.length == 6) {
+	    	p = p.replace(/(\d{3})(\d{3})/, "$1.$2");
+	    }
+	    if (p.length == 7) {
+	    	p = p.replace(/(\d{1})(\d{3})(\d{3})/, "$1.$2.$3");
+	    }
+	    if (p.length == 8) {
+	    	p = p.replace(/(\d{2})(\d{3})(\d{3})/, "$1.$2.$3");
+	    }
+	    if (p.length == 9) {
+	    	p = p.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
+	    }
+	    if (p.length == 10) {
+	    	p = p.replace(/(\d{1})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4");
+	    }
+	    if (p.length == 11) {
+	    	p = p.replace(/(\d{2})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4");
+	    }
+	    if (p.length == 12) {
+	    	p = p.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4");
+	    }
+	    if (p.length == 13) {
+	    	p = p.replace(/(\d{1})(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4.$5");
+	    }
+	    if (p.length == 14) {
+	    	p = p.replace(/(\d{2})(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4.$5");
+	    }
+	    if (p.length == 15) {
+	    	p = p.replace(/(\d{3})(\d{3})(\d{3})(\d{3})(\d{3})/, "$1.$2.$3.$4.$5");
+	    }
+	    
+	    $(this).val(p);
+	});
 	
 });
 
-function validateBirthDay(){ 
-    var birth =  $("#myFormPatient input[id=birthDate]").val();
-    var nowDate = new Date();
-    var formatNowDate = nowDate.getDate() +'-'+(nowDate.getMonth() + 1)+'-'+nowDate.getFullYear();
-    var birthDay = birth.split("-");
-    var now = formatNowDate.split("-");
-   
-    if(now[2].length == 1){
-    	now[2] = '0'+now[2];
-    }
-    if(birthDay[2] > now[2]){
-    	return true;
-    }
-    
-    if(now[1].length == 1){
-    	now[1] = '0'+now[1];
-    }
-    if(birthDay[1] > now[1]){
-    	return true;
-    }
-    
-    if(now[0].length == 1){
-    	now[0] = '0'+now[0];
-    }
-    if(birthDay[0] > now[0]){
-    	return true;
-    }
-    return false;
-}
 
 function saveDataPatient(){
 	var expresion = /\w+@\w+\.+[a-z]/;
@@ -187,21 +194,21 @@ function saveDataPatient(){
 		$("#myFormPatient :radio[id=sex]").focus();
 		return false;
 	}
-	if(name.length < 3 || name.length > 50){
+	if(name.length < 1 || name.length > 50){
 		$("#myFormPatient input[id=name]").focus();
 		return false;
 	}
-	if(lastName.length < 3 || lastName.length > 50){
+	if(lastName.length < 1 || lastName.length > 50){
 		$("#myFormPatient input[id=lastName]").focus();
 		return false;
 	}
-	if(doc.length > 10){
+	if(doc.length > 15){
 		if(!(doc == "")){
 			$("#myFormPatient input[id=document]").focus();
 			return false;
 		}	
 	}
-	if(address.length < 3 || address.length > 50){
+	if(address.length < 1 || address.length > 50){
 		if(!(address == "")){
 			$("#myFormPatient input[id=address]").focus();
 			return false;	
@@ -213,11 +220,11 @@ function saveDataPatient(){
 			return false;
 		}
 	}
-	if(!expresion.test()){
-		if(mail != ""){
+	if(mail != ""){
+		if(!expresion.test(mail)){
 			$("#myFormPatient input[id=mail]").focus();
 			return false;
-		}	
+		}
 	}
 	
 	return true;

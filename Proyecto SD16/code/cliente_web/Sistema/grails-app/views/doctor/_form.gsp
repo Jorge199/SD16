@@ -24,7 +24,7 @@
 	<div class="col-md-6">
 		<label>C.I</label>
 		<div class="form-group">
-			<input class="form-control" type="text" maxlength="10"
+			<input class="form-control" type="text" maxlength="15"
 			id="ci" name="ci" placeholder="Ingrese un número de Cédula" value="${doctorInstance?.ci}"/>
 		</div>
 	</div>
@@ -80,19 +80,6 @@
 		</div>
 	</div>
 </div>
-<!-- formato a telefono y documento -->
-	<script type="text/javascript">
-		$('#ci').on('input', function() {
-			if(!isNaN($("#ci").val())){
-			    var doc = $(this).val().replace(/[^\d]/g, '')
-			    if (doc.length == 7) {
-			      doc = doc.replace(/(\d{1})(\d{3})(\d{3})/, "$1.$2.$3");
-			    } else if (doc.length == 6) {
-			      doc = doc.replace(/(\d{3})(\d{3})/, "$1.$2");
-			    }
-			    $(this).val(doc)
-			}
-		 });
-	</script>
+
 	
 
