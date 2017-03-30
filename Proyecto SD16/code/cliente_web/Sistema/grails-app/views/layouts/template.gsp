@@ -17,6 +17,8 @@
 
 <!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+	<!-- Foco -->
+	<script src=" ${request.contextPath}/template/js/focusForm.js"></script>
 <!-- Select2 -->
 	<link rel="stylesheet" href="${request.contextPath}/dist/css/select2.min.css">
     <script src="${request.contextPath}/dist/js/select2.js"></script>
