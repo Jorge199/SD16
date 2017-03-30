@@ -31,7 +31,7 @@ $(document).ready(function(e){
 							error.insertAfter(element);
 						}
 						if(element.attr("name") == "diagnosticId"){
-							error.insertAfter(element);
+							error.insertAfter("#data-diagnostic");
 						}
 					}
 				
