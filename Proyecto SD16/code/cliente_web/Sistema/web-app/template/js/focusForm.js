@@ -9,11 +9,15 @@ $(document).ready(function(e){
 	$("#article input[id=name]").focus();
 	$("#articleMovement select[id=articleId]").focus();
 	$("#user input[id=name]").focus();
+	$("#report select[id=diagnosticId]").focus();
 	$('#createPatient').on('shown.bs.modal', function () {
 		 $("#myFormPatient input[id=name]").focus();
 	});
 	$('#createDoctor').on('shown.bs.modal', function () {
 		$("#myFormDoctor input[id=name]").focus();
+	});
+	$('#createDiagnostic').on('shown.bs.modal', function () {
+		$("#myFormDiagnostic input[id=name]").focus();
 	});
 	
 });
