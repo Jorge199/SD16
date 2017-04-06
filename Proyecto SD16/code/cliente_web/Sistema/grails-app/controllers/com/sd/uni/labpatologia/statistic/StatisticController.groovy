@@ -3,6 +3,7 @@ package com.sd.uni.labpatologia.statistic
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sd.uni.labpatologia.beans.diagnostic.DiagnosticB
+import com.sd.uni.labpatologia.beans.statistic.StatisticB
 import com.sd.uni.labpatologia.service.auth.IAuthService;
 import com.sd.uni.labpatologia.service.laboratory.ILaboratoryService;
 import com.sd.uni.labpatologia.service.request.IRequestService;
@@ -195,10 +196,14 @@ class StatisticController {
         def diagnosticos = new HashMap()
         def data = [getByDate: 'false', getByDiagnostic: 'false', getByPatientAge: 'false', getBySex:'false']
         String textToFind=""
-        if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
+        if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch")) && !"Selecciona un diagnostico".equals(params.get("diagnosticSearch"))){
+
             diagnostic = params.get("diagnosticSearch")
-            textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
-            data.put("getByDiagnostic", params.get("diagnosticSearch"))
+            textToFind+="diagnostic="+diagnostic+'&'
+            data.put("getByDiagnostic", diagnostic)
+            data.put("getByDiagnosticName", diagnosticService.getById(Integer.parseInt(diagnostic)).getName())
+        }else{
+            return
         }
         if((!"".equals(params.get("startSearch"))) && !"".equals(params.get("endSearch")) && (null != params.get("startSearch")) && (null != params.get("endSearch"))){
             startSearch = params.get("startSearch")
@@ -248,7 +253,7 @@ class StatisticController {
             if(data.get("getByDiagnostic")=='false'){
                 int totalDiagnostic=0
                 for( DiagnosticB diagnosticFor in diagnosticService.getAll()){
-                    data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()+'&'+textToFind).size())
+                    data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getId()+'&'+textToFind).size())
                     totalDiagnostic+=data.get(diagnosticFor.getName())
                 }
                 data.put("totalDiagnostic", totalDiagnostic)
@@ -261,11 +266,13 @@ class StatisticController {
                     diagnosticTextToFind=textToFind.substring(textToFind.indexOf('&')+1,textToFind.length())
                 }
                 for(DiagnosticB diagnosticFor in diagnosticService.getAll()){
-                    if(data.get("getByDiagnostic")==diagnosticFor.getName()){
-                        data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()+'&'+diagnosticTextToFind).size())
+					System.out.println("ver" +diagnosticFor.getName() + statisticService.find("diagnostic="+diagnosticFor.getId()+'&'+diagnosticTextToFind).size())
+					System.out.println(data.get("getByDiagnostic"));
+                    if(Integer.parseInt(data.get("getByDiagnostic"))==diagnosticFor.getId()){
+                        data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getId()+'&'+diagnosticTextToFind).size())
                         System.out.println(diagnosticFor.getName() + " " + data.get(diagnosticFor.getName()))
                     }
-                    totalDiagnostic+=statisticService.find("diagnostic="+diagnosticFor.getName()+'&'+diagnosticTextToFind).size()
+                    totalDiagnostic+=statisticService.find("diagnostic="+diagnosticFor.getId()+'&'+diagnosticTextToFind).size()
                 }
                 data.put("totalDiagnostic", totalDiagnostic)
 				
@@ -288,7 +295,7 @@ class StatisticController {
 
             //Para Diagnóstico
             for( DiagnosticB diagnosticFor in diagnosticService.getAll()){
-                data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()).size())
+                data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getId()).size())
                 diagnosticos.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()).size())
                 totalDiagnostic+=data.get(diagnosticFor.getName())
             }
@@ -333,7 +340,7 @@ class StatisticController {
             }
             def total = data.get("totalDiagnostic");
             if(data.get("getByDiagnostic") != 'false'){
-                def cantidad = data.get(data.get("getByDiagnostic"));
+                def cantidad = data.get(data.get("getByDiagnosticName"));
                 if(cantidad == null){
                     return
                 }
@@ -342,7 +349,7 @@ class StatisticController {
                     promedio = cantidad.div(total);
                     promedio = promedio*100;
                 }
-                documento.add(new Phrase("Se observan " + data.get(data.get("getByDiagnostic")) + " casos, que representan el " + df.format(promedio) + " % de los casos registrados en el laboratorio en ese periodo."));
+                documento.add(new Phrase("Se observan " + data.get(data.get("getByDiagnosticName")) + " casos, que representan el " + df.format(promedio) + " % de los casos registrados en el laboratorio en ese periodo."));
             }
             PdfPTable tabla = new PdfPTable(3);
             tabla.setWidthPercentage([240, 120, 120] as float[], new Rectangle(520, 770));
@@ -377,7 +384,10 @@ class StatisticController {
                     datosc = new PdfPCell(new Phrase(pair.getKey()));
                     tabla.addCell(datosc);
                     def cantidad2 = pair.getValue();
-                    double porcentaje = (double)cantidad2.div(total) * 100;
+                    double porcentaje = 0
+                    if(porcentaje != 0){
+                        porcentaje = (double)cantidad2.div(total) * 100;
+                    }
                     tabla.addCell(new Phrase(String.valueOf(cantidad2)));
                     datosc = new PdfPCell(new Phrase(df.format(porcentaje)));
                     tabla.addCell(datosc);
@@ -414,9 +424,9 @@ class StatisticController {
                 axis.setTickLabelFont(new java.awt.Font("Courier", java.awt.Font.PLAIN, 8));
                 writeChartToPDF(chart, 500, 300, documento, writer);/
             }else{
-                datosc = new PdfPCell(new Phrase(data.get("getByDiagnostic")));
+                datosc = new PdfPCell(new Phrase(data.get("getByDiagnosticName")));
                 tabla.addCell(datosc);
-                def cantidad2 = data.get(data.get("getByDiagnostic"));
+                def cantidad2 = data.get(data.get("getByDiagnosticName"));
                 if(total != 0){
                     double porcentaje = (double)cantidad2.div(total) * 100;
                     tabla.addCell(new Phrase(String.valueOf(cantidad2)));
@@ -430,7 +440,7 @@ class StatisticController {
                 }
                     
                 DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-                dataSet.setValue(cantidad2, "Cantidad", data.get("getByDiagnostic"));
+                dataSet.setValue(cantidad2, "Cantidad", data.get("getByDiagnosticName"));
                 dataSet.setValue(total - cantidad2, "Cantidad", "Otros");
                 
                 datosc = new PdfPCell(new Phrase("Total: "));
