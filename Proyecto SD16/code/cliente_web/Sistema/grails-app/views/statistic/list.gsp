@@ -36,8 +36,10 @@
 											code="Diagnostico" />
 									</label>
 									<div class="col-md-9">
-										<input type="text" name="diagnosticSearch" class="form-control" maxlength="50" value="${diagnosticSearch}"
-									placeholder="Ingrese un texto para buscar" id="dataDiagnosticSearch" />
+										
+									<select class="select-diagnostic form-control" name="diagnosticSearch" id="dataDiagnosticSearch">
+											<option>Selecciona un diagnostico</option>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -263,7 +265,7 @@
 
 
 	<!-- jQuery -->
-	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
+
 
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
@@ -389,5 +391,33 @@
 			$("#dataSexFem").val("");
 		}
 	</script>
+	<!-- Para selector de diagnostico -->
+    <script type="text/javascript">
+	    	$(".select-diagnostic").select2({
+				language: 'es',
+	    		  ajax: {
+	    		    url: "${createLink(controller: 'diagnostic', action: 'selectDiagnostic')}",
+	    		    dataType: 'json',
+	    		    delay: 250,
+	    		    data: function (params) {
+	    		      return {
+	    		        q: params.term, 
+	    		        page: 0
+	    		      };
+	    		    },
+	    		    processResults: function (data) {
+	    		        return {
+	    		            results: $.map(data, function(obj) {
+	    		                return { id: obj.id, text: obj.name};
+	    		            })
+	    		        };
+	    		    },
+	    		    cache: true
+	    		  },
+	    		  escapeMarkup: function (markup) { return markup; }, 
+	    		  minimumInputLength: 1,
+	    	});
+  
+    </script>
 </body>
 </html>
