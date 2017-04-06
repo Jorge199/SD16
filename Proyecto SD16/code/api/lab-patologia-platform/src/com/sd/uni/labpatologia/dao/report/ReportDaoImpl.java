@@ -62,7 +62,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 			Map<String, String> map = obtenerQuery(textToFind);
 
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por diagnostico
-				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("diagnostic._name", "%"+map.get("diagnostic")+"%"));
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.eq("diagnostic._id", Integer.parseInt(map.get("diagnostic"))));
 				criteria.add(Restrictions.or(propertyCriterion));
 			}
 			if (map.containsKey("isProcessed")) { //si quiere filtrar por procesado

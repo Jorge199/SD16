@@ -37,7 +37,7 @@
 									</label>
 									<div class="col-md-9">
 										
-									<select class="select-diagnostic form-control" name="diagnosticSearch" id="dataDiagnosticSearch">
+									<select class="select-diagnostic form-control" name="diagnosticSearch" id="DiagnosticSearch">
 											<option>Selecciona un diagnostico</option>
 										</select>
 									</div>
@@ -159,7 +159,7 @@
 
 	<div class="col-md-3">
 		<g:if test="${!dataMap.getByDiagnostic.equals("false")}">
-		Diagnóstico = ${dataMap.getByDiagnostic}
+		Diagnóstico = ${dataMap.getByDiagnosticName}
 		</g:if>
 		<g:else>
 		Diagnóstico = Todos los Diagnósticos
@@ -211,7 +211,9 @@
 									</thead>
 									<tbody>
 										<g:each in="${dataMap.keySet()}" var="diagnostic">
-											<g:if test="${diagnostic!="getByDate"  && diagnostic!="getByDiagnostic" && diagnostic!="getByPatientAge" && diagnostic!="getBySex"  && diagnostic!="totalDiagnostic" && diagnostic!="masculino" && diagnostic!="femenino" &&diagnostic!="totalSex"}">
+											<g:if test="${diagnostic!="getByDate"  && diagnostic!="getByDiagnostic" && diagnostic!="getByPatientAge" && diagnostic!="startAge" 
+												&& diagnostic!="endAge" && diagnostic!="getBySex"  && diagnostic!="totalDiagnostic" && diagnostic!="masculino" && diagnostic!="femenino" 
+												&& diagnostic!="totalSex" && diagnostic!="getByDiagnosticName" && diagnostic!="startDate" && diagnostic!="endDate"}">
 											<tr>
 												<td>
 													${diagnostic}
@@ -220,20 +222,25 @@
 													${dataMap.get(diagnostic)}
 												</td>
 												<td>
-													${(dataMap.get(diagnostic)/dataMap.totalDiagnostic)*100}%
+													<g:if test="${dataMap.get(diagnostic)!=0}">
+														${(dataMap.get(diagnostic)/dataMap.totalDiagnostic)*100}%														
+													</g:if>
+													<g:else>
+														${0}%
+													</g:else>
 												</td>
 											</tr>
 											</g:if>
 										</g:each>
-										<g:if test="${(dataMap.getByDiagnostic!="false") && dataMap.get(dataMap.getByDiagnostic)}">
+										<g:if test="${(dataMap.getByDiagnostic!="false") && dataMap.get(dataMap.getByDiagnosticName)}">
 											<tr>
 												<td>Otros</td>
-												<td>${(dataMap.totalDiagnostic - dataMap.get(dataMap.getByDiagnostic))}</td>
-												<td>${((dataMap.totalDiagnostic - dataMap.get(dataMap.getByDiagnostic))/dataMap.totalDiagnostic)*100}%</td>
+												<td>${(dataMap.totalDiagnostic - dataMap.get(dataMap.getByDiagnosticName))}</td>
+												<td>${((dataMap.totalDiagnostic - dataMap.get(dataMap.getByDiagnosticName))/dataMap.totalDiagnostic)*100}%</td>
 											<tr>
 										</g:if>
 										<tr>
-											<td><strong>Total:</strong></td>
+											<td><strong>Total Diagnósticos:</strong></td>
 											<td>${dataMap.totalDiagnostic}</td>
 											<td>100%</td>
 										<tr>

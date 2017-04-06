@@ -27,8 +27,8 @@ import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.awt.DefaultFontMapper;
-import java.util.HashMap
 
+import java.util.HashMap
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
@@ -75,10 +75,11 @@ class StatisticController {
         def endSearch = ""
         def data = [getByDate: 'false', getByDiagnostic: 'false', getByPatientAge: 'false', getBySex:'false']
         String textToFind=""
-        if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
+        if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch")) && !"Selecciona un diagnostico".equals(params.get("diagnosticSearch"))){
             diagnostic = params.get("diagnosticSearch")
-            textToFind+="diagnostic="+params.get("diagnosticSearch")+'&'
-            data.put("getByDiagnostic", params.get("diagnosticSearch"))
+            textToFind+="diagnostic="+diagnostic+'&'
+            data.put("getByDiagnostic", diagnostic)
+			data.put("getByDiagnosticName", diagnosticService.getById(Integer.parseInt(diagnostic)).getName())
         }
         if((!"".equals(params.get("startSearch"))) && !"".equals(params.get("endSearch")) && (null != params.get("startSearch")) && (null != params.get("endSearch"))){
             startSearch = params.get("startSearch")
@@ -128,7 +129,7 @@ class StatisticController {
             if(data.get("getByDiagnostic")=='false'){
                 int totalDiagnostic=0
                 for( DiagnosticB diagnosticFor in diagnosticService.getAll()){
-                    data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()+'&'+textToFind).size())
+                    data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getId()+'&'+textToFind).size())
                     totalDiagnostic+=data.get(diagnosticFor.getName())
                 }
                 data.put("totalDiagnostic", totalDiagnostic)
@@ -141,11 +142,13 @@ class StatisticController {
                     diagnosticTextToFind=textToFind.substring(textToFind.indexOf('&')+1,textToFind.length())
                 }
                 for(DiagnosticB diagnosticFor in diagnosticService.getAll()){
-                    if(data.get("getByDiagnostic")==diagnosticFor.getName()){
-                        data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()+'&'+diagnosticTextToFind).size())
+					System.out.println("ver" +diagnosticFor.getName() + statisticService.find("diagnostic="+diagnosticFor.getId()+'&'+diagnosticTextToFind).size())
+					System.out.println(data.get("getByDiagnostic"));
+                    if(Integer.parseInt(data.get("getByDiagnostic"))==diagnosticFor.getId()){
+                        data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getId()+'&'+diagnosticTextToFind).size())
                         System.out.println(diagnosticFor.getName() + " " + data.get(diagnosticFor.getName()))
                     }
-                    totalDiagnostic+=statisticService.find("diagnostic="+diagnosticFor.getName()+'&'+diagnosticTextToFind).size()
+                    totalDiagnostic+=statisticService.find("diagnostic="+diagnosticFor.getId()+'&'+diagnosticTextToFind).size()
                 }
                 data.put("totalDiagnostic", totalDiagnostic)
 				
@@ -168,7 +171,7 @@ class StatisticController {
 
             //Para Diagnóstico
             for( DiagnosticB diagnosticFor in diagnosticService.getAll()){
-                data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getName()).size())
+                data.put(diagnosticFor.getName(), statisticService.find("diagnostic="+diagnosticFor.getId()).size())
                 totalDiagnostic+=data.get(diagnosticFor.getName())
             }
             data.put("totalDiagnostic", totalDiagnostic)

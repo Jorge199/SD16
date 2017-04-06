@@ -35,18 +35,25 @@
 						<div class="panel-body">
 							<g:form action="list">
 								<div class="col-md-4">
-									<div
-										class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
-										<label class="col-sm-3" for="diagnostic"> <g:message
-												code="Diagnostico" />
-										</label>
-										<div class="col-md-9">
-										<select class="select-diagnostic form-control" name="diagnosticSearch" id="dataDiagnosticSearch">
-											<option value="${requestInstance?.diagnostic?.id}">Selecciona un diagnostico</option>
-										</select>
+									<div class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
+											<label class="col-sm-3" for="diagnostic"> <g:message code="Diagnostico" />
+											</label>
+											<div class="col-md-9">
+											<g:if test="${null == diagnosticSearch}">
 										
-										</div>
+											<select class="select-diagnostic form-control" name="diagnosticSearch" id="diagnosticSearch">
+												<option value="${requestInstance?.diagnostic?.id}">Selecciona un diagnostico</option>
+											</select>
+											
+											
+									</g:if>
+									<g:else>
+									<select class="select-diagnostic form-control" name="diagnosticSearch" id="diagnosticSearch">
+										<option value="${diagnosticSearch}">"asd"</option>
+									</select>
+									</g:else>
 									</div>
+										</div>
 								</div>
 								<div class="col-md-6">
 									<div
@@ -226,6 +233,7 @@
 	</script>
 	<script type="text/javascript">
 		$(function() {
+			
 			$('#datetimepicker2').datetimepicker({
 				format : 'DD-MM-YYYY',
 				locale : 'es'

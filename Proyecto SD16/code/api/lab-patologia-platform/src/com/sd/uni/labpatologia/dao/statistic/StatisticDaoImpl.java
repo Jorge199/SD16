@@ -66,7 +66,7 @@ public class StatisticDaoImpl extends BaseDaoImpl<StatisticDomain> implements IS
 				criteria.add(Restrictions.between("_patientAge", map.get("startAge"), map.get("endAge")));
 			}
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por diagnostico
-				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("diagnostic._name", map.get("diagnostic")));
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.eq("diagnostic._id", Integer.parseInt(map.get("diagnostic"))));
 				criteria.add(Restrictions.or(propertyCriterion));
 			}
 			if (map.containsKey("sex")) {
@@ -116,7 +116,7 @@ public class StatisticDaoImpl extends BaseDaoImpl<StatisticDomain> implements IS
 				criteria.add(Restrictions.between("_patientAge", Integer.parseInt(map.get("startAge")), Integer.parseInt(map.get("endAge"))));
 			}
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por diagnostico
-				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("diagnostic._name", map.get("diagnostic")));
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.eq("diagnostic._id", Integer.parseInt(map.get("diagnostic"))));
 				criteria.add(Restrictions.or(propertyCriterion));
 			}
 			if (map.containsKey("sex")) {
